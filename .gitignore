@@ -10,3 +10,16 @@ tmp/
 temp/
 .cache/
 .worktrees/
+
+# Go transient build and test outputs
+*.test
+*.out
+coverage.*
+cmd/mcpgen/mcpgen
+
+# Local tool state; tools/versions.json is committed, caches are not.
+.gocache/
+node_modules/
+
+# Scratch qualification copies live outside the repository; nothing under
+# /tmp is ever committed.

@@ -1,0 +1,59 @@
+{
+	"comment": "Pinned development and build inputs for the go-mcp-lib framework. Hashes marked verified were confirmed against local module cache bytes; hashes marked pinned come from the framework plan's frozen inputs and are re-verified by scripts/gate.py setup on first network use.",
+	"go": {
+		"floor": "1.27.0",
+		"toolchain": "go1.27.4",
+		"verified": true
+	},
+	"runtime-dependencies": {
+		"github.com/modelcontextprotocol/go-sdk": {
+			"version": "v1.8.0",
+			"require-status": "pinned in plan; added to go.mod require list when stage 2 source first imports it"
+		},
+		"github.com/santhosh-tekuri/jsonschema/v6": {
+			"version": "v6.0.3",
+			"require-status": "pinned in plan; added to go.mod require list when stage 5 source first imports it"
+		},
+		"github.com/yosida95/uritemplate/v3": {
+			"version": "v3.0.2",
+			"require-status": "pinned in plan; added to go.mod require list when transport source first imports it"
+		}
+	},
+	"lint": {
+		"golangci-lint": {
+			"version": "2.15.0",
+			"built-with-go": "1.27.4",
+			"staticcheck-enabled": true,
+			"sa1019-enabled": true,
+			"exclusions": "none",
+			"verified": true
+		},
+		"markdownlint-cli2": {
+			"version": "0.23.2",
+			"verified": true
+		}
+	},
+	"mcp-schema": {
+		"revision": "2026-07-28",
+		"upstream-commit": "ac00313ff7f5e9f47b0e0d1ebdf9c0ad6411380b",
+		"sha256": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551",
+		"bytes": 181976,
+		"definitions": 155,
+		"status": "pinned in plan; committed under schema/inputs/2026-07-28/ in stage 2"
+	},
+	"conformance": {
+		"repository": "github.com/modelcontextprotocol/conformance",
+		"commit": "96a6f9478b7f2e125cf0360a213383cf57533893",
+		"package-version": "0.2.0-alpha.12",
+		"requirements-file": "requirements/2026-07-28.yaml",
+		"requirements-sha256": "ae2f4f6210fd729e2e318edd5bbfa31a43cee0bc608e48052fa26dbf1d939b57",
+		"lockfile-sha256": "e9d0405b0fbc905c962af951382780743a28dffa6ce9999eb9ec5cc86b28b348",
+		"node": "26.13.0",
+		"npm": "11.20.0",
+		"status": "prepared by scripts/gate.py setup --allow-network; runner never installed into the runtime module"
+		},
+	"json-schema-test-suite": {
+		"commit": "83e866b46c9f9e7082fd51e83a61c5f2145a1ab7",
+		"status": "pinned in plan; fetched by setup, fixture hashes recorded when stage 5 consumes them"
+	}
+}

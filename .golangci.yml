@@ -1,0 +1,19 @@
+# Pinned golangci-lint 2.15.0 configuration. Staticcheck is enabled with
+# SA1019 and no symbol, file, test, or generated-code exclusion. A finding
+# is a composition defect, never a policy allowance; there is no exclude
+# list, no nolint directive, and no per-file relaxation anywhere in this
+# repository.
+version: "2"
+
+linters:
+  default: standard
+  settings:
+    staticcheck:
+      checks:
+        - all
+  exclusions:
+    # Deliberately empty: no path, symbol, linter, or source-based
+    # exclusion exists. This block exists only to document that fact.
+    paths: null
+    rules: null
+    generated: strict
