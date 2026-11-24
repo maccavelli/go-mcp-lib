@@ -9,7 +9,7 @@ This tree holds three kinds of document:
 - **[architecture.md](architecture.md)** — how the pieces fit together, as they are now.
 - **guides/** — task-shaped walkthroughs. None exists yet; the first real guide creates this directory.
 - **[decisions/](decisions/)** — numbered MADR/PLAN pairs.
-- **reports/** — what was observed, deciding nothing. None exists yet; the first report creates this directory.
+- **[reports/](reports/)** — measured findings and qualification evidence.
 
 ## Records
 
@@ -17,6 +17,11 @@ This tree holds three kinds of document:
 | :--- | :--- | :--- | :--- |
 | 0001 | MADR | [Adopt the fleet workspace scaffold](decisions/0001-MADR-workspace-scaffold.md) | accepted |
 | 0001 | PLAN | [Implement the fleet workspace scaffold](decisions/0001-PLAN-workspace-scaffold.md) | in-progress |
+| 0002 | MADR | [Build a schema-driven MCP framework](decisions/0002-MADR-build-schema-driven-mcp-framework.md) | accepted |
+| 0002 | PLAN | [Implement the schema-driven MCP framework](decisions/0002-PLAN-build-schema-driven-mcp-framework.md) | accepted |
+| 0002 | REPORT | [Qualify MCP framework boundaries](reports/0002-REPORT-qualify-mcp-framework-boundaries.md) | complete |
+| 0003 | MADR | [Name the Bash and heredocs deny hook](decisions/0003-MADR-name-bash-heredoc-hook.md) | accepted |
+| 0003 | PLAN | [Name the Bash and heredocs deny hook](decisions/0003-PLAN-name-bash-heredoc-hook.md) | implemented |
 
 ## I want to…
 
