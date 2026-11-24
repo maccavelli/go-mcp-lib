@@ -1,0 +1,237 @@
+package mcp
+
+import (
+	"errors"
+	"fmt"
+
+	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
+)
+
+// PromptRegistration is the declarative half of a prompt.
+type PromptRegistration struct {
+	// Name is required, non-empty.
+	Name string
+	// Title is the optional display name.
+	Title string
+	// Description is optional.
+	Description string
+	// Arguments are the prompt's declared arguments.
+	Arguments []*sdk.PromptArgument
+}
+
+func (r *PromptRegistration) validate() error {
+	if r == nil || r.Name == "" {
+		return errors.New("mcp: prompt name is required")
+	}
+	seen := make(map[string]bool, len(r.Arguments))
+	for _, arg := range r.Arguments {
+		if arg == nil {
+			return errors.New("mcp: prompt argument must not be nil")
+		}
+		if arg.Name == "" {
+			return errors.New("mcp: prompt argument name is required")
+		}
+		if seen[arg.Name] {
+			return fmt.Errorf("mcp: prompt %q: duplicate argument %q", r.Name, arg.Name)
+		}
+		seen[arg.Name] = true
+	}
+	return nil
+}
+
+// AddPrompt registers a prompt handler. Duplicate names on the same
+// server are rejected; registration is instance-scoped.
+func AddPrompt(s *Server, reg *PromptRegistration, handler sdk.PromptHandler) error {
+	if s == nil {
+		return errors.New("mcp: server is required")
+	}
+	if err := reg.validate(); err != nil {
+		return err
+	}
+	if handler == nil {
+		return fmt.Errorf("mcp: prompt %q: handler is required", reg.Name)
+	}
+	s.mu.Lock()
+	if _, exists := s.registered[reg.Name]; exists {
+		s.mu.Unlock()
+		return fmt.Errorf("mcp: prompt %q: already registered on this server", reg.Name)
+	}
+	s.registered[reg.Name] = registration{kind: "prompt", name: reg.Name}
+	s.mu.Unlock()
+
+	prompt := &sdk.Prompt{
+		Name:        reg.Name,
+		Description: reg.Description,
+		Arguments:   reg.Arguments,
+	}
+	s.sdk.AddPrompt(prompt, handler)
+	return nil
+}
+
+// ResourceRegistration is the declarative half of a static resource.
+type ResourceRegistration struct {
+	// Name is required, non-empty.
+	Name string
+	// Title is the optional display name.
+	Title string
+	// URI is required, absolute (location rule).
+	URI string
+	// Description is optional.
+	Description string
+	// MIMEType is optional.
+	MIMEType string
+}
+
+func (r *ResourceRegistration) validate() error {
+	if r == nil || r.Name == "" {
+		return errors.New("mcp: resource name is required")
+	}
+	if r.URI == "" {
+		return errors.New("mcp: resource URI is required")
+	}
+	if err := validateAbsoluteURI(r.URI); err != nil {
+		return err
+	}
+	return nil
+}
+
+// AddResource registers a static resource handler. Duplicate URIs on
+// the same server are rejected; registration is instance-scoped.
+func AddResource(s *Server, reg *ResourceRegistration, handler sdk.ResourceHandler) error {
+	if s == nil {
+		return errors.New("mcp: server is required")
+	}
+	if err := reg.validate(); err != nil {
+		return err
+	}
+	if handler == nil {
+		return fmt.Errorf("mcp: resource %q: handler is required", reg.Name)
+	}
+	s.mu.Lock()
+	key := "resource:" + reg.URI
+	if _, exists := s.registered[key]; exists {
+		s.mu.Unlock()
+		return fmt.Errorf("mcp: resource URI %q: already registered on this server", reg.URI)
+	}
+	s.registered[key] = registration{kind: "resource", name: reg.URI}
+	s.mu.Unlock()
+
+	resource := &sdk.Resource{
+		Name:        reg.Name,
+		Description: reg.Description,
+		MIMEType:    reg.MIMEType,
+		URI:         reg.URI,
+	}
+	s.sdk.AddResource(resource, handler)
+	return nil
+}
+
+// ResourceTemplateRegistration is the declarative half of a resource
+// template. The URI template is validated against the framework's
+// location rule (URI-shaped, supported varspecs, balanced braces).
+type ResourceTemplateRegistration struct {
+	// Name is required, non-empty.
+	Name string
+	// URITemplate is required and validated.
+	URITemplate string
+	// Description is optional.
+	Description string
+	// MIMEType is optional.
+	MIMEType string
+}
+
+func (r *ResourceTemplateRegistration) validate() error {
+	if r == nil || r.Name == "" {
+		return errors.New("mcp: resource template name is required")
+	}
+	if err := validateURITemplateShape(r.URITemplate); err != nil {
+		return err
+	}
+	return nil
+}
+
+// AddResourceTemplate registers a resource template handler. Duplicate
+// templates on the same server are rejected.
+func AddResourceTemplate(s *Server, reg *ResourceTemplateRegistration, handler sdk.ResourceHandler) error {
+	if s == nil {
+		return errors.New("mcp: server is required")
+	}
+	if err := reg.validate(); err != nil {
+		return err
+	}
+	if handler == nil {
+		return fmt.Errorf("mcp: resource template %q: handler is required", reg.Name)
+	}
+	s.mu.Lock()
+	key := "resource-template:" + reg.URITemplate
+	if _, exists := s.registered[key]; exists {
+		s.mu.Unlock()
+		return fmt.Errorf("mcp: resource template %q: already registered on this server", reg.URITemplate)
+	}
+	s.registered[key] = registration{kind: "resource-template", name: reg.URITemplate}
+	s.mu.Unlock()
+
+	template := &sdk.ResourceTemplate{
+		Name:        reg.Name,
+		Description: reg.Description,
+		MIMEType:    reg.MIMEType,
+		URITemplate: reg.URITemplate,
+	}
+	s.sdk.AddResourceTemplate(template, handler)
+	return nil
+}
+
+// validateAbsoluteURI enforces the framework's URI location rule.
+// It mirrors internal/validation's rule without importing the
+// internal package from the public API.
+func validateAbsoluteURI(uri string) error {
+	if uri == "" {
+		return errors.New("mcp: URI is empty")
+	}
+	schemeEnd := -1
+	for i := 0; i < len(uri); i++ {
+		c := uri[i]
+		switch {
+		case c >= 'a' && c <= 'z', c >= 'A' && c <= 'Z':
+			continue
+		case i > 0 && (c >= '0' && c <= '9' || c == '+' || c == '-' || c == '.'):
+			continue
+		case c == ':' && i > 0:
+			schemeEnd = i
+		}
+		if schemeEnd >= 0 {
+			break
+		}
+	}
+	if schemeEnd < 2 {
+		return fmt.Errorf("mcp: %q is not an absolute URI", uri)
+	}
+	return nil
+}
+
+// validateURITemplateShape enforces the template location rule: at
+// least one {var} expansion, supported varspecs, balanced braces.
+func validateURITemplateShape(template string) error {
+	if template == "" {
+		return errors.New("mcp: uriTemplate is empty")
+	}
+	opens, closes := 0, 0
+	for i := 0; i < len(template); i++ {
+		switch template[i] {
+		case '{':
+			opens++
+		case '}':
+			closes++
+		}
+	}
+	if opens != closes {
+		return fmt.Errorf("mcp: uriTemplate %q has unbalanced braces", template)
+	}
+	if opens == 0 {
+		return fmt.Errorf("mcp: uriTemplate %q has no expansions", template)
+	}
+	if err := validateAbsoluteURI(template); err != nil {
+		return fmt.Errorf("mcp: uriTemplate %q is not URI-shaped", template)
+	}
+	return nil
+}
