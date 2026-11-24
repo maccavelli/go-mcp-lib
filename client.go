@@ -61,7 +61,7 @@ func (c *Client) Connect(ctx context.Context, t Transport) (*ClientSession, erro
 	}
 	sess, err := c.sdk.Connect(ctx, t.transport(), nil)
 	if err != nil {
-		return nil, fmt.Errorf("mcp: connect: %w", err)
+		return nil, typed(ErrTransport, "connect", err)
 	}
 	return &ClientSession{sdk: sess}, nil
 }
@@ -108,9 +108,67 @@ func (s *ClientSession) ListTools(ctx context.Context) (*mcplib.ListToolsResult,
 	}
 	result, err := s.sdk.ListTools(ctx, nil)
 	if err != nil {
-		return nil, fmt.Errorf("mcp: list tools: %w", err)
+		return nil, typed(ErrToolCall, "list tools", err)
 	}
 	return result, nil
+}
+
+// ListResources discovers the server's static resources.
+func (s *ClientSession) ListResources(ctx context.Context) (*mcplib.ListResourcesResult, error) {
+	if s == nil || s.sdk == nil {
+		return nil, errors.New("mcp: session is closed")
+	}
+	result, err := s.sdk.ListResources(ctx, nil)
+	if err != nil {
+		return nil, typed(ErrToolCall, "list resources", err)
+	}
+	return result, nil
+}
+
+// ReadResource reads one resource by URI.
+func (s *ClientSession) ReadResource(ctx context.Context, uri string) (*mcplib.ReadResourceResult, error) {
+	if s == nil || s.sdk == nil {
+		return nil, errors.New("mcp: session is closed")
+	}
+	if uri == "" {
+		return nil, errors.New("mcp: resource URI is required")
+	}
+	result, err := s.sdk.ReadResource(ctx, &sdk.ReadResourceParams{URI: uri})
+	if err != nil {
+		return nil, typed(ErrToolCall, "read resource", err)
+	}
+	return result, nil
+}
+
+// Subscribe asks the server to notify this session of resource
+// updates for a URI.
+func (s *ClientSession) Subscribe(ctx context.Context, uri string) error {
+	if s == nil || s.sdk == nil {
+		return errors.New("mcp: session is closed")
+	}
+	if uri == "" {
+		return errors.New("mcp: resource URI is required")
+	}
+	err := s.sdk.Subscribe(ctx, &sdk.SubscribeParams{URI: uri})
+	if err != nil {
+		return typed(ErrToolCall, "subscribe", err)
+	}
+	return nil
+}
+
+// Unsubscribe stops update notifications for a URI.
+func (s *ClientSession) Unsubscribe(ctx context.Context, uri string) error {
+	if s == nil || s.sdk == nil {
+		return errors.New("mcp: session is closed")
+	}
+	if uri == "" {
+		return errors.New("mcp: resource URI is required")
+	}
+	err := s.sdk.Unsubscribe(ctx, &sdk.UnsubscribeParams{URI: uri})
+	if err != nil {
+		return typed(ErrToolCall, "unsubscribe", err)
+	}
+	return nil
 }
 
 // CallTool invokes a tool with the caller's deadline.
@@ -126,7 +184,11 @@ func (s *ClientSession) CallTool(ctx context.Context, name string, arguments map
 		Arguments: arguments,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("mcp: call tool %q: %w", name, err)
+		if ctx.Err() != nil {
+			return nil, typed(ErrCancelled,
+				fmt.Sprintf("tool %q", name), ctx.Err())
+		}
+		return nil, typed(ErrToolCall, name, err)
 	}
 	return result, nil
 }

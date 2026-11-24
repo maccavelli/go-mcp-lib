@@ -4,11 +4,9 @@ import (
 	"encoding/json"
 	"strings"
 	"testing"
-
-	"github.com/santhosh-tekuri/jsonschema/v6"
 )
 
-func compileOK(t *testing.T, a *Adapter, identity, body string) *jsonschema.Schema {
+func compileOK(t *testing.T, a *Adapter, identity, body string) *Compiled {
 	t.Helper()
 	doc, err := decodeDoc(body)
 	if err != nil {

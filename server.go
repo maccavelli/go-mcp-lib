@@ -71,6 +71,15 @@ type Server struct {
 	// instance-scoped (G13).
 	registered map[string]registration
 
+	// owned middleware chain state; see middleware.go for ordering.
+	userChain    []Middleware
+	observeChain Middleware
+	authChain    Middleware
+	admitChain   Middleware
+
+	// output owns declared-output validation before emission (S6.4).
+	output *outputValidator
+
 	mu sync.Mutex
 }
 
@@ -91,15 +100,16 @@ func NewServer(opts *ServerOptions) (*Server, error) {
 		Version: opts.Implementation.Version,
 	}
 	sdkOpts := &sdk.ServerOptions{
-		Instructions: opts.Instructions,
-		PageSize:     opts.PageSize,
-		KeepAlive:    opts.KeepAlive,
+		Instructions:              opts.Instructions,
+		PageSize:                  opts.PageSize,
+		KeepAlive:                 opts.KeepAlive,
 		KeepAliveFailureThreshold: opts.KeepAliveFailureThreshold,
 	}
 	return &Server{
 		sdk:        sdk.NewServer(impl, sdkOpts),
 		opts:       *opts,
 		registered: make(map[string]registration),
+		output:     newOutputValidator(),
 	}, nil
 }
 

@@ -21,7 +21,7 @@ import (
 type Adapter struct {
 	mu        sync.Mutex
 	resources map[string]any
-	compiled  map[string]*jsonschema.Schema
+	compiled  map[string]*Compiled
 	hits      map[string]int
 	maxCache  int
 }
@@ -34,7 +34,7 @@ func New(maxCache int) *Adapter {
 	}
 	return &Adapter{
 		resources: make(map[string]any),
-		compiled:  make(map[string]*jsonschema.Schema),
+		compiled:  make(map[string]*Compiled),
 		hits:      make(map[string]int),
 		maxCache:  maxCache,
 	}
@@ -54,7 +54,9 @@ func (a *Adapter) Register(canonical string, doc any) error {
 
 // Compile validates a schema document and caches it under identity.
 // Draft 2020-12 is forced when the document does not declare one.
-func (a *Adapter) Compile(identity, canonical string, doc any) (*jsonschema.Schema, error) {
+// The returned Compiled is opaque; callers never see the validator's
+// concrete types.
+func (a *Adapter) Compile(identity, canonical string, doc any) (*Compiled, error) {
 	a.mu.Lock()
 	if schema, ok := a.compiled[identity]; ok {
 		a.hits[identity]++
@@ -88,16 +90,17 @@ func (a *Adapter) Compile(identity, canonical string, doc any) (*jsonschema.Sche
 			a.maxCache,
 		)
 	}
-	a.compiled[identity] = schema
-	return schema, nil
+	wrapped, err := wrapCompiled(schema)
+	if err != nil {
+		return nil, fmt.Errorf("validation: compile %s: %w", identity, err)
+	}
+	a.compiled[identity] = wrapped
+	return wrapped, nil
 }
 
 // Validate checks a decoded instance against a compiled schema.
-func (a *Adapter) Validate(schema *jsonschema.Schema, instance any) error {
-	if err := schema.Validate(instance); err != nil {
-		return fmt.Errorf("validation: %w", shortErr(err))
-	}
-	return nil
+func (a *Adapter) Validate(schema *Compiled, instance any) error {
+	return schema.Validate(instance)
 }
 
 func shortErr(err error) error {

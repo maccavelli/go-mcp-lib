@@ -539,6 +539,42 @@ raw-wire contracts, schema qualification, race/leak checks, and the documented
 platform matrix. Heavy runs use the repository's fleet host and queue policy.
 Exact lint/tool versions and executable gate commands belong in the PLAN.
 
+### CI/CD owner ruling — 2026-11-24
+
+The owner reviewed
+[0009-REPORT-cicd-standardization-assessment.md](../reports/0009-REPORT-cicd-standardization-assessment.md)
+and selected D1 A and D3 C. Extend the existing Python 3.12+ standard-library
+gates behind a thin Makefile, sharing the functional gate contract across queued
+native fleet hosts and GitHub. Retain both modules, both pinned Go versions and
+Linux/amd64, Windows/amd64 and Darwin/arm64, with CGO-free baseline builds/tests
+and separate qualified race instrumentation.
+
+Local test receipts are reusable for less than one hour, only for the exact
+outgoing commit and unchanged policy/tool/input identities. Each push needs fresh
+successful local vulnerability evidence. Disclosure guards and security scans
+remain owner-managed locally; test-receipt integration preserves them without
+installing or reconfiguring scanners or guards.
+
+For D2, the owner reports changing the repository to public and excludes GitHub
+enforcement. Branch protection, rulesets, required-check configuration, visibility
+changes and plan upgrades are out of scope. GitHub functional CI remains required;
+its summary reports failures without administering merge/push restrictions. This
+supersedes the report's original enforcement proposal and 24-hour recommendation.
+
+These are decided policy states, not claims of implemented tests. Named cases map
+to Stage 9 in the paired PLAN.
+
+| ID | Input or state | Ruling and acceptance case |
+| :--- | :--- | :--- |
+| CI01 | Local Make or GitHub invocation | decided — shared Python gate contract; `TestCI01SharedGateContract` verifies selection and failure propagation |
+| CI02 | Native tuple, compiler or CGO mode differs from policy | decided — reject wrong/missing coverage; `TestCI02NativeMatrix` verifies six baseline combinations, both modules and separate preferred-version race results |
+| CI03 | Complete unchanged exact-commit receipt below 3,600 seconds old | decided — permit reuse only with fresh local vulnerability evidence for this push; `TestCI03FreshReceipt` verifies positive reuse |
+| CI04 | Missing, malformed, altered, future, expired or mismatched receipt | decided — reject; age at least 3,600 seconds requires new preflight; `TestCI04ReceiptRejection` covers boundary times, identity changes and every outgoing ref tip |
+| CI05 | Fresh owner-managed local vulnerability evidence absent or unsuccessful | decided — reject local push qualification; no scanner/guard installation or GitHub scan jobs; `TestCI05LocalSecurityBoundary` verifies evidence consumption and preservation of disclosure behavior |
+| CI06 | GitHub matrix failure, cancellation, missing result or unexpected skip | decided — final CI summary fails; `TestCI06CISummary` proves incomplete results cannot pass |
+| CI07 | Concurrent fleet runs, queue/transfer failure or cancellation | decided — serialize heavy work per host, bound waits, retain failures and clean up owned resources; `TestCI07FleetLifecycle` verifies contention and interruption |
+| CI08 | GitHub protection, required checks, visibility or billing administration | out of scope — explicit owner ruling; not an acceptance blocker |
+
 ## Consequences
 
 * Good, because one maintained schema and semantics pipeline can produce the
@@ -662,8 +698,8 @@ The initial limits are explicit application policies, not values required by MCP
 
 | Limit | Default | Configuration and scope |
 | :--- | :--- | :--- |
-| One JSON frame or JSON HTTP body | 1 MiB | Positive values up to 16 MiB; both receive and send boundaries; oversize HTTP input maps to 413 |
-| One SSE event | 1 MiB including framing fields | Positive values up to 16 MiB; independently bounded from stream lifetime |
+| One JSON frame or JSON HTTP body | 4 MiB (SDK default) when undeclared; 16 MiB declared ceiling; above-ceiling declarations configurable to a 64 MiB hard cap | Declarations are explicit and positive; both receive and send boundaries; oversize HTTP input maps to 413; nothing above 64 MiB is constructible |
+| One SSE event | 4 MiB including framing fields; 8 MiB declared ceiling; configurable to a 16 MiB hard limit | Declarations are explicit and positive; independently bounded from stream lifetime; nothing above 16 MiB is constructible |
 | JSON nesting depth | 64 | Positive values up to 256; checked before recursive validation |
 | Numeric token length and exponent magnitude | 256 bytes and 1,024 respectively | Explicit parser resource limits before arbitrary-precision validation; report a resource-limit error, not schema success |
 | Active application handlers | 32 per server instance | Configurable; independent of future HFSC's concurrency-3 workload |
@@ -671,6 +707,27 @@ The initial limits are explicit application policies, not values required by MCP
 | Framework-owned live wire buffers | 64 MiB per runtime instance | Account allocated capacity across directions; acquisition is cancellable; this does not claim to cap user-handler or SDK-internal memory |
 | Retained buffer pool | 8 MiB total, 256 KiB per buffer | Larger buffers are released; bounded lifetime and ownership tests |
 | Schema input | 2 MiB per document, 4,096 definitions, 65,536 reference edges | Explicit acquisition/model limits; reject overflow before emission |
+
+> **Amendment 2026-11-25 (body-size policy).** The original policy set a
+> 1 MiB default with a 16 MiB configurable ceiling for HTTP JSON bodies. The
+> owner ruled the 1 MiB default too small for real payloads: the undeclared
+> default now follows the pinned SDK's own 4 MiB, and an explicit declaration
+> by the server transport or the consumer may raise the limit to at most
+> 8 MiB. The 16 MiB ceiling is superseded for HTTP JSON bodies; declarations
+> above 8 MiB are rejected at construction. SSE events remain independently
+> bounded per the row above.
+>
+> **Amendment 2026-11-25 (second ruling, body-size policy).** Supersedes the
+> first ruling above in the same sitting: undeclared default stays 4 MiB (SDK
+> parity); a declared limit may go to 16 MiB; declarations above 16 MiB are
+> configurable up to a hard cap of 64 MiB. Nothing above 64 MiB is
+> constructible. The 8 MiB intermediate ceiling is withdrawn.
+>
+> **Amendment 2026-11-25 (SSE event bounds).** The original SSE policy set a
+> 1 MiB per-event default with a 16 MiB configurable ceiling. The owner ruled:
+> default 4 MiB, declared ceiling 8 MiB, configurable above-ceiling to a
+> 16 MiB hard limit, nothing above 16 MiB constructible. Supersedes the SSE
+> row of the original limits table.
 
 Control messages and cancellation do not wait behind the application handler
 queue. Long-lived subscription streams are bounded per event, not buffered in

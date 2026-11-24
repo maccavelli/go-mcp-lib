@@ -69,12 +69,18 @@ func TestFormatFixtures(t *testing.T) {
 				failed += len(group.Tests)
 				continue
 			}
+			compiled, err := wrapCompiled(schema)
+			if err != nil {
+				t.Errorf("FAIL wrap %s: %v", format, err)
+				failed += len(group.Tests)
+				continue
+			}
 			for _, tc := range group.Tests {
 				data, err := decodeDoc(string(tc.Data))
 				if err != nil {
 					t.Fatalf("FAIL decode instance %s: %v", tc.Description, err)
 				}
-				err = a.Validate(schema, data)
+				err = a.Validate(compiled, data)
 				if tc.Valid && err != nil {
 					t.Errorf("FAIL %s/%s: expected valid, got %v", format, tc.Description, err)
 					failed++

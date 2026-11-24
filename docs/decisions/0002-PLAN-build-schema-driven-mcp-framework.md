@@ -42,7 +42,7 @@ files; line numbers locate the assessed snapshot rather than immutable APIs.
 | Deprecated HFSC interface | Same mcplib revision; `hfsc/dispatch.go:44`, `LogSession` | Exported logging signature uses the deprecated SDK type; no adapter or suppression enters this project. |
 | Reference generator | acp-go-sdk2 `a6495a56ddf2c2503b4613a2f91fb9ca400ef61a`; `cmd/generate/go.mod`, `main.go:72`, `internal/output/write.go:23` | Separate standard-library-only Go generator; load/model/render/check/write phases; staged sequential replacements are not an atomic multi-file transaction. |
 | SDK transport hooks | SDK v1.8.0; `mcp/transport.go:149`, `mcp/streamable.go:128`, `mcp/server.go:185` | `IOTransport`, outer HTTP handlers, and supplied HTTP round trippers are available. Restricting supported versions alone does not eliminate legacy initialization. |
-| SDK HTTP policy | SDK v1.8.0; `mcp/streamable.go:174–224` | Localhost protection defaults on; the cross-origin option is deprecated; request cancellation propagation is opt-in; the SDK body default is 4 MiB, different from this design's 1 MiB. |
+| SDK HTTP policy | SDK v1.8.0; `mcp/streamable.go:174–224` | Localhost protection defaults on; the cross-origin option is deprecated; request cancellation propagation is opt-in; the SDK body default is 4 MiB, which the amended policy adopts as the undeclared default (owner amendment 2026-11-25). |
 | Qualification evidence | Companion report, exact embedded Go source and dependency checksums | Public interception feasibility, lossless-validator failure/replacement, 421 assertion fixtures, 155 definitions, 36 format fixtures, and 120 benchmark samples. These are prototype observations. |
 | Repository gates | `CLAUDE.md`, `.markdownlint-cli2.jsonc`, `scripts/check_records.py` | Documentation gates exist. Go gates and CI must be added. Records use the existing 0002 pair; no new sequence number is allocated. |
 
@@ -459,7 +459,10 @@ G10/G11/G13/G18/G22, D01 and runtime G09 obligations.
    interruption. Distinguish replay of a stream from reissuing a tool side effect.
 6. For SSE, test LF/CRLF/CR, fragmented delimiters, multiline data, comments, IDs,
    retry fields, empty events, event-name whitespace matching SDK classification,
-   event size including framing, invalid UTF-8 and duplicates after a valid event
+   event size including framing (4 MiB default, 8 MiB declared ceiling,
+   above-ceiling configurable to a 16 MiB hard limit — owner amendment
+   2026-11-25; test all three tiers and the above-16 rejection), invalid UTF-8
+   and duplicates after a valid event
    ID. One-byte reads must expose zero invalid bytes. With retries enabled,
    terminal corruption must cause exactly one HTTP request.
 7. Enforce modern-only policy at raw boundaries on both client and server. Test
@@ -471,8 +474,14 @@ G10/G11/G13/G18/G22, D01 and runtime G09 obligations.
    environment switches enabled; framework policy must not change implicitly.
 8. Use owned HTTP options; do not alias the SDK's deprecated cross-origin field.
    Keep SDK localhost/DNS-rebinding protection, apply current outer cross-origin
-   middleware, set the 1 MiB body policy explicitly, and enable modern request
-   cancellation propagation. Test origin/Host rejection before handler invocation.
+   middleware, set the body policy explicitly — undeclared default 4 MiB
+   (SDK parity), declared ceiling 16 MiB, above-ceiling declarations
+   configurable with a 64 MiB hard cap, nothing above 64 MiB constructible
+   (owner amendment 2026-11-25) — and enable modern request cancellation
+   propagation. Test origin/Host rejection before handler invocation, and test
+   the body-size boundaries: undeclared default 4 MiB, declared 16 MiB,
+   configurable above-ceiling to 64 MiB, rejected declaration above 64 MiB,
+   and oversize-input 413 mapping.
 9. Accept application-owned `http.Client`, trust roots, server TLS and auth
    middleware inputs. Test verified TLS, private test CA, wrong host, untrusted
    issuer, expired fixture certificate, cancelled handshake, and redirect/header
@@ -589,6 +598,49 @@ Exit: all D01–D06 and decided G rows pass the complete implementation matrix;
 all plants are caught; budgets pass; CI definitions run the same documented
 checks; no blocker. No stability or release claim is made from prototype results.
 
+### Stage 9 amendment — selected CI/CD policy, 2026-11-24
+
+This amendment records D1 A, D3 C and the D2 scope instruction. It adds the
+Makefile, receipt verification and cases below to Stage 9; it does not start
+Stage 9 or mark any acceptance case implemented.
+
+1. Re-ground the source locations in
+   [0009-REPORT-cicd-standardization-assessment.md](../reports/0009-REPORT-cicd-standardization-assessment.md)
+   at execution HEAD. Preserve concurrent work and existing cases/budgets. Extend
+   `scripts/gate.py`, `scripts/go-precheck.py`, their tests, `tools/versions.json`,
+   the proposed Makefile and `verify.yml` as one gate implementation.
+2. Implement shared module/case selection and non-mutating pre-add checks. Run
+   all six native tuple/toolchain combinations on queued fleet hosts and GitHub,
+   both modules with CGO off, readonly modules and offline gates after explicit
+   setup. Run preferred-version race instrumentation separately with CGO enabled.
+   Retain the existing conformance, fuzz and numerical budget requirements.
+3. Implement immutable snapshots and one-hour exact-commit receipts. Bind
+   policy/tool/input identities and every outgoing ref tip; reject age at least
+   3,600 seconds, future timestamps and incomplete results. Consume fresh local
+   vulnerability evidence supplied by the owner for each push. Do not install
+   or reconfigure security scans or disclosure guards. Hook integration belongs
+   in its owning repository and must preserve its disclosure behavior.
+4. Add an honest GitHub summary that rejects missing/cancelled/failed cases.
+   GitHub protection, rulesets, required-check configuration, visibility/billing
+   changes and GitHub security-scan jobs are excluded.
+5. Run each decided CI state case below, with baseline pass and broken scratch
+   controls. Retain failure evidence and numbered Stage 9 passes.
+
+| State | Planned acceptance case | Required evidence |
+| :--- | :--- | :--- |
+| CI01 | `TestCI01SharedGateContract` | Make/CI select identical modules/cases; planted command failure propagates |
+| CI02 | `TestCI02NativeMatrix` | Both modules in six CGO-free native combinations and separate race evidence; wrong architecture/compiler/CGO and missing module rejected |
+| CI03 | `TestCI03FreshReceipt` | Complete exact-commit receipt below one hour reused with fresh successful local vulnerability evidence |
+| CI04 | `TestCI04ReceiptRejection` | Missing/malformed/altered/future/expired or mismatched evidence rejected, including one bad tip in multi-ref push; ages immediately below, at and above one hour |
+| CI05 | `TestCI05LocalSecurityBoundary` | Missing/failed/reused scan evidence rejects qualification; disclosure failure remains effective; no scanner/guard mutation or GitHub scan job |
+| CI06 | `TestCI06CISummary` | Failed/cancelled/missing/unexpectedly skipped result fails summary; complete success passes |
+| CI07 | `TestCI07FleetLifecycle` | Queue serializes work; transfer failure, timeout and cancellation retain failure evidence and clean up owned resources |
+| CI08 | Out-of-scope inventory | No GitHub enforcement, visibility or billing configuration is added or required for acceptance |
+
+Additional Stage 9 exit: CI01–CI07 pass, all new plants are caught, CI08 remains
+excluded, and no blocker remains. Receipt/security-boundary fixtures do not replace
+actual native matrix execution. Existing execution authorization is unchanged.
+
 ## Stage 10 — Prepare the reviewable pre-v1 release candidate
 
 1. Update architecture documentation to describe actual packages and dependency
@@ -673,8 +725,8 @@ An omitted option selects the default; distinguish omission from explicit zero.
 
 | Resource | Contract to test |
 | :--- | :--- |
-| JSON frame / HTTP JSON body | 1 MiB default, positive configurable limit no greater than 16 MiB; receive and send; HTTP overflow 413 |
-| SSE event | 1 MiB including framing, maximum configurable 16 MiB; per event, not stream lifetime |
+| JSON frame / HTTP JSON body | 4 MiB undeclared default (SDK parity); declared ceiling 16 MiB; above-ceiling declarations configurable to a 64 MiB hard cap; both receive and send; nothing above 64 MiB constructible; HTTP overflow 413 (owner amendment 2026-11-25) |
+| SSE event | 4 MiB default including framing; 8 MiB declared ceiling; configurable above-ceiling to a 16 MiB hard limit, nothing above constructible; per event, not stream lifetime (owner amendment 2026-11-25) |
 | JSON depth | 64 default, maximum configurable 256; check before recursive validation |
 | Numeric representation | At most 256 token bytes, exponent magnitude at most 1,024; reject before arbitrary precision |
 | Active and queued application calls | 32 active and 32 FIFO queued by default; explicit validated positive configuration; at most 1 second queue wait or earlier deadline |
@@ -967,3 +1019,19 @@ product source, dependency, lockfile, or implementation stage is authorized.
 The four dirty documents and their inventory hash are preserved untouched.
 Option C remains recorded but unexecuted; selecting it requires a fresh
 owner ruling under G23 because it amends the frozen conformance pin.
+
+### 2026-11-24 — CI/CD review decisions and Stage 9 scope amendment
+
+The owner selected D1 A (existing Python gates plus thin Makefile) and D3 C
+(one-hour exact-commit receipts with fresh local vulnerability evidence per push).
+For D2, the owner reports making the repository public, manages disclosure and
+security scans locally, and excludes GitHub enforcement. This supersedes the
+assessment's private-repository protection dependency and 24-hour recommendation.
+GitHub functional CI on all three targets remains in scope.
+
+Affected documentation: this MADR/PLAN pair,
+[0009-REPORT-cicd-standardization-assessment.md](../reports/0009-REPORT-cicd-standardization-assessment.md),
+and its index. Stage 9 gains the Makefile, receipts and CI01–CI07 acceptance cases;
+GitHub enforcement and security-scan administration are excluded. This is a
+policy/specification amendment, not a build pass or completed phase. No workflow,
+hook, dependency or product code was changed by this amendment.

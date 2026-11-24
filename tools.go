@@ -25,6 +25,10 @@ type ToolRegistration struct {
 	// derive from the handler's In type via the SDK's documented
 	// inference path.
 	InputSchema any
+	// OutputSchema is an explicit output schema validated against
+	// every structured result before emission; nil means no output
+	// validation for this tool.
+	OutputSchema any
 	// Annotations carry optional tool annotations.
 	Annotations *mcplib.ToolAnnotations
 }
@@ -52,10 +56,20 @@ func AddTool[In, Out any](s *Server, reg *ToolRegistration, handler sdk.ToolHand
 	s.mu.Lock()
 	if _, exists := s.registered[reg.Name]; exists {
 		s.mu.Unlock()
-		return fmt.Errorf("mcp: tool %q: already registered on this server", reg.Name)
+		return typed(ErrRegistration,
+			fmt.Sprintf("tool %q already registered on this server", reg.Name), nil)
 	}
 	s.registered[reg.Name] = registration{kind: "tool", name: reg.Name}
 	s.mu.Unlock()
+
+	// S6.4: compile the declared output schema before the SDK sees
+	// anything; an invalid declaration fails registration (G10).
+	if err := s.output.declare(reg.Name, reg.OutputSchema); err != nil {
+		s.mu.Lock()
+		delete(s.registered, reg.Name)
+		s.mu.Unlock()
+		return err
+	}
 
 	tool := &sdk.Tool{
 		Name:        reg.Name,

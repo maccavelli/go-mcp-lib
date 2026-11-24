@@ -28,6 +28,8 @@ This tree holds three kinds of document:
 | 0006 | REPORT | [Stage 3 execution: emission and API contract qualification](reports/0006-REPORT-stage-3-emission-api-contract.md) | stage 3 complete |
 | 0007 | REPORT | [Stage 4 execution: CLI, deterministic publication, and recovery](reports/0007-REPORT-stage-4-cli-publication-recovery.md) | stage 4 complete |
 | 0008 | REPORT | [Stage 5 execution: strict JSON codec and canonical validator](reports/0008-REPORT-stage-5-strict-json-validation.md) | stage 5 complete |
+| 0009 | REPORT | [CI/CD standardization assessment](reports/0009-REPORT-cicd-standardization-assessment.md) | complete — owner decisions recorded |
+| 0010 | REPORT | [Stage 6 execution: owned runtime APIs and feature matrix](reports/0010-REPORT-stage-6-runtime-api-feature-matrix.md) | stage 6 complete |
 
 ## I want to…
 
@@ -36,3 +38,4 @@ This tree holds three kinds of document:
 | understand how this fits together | [architecture.md](architecture.md) |
 | know the rules agents follow in this repository | [CLAUDE.md](../CLAUDE.md) |
 | know why the repository has the files and gates it has | [0001-MADR-workspace-scaffold.md](decisions/0001-MADR-workspace-scaffold.md) |
+| review the selected CI/CD policy | [CI/CD standardization assessment](reports/0009-REPORT-cicd-standardization-assessment.md) |
