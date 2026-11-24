@@ -1,6 +1,6 @@
 ---
 status: accepted
-date: 2026-11-23
+date: 2026-11-24
 ---
 
 # Build a schema-driven MCP framework around the upstream Go SDK
@@ -160,12 +160,15 @@ execution. The owner selected all six recommended design decisions on
 are recorded below. The later qualification amendment resolves G08, G20, and
 G21 with executable probe results and a concrete acceptance contract. The
 owner accepted the completed design on 2026-11-23. Production implementation
-has not started; the PLAN is approved, and execution awaits owner instructions.
+has not started; the PLAN is approved. The owner authorized Stage 0
+investigation on 2026-11-24; later stages require separate instructions.
 
 | Date | Owner ruling | Scope |
 | :--- | :--- | :--- |
 | 2026-11-23 | Accepted — “mark the madr as accepted” | Architecture, selected dependencies, qualification resolutions, and numerical acceptance contract; no PLAN execution authorization |
 | 2026-11-23 | Acceptance reaffirmed; PLAN approved; wait for instructions | No implementation execution authorized |
+| 2026-11-24 | Acceptance reaffirmed; PLAN approved; proceed to Stage 0 | Stage 0 investigation and execution evidence authorized; stages 1–10 not authorized |
+| 2026-11-24 | B01 Option A — qualify the existing SDK integration | Approved source investigation and scratch proof under existing pins; preserve feature coverage, no deprecated API exposure or lint suppression, and SDK-owned dispatch |
 
 ### Owner decisions recorded on 2026-11-22
 
@@ -718,6 +721,51 @@ rule, manually altered generated output, and cross-platform compile failure.
 Publication fault injection must demonstrate mixed-output detection and recovery.
 Do not mutate the working tree to plant these failures.
 
+### B01 pass-2 outcome and Option D ruling on 2026-11-24
+
+Pass 2 executed the approved Option A qualification in throwaway scratch
+modules against the pinned SDK v1.8.0; evidence is recorded in
+[0002-REPORT-stage-0-framework-inventory.md](../reports/0002-REPORT-stage-0-framework-inventory.md).
+The server role passed both required scenarios with zero deprecated symbols
+and zero lint findings, and elicitation passed on both axes. The client role
+failed the modern-only composition: sampling fulfillment errors without a
+deprecated handler, roots return the built-in default empty list without
+`AddRoots`, receiving middleware is bypassed by the SDK fulfillment
+dispatcher, and the sealed `InputRequest`/`InputResponse` interfaces admit no
+application-owned implementations. A deprecated control copy passed
+functionally for all scenarios and was flagged by the pinned golangci-lint
+with three unsuppressed SA1019 findings. Inspection of v1.9.0-pre.1 in the
+module cache shows identical SEP-2577 markers; a re-pin cannot change the
+outcome, and a from-scratch SDK would share it because the conformance pin,
+not the SDK, mandates the scenarios.
+
+The owner selected **Option D: codec-mediated fulfillment wrapper**. The
+framework owns the client fulfillment loop
+(`MultiRoundTripOptions.Disabled`), exposes its own public
+`InputRequest`/`InputResponse` DTOs emitted by the schema generator, and
+converts at the SDK seam exclusively through the non-deprecated public codecs
+`InputRequestMap`/`InputResponseMap`. No deprecated symbol is named in
+source, public API, or lint scope; the SDK's deprecated concrete types are
+constructed only inside the SDK package by its own codecs, during the
+SEP-2577 deprecation window. The owner explicitly accepts that runtime
+traversal. Dropping the two scenarios (Option C) is recorded as the fallback
+only; executing it requires a fresh ruling because it amends the frozen
+conformance requirements.
+
+Consumer scope recorded with this ruling: go-mcp-lib deprecates the SDK
+functionality of the mcplib project. The first consumer is gobble, which
+will consume MCP servers as extensions (client role) and expose itself as an
+MCP server to IDE, CLI, and other agent harnesses (server role). This scope
+makes Option C a functional regression for the client role during the
+deprecation window, and it makes the wrapper's public DTOs product API
+rather than test scaffolding.
+
+Pass 1 failed environmentally and pass 2 failed substantively, so the pass-3
+proof is the third qualification attempt. The owner's 2026-11-24 instruction
+to scope and spec Option D is the recorded authorization required by the
+deviation process. Pass 3 remains scratch diagnostic work; it authorizes no
+product source, dependency change, or implementation stage.
+
 ### State table
 
 The D01–D06 table above records the owner's selected policies. The G rows
@@ -750,6 +798,9 @@ implementation acceptance obligations, not unnamed architectural decisions.
 | G20 | Quantitative performance budgets and default quota values | decided — use the measured baselines, numerical gates, and explicit defaults in the qualification amendment; twelve run/size budget cases pass and an over-budget plant fails; full-framework results must be measured during implementation |
 | G21 | Runtime validator's complete required vocabulary | decided — replace the failing SDK-aligned candidate under D04; the qualified v6.0.3 adapter compiles all 155 definitions and passes 421 assertion fixtures, 36 format fixtures, and precision cases; vocabulary changes require renewed qualification |
 | G22 | Public stable API and embedding of generator internals | decided — pre-v1 framework initially, engine internal; API manifest and import-boundary tests |
+| G23 | Client-role input fulfillment for sampling and roots | decided — owned fulfillment loop behind `MultiRoundTripOptions.Disabled`, converting only through the public `InputRequestMap`/`InputResponseMap` codecs; deprecated SDK symbols never named in source or API; runtime traversal inside the SDK package accepted for the SEP-2577 window; the pass-3 scratch proof is the acceptance evidence |
+| G24 | SDK internal structural discriminator (the response codec probing `roots`/`role`/`action` keys) | decided — accept the coupling without suppression and pin it with the conformance-scenario tests required by the qualification amendment, so a probe change fails loudly rather than silently |
+| G25 | SDK removes, or the conformance suite drops, the deprecated input features | decided — delete the codec bridge and the generator's sampling/roots DTOs; the wrapper's public API is shaped so this removal breaks no consumer signature |
 
 ## Pros and Cons of the Options
 
@@ -799,10 +850,14 @@ tree. Line references are anchors for this snapshot and must be re-grounded.
 | Protocol source authority | [MCP stable specification](https://modelcontextprotocol.io/specification/2026-07-28) and immutable schema input linked above |
 | Stable v2 API and migration semantics | [Go 1.27 release notes](https://go.dev/doc/go1.27), [JSON migration guide](https://go.dev/doc/jsonv2-migration), and [versioned JSON v2 documentation](https://pkg.go.dev/encoding/json/v2@go1.27.4) |
 
-All six owner decisions and all three qualification resolutions are recorded.
-There are no open state rows. The owner accepted the architecture, selected
+All six owner decisions, the three qualification resolutions, and the
+2026-11-24 Option D ruling are recorded. G23–G25 are decided policy but not
+yet implemented or proven; the pass-3 scratch proof is their acceptance
+evidence, and executing it requires the owner's approval of the amended PLAN.
+The owner accepted the architecture, selected
 dependencies, and numerical acceptance contract on 2026-11-23. The paired PLAN
-remains proposed and maps executable tests to both
+is approved and maps executable tests to both
 decision and state rows and specifies qualification of the actual implementation
-against this contract; drafting it does not authorize execution. The companion report proves the stated
+against this contract. The 2026-11-24 owner rulings authorize Stage 0 only.
+The companion report proves the stated
 prototype results; it does not certify an unimplemented framework.

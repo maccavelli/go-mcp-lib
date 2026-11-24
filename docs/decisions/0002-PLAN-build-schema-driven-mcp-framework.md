@@ -1,6 +1,6 @@
 ---
-status: accepted
-date: 2026-11-23
+status: in-progress
+date: 2026-11-24
 associated-madr: 0002-MADR-build-schema-driven-mcp-framework.md
 ---
 
@@ -11,8 +11,11 @@ Evidence: [0002-REPORT-qualify-mcp-framework-boundaries.md](../reports/0002-REPO
 
 The owner approved this implementation plan on 2026-11-23 and reaffirmed
 acceptance of the completed MADR, including its numerical acceptance contract.
-No phase has executed. The owner explicitly instructed waiting for further
-instructions; execution requires an instruction to proceed or execute named stages.
+The initial instruction was to wait for further authorization. On 2026-11-24,
+the owner reaffirmed MADR acceptance and PLAN approval and authorized Stage 0.
+Stage 0 is incomplete. The owner selected B01 Option A on 2026-11-24,
+authorizing renewed feasibility investigation and a scratch proof under the
+existing requirements. Stages 1–10 remain unstarted and are not authorized.
 
 ## Goal
 
@@ -815,3 +818,152 @@ exit statuses, complete redacted output artifacts, per-ID results, plants, and
 phase commit. Number failed attempts too. Record deviations and the owner's
 ruling before continuing; retain the original instruction with an annotation
 when a later approved change supersedes it.
+
+### 2026-11-24 — Stage 0, pass 1: authorized investigation
+
+The owner instructed: “set the madr to accepted, approve the plan, and proceed
+to stage 0”. The MADR was already accepted and the PLAN already approved; this
+entry records renewed approval and supersedes the earlier wait instruction for
+Stage 0 only. Starting revision: `bd99482`; the working tree was clean.
+The empty dirty-content inventory has SHA-256
+`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+
+Investigation is incomplete. See
+[0002-REPORT-stage-0-framework-inventory.md](../reports/0002-REPORT-stage-0-framework-inventory.md)
+for verified identities, commands, B01 evidence, and the unfinished obligation
+ledger. The original prototype report remains unchanged. No product source,
+dependency, or configuration changed.
+
+**Deviation requiring owner ruling:** the pinned SDK deprecates sampling and
+roots, while Stage 6 includes those interactions and the pinned conformance
+set requires their basic scenarios. The accepted contract also forbids
+deprecated SDK symbols, transitive exposure, and Staticcheck exceptions. A
+compliant binding has not been established. This is a pre-existing contract
+conflict, not a product test failure. No workaround or changed scope has been
+selected. Stop under the repository deviation rule; amend the pair with the
+owner's resolution before resuming. Stage 0 has not met its exit criterion.
+
+Affected files: this PLAN, its MADR (approval chronology and stale approval
+wording only), `docs/README.md`, and the execution report. No architecture
+amendment has been accepted for B01. No new gate or plant experiment is due;
+no build pass or phase commit occurred.
+
+**Documentation verification, pass 1:** `run-heavy --max-wait 30 -- python3
+scripts/check_records.py --check-all` returned 3 because the queue directory
+was not writable; it ran nothing. The available-dev-hosts skill explicitly
+permits a direct fallback for this exit. The direct record validator exited 0
+with no output; `git diff --check` also exited 0 with no output.
+
+`npx --offline --yes markdownlint-cli2@0.23.2` could not resolve its cached
+registry metadata (`ENOTCACHED`, exit 1), so lint had not run. Inspection found
+the exact 0.23.2 package already installed in the npm execution cache. Running
+its declared CLI entry point with Node exited 0, using the unchanged repository
+configuration and all configured Markdown globs:
+
+```text
+markdownlint-cli2 v0.23.2 (markdownlint v0.41.1)
+Linting: 23 files
+Summary: 0 issues in 0 files
+```
+
+The four changed documents were reviewed and checked for local account, host,
+and real-machine path disclosures. The original qualification report remains
+byte-identical to HEAD. These documentation checks do not resolve B01 or mark
+Stage 0 complete. The incomplete phase remains uncommitted.
+
+### 2026-11-24 — Stage 0, pass 2: approved B01 Option A
+
+The owner instructed “move forward with option a” after reviewing three
+choices. This authorizes qualifying the existing pinned SDK integration;
+it does not waive feature coverage, permit deprecated API exposure or lint
+suppression, or replace SDK dispatch. The pass-1 stop instruction is superseded
+for this investigation. B01 remains unresolved until evidence satisfies it.
+
+Starting revision remains `bd99482`. The four existing dirty documents are
+preserved. Their ordered path-NUL/content-NUL inventory has SHA-256
+`32d15159809e5e5ee3713b96cb4d589a8cd814e97b24a83d60a5f04002a5e18c`.
+
+Approved investigation steps:
+
+1. Inspect public SDK multi-round codecs, callback registration, middleware,
+   custom-method APIs, and capability handling against actual source.
+2. Build a scratch proof using owned application values and public,
+   nondeprecated SDK entry points. Test server requests and client fulfillment
+   separately. SDK dispatch, retries, and request-state handling must remain
+   enabled; success for one role cannot stand in for the other.
+3. Require sampling output from the configured application handler and the
+   actual configured root list. Empty roots, ignored callbacks, or an error
+   from an advertised sampling capability fail qualification.
+4. Run the pinned Staticcheck through golangci-lint, including scratch tests,
+   with no exclusions. In separate copies, demonstrate that deprecated direct
+   bindings are caught and that broken functional fixtures fail. Keep every
+   original expectation; report failures instead of deleting features or tests.
+5. Preserve source, commands, outputs, hashes, negative controls, and limits
+   of the proof in the execution report. Resume the remaining Stage 0 inventory
+   only if B01 is resolved. Otherwise return the concrete failure for review.
+
+Exit: a demonstrated compliant integration for both roles, or an explicit
+failed qualification with the remaining blocker retained. The latter completes
+this investigation attempt but does not complete Stage 0. A third build attempt
+requires the repository deviation process. Added scope is scratch diagnostic
+code and evidence in the existing report; no product source or dependency
+change is authorized. New diagnostic assertions require broken-copy controls;
+the earlier exemption applied only to pass 1, which introduced none.
+
+### 2026-11-24 — Stage 0, pass 3: Option D wrapper qualification
+
+The owner selected Option D (codec-mediated fulfillment wrapper) after
+reviewing the pass-2 failure and the option ledger, and instructed scoping
+and specification. The ruling, consumer scope, and state rows G23–G25 are
+recorded in the MADR amendment above; this section is the executable
+specification of the pass-3 proof that qualifies them. Pass 1 failed
+environmentally and pass 2 substantively; this is the third qualification
+attempt, authorized by the recorded 2026-11-24 owner instruction that the
+deviation process requires.
+
+Composition under proof, per G23: the framework owns the client fulfillment
+loop with `MultiRoundTripOptions.Disabled`; owned DTOs for
+`InputRequest`/`InputResponse` are converted at the SDK seam only through
+the public `InputRequestMap`/`InputResponseMap` codecs; no deprecated symbol
+is named in source, public API, or lint scope; runtime traversal of the
+SDK's deprecated concrete types inside its own package is the accepted,
+documented boundary of this composition. G24's structural-discriminator
+coupling is accepted without suppression and pinned by scenario tests.
+
+Approved investigation steps:
+
+1. **Manual-resumption proof (client role).** In a fresh scratch module,
+   build the owned fulfillment loop: `MultiRoundTripOptions{Disabled: true}`
+   on the client session; `CallTool` returns an input-required result;
+   `NeedsInput()`, `InputRequests`, and `RequestState` are read through the
+   owned DTOs via `InputRequestMap.MarshalJSON`; owned handlers produce
+   owned response DTOs; retry with `Params.InputResponses` populated via
+   `InputResponseMap.UnmarshalJSON` and the echoed `RequestState`. The
+   server fixture is the passing pass-2 server role, reused unchanged.
+   Success requires real sampling output from an owned handler and the
+   actual configured root list — empty, ignored, or erroring responses fail,
+   per the pass-2 criteria.
+2. **Proxy-handler control.** A separate copy demonstrates that a wired but
+   deliberately broken owned handler (wrong model, wrong root) fails the
+   scenario, proving the loop routes through owned code and not a silently
+   succeeding default.
+3. **Lint gate.** Pinned golangci-lint 2.15.0, staticcheck, no exclusions,
+   over the scratch proof: zero findings is the pass condition. Any SA1019
+   finding names a composition defect, not a policy allowance.
+4. **Discriminator pin.** A separate copy demonstrates that a malformed
+   probe payload (a sampling response lacking the `role` key) fails
+   decoding loudly, pinning G24's coupling so an SDK probe change surfaces
+   as a scenario failure rather than silence.
+5. **Evidence and exit.** Record source, commands, outputs, hashes,
+   negative controls, and limits in
+   [0002-REPORT-stage-0-framework-inventory.md](../reports/0002-REPORT-stage-0-framework-inventory.md),
+   with host paths redacted. Exit criterion: both scenarios pass through the
+   owned loop with zero lint findings, or an explicit failed qualification
+   returns to the owner with Option C recorded as the pre-approved fallback
+   that a fresh ruling must still select.
+
+Scope and authority: scratch diagnostic code and report evidence only. No
+product source, dependency, lockfile, or implementation stage is authorized.
+The four dirty documents and their inventory hash are preserved untouched.
+Option C remains recorded but unexecuted; selecting it requires a fresh
+owner ruling under G23 because it amends the frozen conformance pin.
