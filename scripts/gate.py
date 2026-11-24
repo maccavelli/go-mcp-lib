@@ -274,6 +274,63 @@ def mode_plants() -> int:
     return failures
 
 
+def mode_generate_check() -> int:
+    """Generator contract: stage 2 loading, resolution, and modeling.
+
+    Checks the pinned schema is committed and byte-hashed, the fixture
+    corpus is present, the disposition seed is large enough for stage 3
+    to complete mechanically, and the generator module's tests and lint
+    pass. Unimplemented generator stages stay FAIL-incomplete inside the
+    generator's own stage wiring; this mode reports the stage 2 contract.
+    """
+    failures = 0
+    schema_path = os.path.join(ROOT, "schema", "inputs", "2026-07-28", "schema.json")
+    if not os.path.exists(schema_path):
+        fail("generate-check.schema", f"pinned schema missing at {schema_path}")
+        return 1
+    passln("generate-check.schema", "pinned schema present")
+    fixtures_dir = os.path.join(ROOT, "cmd", "mcpgen", "testdata", "fixtures")
+    if not os.path.isdir(fixtures_dir):
+        fail("generate-check.fixtures", "fixture corpus missing")
+        failures += 1
+    else:
+        fixtures = [f for f in os.listdir(fixtures_dir) if f.endswith(".json")]
+        if len(fixtures) < 8:
+            fail("generate-check.fixtures", f"corpus incomplete: {len(fixtures)} fixtures")
+            failures += 1
+        else:
+            passln("generate-check.fixtures", f"{len(fixtures)} fixtures")
+    with open(os.path.join(ROOT, "schema", "sdk-map.json"), encoding="utf-8") as f:
+        sdk_map = json.load(f)
+    dispositioned = set(sdk_map.get("dispositions", {}))
+    if len(dispositioned) < 20:
+        fail(
+            "generate-check.dispositions",
+            f"disposition table too small: {len(dispositioned)} seeded",
+        )
+        failures += 1
+    else:
+        passln(
+            "generate-check.dispositions",
+            f"{len(dispositioned)} definitions dispositioned (stage 3 completes totality)",
+        )
+    code, events, tail = go_test_json("cmd/mcpgen")
+    ran = [e for e in events if e.get("Action") == "run" and e.get("Test")]
+    passed = [e for e in events if e.get("Action") == "pass" and e.get("Test")]
+    if code != 0 or not ran:
+        fail("generate-check.tests", f"generator tests failed: {tail}")
+        failures += 1
+    else:
+        passln("generate-check.tests", f"{len(passed)} generator tests passed")
+    code, out = run_lint("cmd/mcpgen")
+    if code != 0:
+        fail("generate-check.lint", f"generator lint: {out[-500:]}")
+        failures += 1
+    else:
+        passln("generate-check.lint", "0 issues")
+    return failures
+
+
 def main() -> int:
     args = sys.argv[1:]
     if not args or args[0] not in MODES:
@@ -287,9 +344,7 @@ def main() -> int:
     elif mode == "unit":
         failures = mode_unit()
     elif mode == "generate-check":
-        failures = mode_incomplete(
-            "generate-check", "generator stages land in stages 2-4"
-        )
+        failures = mode_generate_check()
     elif mode == "api":
         failures = mode_incomplete("api", "generated API contract lands in stage 3")
     elif mode == "wire":

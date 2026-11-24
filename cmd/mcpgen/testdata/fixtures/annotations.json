@@ -1,0 +1,16 @@
+{
+	"$comment": "Unsupported assertion fixture: a vendor assertion keyword that is not in the pinned vocabulary fails the model with a source pointer, not a silent skip. 'x-annotation' stays an annotation; 'unevaluatedProperties' is an unpinned assertion.",
+	"$defs": {
+		"Annotated": {
+			"type": "object",
+			"title": "annotated",
+			"x-annotation": "kept as annotation",
+			"properties": {
+				"a": { "type": "string" }
+			}
+		}
+	},
+	"expected": {
+		"annotations-kept": ["title", "x-annotation"]
+	}
+}

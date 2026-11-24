@@ -1,0 +1,17 @@
+{
+	"$comment": "Reserved names fixture: properties colliding with Go keywords must survive the model verbatim; the emitter (stage 3) mangles names, never the model.",
+	"$defs": {
+		"Keywordish": {
+			"type": "object",
+			"properties": {
+				"type": { "type": "string" },
+				"range": { "type": "string" },
+				"func": { "type": "string" },
+				"select": { "type": "string" }
+			}
+		}
+	},
+	"expected": {
+		"properties-verbatim": ["func", "range", "select", "type"]
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"$comment": "Extension vocabulary fixture: an unknown required vocabulary must fail loudly; unknown non-required keywords stay annotations.",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$vocabulary": {
+		"https://json-schema.org/draft/2020-12/vocab/core": true,
+		"https://json-schema.org/draft/2020-12/vocab/applicator": true,
+		"https://json-schema.org/draft/2020-12/vocab/validation": true,
+		"https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+		"https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+		"https://json-schema.org/draft/2020-12/vocab/content": true,
+		"https://example.invalid/vocab/required-extension": true
+	},
+	"$defs": {
+		"Extended": {
+			"type": "object",
+			"properties": {
+				"a": { "type": "string" }
+			}
+		}
+	},
+	"expected": {
+		"fails": true,
+		"reason": "unknown required vocabulary"
+	}
+}

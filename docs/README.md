@@ -24,6 +24,7 @@ This tree holds three kinds of document:
 | 0003 | MADR | [Name the Bash and heredocs deny hook](decisions/0003-MADR-name-bash-heredoc-hook.md) | accepted |
 | 0003 | PLAN | [Name the Bash and heredocs deny hook](decisions/0003-PLAN-name-bash-heredoc-hook.md) | implemented |
 | 0004 | REPORT | [Stage 1 execution: modules, tool pins, and honest gates](reports/0004-REPORT-stage-1-modules-tool-pins-gates.md) | stage 1 complete |
+| 0005 | REPORT | [Stage 2 execution: lossless loading, resolution, and mappings](reports/0005-REPORT-stage-2-loading-resolution-mappings.md) | stage 2 complete |
 
 ## I want to…
 

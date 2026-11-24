@@ -86,11 +86,17 @@ class GateModes(unittest.TestCase):
         self.assertIn("pre-add", out)
 
     def test_unimplemented_modes_fail_incomplete(self):
-        for mode in ("generate-check", "api", "wire", "qualification"):
+        for mode in ("api", "wire", "qualification"):
             with self.subTest(mode=mode):
                 code, out = run_script(GATE, [mode], ROOT)
                 self.assertEqual(code, 1)
                 self.assertIn(f"FAIL {mode}: incomplete", out)
+
+    def test_generate_check_passes_on_real_repo(self):
+        code, out = run_script(GATE, ["generate-check"], ROOT)
+        self.assertEqual(code, 0, out)
+        self.assertIn("pass generate-check.schema", out)
+        self.assertIn("pass generate-check.tests", out)
 
     def test_setup_offline_fails_conformance(self):
         code, out = run_script(GATE, ["setup"], ROOT)

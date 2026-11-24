@@ -1,0 +1,31 @@
+{
+	"version": 1,
+	"revision": "2026-07-28",
+	"comment": "Explicit dispositions for every schema definition against the pinned SDK v1.8.0. 'alias' maps to a reviewed public SDK type; 'owned' emits an owned framework type (deprecated or sealed SDK surfaces); 'owned-codec' converts only through the public InputRequestMap/InputResponseMap codecs per G23. Dispositions are input to stage 3 emission and are validated for totality.",
+	"module": "github.com/modelcontextprotocol/go-sdk",
+	"version-pinned": "v1.8.0",
+	"dispositions": {
+		" alias-comment": "The alias table below is seeded with representative entries; stage 3's sdkmap builder completes it mechanically from Go metadata and source ASTs, and the generator fails on any definition without a disposition.",
+		"CallToolResult": "alias",
+		"CallToolParams": "alias",
+		"Tool": "alias",
+		"TextContent": "alias",
+		"ImageContent": "alias",
+		"AudioContent": "alias",
+		"ResourceLink": "alias",
+		"EmbeddedResource": "alias",
+		"Implementation": "alias",
+		"InitializeParams": "alias",
+		"InitializeResult": "alias",
+		"ClientCapabilities": "alias",
+		"ServerCapabilities": "alias",
+		"ElicitResult": "alias",
+		"CreateMessageParams": "owned-codec",
+		"CreateMessageRequest": "owned-codec",
+		"CreateMessageResult": "owned-codec",
+		"ListRootsResult": "owned-codec",
+		"Root": "owned-codec",
+		"RootsCapabilities": "owned-codec",
+		"SamplingCapabilities": "owned-codec"
+	}
+}

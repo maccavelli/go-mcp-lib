@@ -1,0 +1,96 @@
+{
+	"version": 1,
+	"revision": "2026-07-28",
+	"comment": "Normative protocol rules encoded as machine-checkable entries. Each entry binds a schema definition or method to its normative source, direction, capability, and local fixture. Entries describe current 2026-07-28 behavior only; ACP x-* conventions and old initialization semantics are deliberately absent.",
+	"methods": [
+		{
+			"name": "initialize",
+			"direction": "client-to-server",
+			"capability": null,
+			"normative-section": "MCP 2026-07-28 / Lifecycle",
+			"completion": "single-result",
+			"cancellation": false,
+			"retry-safe": false,
+			"fixture": "lifecycle-initialize"
+		},
+		{
+			"name": "tools/call",
+			"direction": "client-to-server",
+			"capability": "tools",
+			"normative-section": "MCP 2026-07-28 / Tools",
+			"completion": "single-result-or-input-required",
+			"cancellation": true,
+			"retry-safe": false,
+			"fixture": "tools-call-input-required"
+		},
+		{
+			"name": "sampling/createMessage",
+			"direction": "server-to-client",
+			"capability": "sampling",
+			"normative-section": "MCP 2026-07-28 / Sampling (deprecated by SEP-2577)",
+			"completion": "single-result",
+			"cancellation": true,
+			"retry-safe": false,
+			"fixture": "sampling-fulfillment-owned-loop"
+		},
+		{
+			"name": "roots/list",
+			"direction": "server-to-client",
+			"capability": "roots",
+			"normative-section": "MCP 2026-07-28 / Roots (deprecated by SEP-2577)",
+			"completion": "single-result",
+			"cancellation": false,
+			"retry-safe": true,
+			"fixture": "roots-fulfillment-owned-loop"
+		},
+		{
+			"name": "elicitation/create",
+			"direction": "server-to-client",
+			"capability": "elicitation",
+			"normative-section": "MCP 2026-07-28 / Elicitation",
+			"completion": "single-result",
+			"cancellation": true,
+			"retry-safe": false,
+			"fixture": "elicitation-fulfillment"
+		}
+	],
+	"definitions": [
+		{
+			"name": "CallToolResult",
+			"schema-pointer": "#/$defs/CallToolResult",
+			"normative-section": "MCP 2026-07-28 / Tools; SEP-2322 multi-round-trip",
+			"sdk-symbol": "mcp.CallToolResult",
+			"completion": "complete-or-input-required",
+			"cancellation": true,
+			"retry-safe": "with-requestState",
+			"fixture": "tools-call-input-required"
+		},
+		{
+			"name": "CreateMessageResult",
+			"schema-pointer": "#/$defs/CreateMessageResult",
+			"normative-section": "MCP 2026-07-28 / Sampling (deprecated by SEP-2577)",
+			"sdk-symbol": "mcp.CreateMessageResult",
+			"completion": "single-result",
+			"cancellation": true,
+			"retry-safe": false,
+			"fixture": "sampling-fulfillment-owned-loop",
+			"deprecation": "SEP-2577; traversed only through public codecs during the window per G23-G25"
+		},
+		{
+			"name": "ListRootsResult",
+			"schema-pointer": "#/$defs/ListRootsResult",
+			"normative-section": "MCP 2026-07-28 / Roots (deprecated by SEP-2577)",
+			"sdk-symbol": "mcp.ListRootsResult",
+			"completion": "single-result",
+			"cancellation": false,
+			"retry-safe": true,
+			"fixture": "roots-fulfillment-owned-loop",
+			"deprecation": "SEP-2577; traversed only through public codecs during the window per G23-G25"
+		}
+	],
+	"validation": {
+		"total-mapping-required": true,
+		"comment": "Every standard method and every mapped definition must appear here or in sdk-map.json; the generator fails on a missing entry rather than skipping it.",
+		"unknown-members": "preserved where the schema allows them; recorded, never silently dropped"
+	}
+}

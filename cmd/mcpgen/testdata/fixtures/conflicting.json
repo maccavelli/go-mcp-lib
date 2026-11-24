@@ -1,0 +1,15 @@
+{
+	"$comment": "Conflicting composition fixture: allOf constraints that disagree must stay structural — the model records both branches and the validator (stage 5) decides; no silent merge.",
+	"$defs": {
+		"Conflicted": {
+			"allOf": [
+				{ "type": "object", "required": ["mode"], "properties": { "mode": { "type": "string" } } },
+				{ "type": "object", "required": ["mode", "level"], "properties": { "mode": { "type": "string" }, "level": { "type": "integer", "minimum": 1 } } }
+			]
+		}
+	},
+	"expected": {
+		"allOf-branches": 2,
+		"merged": false
+	}
+}

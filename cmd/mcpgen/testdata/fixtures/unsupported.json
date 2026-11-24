@@ -1,0 +1,16 @@
+{
+	"$comment": "Unsupported assertion fixture: 'unevaluatedProperties' is not in the pinned 17-keyword inventory and is an assertion-shaped keyword; the model must fail it with a pointer rather than classify it as an annotation.",
+	"$defs": {
+		"Unsupported": {
+			"type": "object",
+			"properties": {
+				"a": { "type": "string" }
+			},
+			"unevaluatedProperties": false
+		}
+	},
+	"expected": {
+		"fails": true,
+		"reason": "unsupported assertion keyword"
+	}
+}

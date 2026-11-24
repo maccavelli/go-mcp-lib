@@ -1,0 +1,18 @@
+{
+	"$comment": "Recursive reference fixture: Node references itself through children. Expected: the model represents the cycle as a structural edge without exhausting depth; resolution terminates on the non-ref leaf.",
+	"$defs": {
+		"Node": {
+			"type": "object",
+			"required": ["id"],
+			"properties": {
+				"id": { "type": "string" },
+				"children": { "type": "array", "items": { "$ref": "#/$defs/Node" } }
+			}
+		}
+	},
+	"expected": {
+		"definitions": 1,
+		"recursive": true,
+		"required": ["id"]
+	}
+}

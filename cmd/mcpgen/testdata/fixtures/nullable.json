@@ -1,0 +1,19 @@
+{
+	"$comment": "Nullability fixture: optional-and-nullable must stay distinct from required and from zero-valued.",
+	"$defs": {
+		"Item": {
+			"type": "object",
+			"required": ["name"],
+			"properties": {
+				"name": { "type": "string" },
+				"nickname": { "type": ["string", "null"] },
+				"count": { "type": "integer", "default": 0 }
+			}
+		}
+	},
+	"expected": {
+		"required": ["name"],
+		"nullable": ["nickname"],
+		"defaults-preserved": ["count"]
+	}
+}

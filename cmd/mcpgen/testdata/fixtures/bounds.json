@@ -1,0 +1,21 @@
+{
+	"$comment": "Numeric bounds fixture: exact tokens with precision a float64 would collapse.",
+	"$defs": {
+		"Bounded": {
+			"type": "number",
+			"minimum": 0.30000000000000004,
+			"maximum": 1e308
+		},
+		"Empty": {
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 0
+		}
+	},
+	"expected": {
+		"minimum-token": "0.30000000000000004",
+		"maximum-token": "1e308",
+		"minItems": 0,
+		"maxItems": 0
+	}
+}
