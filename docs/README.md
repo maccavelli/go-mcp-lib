@@ -26,6 +26,7 @@ This tree holds three kinds of document:
 | 0004 | REPORT | [Stage 1 execution: modules, tool pins, and honest gates](reports/0004-REPORT-stage-1-modules-tool-pins-gates.md) | stage 1 complete |
 | 0005 | REPORT | [Stage 2 execution: lossless loading, resolution, and mappings](reports/0005-REPORT-stage-2-loading-resolution-mappings.md) | stage 2 complete |
 | 0006 | REPORT | [Stage 3 execution: emission and API contract qualification](reports/0006-REPORT-stage-3-emission-api-contract.md) | stage 3 complete |
+| 0007 | REPORT | [Stage 4 execution: CLI, deterministic publication, and recovery](reports/0007-REPORT-stage-4-cli-publication-recovery.md) | stage 4 complete |
 
 ## I want to…
 

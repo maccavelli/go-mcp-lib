@@ -1,10 +1,12 @@
 // Command mcpgen generates the framework's reviewed protocol contracts
 // from the pinned MCP schema.
 //
-// The generator is standard-library only and has no dependency on the
-// runtime module, Node, or Python. Stages are implemented across stages
-// 2-4 of the framework plan; until then, invoking an unimplemented stage
-// returns an explicit incomplete error and exits nonzero.
+// Commands: inspect, check, generate, diff, update, recover, diagnostic.
+// Help exits 0; usage errors exit 2; failed validation, drift, or
+// incomplete recovery exit 1. Diagnostics go to stderr; machine-readable
+// results go to stdout with a format version. The generator is standard
+// library only and has no dependency on the runtime module, Node, or
+// Python.
 package main
 
 import (
@@ -13,52 +15,48 @@ import (
 	"sort"
 )
 
-// stages maps a stage name to its implementation status. A stage is
-// implemented only when its function is wired in; nil means the plan
-// stage has not landed yet and must fail explicitly.
-var stages = map[string]func([]string) error{
-	"acquire":    nil,
-	"load":       nil,
-	"resolve":    nil,
-	"model":      nil,
-	"sdkmap":     nil,
-	"emit":       nil,
-	"qualify":    nil,
-	"publish":    nil,
-	"diagnostic": nil,
+// commands maps a command name to its implementation.
+var commands = map[string]func([]string, *printer) error{
+	"inspect":    cmdInspect,
+	"check":      cmdCheck,
+	"generate":   cmdGenerate,
+	"diff":       cmdDiff,
+	"update":     cmdUpdate,
+	"recover":    cmdRecover,
+	"diagnostic": cmdDiagnostic,
 }
-
-const usage = `usage: mcpgen <stage> [args]
-
-Stages: acquire, load, resolve, model, sdkmap, emit, qualify, publish, diagnostic
-
-Unimplemented stages exit 2 with an incomplete error.`
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, usage)
-		os.Exit(2)
+		fmt.Fprintln(os.Stderr, helpText())
+		os.Exit(exitUsage)
 	}
 	name := os.Args[1]
-	run, ok := stages[name]
+	if name == "help" || name == "--help" || name == "-h" {
+		fmt.Print(helpText())
+		os.Exit(exitOK)
+	}
+	run, ok := commands[name]
 	if !ok {
-		fmt.Fprintf(os.Stderr, "mcpgen: unknown stage %q\n%s\n", name, usage)
-		os.Exit(2)
+		fmt.Fprintf(os.Stderr, "mcpgen: unknown command %q\n\n%s\n", name, helpText())
+		os.Exit(exitUsage)
 	}
-	if run == nil {
-		fmt.Fprintf(os.Stderr, "mcpgen: stage %q is not implemented yet; exit incomplete\n", name)
-		os.Exit(2)
+	out := newPrinter("text")
+	err := run(os.Args[2:], out)
+	if err == nil {
+		os.Exit(exitOK)
 	}
-	if err := run(os.Args[2:]); err != nil {
-		fmt.Fprintf(os.Stderr, "mcpgen: %s: %v\n", name, err)
-		os.Exit(1)
+	if _, isUsage := err.(*usageExit); isUsage {
+		os.Exit(exitUsage)
 	}
+	fmt.Fprintf(os.Stderr, "mcpgen %s: %v\n", name, err)
+	os.Exit(exitFail)
 }
 
-// stageNames is the sorted stage list for tests and diagnostics.
-func stageNames() []string {
-	names := make([]string, 0, len(stages))
-	for name := range stages {
+// commandNames is the sorted command list for tests.
+func commandNames() []string {
+	names := make([]string, 0, len(commands))
+	for name := range commands {
 		names = append(names, name)
 	}
 	sort.Strings(names)
