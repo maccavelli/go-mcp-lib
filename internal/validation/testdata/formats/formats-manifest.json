@@ -1,0 +1,70 @@
+{
+  "commit": "83e866b46c9f9e7082fd51e83a61c5f2145a1ab7",
+  "formats": {
+    "LICENSE": {
+      "cases": 0,
+      "hash": "837402bd25fad9b704265801ca3f92566a98157c1f9a7acd6f446299ba1c305a"
+    },
+    "date": {
+      "cases": 47,
+      "hash": "20435f915c7a0d94b623939153d847b31583cbe688d94ba6cf63679d7036fecf"
+    },
+    "date-time": {
+      "cases": 25,
+      "hash": "80ef96b964d455f02b7df19ff0009578011bbeba0369dc3397ccb0f7b932c5d1"
+    },
+    "duration": {
+      "cases": 26,
+      "hash": "ac8858c321a0a8f246363453db0b08555a07bf493083450bb733b73d76fb5417"
+    },
+    "email": {
+      "cases": 22,
+      "hash": "44de293b460954991e0392eb17fbf0af7ceeaeb3d67690a007e91c35a96318b8"
+    },
+    "hostname": {
+      "cases": 25,
+      "hash": "e64c4ed9acd1b15aab72ae683a69df2e0875db3727ca0e5820cbf7cc8f968974"
+    },
+    "ipv4": {
+      "cases": 16,
+      "hash": "471af1d2dba48fcee229d2ee0f28c7065c46c9d8e0adafab108c8ff52572ba28"
+    },
+    "ipv6": {
+      "cases": 40,
+      "hash": "d193daedb1bea81a57108831f727f64585b90a46dc4c495fe3c207aaa0e54974"
+    },
+    "json-pointer": {
+      "cases": 38,
+      "hash": "565525f00edd74a533a6f404ee7be69d14b8ac37c8b96332789aa183e95d53f1"
+    },
+    "regex": {
+      "cases": 8,
+      "hash": "38d81f166bf22df5dba59e8360ca44f4113129e483fb4f4f3e704a2f2fd28499"
+    },
+    "relative-json-pointer": {
+      "cases": 18,
+      "hash": "ae133bdbbf4a60f5b6393de924b5011eb7af4ff0b9358c019918eccfe26b14d9"
+    },
+    "time": {
+      "cases": 45,
+      "hash": "864292340613089d26018bfbaa51a914c7a5782b44516aa0fe5128acef8844af"
+    },
+    "uri": {
+      "cases": 26,
+      "hash": "56eafa51d31e29d993cbaa0e53d2b93d196f162317896a943231befd442835dc"
+    },
+    "uri-reference": {
+      "cases": 13,
+      "hash": "3c95e48e448c0e692e39038dd80ee32b4930fcc90830eb80109039207be13068"
+    },
+    "uri-template": {
+      "cases": 10,
+      "hash": "02753aa3f3e38c29b3ed0231305ba77f0427f922aca9b974ed3351da07b6134e"
+    },
+    "uuid": {
+      "cases": 21,
+      "hash": "b9f763a03829da5037c8ddaada416b3be83b4632bcfc0ca4a4650083f2f4f05c"
+    }
+  },
+  "suite": "json-schema-org/JSON-Schema-Test-Suite"
+}
