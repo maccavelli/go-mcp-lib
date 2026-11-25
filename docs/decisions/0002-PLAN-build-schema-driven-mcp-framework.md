@@ -1,6 +1,6 @@
 ---
 status: in-progress
-date: 2026-11-24
+date: 2026-11-25
 associated-madr: 0002-MADR-build-schema-driven-mcp-framework.md
 ---
 
@@ -13,9 +13,21 @@ The owner approved this implementation plan on 2026-11-23 and reaffirmed
 acceptance of the completed MADR, including its numerical acceptance contract.
 The initial instruction was to wait for further authorization. On 2026-11-24,
 the owner reaffirmed MADR acceptance and PLAN approval and authorized Stage 0.
-Stage 0 is incomplete. The owner selected B01 Option A on 2026-11-24,
-authorizing renewed feasibility investigation and a scratch proof under the
-existing requirements. Stages 1–10 remain unstarted and are not authorized.
+The historical execution entries below record the B01 investigation. Product
+source subsequently landed through the claimed Stage 6 baseline. The
+[completion audit](../reports/0011-REPORT-pre-stage-7-completion-audit.md) found
+unmet exits in every Stage 0–6, so those completion claims are not the current
+acceptance status. The owner selected post-audit option A, “do A repairs”.
+R1–R5 below specify that option's repair amendment. The owner initially
+authorized R1 only, then approved execution of R1–R5 and commits to main between
+qualified coherent phases. R1 passed qualification on 2026-11-25; R2 is next.
+The overall PLAN remains in-progress. Stage 7 is not ready to start.
+
+The 2026-11-25 research refinement below evaluates three implementation options
+per repair and specifies the recommended work. It is a reviewable planning
+update; the later owner approval and dated execution entries record which work
+was authorized and what actually passed. Shared-runner changes were separately
+approved through D1 A. Other product repositories remain outside this work.
 
 ## Goal
 
@@ -59,7 +71,8 @@ alone is insufficient evidence for this framework's complete advertised surface.
 
 ### Modules, packages, and files to create
 
-All paths in this table are planned deliverables, not existing implementation.
+This table preserves the original deliverables. Some paths now exist; existence
+does not establish acceptance. The repair ledger below gives current status.
 Use root package name `mcp`; callers can import the module with that conventional
 local name. The generator's package is `main` and its engine remains internal.
 
@@ -155,6 +168,713 @@ features. Stage 5 supplies codecs and validation; stages 6–8 integrate them wi
 owned APIs and both transports. Stage 9 qualifies the combined system; stage 10
 prepares review artifacts. A stage can exercise lower-level fixtures before the
 final runtime exists, but cannot report a later integration obligation as passed.
+
+### Proposed repair amendment — R1–R5 before Stage 7
+
+This is the concrete execution amendment for the owner's post-audit option A.
+It restores the existing Stage 0–6 requirements and the MADR's RA01–RA20 states.
+The initial selection authorized drafting for review. The subsequent instruction
+“resume r1” authorizes R1 implementation and verification; R2–R5 remain pending
+execution approval. Historical stage instructions and
+measurements remain below. Nothing in this section retrospectively marks a
+failed or untested obligation passing.
+
+#### Current acceptance ledger
+
+| Original stage | Current state | Repair ownership and completion condition |
+| :--- | :--- | :--- |
+| 0 | Incomplete; B01 feasibility resolved, full inventory unfinished | R1 inventory; R2 transitive mapping evidence; R5 actual feature reachability. All Stage 0 obligations must be reconciled. |
+| 1 | Incomplete; modules exist, preparation/accounting/lint gaps remain | R1 restores foundational gates and preparation; full-product checks remain failed wherever later defects persist. |
+| 2 | Incomplete; loader/model/reference/mapping failures reproduced | R2; original Stage 2 exit plus RA05–RA09 pass. |
+| 3 | Incomplete; emission/alias/candidate gaps remain | R2 establishes complete candidate contract; R3 safely promotes it; R4/R5 supply the original codec/runtime integration evidence. |
+| 4 | Incomplete; unsafe publication and nonrecoverable journals | R3; original Stage 4 exit plus RA12–RA14 pass natively on all three targets. |
+| 5 | Incomplete; strict codec and production validation gaps | R4; original Stage 5 exit plus RA15–RA17 pass. |
+| 6 | Incomplete; enforcement and required API behavior absent | R5; original Stage 6 exit plus RA18–RA20 and G23–G25 production cases pass. |
+| 7–10 | Not certified or started by this repair amendment | Original scope retained, including Stage 9 CI01–CI08; separate subsequent execution instruction. |
+
+Repair phases are work packages, not substitute definitions of the original
+stage exits. An early phase may prove a gate correctly rejects the still-broken
+product. Record that product failure separately; never label the complete
+product green or use expected failures to close a required case. Requalify
+affected cross-phase cases after their dependencies change.
+
+#### R1 — Restore evidence, preparation and trustworthy local gates
+
+Scope: `scripts/gate.py`, `scripts/go-precheck.py`, their tests, preparation
+helpers under `scripts/`, `tools/versions.json`, `.golangci.yml`, required
+fixture inventory and the documentation index. Existing generator test setup
+may change only to resolve prepared SDK locations and replace opt-in mutation
+helpers with equivalent always-executed scratch tests. Product generation and
+runtime behavior remain R2–R5 work.
+
+1. Re-ground every audit locator at execution HEAD, record the starting dirty
+   inventory and hashes, and preserve the existing report/index changes.
+   Inventory all D/G/CI obligations, all 155 definitions, standard methods and
+   pinned conformance scenarios, with role, direction, transport, normative
+   reference, named acceptance owner and expected outcome. A missing required
+   binding is a blocker, not an inapplicable row. Preserve previous failed
+   observations and distinguish prototype, helper and production evidence.
+2. Implement test-result accounting by module/package/test identity. Require
+   fresh execution (`-count=1`) and matching terminal outcomes. Reject malformed,
+   duplicate/conflicting, empty, cached-only, missing, failed and unexpectedly
+   skipped results, including a zero child exit with an incomplete stream.
+   Python checks aggregate every independent failure into a named FAIL line.
+   Support strict `--module runtime|generator|all` selection and reject invalid
+   arguments. Keep incomplete gate modes nonzero until their actual contracts
+   are implemented; a helper's success cannot stand in for a product gate.
+3. Make pre-add non-mutating: use `gofmt -l`, vet, appropriate package tests and
+   the pinned linter with the repository configuration in both modules. Include
+   generated/test code in lint. Prove actual lint catches generated and
+   handwritten deprecated-symbol plants. Fix missing-tool/version diagnostics
+   so independent checks continue and report their own outcomes.
+4. Implement explicit pinned setup, including local tool/dependency identities,
+   conformance commit/lock/requirements verification, unchanged-lock `npm ci`,
+   build and prepared-runner digest. Normal gates are offline and readonly.
+   Resolve Go locations through module-aware Go metadata rather than a presumed
+   home-directory layout. Fail missing prerequisites without network fallback.
+   Test interrupted/partial setup and hash mismatch without promoting a partial
+   preparation. Do not reconfigure owner security/disclosure tooling.
+5. Run the existing suites with honest outcome accounting. Required emission
+   tests must execute with verified prepared SDK inputs. Replace the opt-in
+   repository-writing test mechanism with equivalent scratch generation/CLI
+   coverage; preserve its assertions and demonstrate ordinary tests leave the
+   input tree unchanged. Report any newly exposed product failure under its
+   existing repair ID rather than weakening checks.
+
+Exit: no R1 blocker; RA01–RA04 all tested; each gate's broken scratch control
+caught; prepared identities and full inventory recorded. Overall product
+qualification remains incomplete while R2–R5 cases fail. No Stage 9 workflow,
+Makefile/receipt rollout or GitHub enforcement is introduced here.
+
+#### R2 — Repair the input/model/API contract and candidate qualification
+
+Scope: generator `load`, `resolve`, `model`, `sdkmap`, `emit`, `qualify` and
+diagnostics, `generate.go`, `check.go`, reviewed schema/SDK/semantic manifests,
+generated contract artifacts and independent fixtures. Include root signature
+and `internal/sdkbridge/` adaptations needed to compile and exercise the
+corrected owned types with the existing runtime. Such adaptations must preserve
+existing working behavior; no runtime stub or deprecated compatibility alias
+is permitted. Complete additional canonical operations in R5.
+
+1. Replace incomplete handwritten JSON parsing with strict standard-library
+   token parsing and exact numeric representation. Bound file reads before
+   allocation beyond the input allowance. Exercise every A05 input and valid
+   Unicode-pair control; enforce dialect, duplicates, trailing content,
+   definition limits and deterministic bounded source-pointer diagnostics.
+2. Resolve local registered canonical URIs, fragments and JSON Pointers without
+   lossy suffix rewriting. Carry the correct base across references, decode
+   pointer escapes correctly, validate array indices without overflow, retain
+   recursive graph edges and enforce acyclic-depth/reference budgets. Reject
+   missing targets, duplicate IDs, encoded traversal and symlink escape; never
+   fetch references. Invoke resolution in the actual generation pipeline.
+3. Model and classify the pinned vocabulary and explicitly supported inputs.
+   Preserve assertions, annotations, const/enum, required/nullable/presence,
+   unions/compositions and object openness. `minLength` must either be qualified
+   and represented or explicitly rejected, never relabeled an annotation.
+   Require all reviewed semantic and SDK mapping inputs with their independent
+   version/hash identities before emission, including first generation.
+4. Audit alias closure using module-aware source/type information, including
+   instantiated generics, fields, embedded/inherited methods, request/session
+   reachability and deprecation comments. Resolve SDK paths with Go metadata.
+   Generate compiled identity/signature probes; replace unsafe aliases with
+   owned public types and private conversions. Consumers use owned request
+   contexts/handles; no public `Session` field or accessor exposes the SDK.
+5. Produce Go ASTs, protocol method/version registries, declaration/schema
+   bindings, owned DTOs/hooks, API/coverage tables and hashed ownership manifest.
+   Every one of the 155 definitions has an explicit reviewed disposition:
+   alias, owned, validation-only, or release-blocking unsupported. Validation-only
+   is justified in the independent inventory, never inferred from emission
+   failure. Required Option D union types and open maps must have real bindings.
+   Detect keywords, exported names/methods, handwritten and platform declarations,
+   file and case-insensitive collisions. Test serialization against handwritten
+   fixtures; retain R4 differential obligations explicitly.
+6. Wire `check` and `generate` through complete scratch-candidate qualification:
+   all proposed files plus real handwritten source, internal/external tests,
+   module boundaries and tags; stale owned files removed only in scratch after
+   verified ownership. Set `CGO_ENABLED=0`, `GOWORK=off`, `GOTOOLCHAIN=local`,
+   `GOPROXY=off`, `GOSUMDB=off` and readonly modules. Compile package and test
+   binaries for Linux/amd64, Windows/amd64 and Darwin/arm64. Never execute foreign
+   binaries. Check every failure leaves destinations byte-identical.
+7. Treat the existing hashless ownership list as unverified migration input.
+   Render and qualify the new pinned candidate in scratch; record exact old and
+   proposed file inventories and hashes for review. Do not run the old publisher
+   to install it. R3 owns the verified publication/migration. Handwritten bridge
+   adaptations must compile against the committed baseline and the proposed
+   candidate, or remain an explicit coordinated R2/R3 change until both can land
+   coherently; do not commit a broken intermediate tree.
+
+Exit: no R2 blocker; RA05–RA11 tested; malformed/ref/missing-map/transitive-alias/
+collision/platform compile plants caught; the actual proposed product candidate
+compiles on all three targets. The candidate is not declared published until
+R3. No Stage 3 completion claim precedes its codec/runtime integration evidence.
+
+#### R3 — Make publication, recovery and CLI contracts dependable
+
+Scope: generator CLI and `publish`, `recover`, lock/acquisition support,
+versioned manifests/journals, R2 candidate promotion, `scripts/verify_*` and
+committed generator fault fixtures. Refactor packages where useful without
+changing the pure-Go product boundary. Include required Python ignore rules
+when adding reusable orchestration. No reusable helper remains scratch-only.
+
+1. Validate paths before all mutation: reject absolute/traversing/encoded or
+   aliased paths, symlink escapes, unowned collisions and unsafe platform names.
+   Verify containment through existing ancestors and destination identity;
+   revalidate under the exclusive lock before touching files. Test a raced path
+   replacement, case-insensitive collision and intervening edit. Apply the same
+   checks to recovery and stale deletion, including files originally new.
+2. Implement bounded context-aware lock ownership and explicit conflict handling.
+   Do not steal a lock based on age. Stage original and candidate bytes plus
+   hashes on the destination filesystem; durably journal intent before each
+   destructive boundary, use per-file atomic replacement where supported, and
+   promote the manifest last. Preserve unchanged mtimes and inventory order.
+   Report platform sync limitations accurately without claiming transactionality.
+3. Implement read-only inspect and locked complete/restore. Validate journal
+   version, paths, ownership, original/candidate bytes and manifest state before
+   mutation. Detect manual changes to new as well as replaced files. Completion
+   supplies missing staged bytes and finishes the manifest; restore reinstates
+   original bytes, including removed files and the original manifest. Preserve
+   recoverable state on failure; an unreadable/corrupt journal is an error, not
+   “no journal”. Repeated completed recovery is safe and deterministic.
+4. Migrate the old hashless manifest only through explicit verified bootstrap:
+   compare the frozen baseline's Git object bytes and independent R2 digest
+   inventory with all currently owned paths, reject dirty/unowned/conflicting
+   paths, and journal original bytes before installing the qualified candidate.
+   Never infer permission from filenames or bless current bytes by rehashing
+   them. Test clean bootstrap, absent output, modified output and unknown files.
+   Thereafter ordinary generation always verifies the previous hashed manifest.
+5. Complete all six CLI contracts: strict common arguments/format/versioned
+   results and exit codes; inspect complete provenance/coverage; semantic/API/
+   capability/vocabulary diff even when filenames do not change; bounded update
+   with immutable commit/hash provenance, cancellation and disjoint candidate
+   storage. No live input/output promotion or ordinary network use. Diagnostics
+   and structured output retain their separate channels.
+6. Replace synthetic interruption claims with actual child-process kill tests
+   at deterministic publication checkpoints. Inject write, sync, rename,
+   deletion, manifest, cleanup, permission-denied and disk-full failures. Test
+   cancellation, competing generators/recovery, stale locks and tampered journal
+   state. `check` must reject mixed output; complete/restore must preserve every
+   unrelated sentinel. Run native filesystem/recovery cases on all three targets.
+7. Regenerate twice under changed scratch names/source-map ordering; require
+   identical bytes, inventory and retained mtimes. Run actual CLI check and API
+   gates after promotion. Update documentation to identify the verified migration
+   and recovery commands; no direct scratch-binary path is a prerequisite.
+
+Exit: no R3 blocker; RA12–RA14 and original Stage 4 contracts tested; all fault
+and manual-edit plants caught; verified R2 candidate safely promoted and normal
+regeneration clean. Commit coordinated R2/R3 files together if necessary for a
+coherent build, recording both phase results rather than inventing a partial
+Stage 3/4 success.
+
+#### R4 — Complete strict owned codecs and canonical validation
+
+Scope: `codec/`, `internal/rawjson/`, `internal/validation/`, schema declaration
+bindings, generated serialization hooks and their fixtures, location helpers,
+runtime callers of those helpers and `scripts/verify_mutations.py`.
+
+1. Require exactly one complete valid raw JSON value. Distinguish actual end of
+   input from truncated strings/numbers/literals/containers; do not match error
+   text for success. Preserve escaped-equivalent duplicate and invalid UTF-8/
+   surrogate rejection. Test empty/whitespace, trailing value, every audit input,
+   numeric signs/leading zeros and exact/one-past limits. Restore depth 64 default
+   with explicit valid bounds up to 256; retain the frozen frame/token/exponent
+   limits and reject invalid bound configuration.
+2. Implement the owned JSON v2 API and generated presence/union/open-object
+   behavior. Cross-check v1, v2 and the real SDK path using independent frames,
+   custom marshalers, raw values, nil/empty collections, unknown fields, case,
+   resource links and exact numeric neighbors. Compare required byte identities
+   separately from independently validated semantic equivalence.
+3. Use one production adapter/configuration path in qualification and runtime.
+   Force the accepted draft/profile, local resource registry and lossless numeric
+   projection; prohibit external loading. Compile/cache by immutable content and
+   profile identity with bounded retention and concurrent-safe immutable inputs.
+   The same caller key with changed bytes must not reuse an old schema.
+4. Preserve arbitrary application `format` as annotation unless the accepted
+   policy mandates an assertion. Exercise generic format syntax through the same
+   production semantic checkers used at mandated protocol locations. Do not fix
+   A16 by globally enabling `AssertFormat`. Enforce `Root.uri` file semantics,
+   strict URI/base64 syntax and the pinned RFC 6570 parser in actual declarations
+   and validation; remove divergent runtime checks only once equivalent stronger
+   production coverage passes. Qualify and document any supported compatible
+   regex subset; reject unqualified pattern/vocabulary inputs with pointers.
+5. Reconcile the original 421 assertions, 155 definitions, 36 format fixtures
+   and precision cases with the larger vendored corpus by fixture identity and
+   expected outcome. Report annotation/nonapplicable cases explicitly; corpus
+   size alone is no evidence of equivalence. Convert diagnostic probes into
+   maintained regression cases and preserve independent oracles.
+6. Run genuine scratch mutations: remove a required assertion, round a large
+   number, and actually permit duplicate input past the raw guard. Each must
+   fail its intended production-path test. An error-message change or unrelated
+   compile failure does not count as catching the bypass.
+
+Exit: no R4 blocker; RA15–RA17 and original Stage 5 requirements pass, including
+actual SDK differential cases; genuine bypass plants caught. This does not
+claim guarded production stdio/HTTP/SSE, which remains Stage 7.
+
+#### R5 — Restore the live canonical runtime and requalify prerequisites
+
+Scope: owned root handles/options/registration/middleware/errors/session APIs,
+`internal/sdkbridge/`, generated API bindings, `internal/contracttest/`, external
+consumer fixtures and the transport handle seam. Stage 7 guards, Stage 8 quotas
+and Stage 9 CI remain in their original stages.
+
+1. Expose owned server connect/serve and connection/session operations that
+   external consumers can use. Complete the independent method/capability
+   inventory: tools, resources/templates/links, prompts/completion, discovery,
+   cursor/request metadata, subscriptions, progress/cancellation and supported
+   input-required operations. Advertise only configured usable capabilities;
+   required features cannot disappear under an “optional” label.
+2. Resolve the private-method package conflict with an opaque owned transport
+   handle shared through an internal package. Public `transport/` constructors
+   return that handle; root accepts it and the internal bridge unwraps it.
+   Keep fields and SDK extraction private, with no exported SDK-returning method
+   on the handle and no root import from `transport/`. Test external consumer
+   compilation, zero/invalid handles, import direction and inability to obtain
+   SDK runtime objects. Keep the original SDK connection inside the bridge.
+   This specifies the package seam, not completion of Stage 7 adapters.
+3. Implement Option D fulfillment with owned callbacks/DTOs and the SDK's public
+   map codecs, disabling SDK automatic fulfillment. Carry request state and
+   metadata across tool/prompt/resource input-required paths where the pinned
+   protocol requires them. Exercise sampling with actual callback output, actual
+   configured roots and elicitation. Pin missing/wrong `role`/`roots`/`action`
+   discriminators, absent callbacks, cancellation and no blind reissue of side
+   effects. Keep deprecated runtime traversal entirely inside the SDK package.
+4. Connect the real dispatch path to mandatory validation/capability policy,
+   observation, authorization and admission before user side effects. Install
+   each user link once in declared order. Validate final output after all user
+   transformations, including middleware short-circuit results and missing
+   required structured content. Denial must invoke zero tool handlers; retain
+   counters for each layer so a detached helper cannot pass the test. Validate
+   raw canonical input before any lossy typed conversion; SDK validation remains
+   separate. Later Stage 7 wire policy cannot be claimed by these dispatch tests.
+5. Return expected declaration errors without fallback. Check schemas before SDK
+   registration and convert only identified declaration panics; unrelated
+   programmer faults propagate. Rejected registrations leave no stale registry
+   or compiled-output entry, and corrected retry works. Declare/validate output
+   schemas consistently with advertised tool metadata. Deep-copy owned mutable
+   configuration on entry and on retrieval. Use classified, bounded sanitized
+   public errors with private cause access; test Is/As, Unicode bounds and secret
+   values. Keep application response caching disabled.
+6. Replace private-SDK-only round-trip evidence with external consumer modules
+   importing go-mcp-lib public packages only, no direct SDK imports or workspace
+   assistance. Exercise allowed/denied calls, invalid input/output, callbacks,
+   all required canonical operations and two servers/two connections with one
+   blocked handler. Run relevant native tests on all three targets with CGO off;
+   run race cases separately on qualified native hosts with CGO enabled.
+7. Re-run every affected R1–R5 acceptance group and reconcile the original
+   Stage 0–6 exits against the final source/input/tool identities. Include the
+   minimum and preferred Go versions on all three native targets for prerequisite
+   functional/publication cases; cross-compilation is additional evidence.
+   Record failures as failures. Update original report status annotations and
+   the index only with links to new evidence; preserve original observations.
+
+Exit: no R5 blocker; RA18–RA20, G23–G25 and all applicable original Stage 0–6
+groups pass; all corresponding plants caught; final generated drift/API and
+pre-add checks pass. Stage 7 becomes ready only after this evidence is reviewed
+and every prerequisite row is closed. R1–R5 completion does not authorize it.
+
+#### Research refinement — 2026-11-25
+
+Assessment baseline: HEAD `5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532` plus
+the unfinished R1 working tree. The audit's product defects remain relevant;
+the draft R1 improves orchestration but has not demonstrated its exit. These
+are blockers to declaring Stages 0–6 complete and starting Stage 7, not reasons
+to stop investigating or repairing the prerequisite stages. R1 establishes
+trustworthy evidence; R2 establishes the generated contract; R3 protects its
+publication; R4 enforces wire/schema semantics; R5 applies them on live SDK
+operations. A passing helper or cross-build cannot substitute for those exits.
+
+The recommendations below refine the existing RA01–RA20 outcomes. Alternatives
+that require a dependency or architecture change are identified explicitly and
+are not selected. Keep the accepted SDK/protocol/tool pins, numerical bounds,
+Option D, and standard-library-only generator. Do not upgrade a dependency merely
+to avoid investigating the pinned behavior. Relative costs describe engineering
+and qualification work, not measured time estimates.
+
+##### R1 options and remaining work
+
+| Option | Evaluation |
+| :--- | :--- |
+| A — Finish the shared Python runner and explicit check graph **(recommended)** | Moderate orchestration work; preserves the repository's tooling policy and existing draft. Go tools remain the authorities for Go compilation, analysis and execution. |
+| B — Replace the draft with one audited reference repository's runner | Moderate-to-high adaptation cost; useful only if it demonstrably covers both modules, strict result accounting and all native targets. Copying a runner does not transfer its qualification. Assess and adapt only in this repository. |
+| C — Reimplement orchestration as a Go command | High migration and bootstrap cost; introduces a tooling-policy exception and another maintained program. No demonstrated advantage justifies changing the Python orchestration rule here. |
+
+The draft's specific gaps are in `scripts/gate_common.py` (`environment`,
+`run`, `account_tests`, `precheck`), `scripts/prepare.py` (`prepare`), and
+`scripts/acceptance_inventory.py` (`build_inventory`). Complete R1 as follows:
+
+1. Replace generic inventory labels with reviewed per-obligation bindings:
+   method/definition/scenario, role, direction, applicable transport, normative
+   reference, required acceptance group and expected named cases. Account for
+   server-to-client cancellation where the pinned protocol permits it; do not
+   derive direction from a method-name prefix. Keep expected obligations
+   independent of observed passing test names. Missing RA/D/G bindings cannot
+   be hidden by one unrelated passing test or by regenerating the inventory.
+2. Parse the documented `go test -json` event stream, including interleaved
+   packages, parallel subtests, build failure and package-without-tests cases.
+   Reconcile expected groups and required cases as well as package terminals.
+   Use `-count=1`, attributable command/target identity and completed execution
+   for freshness. Remove the draft's arbitrary `"(cached)"` log-substring
+   rejection; a test may legitimately print that text. Qualify parsing against
+   real events from both pinned Go versions, not invented event fields alone.
+   Keep process exit and stderr/build diagnostics alongside the event stream.
+   See the [Go event contract](https://pkg.go.dev/cmd/test2json).
+3. Specify and verify the execution environment rather than inheriting a foreign
+   `GOOS`, `GOARCH`, experiment, workspace or compiler selection. Record actual
+   compiler and target identities. Ordinary execution uses CGO off; only the
+   explicitly selected race leaf enables it. Resolve executables using verified
+   configuration/PATH and module metadata, including native Windows executable
+   naming. A user-home layout is not a tool identity.
+4. Stream full logs to bounded/rotated scratch artifacts with bounded summaries;
+   retain partial diagnostics on timeout. Distinguish missing executable,
+   timeout, signal termination and child failure. Qualify cancellation and
+   descendant-process cleanup on native targets before releasing preparation
+   locks or reporting completion. Continue independent checks after a failure.
+5. Separate offline preparation verification from explicit acquisition. The
+   draft calls `go mod download` in live modules and only checks hashes afterward;
+   move acquisition to verified temporary module metadata or an equivalent
+   isolated location. A readonly build flag alone does not prove `go.sum` and
+   caches cannot change under module-management commands. Verify exact runtime
+   dependency pins as well as archive integrity; include conformance source,
+   lock, requirements, runtime dependency closure and runnable entry point in
+   prepared identities. Interrupted/tampered preparation must not be promoted.
+   See the [Go module reference](https://go.dev/ref/mod) and
+   [npm ci contract](https://docs.npmjs.com/cli/v11/commands/npm-ci/).
+6. Finish the local analyzer-ownership table before deduplicating. The current
+   path runs standalone vet, default test vet, and a linter configuration with
+   govet. Recommended owner: standalone full `go vet` for the agreed analyzer
+   set; tests execute with `-vet=off` only in graph paths requiring that vet
+   result. Remove overlapping linter analyzers only after proving equivalent
+   options, package/test/generated coverage, tags and target context with real
+   plants. Retain any non-equivalent analysis. This is ownership relocation,
+   not waiver of an assertion. Keep `gofmt -l`, staticcheck/SA1019 and necessary
+   independent build/API checks. Fail unexplained nested modules or uncovered
+   source rather than silently omitting them. Distinguish invalid Go fixture
+   inputs from product source using an explicit reviewed inventory.
+7. Execute matching leaves once within an invocation and feed their identified
+   results to all consumers; do not add cross-invocation success caching in R1.
+   Record execution counts and timings, including preparation and queue time.
+   Prove zero unexplained duplicate leaves and unchanged obligations. Leave the
+   Makefile, exact-commit receipts and full Stage 9 rollout in their own stage.
+
+RA01–RA04 add controls for a missing expected group despite other passing tests,
+legitimate cache-text output, malformed/unterminated events, inherited foreign
+target, module mutation, orphaned child, runner tampering and duplicated vet.
+Keep the actual generated/handwritten SA1019 plants and scratch emission tests.
+R1 must expose later product failures without redefining them as R1 success or
+weakening the checks needed to commit a coherent change.
+
+##### R2 options and remaining work
+
+| Option | Evaluation |
+| :--- | :--- |
+| A — Standard-library parsing/types with explicit Go module metadata **(recommended within the accepted dependency constraint)** | Moderate-to-high implementation cost. Preserves the standalone generator; requires qualification of the export-data loader and transitive type audit. |
+| B — Put a `go/packages` auditor in a separate developer-tools module | Uses the Go project's recommended general package loader while retaining the standalone generator boundary. Adds a third module, orchestration and a decision about which generator commands require the auditor; requires an approved scope amendment. |
+| C — Add pinned `golang.org/x/tools/go/packages` to the generator | Least custom loading code and strong module-aware analysis; changes the accepted standard-library-only generator constraint and dependency footprint. Requires an architectural decision before implementation. |
+
+Go's [importer documentation](https://pkg.go.dev/go/importer) recommends
+[`go/packages`](https://pkg.go.dev/golang.org/x/tools/go/packages) for general
+module-aware loading. Option A is a constrained tradeoff, not a claim that
+`importer.Default()` is the modern module loader. Implement it with
+`go list -deps -export -json` from the verified candidate module, explicit
+`importer.ForCompiler` export-file lookup, `go/types`, and `go/ast` for source
+comments. Never fall back to GOPATH lookup. Reject incomplete/error metadata,
+unexpected replacements and compiler/export-data identity mismatches. Qualify
+target-dependent declarations, generic instantiations and pointer/value method
+sets before accepting the approach. If it cannot satisfy RA09, present B/C for
+decision rather than approximating a type checker with names or regular expressions.
+
+1. Replace `internal/load`'s handwritten grammar with bounded streaming
+   `encoding/json/jsontext` parsing. Build the lossless node representation from
+   standard-library tokens/raw spans; preserve number lexemes without float64
+   conversion. Bound the reader before allocating the document and retain
+   deterministic source pointers. Strict duplicate/Unicode handling is the
+   default; do not enable permissive options. Test parser error classification
+   without unchecked type assertions.
+2. Replace suffix stripping and recursive reference expansion in
+   `internal/resolve` with interned graph nodes keyed by canonical resource URI
+   and fragment. Track `$id` bases and supported anchors; decode URI fragments
+   and RFC 6901 tokens in their specified order. Empty pointer and `/` refer to
+   different locations. Reject invalid escapes, invalid/overflowing indices,
+   duplicate IDs and unresolved targets. Cycles are edges with visited/active
+   states, not automatic depth failures. Enforce separate graph/depth budgets.
+   A registered HTTPS identifier is resolvable without network access; absence
+   from the local registry is what fails. Apply filesystem containment only
+   when acquiring approved local resources.
+3. Keep an explicit dialect/vocabulary capability registry in `internal/model`.
+   Distinguish qualified assertions, annotations and unsupported required
+   semantics. Unknown keywords are not automatically assertions under JSON
+   Schema; the reviewed generation profile must additionally detect an
+   unreviewed input change instead of silently omitting its intended semantics.
+   Resolve required vocabularies/anchors/dynamic features completely when
+   supported, otherwise report the unsupported feature before emission. See
+   [JSON Schema 2020-12 Core](https://json-schema.org/draft/2020-12/json-schema-core)
+   and [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html).
+4. Walk every exported reachable field, embedded type, method, parameter,
+   result, type argument and constraint in `internal/sdkmap`; join deprecation
+   comments to resolved symbols. Include unexported reachable SDK runtime/sealed
+   types where they prevent safe ownership or construction. Emit compiled
+   identity/signature probes and independent wire fixtures for approved aliases.
+   SDK sessions, transport objects and handler signatures stay inside the bridge.
+5. Emit `go/ast` nodes and format with `go/format`; use typed errors and stable
+   sorted inventories. Derive presence/union/open-object code from the reviewed
+   model, not field-name heuristics. Check all 155 dispositions and handwritten,
+   test and platform collisions. Candidate qualification includes both modules
+   and external consumers. Cross-compile tests on all three targets, then use
+   native execution in the applicable repair exit; these are different proofs.
+
+RA05–RA11 add empty-member pointer, registered HTTPS identifier, cyclic graph,
+generic/pointer-method leakage, target-specific alias and deprecated embedded
+member cases. R2 must not depend on the runtime module to share parser code:
+keep module boundaries intact and share independent fixture specifications.
+The R2 candidate remains staged until R3 supplies safe migration/publication;
+R4/R5 subsequently requalify generated semantics and public runtime bindings.
+
+##### R3 options and remaining work
+
+| Option | Evaluation |
+| :--- | :--- |
+| A — Rooted file operations plus a durable recovery journal **(recommended)** | Moderate-to-high work; standard library and CGO-free. Provides verified recovery and mixed-generation detection without assuming a multi-file atomic replacement primitive. |
+| B — Platform-specific replacement/locking adapters plus the same journal | Higher maintenance and native fault-testing cost. May improve individual platform guarantees, but does not remove the journal or make multiple file replacements transactional. Requires concrete evidence that A cannot meet an accepted case. |
+| C — Immutable generation directories with a switched reference | High layout and migration cost; changes compiler/import/output ownership assumptions. The reference switch still needs platform qualification and recovery. Requires a separately reviewed publication/layout amendment. |
+
+1. Use Go 1.27 `os.OpenRoot`/`os.Root` operations throughout publish, deletion
+   and recovery, including temporary creation and rename. Lexical path cleaning
+   or `EvalSymlinks` followed by unrooted mutation does not close a path race.
+   Root containment is separate from ownership: reject unsafe aliases, symlinks
+   or other file kinds under the accepted policy, verify existing identities,
+   and preserve unrelated/manual edits. Check Windows reserved names and
+   case collisions. See Go's [rooted filesystem guidance](https://go.dev/blog/osroot)
+   and [`os` API contracts](https://pkg.go.dev/os).
+2. Implement an explicit publication/recovery state machine: exclusive owned
+   lock, verified original/candidate bytes on the destination filesystem,
+   durable versioned intent, bounded replacements/deletions, manifest last,
+   then cleanup. Do not infer ownership from age, an untrusted journal path or
+   the old hashless manifest. Detect conflicts again at destructive boundaries.
+3. Document exactly what each native filesystem supports. `os.Rename` does not
+   promise atomicity on non-Unix targets, even within one directory. RA13 therefore
+   requires verified process-interruption recovery and rejection of mixed
+   output; neither rename nor a journal alone proves power-loss durability.
+   Check write/sync/close/rename errors, qualify file and directory synchronization
+   where supported, and fail/report an unsupported required durability guarantee.
+   Do not suppress a sync error or advertise a universal atomic transaction.
+4. Test real killed subprocesses and injected filesystem failures at each
+   journal boundary. Include conflicting manual edits, originally new files,
+   stale/live lock owners, repeated recovery, absent/corrupt staged data and
+   manifest-last failure. A platform fault seam supplements actual native
+   process/filesystem tests. Preserve recoverable state after cleanup failure.
+5. Route all six CLI modes through the same validated inputs/ownership rules.
+   Finish semantic/API diff and bounded immutable candidate-only update. Migrate
+   the hashless manifest using reviewed baseline bytes; install R2 output only
+   after candidate qualification and reversible journal preparation.
+
+RA12–RA14 retain all existing fault cases and add native rename/sync limitations
+to the evidence record. No fallback may overwrite unverified bytes. Commit R2/R3
+together when necessary to avoid a broken intermediate generated/runtime tree.
+
+##### R4 options and remaining work
+
+| Option | Evaluation |
+| :--- | :--- |
+| A — Standard `jsontext` syntax guard, owned JSON v2 codecs and one canonical validator **(recommended)** | Moderate work; removes custom JSON grammar and keeps the accepted exact-number/profile contract. Share validation results within a boundary when their input identity is unchanged. |
+| B — An independent full raw pre-scan followed by v2 decoding at every boundary | Straightforward separation of concerns, but adds repeated parsing and allocation. Valid if measurements and isolation justify it; deduplicate only where the same predicate and bytes are proven. |
+| C — Fully repair and maintain the handwritten parser | Highest grammar, fuzzing and maintenance burden; no demonstrated benefit over the pinned standard library. Must meet exactly the same Unicode, duplicate, numeric and limit cases. |
+
+Go 1.27 makes JSON v2 available by default; no experimental enablement is
+required. Verify this at the minimum and preferred compiler pins and reject
+an environment that disables it. Use the stable API, including current struct
+tags, rather than copying pre-release examples. v1 compatibility behavior and
+the SDK's actual conversions still need differential tests. See the
+[Go 1.27 release notes](https://go.dev/doc/go1.27),
+[migration guide](https://go.dev/doc/jsonv2-migration) and
+[`jsontext` reference](https://pkg.go.dev/encoding/json/jsontext).
+
+1. Replace both EOF-text checks in `codec/codec.go`. Accept only one complete
+   root value followed by actual `io.EOF`; use `errors.Is`/`errors.As` and typed
+   syntax errors. Truncation is never successful EOF. Enforce depth, byte,
+   numeric-token and exponent limits while parsing; preserve numeric lexemes.
+   Duplicate-name diagnostics use structured parser data, not quoted substrings
+   extracted from error prose. Include valid surrogate pairs and invalid pairs.
+2. Generate owned v2 hooks for presence, unions and open members using the
+   stable API. Preserve unknown data only where the schema permits it. Keep
+   lexical identity tests separate from semantic equivalence tests and invoke
+   real SDK marshaling/dispatch in the differential suite.
+3. Repair `internal/validation` around one immutable compiled-schema profile.
+   In the pinned validator, `DefaultDraft` supplies a fallback, not rejection
+   of an explicitly different dialect. Validate `$schema` and required
+   vocabularies; install a registry-only loader that cannot fetch files/URLs.
+   Snapshot caller-owned schemas/resources before compilation. Cache keys bind
+   schema content, referenced resource closure and profile/version identities;
+   enforce retention bounds and concurrent access without mutable shared input.
+   See the [pinned validator API](https://pkg.go.dev/github.com/santhosh-tekuri/jsonschema/v6@v6.0.3).
+4. Keep generic `format` annotations distinct from mandated protocol checks.
+   Route location assertions through the same production semantic functions;
+   use the [pinned RFC 6570 parser](https://pkg.go.dev/github.com/yosida95/uritemplate/v3@v3.0.2).
+   Do not treat Go's regex engine as complete ECMAScript regex support. Define
+   and qualify the accepted subset; reject unsupported patterns with source
+   pointers rather than silently changing their meaning.
+5. Reconcile the 421 assertion, 155 definition and 36 format identities with
+   maintained production-path cases. Add changed-resource/same-key cache tests,
+   mutable caller input, explicit other dialect, network-loader denial and
+   concurrent compilation. Prove actual duplicate/precision/assertion bypasses
+   fail the intended tests. Retain RA15–RA17 as the acceptance owners.
+
+##### R5 options and remaining work
+
+| Option | Evaluation |
+| :--- | :--- |
+| A — Public low-level SDK registration with owned typed adapters **(recommended)** | Moderate-to-high parity work, but gives strict v2 decoding and validation an explicit boundary. SDK keeps transport/session/dispatch ownership; wrapper owns conversion, policy and result construction. |
+| B — Keep generic SDK `AddTool` behind owned callbacks and mandatory guards | Less registration adapter code; must prove SDK decoding/defaults cannot violate owned v2 semantics. Generic registration still panics on declaration failure, so error conversion and exact raw/output enforcement remain difficult. |
+| C — Qualify a different SDK pin with suitable public registration/codec hooks | Potentially less wrapper maintenance, but requires evidence of actual APIs, full requalification and an approved pin change. No newer release is assumed to solve these defects. |
+
+The pinned public `(*mcp.Server).AddTool` supplies raw arguments and explicitly
+leaves conversion, validation and result construction to the caller. This is
+a supported composition point, not a second dispatcher. Generic `mcp.AddTool`
+performs additional inference/default/error work; A must preserve required SDK
+behavior deliberately. Inspect the [v1.8.0 registration source](https://github.com/modelcontextprotocol/go-sdk/blob/v1.8.0/mcp/server.go).
+
+1. Define owned generic callback/request/result types; remove the public
+   `sdk.ToolHandlerFor` and SDK middleware signatures. Keep SDK conversion in
+   `internal/sdkbridge/`, a planned package rather than an existing qualified
+   boundary. Implement the opaque transport seam and owned connect/session APIs
+   before external-consumer parity tests; do not import transport subpackages
+   from the root or export SDK extraction methods.
+2. For low-level tool registration, qualify inference, explicit schemas,
+   defaults, pointer/nil/`any` handling, title/annotations, non-object output,
+   structured/text content and tool-error versus protocol-error behavior.
+   Reuse the public pinned
+   [schema inference API](https://pkg.go.dev/github.com/google/jsonschema-go@v0.4.3/jsonschema)
+   where SDK parity requires it; do not copy SDK-private functions or replace
+   canonical instance validation with another validator. Any direct import
+   promotes the existing transitive dependency to direct with the same reviewed
+   version and an explicit dependency-manifest update. Test generated v2 types
+   against inferred tags/defaults; inference success alone is not parity proof.
+3. Prevalidate declarations and normalize immutable SDK inputs before calling
+   registration. The pinned SDK does not expose a typed declaration-panic
+   contract: matching panic text or recovering every panic is not a safe
+   classifier. The earlier instruction to convert identified declaration panics
+   is satisfied by returning errors at owned prevalidation boundaries where
+   possible; a genuinely unavoidable SDK panic needs a proven narrow boundary
+   and review before conversion. Unexpected programmer faults propagate.
+   Stage registry/cache updates transactionally, serialize name conflicts and
+   roll back rejected registrations so corrected retries work. Do not hold a
+   registry lock while invoking user callbacks.
+4. Install one receiving bridge, then use coherent per-operation snapshots of
+   owned configuration. Avoid re-adding the accumulated SDK middleware chain.
+   Mandatory input/capability checks and authorization/admission must precede
+   user middleware as well as handlers; test denial invokes neither. Trusted
+   observation records the final outcome, including rejection. The result guard
+   surrounds user transformations and checks the final returned value, including
+   short-circuits and missing required structured content. Repeated registration,
+   configuration updates and concurrent calls must retain declared ordering.
+5. Distinguish validation layers: SDK parsing occurs before receiving middleware.
+   Validate raw tool arguments before typed conversion, and validate all owned
+   ingress/egress at the earliest available boundary. A parsed SDK request cannot
+   prove original wire duplicate/number behavior. Preserve original connections;
+   the complete stdio/HTTP/SSE wire guards and lifecycle remain Stage 7. Record
+   that limitation in R5 evidence instead of claiming middleware solves it.
+6. Keep Option D's SDK automatic fulfillment disabled. Exercise real owned
+   sampling/roots/elicitation callbacks and SDK public map codecs through tools,
+   prompts and resources. Preserve the pinned bounded-round behavior, request
+   state, metadata, cancellation and error classification; do not blindly retry
+   side effects. Test repeated input-required rounds, absent callbacks and wrong
+   discriminators against the [pinned fulfillment implementation](https://github.com/modelcontextprotocol/go-sdk/blob/v1.8.0/mcp/mrtr.go).
+7. Deep-copy mutable configuration and returned snapshots, use context-aware
+   operations and ordinary wrapped/classified errors with working `errors.Is`
+   and `errors.As`; bound public messages without exposing private causes on the
+   wire. Keep response caching disabled. Exercise SDK-free external consumers,
+   two servers/connections, handler errors, concurrent registration and policy
+   changes. Run relevant native functional cases with CGO off and race cases
+   separately with CGO on. RA18–RA20 and G23–G25 remain the exit owners.
+
+##### Integration sequence and evidence required for the revised work
+
+1. Finish and qualify R1's graph/accounting/preparation fixes first. Keep all
+   unverified draft changes visible. A setup success is not a successful suite,
+   lint plant, native qualification or repaired product gate.
+2. Build the R2 candidate and type/alias contract, then R3's safe publisher and
+   migration. Coordinate those changes when neither can land alone coherently.
+3. Complete R4's owned codecs/validation profile and regenerate affected hooks;
+   rerun R2 API, alias, candidate and serialization cases and R3 drift checks.
+4. Complete R5's owned SDK adapters/live enforcement. Rerun affected RA groups
+   and all applicable Stage 0–6 D/G obligations against the final tree. Preserve
+   dependency identities so only genuinely equivalent leaves are reused within
+   the run; changed source or policy invalidates affected results.
+5. Qualify native Windows/amd64, Linux/amd64 and Darwin/arm64 on the required
+   compiler floor/preferred versions; retain WSL as the additional local runner
+   environment. WSL cannot stand in for Windows filesystem or process behavior.
+   Use the existing SSH host-selection and heavy-run queue policy. Cross-builds
+   remain CGO-free and are supplementary to native execution. Race is the sole
+   CGO-enabled execution class.
+
+Every repair exit still requires no blocker, all decided cases tested, and
+deliberately broken scratch inputs caught by their intended checks. Record
+command, source/input/tool/target identities, full bounded artifacts, named
+failure and exit for each plant. Do not introduce new numerical/performance
+claims without measurement. This refinement adds implementation detail to the
+existing acceptance groups below; it neither removes cases nor declares them
+passing. Stage 7 remains pending prerequisite evidence and execution approval.
+
+#### Repair acceptance mapping
+
+These are planned maintained groups, not existing tests. Python groups are
+`unittest.TestCase` classes with named test methods; Go groups are top-level Go
+tests with named subcases. Gate reconciliation uses the exact group IDs.
+The full expected-state matrix is in MADR RA01–RA20 and the steps above.
+
+| State / finding | Acceptance group and location | Phase |
+| :--- | :--- | :--- |
+| RA01 / A01 | `TestRepairA01Evidence`, Python inventory tests in `scripts/` | R1 |
+| RA02 / A02 | `TestRepairA02GateAccounting`, `scripts/test_gate.py` | R1 |
+| RA03 / A03 | `TestRepairA03LintAndPreAdd`, Python gate/pre-add integration tests | R1 |
+| RA04 / A04 | `TestRepairA04Preparation`, Python setup tests | R1 |
+| RA05 / A05 | `TestRepairA05StrictLoader`, generator `internal/load` | R2 |
+| RA06 / A06 | `TestRepairA06References`, generator `internal/resolve` | R2 |
+| RA07 / A07 | `TestRepairA07Vocabulary`, generator `internal/model` | R2 |
+| RA08 / A08 | `TestRepairA08ProvenanceAndMapping`, generator CLI integration | R2 |
+| RA09 / A09 | `TestRepairA09AliasClosure`, generator `internal/sdkmap` | R2 |
+| RA10 / A10 | `TestRepairA10GeneratedContract`, generator `internal/emit` | R2; rerun after R4/R5 |
+| RA11 / A11 | `TestRepairA11CandidateQualification`, generator CLI integration | R2; rerun after R3–R5 |
+| RA12 / A12 | `TestRepairA12PathContainment`, generator publication integration | R3 |
+| RA13 / A13 | `TestRepairA13Recovery`, generator publication integration | R3 |
+| RA14 / A14 | `TestRepairA14CLI`, generator CLI integration | R3 |
+| RA15 / A15 | `TestRepairA15RawCodec`, `codec/` | R4 |
+| RA16 / A16 | `TestRepairA16ValidationProfile`, `internal/contracttest/` | R4 |
+| RA17 / A17 | `TestRepairA17Locations`, `internal/validation/` with runtime callers exercised | R4 |
+| RA18 / A18 | `TestRepairA18LiveEnforcement`, external runtime integration fixtures | R5 |
+| RA19 / A19 | `TestRepairA19CanonicalRuntime`, `internal/contracttest/` external consumers | R5 |
+| RA20 / A20 | `TestRepairA20RuntimeContracts`, root runtime tests and external fixtures | R5 |
+
+Each group must have a passing valid control and an intended failing scratch
+plant. Record the plant's exact command, mutation/input hash, named failure and
+exit. A01's broken control is a missing/false completion inventory; A03 uses the
+actual linter; A13 uses real interruption as well as fault seams. Missing groups
+and empty selections are not success. Preserve original D/G group obligations;
+RA groups supplement them and may share fixtures, not replace their coverage.
+
+#### Verification, commits and rollback during repair
+
+Use the original commands and host policy below, with R1's explicit selectors
+and non-mutating pre-add implementation. Run documentation gates for records;
+Python harness tests for orchestration; affected Go package checks after edits;
+and queued, uncached full suites at each relevant phase exit. For cross-target
+candidate builds use prepared compilers/caches and readonly offline modules.
+For native OS behavior use the fleet's selected target and serialized heavy-run
+queue; no Windows result may be replaced by WSL execution.
+
+Number every repair build pass as `R<n> — pass <m>`, retaining failures. The
+third-build deviation rule applies to these work packages; splitting a name or
+changing host does not reset attempts. Do not add ad hoc retries or suppressions.
+Commit each approved, coherent phase after required pre-add checks. If repairing
+a gate exposes a defect assigned to a later repair, report the case and preserve
+the failure; do not bypass a required pre-add check to commit. Prepare dependent
+corrections as one coherent change where this amendment explicitly permits it,
+otherwise use the deviation process. No push, tag or release is included.
+
+Treat generator manifest migration as a recoverable local change, with exact
+original bytes and verified candidate bytes. Rollback uses the verified journal
+or a reviewed phase revert; never clean/reset the user's tree. Preserve the
+audit report and pre-existing work. A rollback or change to source/input/policy
+identities invalidates affected evidence and requires requalification.
 
 ## Stage 0 — Re-ground the contract and freeze the execution inventory
 
@@ -641,6 +1361,118 @@ Additional Stage 9 exit: CI01–CI07 pass, all new plants are caught, CI08 remai
 excluded, and no blocker remains. Receipt/security-boundary fixtures do not replace
 actual native matrix execution. Existing execution authorization is unchanged.
 
+### Stage 9 amendment — local-cicd-scaffolding contract, 2026-11-24
+
+The dedicated skill is named `local-cicd-scaffolding`. Its reusable contract ends
+at local pre-push readiness. This amendment specifies local adoption; it does not
+start Stage 9, install a fleet skill, or approve pending R1–R5 execution. The
+existing upstream implementation steps are separate repository work and must not
+enter the skill's instructions, assets, configuration or acceptance dependencies.
+
+1. Re-ground the local source evidence at execution HEAD: the four reference
+   repositories' Makefiles, runners, pre-add checks, module inventories, tooling
+   tests and accepted local policies. Inspect the canonical workspace skill and
+   host-routing interfaces. Treat documented defects as defects, not precedent.
+   Re-ground the call paths in
+   [0012-REPORT-local-gate-duplication-assessment.md](../reports/0012-REPORT-local-gate-duplication-assessment.md).
+   Capture the transitive command graph, including nested validators, scripts,
+   self-test baselines and hook adapters; identify duplicate requests separately
+   from intentionally distinct build/test contexts. Preserve concurrent work.
+2. Record the skill implementation/deployment in its owning library's MADR/PLAN.
+   Keep the name and scope selected here. Validate the skill with the fleet's
+   skill-authoring gate and deploy through its established registration/linking
+   mechanism; verify discovery before claiming installation. This consumer plan
+   does not authorize edits in that separate repository.
+3. Build a local requirements ledger covering every area in the associated
+   MADR's complete local standards inventory. For each entry, record its source,
+   applicability, command, module/target coverage, required data, acceptance test
+   and broken-input control. Preserve all decided product cases and budgets.
+4. Adapt the versioned local scaffold to `scripts/gate.py`, pre-add checks,
+   local pins and the proposed thin Makefile. Preserve workspace-owned templates
+   and global hook/security ownership. Keep pinned policy independent of upstream
+   configuration and agent-skill installation. Validate the Python entry points
+   and native Make invocation on each supported host.
+   Define canonical leaves and dependency edges; legacy modes and Make targets
+   select them. Replace nested aggregate execution with shared prerequisites.
+   Attach every existing required checker to an owner, including documentation
+   checks omitted by legacy aggregates. Fix the current gate correctness defects
+   before using their outputs as reusable evidence. Keep standalone target use
+   complete by resolving its prerequisites through the same graph.
+5. Qualify inspection, first application, repeat application, managed/unmanaged
+   conflicts, explicit overrides, upgrade/rollback, unsafe paths, concurrent
+   changes, permission failure and interrupted publication in isolated fixtures.
+   Compare content, mode, link target and modification time; ignore no generated
+   scaffold file when asserting the second application is a no-op. Readiness
+   checks may write untracked evidence/cache outside the source snapshot; that
+   does not authorize scaffold refreshes to rewrite unchanged files.
+6. Qualify the local gate graph on immutable candidate snapshots using the
+   approved fleet queues, all modules and native target/toolchain combinations.
+   Require the four runner roles recorded in the MADR: native Windows over SSH,
+   WSL through the same SSH connection, session-local Darwin, and standalone
+   Ubuntu over SSH. Probe actual environments and run both compiler versions in
+   each: eight baseline cells, with both modules in every cell. Retain the six
+   native cells independently of WSL's two additional cells. Serialize Windows
+   and WSL heavy work on their shared physical queue; preserve the existing WSL
+   race exclusion and run preferred-version race cases on the three native hosts.
+   Set and verify `CGO_ENABLED=0` for all non-race Go operations and child builds;
+   isolate `CGO_ENABLED=1` to race-test processes and their instrumented builds.
+   Check that race settings cannot leak into subsequent commands or ordinary
+   fixture builds, alter persistent Go settings, or certify deliverable artifacts.
+   Run the existing product cases, tooling tests and scratch failure controls.
+   Verify exact-commit receipts and owner-supplied security evidence under
+   CI03–CI05. Hook-chain changes, if needed, remain in the hook owner's plan.
+7. Record the chosen scaffold version, repository extensions, full per-case
+   evidence, numbered execution passes and remaining limitations. Do not claim
+   idempotence from a clean text diff alone or declare gates effective from only
+   successful inputs. Every new gate needs an observed nonzero broken-input run.
+8. Qualify deduplication with LC13–LC16. Trace actual subprocess requests, not
+   only declared target names. Prove two aggregate paths and concurrent requests
+   execute a matching leaf once, while changed tags/compiler/CGO/workspace mode,
+   runner environment, fixture, selection/count and relevant history remain
+   distinct. A shared failure must fail every dependent readiness result.
+   Inventory analyzer versions/settings and deliberate failure behavior before
+   relocating checks; prove identical coverage rather than deleting overlap by
+   name. Required rules, tests and diagnostic classes must remain covered.
+9. Separate reusable producers from validators, starting with tests/coverage,
+   module/file inventories and clean gate-self-test baselines. Preserve each
+   mutated fixture's distinct execution and history-sensitive baseline. Record
+   fresh security evidence once per required scope and push attempt through its
+   existing owner; do not make repeated scans permissive to reduce cost.
+10. Measure baseline and candidate on comparable snapshots and queued hosts,
+    recording cache state, wall time, queue wait, setup/transfer, critical path,
+    invocation counts and reuse reasons. Keep all eight baseline environment/
+    compiler cells, both modules, native race runs and accepted product cases.
+    Record remaining necessary overlap explicitly. Reference-repository changes
+    require their own implementation records; this plan does not silently alter
+    their accepted checks, pre-add policies, hooks or execution schedules.
+
+| State | Planned acceptance case | Required evidence |
+| :--- | :--- | :--- |
+| LC01 | `TestLC01LocalBoundary` | Local qualification works without a configured remote or upstream files; unrelated upstream content is unchanged and cannot affect local pins or case selection; no upstream service call or operation |
+| LC02 | `TestLC02Ownership` | Existing workspace files, hooks, owner-managed guards and product targets survive adoption; duplicate runner/target fixtures are rejected |
+| LC03 | `TestLC03StandardsCoverage` | All inventory areas have applicable checks or recorded reasons; plant an omitted required case/module/gate and observe rejection |
+| LC04 | `TestLC04Idempotence` | Read-only inspection changes nothing; applying twice preserves all file bytes, modes, links and modification times, including managed metadata |
+| LC05 | `TestLC05Drift` | Named overrides survive refresh; conflicting edits and a concurrent base change reject publication without losing user content |
+| LC06 | `TestLC06FailureRecovery` | Malformed/unsupported profile, path escape, external symlink, denied write, concurrent application and killed process fail clearly; recovery preserves unrelated files and emits no false readiness |
+| LC07 | `TestLC07Migration` | Versioned upgrade followed by rollback restores the prior managed state; concurrent unrelated edits remain; unsupported migration fails |
+| LC08 | `TestLC08HonestReadiness` | Required modules and native targets execute; wrong architecture/compiler/CGO, failed formatter with empty output, empty selection, unfinished test, skip, malformed result, missing tool, timeout and cancelled host prevent readiness |
+| LC09 | `TestLC09EvidenceValidity` | Exact candidate/ref-tip matching and CI03–CI05 age/security rules; changed policy/tools/inputs, tampered evidence and one unqualified outgoing tip fail |
+| LC10 | `TestLC10RepositoryProfile` | Product fixtures and budget values remain repository-owned; preserve explicit applicability; a missing required extension or planted contract/budget failure prevents readiness |
+| LC11 | `TestLC11FleetRunners` | Eight baseline environment/compiler cells cover both modules; SSH and WSL routing reach the correct runtime; shared Windows/WSL contention serializes; wrong environment, unreachable host, omitted WSL result or Linux substitution fails readiness; private identifiers stay out of committed artifacts |
+| LC12 | `TestLC12CGOIsolation` | Inject inherited CGO on, child-process leakage, a non-race build with CGO on, and a race artifact presented as baseline evidence; each is overridden to the required mode or rejected. A race run uses CGO on only with qualified C tools; its ordinary child build and the following build prove CGO off; no persistent environment change |
+| LC13 | `TestLC13SharedExecution` | Two aliases, nested selections and concurrent requests launch an equivalent leaf once; every consumer cites its result; planted cycle, duplicate execution and missing obligation owner fail |
+| LC14 | `TestLC14CoverageEquivalence` | Before/after coverage ledger matches all required rules, modules, files and contexts; a planted analyzer gap, stricter formatter failure lost during consolidation, missing nested module or incorrect coverage scope fails |
+| LC15 | `TestLC15ReuseInvalidation` | Changed source/config/tool/target/compiler/tag/CGO/workspace/fixture/history invalidates matching dependencies; mutate a supposedly safe document input; partial, failed, expired or clean-for-mutant results cannot certify readiness |
+| LC16 | `TestLC16CostAccounting` | Real recorder counts match executed and reused leaves; each required repeat has a distinct justified context; queue and service time are separated; missing timing/count evidence or a duplicate concealed as reuse fails |
+
+Additional local adoption exit: LC01–LC16 pass with deliberate scratch failures,
+all applicable inventory areas are covered, no blocker remains, and the repeated
+application is proven unchanged. The gate graph has no unexplained duplicate
+executions and retains the complete required coverage, with measured cost evidence.
+These are planned tests, not existing commands or completed evidence. Report
+skill deployment, consumer adoption and product
+qualification separately so one cannot masquerade as another's completion.
+
 ## Stage 10 — Prepare the reviewable pre-v1 release candidate
 
 1. Update architecture documentation to describe actual packages and dependency
@@ -711,6 +1543,9 @@ exclusion has a scope review, not a fictional passing implementation test.
 | G20 | `internal/contracttest: TestG20LimitsAndBudgets` | 8, 9 | Every numeric limit boundary and actual benchmark/RSS/cancellation results; planted excess rejected |
 | G21 | `internal/validation: TestG21SchemaVocabulary` | 5 | All 155 definitions, 421 assertions, 36 formats, precision and unsupported-profile tests |
 | G22 | `cmd/mcpgen: TestG22APIBoundaries` | 3, 10 | Pre-v1 manifest, generator internal import failure, runtime dependency closure and external examples |
+| G23 | `internal/contracttest: TestG23OwnedFulfillment` | R5, 6, 9 | Real owned sampling/roots/elicitation callbacks, disabled SDK automatic fulfillment, tool/prompt/resource request-state paths where required |
+| G24 | `internal/contracttest: TestG24InputDiscriminators` | R5, 6, 9 | Missing/wrong roots/role/action keys fail loudly at actual SDK codec conversion; valid controls complete |
+| G25 | `internal/contracttest: TestG25BridgeRemovalBoundary` | R5, 6, 9 | Public consumer signature fixture contains no deprecated/bridge-specific SDK types; scratch bridge-removal design check preserves consumer compile contract, without dropping currently required production features |
 
 Package locations for generator groups are relative to `cmd/mcpgen`. Test names
 are acceptance interfaces for gate selection; helper/unit tests can be more
@@ -749,8 +1584,8 @@ fixed by silently changing the budget or excluding the slow sample.
 
 ### Commands and gate semantics
 
-The commands below become executable deliverables in stage 1 and subsequent
-stages. Today only the two documentation commands exist. Invoke one command at
+The commands below are required deliverables in stage 1 and subsequent stages.
+Some now exist but have audit gaps; R1–R5 restore their contracts. Invoke one command at
 a time. Heavy commands use fleet wrappers as required by repository policy;
 wrappers are omitted from the command column only to show the underlying check.
 
@@ -854,6 +1689,350 @@ re-run qualification, rather than pairing old generated code with new inputs.
   occurred without its separate explicit authorization.
 
 ## Execution Record
+
+### 2026-11-25 — R1, pass 5: qualified across all four local environments
+
+Implemented approved corpus binding A: the existing bounds fixture names
+`Bounded` and `Empty`; the harness rejects ambiguous/missing named definitions
+and represents expected item bounds with pointers so zero is checked. It also
+requires the corresponding assertion to be present. Single-definition fixtures
+retain every original check. No generator production behavior was changed.
+
+Ran `python3 -u scripts/qualify_r1.py --allow-network` through the shared host
+runner/queue on Windows/amd64, Darwin/arm64, Linux/amd64 and the additional WSL
+environment. The Windows/WSL runs were serialized by their shared physical queue.
+All four used input identity
+`2f8a43fc8c04f82736888f20dbe517c3b5c285d6a339d56b52603a408c2dc44d`.
+
+| Check | Windows | Darwin | Linux | WSL |
+| :--- | :--- | :--- | :--- | :--- |
+| R1 harness | 20 passed | 20 passed | 20 passed | 20 passed |
+| Ownership inventory | Passed | Passed | Passed | Passed |
+| Pinned preparation and actual runner entry | Passed | Passed | Passed | Passed |
+| Runtime formatter/vet/tests/lint | Passed; 56 tests | Passed; 56 tests | Passed; 56 tests | Passed; 56 tests |
+| Generator formatter/vet/tests/lint | Passed; 66 tests | Passed; 66 tests | Passed; 66 tests | Passed; 66 tests |
+| Actual SA1019/printf valid and broken controls | Passed/caught | Passed/caught | Passed/caught | Passed/caught |
+| Corpus-binding valid and broken controls | Passed/caught | Passed/caught | Passed/caught | Passed/caught |
+| Source preservation | Passed | Passed | Passed | Passed |
+| Overall exit | 0 | 0 | 0 | 0 |
+| Execution wall time, excluding queue/transfer | 62 s | 32 s | 75 s | 43 s |
+
+Go test counts include subtests. Every run used Go 1.27.4, CGO off, no workspace
+and readonly modules for checks. Explicit setup alone could acquire inputs.
+Pinned Node/npm/linter identities and conformance commit/hash checks passed.
+The prepared runner digest remained
+`52212bd32f2222e7513b634f6b9e14d379c9886e67362cf1ae58696eccb6e1f3`.
+No speedup claim is made from these timings. The compiler-floor/product/race
+matrix remains assigned to its later qualification steps.
+
+The maintained `scripts/verify_fixture_bindings.py` ran one valid control and
+ten deliberately broken scratch copies on every environment. Missing numeric
+binding, missing item binding and unknown binding failed with
+`FAIL fixture binding`; wrong binding/minimum/maximum failed with their numeric
+token diagnostics; changing either zero item bound failed its value assertion;
+removing either zero assertion failed `FAIL minItems: assertion absent` or
+`FAIL maxItems: assertion absent`. All mutation commands returned nonzero for
+the intended diagnostic; the positive control returned zero. Source fixtures
+were never dirtied by a plant. Actual generated/handwritten SA1019 plants and
+the standalone-vet/former-govet printf controls likewise passed valid controls
+and caught their deliberately broken inputs.
+
+R1's scoped RA01–RA04 exit is satisfied. Product API/generation/wire/full
+qualification modes still report their documented incomplete contracts; R1
+does not certify R2–R5, Stage 7 or Stage 9. Preserve the prior failed passes.
+No unnecessary sixth R1 pass was run. Shared runner repair was committed on
+its owning repository's main as `c49c694`; the 26 shared regression tests and
+native Windows archive controls underpin that dependency. The R1 phase commit
+includes these records and the earlier preserved audit/duplication reports.
+
+### 2026-11-25 — Corpus binding deviation: Option A approved
+
+The owner selected A: add explicit definition bindings to existing fixture
+expectations, retain all numerical assertions, and explicitly check zero item
+bounds. Extend R1 to the generator's `internal/model/fixtures_test.go` and
+`testdata/fixtures/bounds.json`, with maintained scratch controls under
+`scripts/`. Ambiguous multi-definition expectations must fail instead of using
+map order. Single-definition fixtures retain their existing assertions. Verify
+wrong numeric tokens, wrong zero bounds and missing bindings on scratch copies.
+R1 passes 5 and 6 are authorized; preserve previous failures. Commit to main
+only after the phase's required checks pass. R2–R5 execution approval continues.
+
+### 2026-11-25 — R1, pass 4: lint and preparation fixed; flaky corpus binding found
+
+Added the approved handwritten `protocol/doc.go` package documentation.
+Executed `python3 -u scripts/qualify_r1.py --allow-network` on native
+Windows/amd64, Darwin/arm64 and Linux/amd64 through the shared runner and
+per-host queue. All used this identical input identity:
+`ce14fc01551475f6c14f2a4ccac174f2422a540cba40bed0eb800234a14f35c3`.
+No source change occurred during any run. Linux selection used the primary
+Linux machine; this pass did not qualify the additional WSL environment.
+
+| Check | Windows | Darwin | Linux |
+| :--- | :--- | :--- | :--- |
+| R1 harness, including scratch lock-mutation and explicit-network controls | 20 passed | 20 passed | 20 passed |
+| Ownership inventory | Passed | Passed | Passed |
+| Exact tools, isolated dependency metadata, schema and conformance preparation | Passed | Passed | Passed |
+| Runtime formatter/vet/tests/lint | Passed; 56 tests | Passed; 56 tests | Passed; 56 tests |
+| Generator formatter/vet/lint | Passed | Passed | Passed |
+| Generator tests | Failed: `TestFixtureCorpus/bounds.json` | Same failure | Passed; 66 tests including subtests |
+| Generated/handwritten SA1019 valid and broken controls | Passed/caught | Passed/caught | Passed/caught |
+| Standalone vet and former duplicate govet printf controls | Passed/caught | Passed/caught | Passed/caught |
+| Source preservation | Passed | Passed | Passed |
+| Overall | Exit 1 | Exit 1 | Exit 0 |
+
+The actual lint plants now have valid clean baselines. All intended broken
+analyzer controls were caught on every target. No suppression was added.
+Native preferred compiler was Go 1.27.4 with CGO off throughout. Root and
+generator module metadata remained unchanged. Complete logs remain in session
+scratch artifacts; private host paths are not copied into these records.
+
+Read-only diagnosis of the new failure:
+
+* `cmd/mcpgen/internal/model/fixtures_test.go:87–96` compares minimum and maximum
+  against `firstNode(m)`. That helper at the end of the file returns the first
+  value encountered in a Go map, with no definition binding.
+* `cmd/mcpgen/testdata/fixtures/bounds.json` contains both `Bounded` (numeric
+  minimum/maximum) and `Empty` (array item bounds). When `Empty` is selected,
+  diagnostics are `FAIL minimum token: got "" want "0.30000000000000004"` and
+  `FAIL maximum token: got "" want "1e308"`.
+* Both the corpus harness and fixture are unchanged from HEAD (empty diff).
+  Pass 3 and Linux pass 4 passing do not invalidate the Windows/Darwin failures.
+  The harness also conditions item-bound checks on nonzero expected values,
+  leaving the fixture's explicit zero bounds unchecked; that must be corrected
+  while preserving the numerical assertions.
+
+R1 remains incomplete; no source is staged or committed. The two additional
+passes approved by D2 B have been used. Before another build, request approval
+to bind expectations to explicit definitions (recommended A), split bounds into
+separate numeric/array fixtures (B), or convert all fixture expectations to a
+per-definition map (C). Each option retains every existing predicate and tests
+zero bounds explicitly; none skips the failing test or retries until it passes.
+R2–R5 remain authorized but unstarted behind the required R1 phase boundary.
+
+### 2026-11-25 — Package documentation deviation: Option A approved
+
+The owner selected A, approving a handwritten `protocol/doc.go` package comment
+within R1. Add package documentation without changing generated declarations,
+the generated ownership manifest, assertions or lint policy. This resolves the
+pending ST1000 source-scope decision recorded in pass 3. Pass 4 includes this
+file and the prepared R1 fixture/module-preparation corrections. Existing
+approval to execute R1–R5 and commit each qualified coherent phase to main
+continues; no push or Stage 7 execution is authorized.
+
+### 2026-11-25 — D1 A / D2 B: approved deviation and broader R1 review
+
+The owner selected D1 A (repair and qualify the shared Windows transfer) and
+D2 B (broader read-only R1 review, then formatter/tool corrections and two
+further qualification passes). Execute the existing 0002 pair with this scope
+amendment: add the canonical `available-dev-hosts/scripts/run-on-host` and its
+maintained transfer tests in the shared skill source, and formatting-only
+changes to `output_test.go`. The shared runner source lives in its owning
+dotfiles repository; do not change other product repositories or skill policy.
+Preserve its queue, source-copy checks and failure behavior. Record shared
+changes separately from this product's phase commit. No push is authorized.
+
+Read-only R1 review covered the shared runner's archive/copy/verify paths, gate
+dispatch and pre-add call graph, event accounting, preparation and acceptance
+inventory. Remaining gaps: expected test identities are not wired into live
+accounting; default test vet duplicates standalone vet and linter govet;
+inventory role/direction labels need independent method bindings; module
+preparation failures need per-module aggregation; conformance verification
+needs runtime dependency integrity and usable-entry evidence. Timeout/process
+behavior and actual generated/handwritten lint plants remain unqualified.
+
+Native Windows scratch probe confirms Python 3.14 can create and read the
+required relative symlink with target `CLAUDE.md`; no host symlink setting
+change is necessary. The current transfer delegates extraction to the MINGW
+tar command. Repair it with native Python archive extraction and explicit link
+verification, preserving link targets and rejecting unsafe archive entries.
+Use maintained valid/broken archive fixtures, then exercise actual native
+Windows transfer. This replaces the failed transfer mechanism without dropping
+the required symlink or relaxing copy verification.
+
+R1 passes 3 and 4 are authorized after this broader review. Preserve every
+failure; if those passes do not establish the exit, report the remaining cases
+and request another decision under the third-pass rule.
+
+### 2026-11-25 — R1, pass 3: Windows transfer qualified; product gate failed
+
+Completed the broader review before the implementation updates. The shared
+runner now extracts Windows archives using native Python, with files before
+links, path/type/link-ancestor validation and explicit symlink target checks.
+The existing source-copy count checks, queue and failure fallback remain.
+Native Windows `test_windows_archive.py`: exit 0, two tests passed. Valid
+link-before-target control preserved `AGENTS.md -> CLAUDE.md`. Seven broken
+archive controls were rejected: traversal, absolute path, drive path, link
+escape, link ancestor, duplicate and device entry. The shared runner's full
+`python3 -B -m unittest -v test_run_on_host test_windows_archive` regression
+suite on queued Darwin: exit 0, 26 tests passed in 80.239 seconds. This includes
+queue, WSL isolation/cancellation, copy verification and exit-status contracts.
+The shared source/test changes are uncommitted in their owning repository.
+
+R1 source updates: corrected only whitespace in `output_test.go`; added
+`tools/test-inventory.json` with 56 runtime and 58 generator top-level test
+identities, wired as required passing results; retained D/G obligations as
+independent, unqualified product requirements. Added reviewed method directions
+and definition-to-method reference tracing to the acceptance inventory.
+Preserved 39 obligations, 155 definitions, 21 methods and 89 scenarios.
+Standalone full vet owns its analysis once per selected module; test execution
+uses `-vet=off`, and golangci's duplicate govet producer is disabled. No
+staticcheck suppression or generated-file exclusion was introduced.
+
+Pinned preparation can build a missing/wrong linter into an isolated native
+tool cache and verifies its version/build compiler before promotion. Module
+acquisition uses scratch metadata. Conformance preparation now verifies runtime
+dependency bytes as well as the built runner and checks its actual CLI entry
+point. Explicit preparation retains invalid cache material separately before
+rebuilding; ordinary offline checks cannot rebuild it. Native npm invokes its
+Node entry point without a shell. Added `scripts/qualify_r1.py` to run named
+independent checks and verify the source tree is byte-identical afterward.
+
+Executed the frozen pass-3 candidate through the repaired shared runner on
+native Windows and queued Darwin:
+
+```text
+python3 -u scripts/qualify_r1.py --allow-network
+input identity: caf609c99422a4a00f28bf32d9a05fb967dfaf784143e478ceb293cbb490c3eb
+```
+
+| Check | Windows | Darwin |
+| :--- | :--- | :--- |
+| Harness and deliberately broken event/cache controls | 18 tests passed | 18 tests passed |
+| Acceptance ownership inventory | Passed; product remains unqualified | Passed; product remains unqualified |
+| Pinned tools, schema and built conformance runner | Passed | Passed |
+| Runtime dependency metadata preparation | Failed: `module lookup disabled by GOPROXY=off` | Passed |
+| Formatter, standalone vet and runtime tests | Passed; 56 tests | Passed; 56 tests |
+| Runtime lint | Failed: three ST1000 reports in `protocol/` | Same failure |
+| Generator formatter/vet/tests/lint | Passed; 66 tests including subtests | Passed; 66 tests including subtests |
+| Actual SA1019 plants, generated and handwritten | Both caught | Both caught |
+| Standalone vet / former govet valid and broken printf controls | All passed/caught as intended | All passed/caught as intended |
+| Lint plant clean baseline | Failed: fixture lacked valid package documentation | Same failure |
+| Source preservation | Passed | Passed |
+| Overall | Exit 1, three failed check groups | Exit 1, two failed check groups |
+
+Full logs remain session scratch artifacts, with private host paths excluded
+from these records. No R1 exit, phase commit or later repair completion is
+claimed. Native Linux/WSL and compiler-floor qualification remain outstanding.
+
+Pass-4 corrections prepared within R1: give the lint fixtures proper package
+comments, allow module metadata acquisition only during explicit network setup,
+aggregate each module's preparation failures independently, and add scratch
+lock-mutation/network-permission controls. These corrections have passed static
+Python AST parsing but have not executed in a qualification pass.
+
+Pending deviation decision: actual lint revealed missing package documentation
+in existing generated `protocol/aliases.go`, `protocol/constants.go` and
+`protocol/owned.go` (`ST1000`, package declaration lines). This is pre-existing
+product source outside the listed R1 gate/test-setup files. Offered A (a small
+handwritten `protocol/doc.go` in R1), B (generator emission plus R2/R3 qualified
+publication), or C (one coherent R1–R3 change and commit). Recommended A.
+No protocol source was changed while that decision is pending. The next
+qualification pass remains pass 4; no checks are bypassed to commit R1.
+
+### 2026-11-25 — R1–R5 execution authorization
+
+The owner approved execution of R1–R5 and explicitly requested staging and
+committing to main between phases. This supersedes the earlier R2–R5 pending
+authorization statements; the recommended implementation options are approved.
+Stage 7 and push/tag remain outside this instruction. Preserve unfinished R1
+work and commit each coherent phase only after its acceptance and pre-add
+checks pass. Starting revision remains `5bfdd9f`.
+
+### 2026-11-25 — R1, pass 2: partial repairs and failed pre-add
+
+Applied initial R1 corrections to `scripts/gate_common.py`,
+`scripts/prepare.py` and `scripts/test_gate.py`: isolate inherited Go environment
+settings; resolve the linter on PATH; retain bounded disk command logs and
+partial timeout diagnostics; terminate timed-out process trees; distinguish
+timeout/missing-command/log-limit statuses; support required named test results;
+remove arbitrary cache-text rejection; acquire/verify Go dependencies using
+scratch module metadata and verify pinned runtime versions. Added controls for
+missing required cases, literal cache text, environment pollution and timeout
+diagnostics. These changes remain unqualified; required-case accounting still
+needs production inventory wiring, and the remaining R1 steps are incomplete.
+
+The existing shared runner selected native Windows for
+`python3 -m unittest discover -s scripts -p test_gate.py -v`. Its transfer failed:
+`tar: ./AGENTS.md: Cannot create symlink to 'CLAUDE.md': No such file or directory`.
+The symlink is required and unchanged in the source tree. The runner released
+the remote claim and queued a local fallback behind another repository's job.
+This is a dispatch failure, not evidence that the harness ran on Windows.
+An owner decision was requested before repairing the shared runner or changing
+host symlink administration; neither is implicitly part of this repository's
+R1 source changes.
+
+Independently dispatched `python3 -u scripts/go-precheck.py` through
+`run-on-host --need linux`; selection chose the WSL environment. Exact relevant
+output, with the machine-specific scratch prefix removed:
+
+```text
+FAIL pre-add.linter: required golangci-lint 2.15.0 built with go1.27.4; golangci-lint has version 2.14.0 built with go1.27.4
+FAIL pre-add.runtime.gofmt: gofmt would rewrite: <scratch>/output_test.go
+pass pre-add.runtime.vet
+pass unit.runtime: 56 tests passed; 4 packages accounted
+FAIL lint.runtime: pinned linter unavailable
+pass pre-add.generator.gofmt
+pass pre-add.generator.vet
+pass unit.generator: 66 tests passed; 9 packages accounted
+FAIL lint.generator: pinned linter unavailable
+gate pre-add: 4 FAIL case(s)
+```
+
+Exit: 1. Full dispatch output is retained in the session scratch log, not a
+committed artifact containing private machine paths. The runner stopped the
+WSL environment it had started. The linter mismatch is pre-existing host drift;
+the formatter finding is pre-existing at HEAD (`output_test.go`, tool
+registration literals), confirmed by the empty starting diff for that file.
+No test assertion was weakened and no phase exit or commit is claimed.
+
+Deviation pending review: align the runner's pinned tools and qualify Windows
+symlink transfer; include the existing `output_test.go` formatter correction in
+R1 if approved. A further build pass must respect the repository's third-pass
+review rule. Keep all outstanding R1 inventory, analyzer ownership, preparation,
+actual lint plants and native qualification obligations visible.
+
+After 241 seconds waiting behind another repository's heavy job, cancelled only
+this task's queued harness ticket while the required deviation decisions were
+pending. Runner output: `interrupted while waiting; ticket removed; nothing run`;
+exit 130. No harness test or its new negative controls executed in this pass.
+No test process or polling loop remains running for this task. Static Python
+AST parsing of all three changed helpers passed; records validation,
+markdownlint-cli2 v0.23.2 (32 files, zero issues) and `git diff --check` passed.
+
+### 2026-11-25 — R1–R5 research and planning pass 1
+
+The owner requested assessment, options and a PLAN update. Reviewed product
+source and unfinished R1 changes at HEAD `5bfdd9f`, the pinned SDK v1.8.0
+module source, and the primary documentation linked in the research refinement.
+Updated this PLAN, its MADR clarification and the documentation index only.
+No repair implementation, product build, suite, negative-control plant, native
+host qualification, commit or push was performed in this planning pass. It is
+not a numbered repair build attempt and establishes no RA exit result.
+
+The sorted modified/untracked non-documentation path-NUL/content-NUL SHA-256
+was identical before and after editing:
+`e1080c42481ace4a254aa426fe01f289e0323882459f3feb15ee63e3e8b837ff`.
+Existing R1 source/configuration work is preserved and remains unqualified.
+
+Documentation verification:
+
+* `python3 scripts/check_records.py --check-all`: exit 0; no diagnostics.
+* Cached `markdownlint-cli2` v0.23.2, invoked through Node with this MADR, PLAN
+  and `docs/README.md` as arguments: exit 0. Repository configuration expanded
+  the selection to 32 files; output: `Summary: 0 issues in 0 files`.
+* `git diff --check`: exit 0; no diagnostics.
+
+### 2026-11-24 — R1, pass 1: execution authorized
+
+The owner instructed “resume r1” after reviewing the repair sequence. Execute
+only R1 in this repository; no fleet skill adoption, other-repository changes,
+Stage 9 rollout, push or tag is authorized. Starting HEAD is `5bfdd9f`.
+The five existing dirty documentation files are preserved. Their sorted
+path-NUL/content-NUL inventory SHA-256 before this amendment is
+`663933681242d4380d5090b05dbedb8862c0286db4d3c76d959f620f8849b42f`.
+Re-grounding confirms A02–A04 in the current gate, pre-add and lint configuration.
+Implementation and verification results follow when established; no R1 exit is
+claimed by this authorization entry.
 
 2026-11-23 — Draft only. Repository/source grounding and tool/conformance pin
 research completed. Product implementation stages 0–10 have not executed; none
@@ -1035,3 +2214,84 @@ and its index. Stage 9 gains the Makefile, receipts and CI01–CI07 acceptance c
 GitHub enforcement and security-scan administration are excluded. This is a
 policy/specification amendment, not a build pass or completed phase. No workflow,
 hook, dependency or product code was changed by this amendment.
+
+### 2026-11-24 — Audit deviation and proposed R1–R5 repair amendment
+
+Evidence: [0011-REPORT-pre-stage-7-completion-audit.md](../reports/0011-REPORT-pre-stage-7-completion-audit.md),
+findings A01–A20 at `5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532`. The failures are
+pre-existing. The audit records exact source locators and executed negative
+inputs; eight runtime diagnostic groups and eight generator diagnostic groups
+fail despite successful existing Linux suites. The generator suite also skips
+two tests. This is an implementation/completion deviation under the accepted
+contract, not permission to loosen it.
+
+Owner selection: “do A repairs”, selecting the offered option A to draft the
+existing pair's repair amendment and acceptance ledger for review before
+execution. R1–R5 and RA01–RA20 above make the selected repair concrete. The
+architecture remains accepted; review/approval of this detailed execution
+amendment is pending. No repair build pass, product edit or phase commit has
+occurred in preparing it.
+
+Starting dirty files: `docs/README.md` and the audit report. Their sorted
+path-NUL/content-NUL inventory SHA-256 is
+`6d9bead6eef4152cec9c441fa1a4552f1e8b793263bcfe88ab1faa273f38f5c3`.
+The report is preserved unchanged; the index gains current audit/repair status
+annotations. This amendment edits only the MADR, PLAN and documentation index.
+Affected product scope for subsequent approval is enumerated per repair phase,
+including original-manifest migration, production-path fixtures, private SDK
+bridge adaptations and external consumer tests. Stage 7–10 scope and CI08's
+explicit exclusion remain unchanged.
+
+Documentation verification: `python3 scripts/check_records.py --check-all`
+and `git diff --check` exited 0. The installed pinned markdownlint-cli2 0.23.2
+entry point, invoked with Node and the repository configuration, checked 31
+Markdown files with zero issues. A one-use read-only comparison verified that
+all 20 RA state IDs map one-to-one to the same named groups in this PLAN.
+These are documentation checks, not repair implementation or product tests.
+
+### 2026-11-24 — Dedicated local scaffolding name and scope
+
+The owner selected `local-cicd-scaffolding` and explicitly limited it to local
+acceptance, validation, tests and gates through pre-push readiness, with idempotent
+application and no upstream-forge-specific content or operations. The MADR now
+records ownership, the complete local capability inventory and LC01–LC10; this
+PLAN maps those states to future adoption evidence. The conversational working
+name is superseded; no existing skill directory required a rename.
+
+This is a specification amendment to the current pair, not a skill installation,
+repair build pass, hook change or Stage 9 execution. Existing upstream work stays
+outside the skill, and pending repair authorization is unchanged. The skill's
+canonical implementation belongs to the fleet skill library and needs that
+repository's implementation record. Only this pair and its index were changed.
+
+### 2026-11-24 — Explicit local runners and race-only CGO
+
+The owner clarified the required runner set: native Windows 11, its WSL Linux
+environment, the session Mac and standalone Ubuntu 26 Linux, with SSH for remote
+execution. Host aliases remain in private fleet configuration. This amendment
+adds explicit four-environment coverage and LC11–LC12 to the local skill contract;
+the two WSL baseline cells supplement the six native cells. Existing upstream
+matrix requirements are unchanged. The current fleet policy keeps WSL out of
+race runs and serializes its heavy work with native Windows on the same machine.
+
+The owner also requires CGO off for all non-race operations and builds. The
+contract now names explicit subprocess environments, child-build handling and
+artifact separation; CGO on is limited to qualified race-test execution and its
+instrumented compilation. This is documentation of required behavior, not an
+executed host probe, implemented gate, or completed qualification run.
+
+### 2026-11-24 — Local gate duplication assessment and streamlined execution
+
+The owner requested analysis of overlapping Make targets, tests, linters,
+validators and checkers across the reference repositories, with necessary checks
+retained and redundant scans removed. Findings and conservative command-count
+reductions are recorded in
+[0012-REPORT-local-gate-duplication-assessment.md](../reports/0012-REPORT-local-gate-duplication-assessment.md).
+The MADR now requires canonical execution ownership, evidence reuse with complete
+context, coverage equivalence and measured costs. LC13–LC16 specify future proof.
+
+This amendment changes the skill/adoption specification, not existing gate source
+or configuration. No suite was rerun, no check was disabled and no timing saving
+is claimed. The reference repositories' uncommitted work was preserved. Pending
+repair and Stage 9 execution status are unchanged; consumer and fleet skill
+implementations remain separate recorded work.

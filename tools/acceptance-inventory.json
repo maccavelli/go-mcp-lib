@@ -1,0 +1,3935 @@
+{
+  "definitions": [
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "Annotations",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Annotations",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "AudioContent",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/AudioContent",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "BaseMetadata",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/BaseMetadata",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "BlobResourceContents",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/BlobResourceContents",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "BooleanSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/BooleanSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "CacheableResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CacheableResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "tools/call"
+      ],
+      "name": "CallToolRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CallToolRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "tools/call"
+      ],
+      "name": "CallToolRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CallToolRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "tools/call"
+      ],
+      "name": "CallToolResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CallToolResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "CallToolResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CallToolResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server; server to client on stdio only to terminate subscriptions/listen"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/cancelled"
+      ],
+      "name": "CancelledNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CancelledNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server; server to client on stdio only to terminate subscriptions/listen"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/cancelled"
+      ],
+      "name": "CancelledNotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CancelledNotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "ClientCapabilities",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ClientCapabilities",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ClientNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ClientNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ClientRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ClientRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ClientResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ClientResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete"
+      ],
+      "name": "CompleteRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CompleteRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete"
+      ],
+      "name": "CompleteRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CompleteRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete"
+      ],
+      "name": "CompleteResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CompleteResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "CompleteResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CompleteResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "ContentBlock",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ContentBlock",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "CreateMessageRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CreateMessageRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "CreateMessageRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CreateMessageRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "CreateMessageResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CreateMessageResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Cursor",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Cursor",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "server/discover"
+      ],
+      "name": "DiscoverRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/DiscoverRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "server/discover"
+      ],
+      "name": "DiscoverResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/DiscoverResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "DiscoverResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/DiscoverResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "ElicitRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "ElicitRequestFormParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitRequestFormParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "ElicitRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "ElicitRequestURLParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitRequestURLParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create",
+        "prompts/get",
+        "resources/read",
+        "tools/call"
+      ],
+      "name": "ElicitResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "EmbeddedResource",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/EmbeddedResource",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "EmptyResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/EmptyResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "EnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/EnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Error",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Error",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get"
+      ],
+      "name": "GetPromptRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/GetPromptRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get"
+      ],
+      "name": "GetPromptRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/GetPromptRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get"
+      ],
+      "name": "GetPromptResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/GetPromptResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "GetPromptResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/GetPromptResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "HeaderMismatchError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/HeaderMismatchError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "sampling/createMessage",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "Icon",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Icon",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Icons",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Icons",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "ImageContent",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ImageContent",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "Implementation",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Implementation",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InputRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InputRequests",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputRequests",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InputRequiredResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputRequiredResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "tools/call"
+      ],
+      "name": "InputResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InputResponseRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputResponseRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "tools/call"
+      ],
+      "name": "InputResponses",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InputResponses",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InternalError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InternalError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InvalidParamsError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InvalidParamsError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "InvalidRequestError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/InvalidRequestError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONArray",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONArray",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "sampling/createMessage",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "JSONObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCErrorResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCErrorResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCMessage",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCMessage",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "JSONRPCResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONRPCResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "sampling/createMessage",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "JSONValue",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/JSONValue",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "LegacyTitledEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/LegacyTitledEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/list"
+      ],
+      "name": "ListPromptsRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListPromptsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/list"
+      ],
+      "name": "ListPromptsResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListPromptsResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ListPromptsResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListPromptsResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/templates/list"
+      ],
+      "name": "ListResourceTemplatesRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourceTemplatesRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/templates/list"
+      ],
+      "name": "ListResourceTemplatesResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourceTemplatesResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ListResourceTemplatesResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourceTemplatesResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/list"
+      ],
+      "name": "ListResourcesRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourcesRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/list"
+      ],
+      "name": "ListResourcesResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourcesResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ListResourcesResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourcesResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "roots/list"
+      ],
+      "name": "ListRootsRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListRootsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "roots/list",
+        "tools/call"
+      ],
+      "name": "ListRootsResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListRootsResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "tools/list"
+      ],
+      "name": "ListToolsRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListToolsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "tools/list"
+      ],
+      "name": "ListToolsResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListToolsResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ListToolsResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListToolsResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "notifications/message",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "LoggingLevel",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/LoggingLevel",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/message"
+      ],
+      "name": "LoggingMessageNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/LoggingMessageNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/message"
+      ],
+      "name": "LoggingMessageNotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/LoggingMessageNotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "roots/list",
+        "sampling/createMessage",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "MetaObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/MetaObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "MethodNotFoundError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/MethodNotFoundError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "MissingRequiredClientCapabilityError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/MissingRequiredClientCapabilityError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "ModelHint",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ModelHint",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "ModelPreferences",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ModelPreferences",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "MultiSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/MultiSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Notification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Notification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server; server to client on stdio only to terminate subscriptions/listen",
+        "request receiver to request sender",
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/cancelled",
+        "notifications/message",
+        "notifications/progress",
+        "notifications/prompts/list_changed",
+        "notifications/resources/list_changed",
+        "notifications/resources/updated",
+        "notifications/subscriptions/acknowledged",
+        "notifications/tools/list_changed"
+      ],
+      "name": "NotificationMetaObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/NotificationMetaObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/prompts/list_changed",
+        "notifications/resources/list_changed",
+        "notifications/tools/list_changed"
+      ],
+      "name": "NotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/NotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "NumberSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/NumberSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "PaginatedRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PaginatedRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/list",
+        "resources/list",
+        "resources/templates/list",
+        "tools/list"
+      ],
+      "name": "PaginatedRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PaginatedRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "PaginatedResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PaginatedResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ParseError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ParseError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "PrimitiveSchemaDefinition",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PrimitiveSchemaDefinition",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "request receiver to request sender"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/progress"
+      ],
+      "name": "ProgressNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ProgressNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "request receiver to request sender"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/progress"
+      ],
+      "name": "ProgressNotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ProgressNotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "request receiver to request sender"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "notifications/progress",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "ProgressToken",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ProgressToken",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/list"
+      ],
+      "name": "Prompt",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Prompt",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/list"
+      ],
+      "name": "PromptArgument",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PromptArgument",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/prompts/list_changed"
+      ],
+      "name": "PromptListChangedNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PromptListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get"
+      ],
+      "name": "PromptMessage",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PromptMessage",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete"
+      ],
+      "name": "PromptReference",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PromptReference",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/read"
+      ],
+      "name": "ReadResourceRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ReadResourceRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/read"
+      ],
+      "name": "ReadResourceRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ReadResourceRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/read"
+      ],
+      "name": "ReadResourceResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ReadResourceResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ReadResourceResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ReadResourceResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Request",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Request",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "client to server; server to client on stdio only to terminate subscriptions/listen",
+        "request receiver to request sender",
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "notifications/cancelled",
+        "notifications/message",
+        "notifications/progress",
+        "notifications/prompts/list_changed",
+        "notifications/resources/list_changed",
+        "notifications/resources/updated",
+        "notifications/subscriptions/acknowledged",
+        "notifications/tools/list_changed",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "RequestId",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/RequestId",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "subscriptions/listen",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "RequestMetaObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/RequestMetaObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "server/discover"
+      ],
+      "name": "RequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/RequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/list"
+      ],
+      "name": "Resource",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Resource",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ResourceContents",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceContents",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "ResourceLink",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceLink",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/resources/list_changed"
+      ],
+      "name": "ResourceListChangedNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ResourceRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "resources/templates/list"
+      ],
+      "name": "ResourceTemplate",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceTemplate",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete"
+      ],
+      "name": "ResourceTemplateReference",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceTemplateReference",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/resources/updated"
+      ],
+      "name": "ResourceUpdatedNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceUpdatedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/resources/updated"
+      ],
+      "name": "ResourceUpdatedNotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceUpdatedNotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "Result",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Result",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "completion/complete",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "server/discover",
+        "tools/call",
+        "tools/list"
+      ],
+      "name": "ResultMetaObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResultMetaObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ResultType",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResultType",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/list",
+        "resources/read",
+        "resources/templates/list",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "Role",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Role",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "roots/list",
+        "tools/call"
+      ],
+      "name": "Root",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Root",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "SamplingMessage",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SamplingMessage",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "SamplingMessageContentBlock",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SamplingMessageContentBlock",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "server/discover"
+      ],
+      "name": "ServerCapabilities",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ServerCapabilities",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ServerNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ServerNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "ServerResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ServerResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "SingleSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SingleSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "StringSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/StringSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/subscriptions/acknowledged",
+        "subscriptions/listen"
+      ],
+      "name": "SubscriptionFilter",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionFilter",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/subscriptions/acknowledged"
+      ],
+      "name": "SubscriptionsAcknowledgedNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsAcknowledgedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/subscriptions/acknowledged"
+      ],
+      "name": "SubscriptionsAcknowledgedNotificationParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsAcknowledgedNotificationParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "subscriptions/listen"
+      ],
+      "name": "SubscriptionsListenRequest",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "subscriptions/listen"
+      ],
+      "name": "SubscriptionsListenRequestParams",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenRequestParams",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "subscriptions/listen"
+      ],
+      "name": "SubscriptionsListenResult",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenResult",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "subscriptions/listen"
+      ],
+      "name": "SubscriptionsListenResultMetaObject",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenResultMetaObject",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "SubscriptionsListenResultResponse",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenResultResponse",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "TextContent",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/TextContent",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "TextResourceContents",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/TextResourceContents",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "TitledMultiSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/TitledMultiSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "TitledSingleSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/TitledSingleSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage",
+        "tools/list"
+      ],
+      "name": "Tool",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/Tool",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage",
+        "tools/list"
+      ],
+      "name": "ToolAnnotations",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolAnnotations",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "sampling/createMessage"
+      ],
+      "name": "ToolChoice",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolChoice",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server to client"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "notifications/tools/list_changed"
+      ],
+      "name": "ToolListChangedNotification",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "ToolResultContent",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolResultContent",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "client to server",
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "prompts/get",
+        "resources/read",
+        "sampling/createMessage",
+        "tools/call"
+      ],
+      "name": "ToolUseContent",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolUseContent",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "both peers: framing/value validation"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [],
+      "name": "UnsupportedProtocolVersionError",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "protocol framing or reusable value",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/UnsupportedProtocolVersionError",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "UntitledMultiSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/UntitledMultiSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "direction": [
+        "server input request / client owned fulfillment"
+      ],
+      "expected": "explicit reviewed binding preserving schema semantics",
+      "methods": [
+        "elicitation/create"
+      ],
+      "name": "UntitledSingleSelectEnumSchema",
+      "owner": "R2: TestRepairA10GeneratedContract",
+      "role": "method contract",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/UntitledSingleSelectEnumSchema",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    }
+  ],
+  "methods": [
+    {
+      "definition": "CallToolRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "tools/call",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CallToolRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "CancelledNotification",
+      "direction": "client to server; server to client on stdio only to terminate subscriptions/listen",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/cancelled",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CancelledNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "CompleteRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "completion/complete",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CompleteRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "CreateMessageRequest",
+      "direction": "server input request / client owned fulfillment",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "sampling/createMessage",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/CreateMessageRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "DiscoverRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "server/discover",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/DiscoverRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ElicitRequest",
+      "direction": "server input request / client owned fulfillment",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "elicitation/create",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ElicitRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "GetPromptRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "prompts/get",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/GetPromptRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ListPromptsRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "prompts/list",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListPromptsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ListResourceTemplatesRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "resources/templates/list",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourceTemplatesRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ListResourcesRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "resources/list",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListResourcesRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ListRootsRequest",
+      "direction": "server input request / client owned fulfillment",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "roots/list",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListRootsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ListToolsRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "tools/list",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ListToolsRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "LoggingMessageNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/message",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/LoggingMessageNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ProgressNotification",
+      "direction": "request receiver to request sender",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/progress",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ProgressNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "PromptListChangedNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/prompts/list_changed",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/PromptListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ReadResourceRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "resources/read",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ReadResourceRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ResourceListChangedNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/resources/list_changed",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ResourceUpdatedNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/resources/updated",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ResourceUpdatedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "SubscriptionsAcknowledgedNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/subscriptions/acknowledged",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsAcknowledgedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "SubscriptionsListenRequest",
+      "direction": "client to server",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "subscriptions/listen",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/SubscriptionsListenRequest",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    },
+    {
+      "definition": "ToolListChangedNotification",
+      "direction": "server to client",
+      "expected": "supported modern path or explicit legacy rejection; preserve owned fulfillment",
+      "name": "notifications/tools/list_changed",
+      "owner": "R5: TestRepairA19CanonicalRuntime",
+      "role": "client and server",
+      "source": "schema/inputs/2026-07-28/schema.json#/$defs/ToolListChangedNotification",
+      "status": "unqualified",
+      "transport": "stdio and HTTP"
+    }
+  ],
+  "obligations": [
+    {
+      "expected": "Make/CI select identical modules/cases; planted command failure propagates",
+      "id": "CI01",
+      "owner": "TestCI01SharedGateContract",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Both modules in six CGO-free native combinations and separate race evidence; wrong architecture/compiler/CGO and missing module rejected",
+      "id": "CI02",
+      "owner": "TestCI02NativeMatrix",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Complete exact-commit receipt below one hour reused with fresh successful local vulnerability evidence",
+      "id": "CI03",
+      "owner": "TestCI03FreshReceipt",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Missing/malformed/altered/future/expired or mismatched evidence rejected, including one bad tip in multi-ref push; ages immediately below, at and above one hour",
+      "id": "CI04",
+      "owner": "TestCI04ReceiptRejection",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Missing/failed/reused scan evidence rejects qualification; disclosure failure remains effective; no scanner/guard mutation or GitHub scan job",
+      "id": "CI05",
+      "owner": "TestCI05LocalSecurityBoundary",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Failed/cancelled/missing/unexpectedly skipped result fails summary; complete success passes",
+      "id": "CI06",
+      "owner": "TestCI06CISummary",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Queue serializes work; transfer failure, timeout and cancellation retain failure evidence and clean up owned resources",
+      "id": "CI07",
+      "owner": "TestCI07FleetLifecycle",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "No GitHub enforcement, visibility or billing configuration is added or required for acceptance",
+      "id": "CI08",
+      "owner": "Out-of-scope inventory",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "out-of-scope"
+    },
+    {
+      "expected": "External consumers, owned handle identity, reviewed alias method/signature closure, enforcement boundary",
+      "id": "D01",
+      "owner": "internal/contracttest: TestD01CanonicalAPI",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Owned v2, SDK differential fixtures, predecode raw wire guards on every supported direction/mode",
+      "id": "D02",
+      "owner": "internal/contracttest: TestD02JSONBoundaries",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "All six commands, pure Go execution, internal import rejection, explicit offline/network distinction",
+      "id": "D03",
+      "owner": "cmd/mcpgen: TestD03GeneratorContract",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Lossless precision, semantic locations, immutable compilation, no permissive fallback",
+      "id": "D04",
+      "owner": "internal/validation: TestD04ValidatorAdapter",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Complete sample inventory, equivalent controls, numerical gate and over-budget log rejection",
+      "id": "D05",
+      "owner": "internal/contracttest: TestD05BudgetEvidence",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Both transports, both HTTP response modes, native lifecycle and official/local coverage",
+      "id": "D06",
+      "owner": "internal/contracttest: TestD06TransportQualification",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Build/run without Python/Node in PATH; Go executable available for qualification",
+      "id": "G01",
+      "owner": "cmd/mcpgen: TestG01PureGo",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Same bytes/inventory, untouched mtimes, no path/time/network leakage",
+      "id": "G02",
+      "owner": "cmd/mcpgen: TestG02DeterministicGeneration",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Absent/tampered/wrong-dialect source, missing ref, traversal and offline failure",
+      "id": "G03",
+      "owner": "internal/load: TestG03PinnedInputs in generator",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Valid cycles, depth/node/edge limits, deterministic diagnostics",
+      "id": "G04",
+      "owner": "internal/resolve: TestG04ReferenceGraph in generator",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Complete definitions/methods/keywords; unsupported assertion and missing-rule plants",
+      "id": "G05",
+      "owner": "internal/model: TestG05Coverage in generator",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Raw independent required/optional/null/zero/empty/discriminator/open-object fixtures",
+      "id": "G06",
+      "owner": "codec: TestG06PresenceAndUnions",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Duplicate/escaped duplicate, UTF-8, surrogate, trailing value, depth/size/numeric bounds",
+      "id": "G07",
+      "owner": "codec: TestG07StrictRawJSON",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Zero invalid-byte exposure; corrupt resumable SSE closes original connection; no extra request",
+      "id": "G08",
+      "owner": "transport: TestG08PredecodeGuards",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "v1/v2/SDK custom methods and actual captured frames, including resource links",
+      "id": "G09",
+      "owner": "internal/contracttest: TestG09CodecInterop",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Invalid schemas, duplicates, expected declaration panics, no handler invocation/fallback",
+      "id": "G10",
+      "owner": "Root: TestG10RegistrationFailure",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Disabled capabilities absent and rejected; extension shadow/unknown/negotiation checks",
+      "id": "G11",
+      "owner": "internal/contracttest: TestG11Capabilities",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Valid modern lifecycle; legacy/fallback/header/metadata/environment bypass rejection",
+      "id": "G12",
+      "owner": "transport: TestG12ModernOnly",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Same-name tool independence, multiple connections, registration-scoped serialization, race",
+      "id": "G13",
+      "owner": "Root: TestG13InstanceIsolation",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Admission, slow peers, saturated controls, first failure, cancellation, shutdown and leaks",
+      "id": "G14",
+      "owner": "internal/contracttest: TestG14LifecycleBounds",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Cache disabled; current authorization on repeat/revoked/expired calls; bounded schema reuse",
+      "id": "G15",
+      "owner": "Root: TestG15NoCrossPrincipalReuse",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Handwritten/internal/external/platform candidates; collision and foreign-target compile plants",
+      "id": "G16",
+      "owner": "internal/qualify: TestG16CandidateCompilation in generator",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Fault matrix, killed child, stale lock, edited output, recovery conflict, unrelated sentinels",
+      "id": "G17",
+      "owner": "internal/publish: TestG17Recovery in generator",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Direct/transitive API audit plus actual Staticcheck gate, no suppression/excluded generated files",
+      "id": "G18",
+      "owner": "internal/contracttest: TestG18ModernSurface",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "No HFSC protocol/store/routing or consumer changes; primitives and examples only",
+      "id": "G19",
+      "owner": "Scope/dependency/API inventory review",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Every numeric limit boundary and actual benchmark/RSS/cancellation results; planted excess rejected",
+      "id": "G20",
+      "owner": "internal/contracttest: TestG20LimitsAndBudgets",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "All 155 definitions, 421 assertions, 36 formats, precision and unsupported-profile tests",
+      "id": "G21",
+      "owner": "internal/validation: TestG21SchemaVocabulary",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Pre-v1 manifest, generator internal import failure, runtime dependency closure and external examples",
+      "id": "G22",
+      "owner": "cmd/mcpgen: TestG22APIBoundaries",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Real owned sampling/roots/elicitation callbacks, disabled SDK automatic fulfillment, tool/prompt/resource request-state paths where required",
+      "id": "G23",
+      "owner": "internal/contracttest: TestG23OwnedFulfillment",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Missing/wrong roots/role/action keys fail loudly at actual SDK codec conversion; valid controls complete",
+      "id": "G24",
+      "owner": "internal/contracttest: TestG24InputDiscriminators",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    },
+    {
+      "expected": "Public consumer signature fixture contains no deprecated/bridge-specific SDK types; scratch bridge-removal design check preserves consumer compile contract, without dropping currently required production features",
+      "id": "G25",
+      "owner": "internal/contracttest: TestG25BridgeRemovalBoundary",
+      "source": "docs/decisions/0002-PLAN-build-schema-driven-mcp-framework.md#verification",
+      "status": "unqualified"
+    }
+  ],
+  "qualification": "incomplete; ownership is not execution evidence",
+  "requirements-sha256": "ae2f4f6210fd729e2e318edd5bbfa31a43cee0bc608e48052fa26dbf1d939b57",
+  "scenarios": [
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "server-stateless",
+      "owner": "Stage 9: official scenario server-stateless",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "completion-complete",
+      "owner": "Stage 9: official scenario completion-complete",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-list",
+      "owner": "Stage 9: official scenario tools-list",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-simple-text",
+      "owner": "Stage 9: official scenario tools-call-simple-text",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-image",
+      "owner": "Stage 9: official scenario tools-call-image",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-audio",
+      "owner": "Stage 9: official scenario tools-call-audio",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-embedded-resource",
+      "owner": "Stage 9: official scenario tools-call-embedded-resource",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-mixed-content",
+      "owner": "Stage 9: official scenario tools-call-mixed-content",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-error",
+      "owner": "Stage 9: official scenario tools-call-error",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "tools-call-with-progress",
+      "owner": "Stage 9: official scenario tools-call-with-progress",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "server-sse-multiple-streams",
+      "owner": "Stage 9: official scenario server-sse-multiple-streams",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "resources-list",
+      "owner": "Stage 9: official scenario resources-list",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "resources-read-text",
+      "owner": "Stage 9: official scenario resources-read-text",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "resources-read-binary",
+      "owner": "Stage 9: official scenario resources-read-binary",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "resources-templates-read",
+      "owner": "Stage 9: official scenario resources-templates-read",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "sep-2164-resource-not-found",
+      "owner": "Stage 9: official scenario sep-2164-resource-not-found",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "prompts-list",
+      "owner": "Stage 9: official scenario prompts-list",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "prompts-get-simple",
+      "owner": "Stage 9: official scenario prompts-get-simple",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "prompts-get-with-args",
+      "owner": "Stage 9: official scenario prompts-get-with-args",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "prompts-get-embedded-resource",
+      "owner": "Stage 9: official scenario prompts-get-embedded-resource",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "prompts-get-with-image",
+      "owner": "Stage 9: official scenario prompts-get-with-image",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "dns-rebinding-protection",
+      "owner": "Stage 9: official scenario dns-rebinding-protection",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "caching",
+      "owner": "Stage 9: official scenario caching",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-basic-elicitation",
+      "owner": "Stage 9: official scenario input-required-result-basic-elicitation",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-basic-sampling",
+      "owner": "Stage 9: official scenario input-required-result-basic-sampling",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-basic-list-roots",
+      "owner": "Stage 9: official scenario input-required-result-basic-list-roots",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-request-state",
+      "owner": "Stage 9: official scenario input-required-result-request-state",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-multiple-input-requests",
+      "owner": "Stage 9: official scenario input-required-result-multiple-input-requests",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-multi-round",
+      "owner": "Stage 9: official scenario input-required-result-multi-round",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-missing-input-response",
+      "owner": "Stage 9: official scenario input-required-result-missing-input-response",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-non-tool-request",
+      "owner": "Stage 9: official scenario input-required-result-non-tool-request",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-result-type",
+      "owner": "Stage 9: official scenario input-required-result-result-type",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-unsupported-methods",
+      "owner": "Stage 9: official scenario input-required-result-unsupported-methods",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-tampered-state",
+      "owner": "Stage 9: official scenario input-required-result-tampered-state",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-capability-check",
+      "owner": "Stage 9: official scenario input-required-result-capability-check",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-ignore-extra-params",
+      "owner": "Stage 9: official scenario input-required-result-ignore-extra-params",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report; require pass",
+      "name": "input-required-result-validate-input",
+      "owner": "Stage 9: official scenario input-required-result-validate-input",
+      "role": "server",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "tools_call",
+      "owner": "Stage 9: official scenario tools_call",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "request-metadata",
+      "owner": "Stage 9: official scenario request-metadata",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/metadata-default",
+      "owner": "Stage 9: official scenario auth/metadata-default",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/metadata-var1",
+      "owner": "Stage 9: official scenario auth/metadata-var1",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/metadata-var2",
+      "owner": "Stage 9: official scenario auth/metadata-var2",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/metadata-var3",
+      "owner": "Stage 9: official scenario auth/metadata-var3",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/basic-cimd",
+      "owner": "Stage 9: official scenario auth/basic-cimd",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/scope-from-www-authenticate",
+      "owner": "Stage 9: official scenario auth/scope-from-www-authenticate",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/scope-from-scopes-supported",
+      "owner": "Stage 9: official scenario auth/scope-from-scopes-supported",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/scope-omitted-when-undefined",
+      "owner": "Stage 9: official scenario auth/scope-omitted-when-undefined",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/scope-step-up",
+      "owner": "Stage 9: official scenario auth/scope-step-up",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/scope-retry-limit",
+      "owner": "Stage 9: official scenario auth/scope-retry-limit",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/token-endpoint-auth-basic",
+      "owner": "Stage 9: official scenario auth/token-endpoint-auth-basic",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/token-endpoint-auth-post",
+      "owner": "Stage 9: official scenario auth/token-endpoint-auth-post",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/token-endpoint-auth-none",
+      "owner": "Stage 9: official scenario auth/token-endpoint-auth-none",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/pre-registration",
+      "owner": "Stage 9: official scenario auth/pre-registration",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/resource-mismatch",
+      "owner": "Stage 9: official scenario auth/resource-mismatch",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/offline-access-scope",
+      "owner": "Stage 9: official scenario auth/offline-access-scope",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/offline-access-not-supported",
+      "owner": "Stage 9: official scenario auth/offline-access-not-supported",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/authorization-server-migration",
+      "owner": "Stage 9: official scenario auth/authorization-server-migration",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-supported",
+      "owner": "Stage 9: official scenario auth/iss-supported",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-not-advertised",
+      "owner": "Stage 9: official scenario auth/iss-not-advertised",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-supported-missing",
+      "owner": "Stage 9: official scenario auth/iss-supported-missing",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-wrong-issuer",
+      "owner": "Stage 9: official scenario auth/iss-wrong-issuer",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-unexpected",
+      "owner": "Stage 9: official scenario auth/iss-unexpected",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/iss-normalized",
+      "owner": "Stage 9: official scenario auth/iss-normalized",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "auth/metadata-issuer-mismatch",
+      "owner": "Stage 9: official scenario auth/metadata-issuer-mismatch",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "sep-2322-client-request-state",
+      "owner": "Stage 9: official scenario sep-2322-client-request-state",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "http-standard-headers",
+      "owner": "Stage 9: official scenario http-standard-headers",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "http-custom-headers",
+      "owner": "Stage 9: official scenario http-custom-headers",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "http-invalid-tool-headers",
+      "owner": "Stage 9: official scenario http-invalid-tool-headers",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report; require pass",
+      "name": "json-schema-ref-no-deref",
+      "owner": "Stage 9: official scenario json-schema-ref-no-deref",
+      "role": "client",
+      "scoring": "required",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/client-credentials-jwt",
+      "owner": "Stage 9: official scenario auth/client-credentials-jwt",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/client-credentials-basic",
+      "owner": "Stage 9: official scenario auth/client-credentials-basic",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/enterprise-managed-authorization",
+      "owner": "Stage 9: official scenario auth/enterprise-managed-authorization",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/dpop",
+      "owner": "Stage 9: official scenario auth/dpop",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/dpop-nonce",
+      "owner": "Stage 9: official scenario auth/dpop-nonce",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "auth/wif-jwt-bearer",
+      "owner": "Stage 9: official scenario auth/wif-jwt-bearer",
+      "role": "client",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's client role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "json-schema-2020-12-preservation",
+      "owner": "Stage 9: official scenario json-schema-2020-12-preservation",
+      "role": "client",
+      "scoring": "added-after-release",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-lifecycle",
+      "owner": "Stage 9: official scenario tasks-lifecycle",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-capability-negotiation",
+      "owner": "Stage 9: official scenario tasks-capability-negotiation",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-wire-fields",
+      "owner": "Stage 9: official scenario tasks-wire-fields",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-request-state-removal",
+      "owner": "Stage 9: official scenario tasks-request-state-removal",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-mrtr-input",
+      "owner": "Stage 9: official scenario tasks-mrtr-input",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-request-headers",
+      "owner": "Stage 9: official scenario tasks-request-headers",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-dispatch-and-envelope",
+      "owner": "Stage 9: official scenario tasks-dispatch-and-envelope",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-status-notifications",
+      "owner": "Stage 9: official scenario tasks-status-notifications",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-required-task-error",
+      "owner": "Stage 9: official scenario tasks-required-task-error",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "tasks-mrtr-composition",
+      "owner": "Stage 9: official scenario tasks-mrtr-composition",
+      "role": "server",
+      "scoring": "extension",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "json-schema-2020-12",
+      "owner": "Stage 9: official scenario json-schema-2020-12",
+      "role": "server",
+      "scoring": "pending",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "http-header-validation",
+      "owner": "Stage 9: official scenario http-header-validation",
+      "role": "server",
+      "scoring": "pending",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    },
+    {
+      "direction": "peer exercises implementation's server role",
+      "expected": "execute and report without counting toward pass rate",
+      "name": "http-custom-header-server-validation",
+      "owner": "Stage 9: official scenario http-custom-header-server-validation",
+      "role": "server",
+      "scoring": "pending",
+      "source": "conformance@96a6f9478b7f2e125cf0360a213383cf57533893/requirements/2026-07-28.yaml",
+      "status": "unqualified",
+      "transport": "HTTP (official runner); applicable stdio parity owned by G08/D06"
+    }
+  ],
+  "schema-sha256": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551",
+  "version": 1
+}

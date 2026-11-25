@@ -15,6 +15,8 @@ type fixtureExpectation struct {
 	Fails              bool     `json:"fails"`
 	Reason             string   `json:"reason"`
 	Definitions        int      `json:"definitions"`
+	Definition         string   `json:"definition"`
+	ItemsDefinition    string   `json:"items-definition"`
 	Recursive          bool     `json:"recursive"`
 	Required           []string `json:"required"`
 	Nullable           []string `json:"nullable"`
@@ -23,8 +25,8 @@ type fixtureExpectation struct {
 	Merged             bool     `json:"merged"`
 	MinimumToken       string   `json:"minimum-token"`
 	MaximumToken       string   `json:"maximum-token"`
-	MinItems           int      `json:"minItems"`
-	MaxItems           int      `json:"maxItems"`
+	MinItems           *int     `json:"minItems"`
+	MaxItems           *int     `json:"maxItems"`
 	PropertiesVerbatim []string `json:"properties-verbatim"`
 	AnnotationsKept    []string `json:"annotations-kept"`
 }
@@ -84,34 +86,44 @@ func TestFixtureCorpus(t *testing.T) {
 				t.Error("FAIL recursive reference collapsed")
 			}
 			if expect.MinimumToken != "" {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				if node.Minimum != expect.MinimumToken {
 					t.Errorf("FAIL minimum token: got %q want %q", node.Minimum, expect.MinimumToken)
 				}
 			}
 			if expect.MaximumToken != "" {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				if node.Maximum != expect.MaximumToken {
 					t.Errorf("FAIL maximum token: got %q want %q", node.Maximum, expect.MaximumToken)
 				}
 			}
-			if expect.MinItems != 0 || expect.MaxItems != 0 {
-				// Empty fixture: maxItems 0 is a real value, distinct from unset.
-				if n, ok := m.Definitions["Empty"]; ok {
-					if n.MinItems != expect.MinItems || n.MaxItems != expect.MaxItems {
-						t.Errorf("FAIL item bounds: got (%d,%d) want (%d,%d)",
-							n.MinItems, n.MaxItems, expect.MinItems, expect.MaxItems)
+			if expect.MinItems != nil || expect.MaxItems != nil {
+				n := fixtureNode(t, m, expect.ItemsDefinition)
+				if expect.MinItems != nil {
+					if _, present := n.Keywords["minItems"]; !present {
+						t.Error("FAIL minItems: assertion absent")
 					}
+				}
+				if expect.MaxItems != nil {
+					if _, present := n.Keywords["maxItems"]; !present {
+						t.Error("FAIL maxItems: assertion absent")
+					}
+				}
+				if expect.MinItems != nil && n.MinItems != *expect.MinItems {
+					t.Errorf("FAIL minItems: got %d want %d", n.MinItems, *expect.MinItems)
+				}
+				if expect.MaxItems != nil && n.MaxItems != *expect.MaxItems {
+					t.Errorf("FAIL maxItems: got %d want %d", n.MaxItems, *expect.MaxItems)
 				}
 			}
 			if expect.AllOfBranches > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				if got := len(node.Compositions["allOf"]); got != expect.AllOfBranches {
 					t.Errorf("FAIL allOf branches: got %d want %d", got, expect.AllOfBranches)
 				}
 			}
 			if !expect.Merged && expect.AllOfBranches > 1 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, branch := range node.Compositions["allOf"] {
 					if len(branch.Required) == 0 && len(branch.Properties) == 0 {
 						t.Error("FAIL allOf branches silently merged")
@@ -119,7 +131,7 @@ func TestFixtureCorpus(t *testing.T) {
 				}
 			}
 			if len(expect.Nullable) > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, name := range expect.Nullable {
 					p, ok := node.Properties[name]
 					if !ok || p.Type != "string|null" {
@@ -128,7 +140,7 @@ func TestFixtureCorpus(t *testing.T) {
 				}
 			}
 			if len(expect.Required) > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, name := range expect.Required {
 					found := false
 					for _, r := range node.Required {
@@ -142,7 +154,7 @@ func TestFixtureCorpus(t *testing.T) {
 				}
 			}
 			if len(expect.DefaultsPreserved) > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, name := range expect.DefaultsPreserved {
 					p, ok := node.Properties[name]
 					if !ok {
@@ -154,7 +166,7 @@ func TestFixtureCorpus(t *testing.T) {
 				}
 			}
 			if len(expect.PropertiesVerbatim) > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, name := range expect.PropertiesVerbatim {
 					if _, ok := node.Properties[name]; !ok {
 						t.Errorf("FAIL property %s renamed or dropped by the model", name)
@@ -162,7 +174,7 @@ func TestFixtureCorpus(t *testing.T) {
 				}
 			}
 			if len(expect.AnnotationsKept) > 0 {
-				node := firstNode(m)
+				node := fixtureNode(t, m, expect.Definition)
 				for _, name := range expect.AnnotationsKept {
 					if _, ok := node.Annotations[name]; !ok {
 						t.Errorf("FAIL annotation %s dropped", name)
@@ -174,7 +186,18 @@ func TestFixtureCorpus(t *testing.T) {
 	}
 }
 
-func firstNode(m *Model) *Node {
+func fixtureNode(t *testing.T, m *Model, name string) *Node {
+	t.Helper()
+	if name != "" {
+		node, ok := m.Definitions[name]
+		if !ok {
+			t.Fatalf("FAIL fixture binding: definition %q does not exist", name)
+		}
+		return node
+	}
+	if len(m.Definitions) != 1 {
+		t.Fatal("FAIL fixture binding: multiple definitions require an explicit name")
+	}
 	for _, node := range m.Definitions {
 		return node
 	}

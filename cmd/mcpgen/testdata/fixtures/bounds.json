@@ -13,6 +13,8 @@
 		}
 	},
 	"expected": {
+		"definition": "Bounded",
+		"items-definition": "Empty",
 		"minimum-token": "0.30000000000000004",
 		"maximum-token": "1e308",
 		"minItems": 0,

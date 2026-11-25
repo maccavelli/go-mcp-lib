@@ -3,13 +3,13 @@ package emit
 import (
 	"bytes"
 	"os"
-	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/load"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/model"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/testenv"
 )
 
 func pinnedModel(t *testing.T) (*model.Model, *sdkmap.Result) {
@@ -26,15 +26,7 @@ func pinnedModel(t *testing.T) (*model.Model, *sdkmap.Result) {
 	if err != nil {
 		t.Fatalf("FAIL model: %v", err)
 	}
-	cache := os.Getenv("GOMODCACHE")
-	if cache == "" {
-		home, _ := os.UserHomeDir()
-		cache = filepath.Join(home, "go", "pkg", "mod")
-	}
-	dir := filepath.Join(cache, "github.com", "modelcontextprotocol", "go-sdk@v1.8.0", "mcp")
-	if _, err := os.Stat(dir); err != nil {
-		t.Skipf("pinned SDK source not present locally: %v", err)
-	}
+	dir := testenv.SDKDir(t)
 	var names []string
 	for name := range m.Definitions {
 		names = append(names, name)

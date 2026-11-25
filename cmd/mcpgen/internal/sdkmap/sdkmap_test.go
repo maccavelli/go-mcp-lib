@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/testenv"
 )
 
 func pinnedDefs(t *testing.T) []string {
@@ -31,19 +33,7 @@ func pinnedDefs(t *testing.T) []string {
 
 func sdkDir(t *testing.T) string {
 	t.Helper()
-	cache := os.Getenv("GOMODCACHE")
-	if cache == "" {
-		home, err := os.UserHomeDir()
-		if err != nil {
-			t.Fatal(err)
-		}
-		cache = filepath.Join(home, "go", "pkg", "mod")
-	}
-	dir := filepath.Join(cache, "github.com", "modelcontextprotocol", "go-sdk@v1.8.0", "mcp")
-	if _, err := os.Stat(dir); err != nil {
-		t.Skipf("pinned SDK source not present locally: %v", err)
-	}
-	return dir
+	return testenv.SDKDir(t)
 }
 
 func TestBuildTotalDispositions(t *testing.T) {

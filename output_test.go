@@ -18,7 +18,7 @@ func TestDeclareOutputSchemaValidation(t *testing.T) {
 	}
 	// Invalid schema: type is not a JSON Schema type.
 	err := AddTool(server, &ToolRegistration{
-		Name:        "bad",
+		Name:         "bad",
 		OutputSchema: map[string]any{"type": "not-a-type"},
 	}, handler)
 	if err == nil {
@@ -53,7 +53,7 @@ func TestOutputValidationBeforeEmission(t *testing.T) {
 		return nil, outOutput{Count: -1}, nil // violates minimum
 	}
 	if err := AddTool(server, &ToolRegistration{
-		Name:        "emit-check",
+		Name:         "emit-check",
 		OutputSchema: schema,
 	}, handler); err != nil {
 		t.Fatalf("FAIL AddTool: %v", err)
@@ -96,7 +96,7 @@ func TestValidOutputPassesEmission(t *testing.T) {
 		return nil, outOutput{Count: 1}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{
-		Name:        "emit-ok",
+		Name:         "emit-ok",
 		OutputSchema: schema,
 	}, handler); err != nil {
 		t.Fatalf("FAIL AddTool: %v", err)

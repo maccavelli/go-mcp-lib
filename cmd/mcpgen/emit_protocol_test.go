@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/testenv"
 )
 
 // TestEmitProtocolIntoScratch emits the full protocol package into a
@@ -11,20 +13,7 @@ import (
 // ownership. Generation is deterministic, so the committed protocol/
 // bytes in the repository are this same emission.
 func TestEmitProtocolIntoScratch(t *testing.T) {
-	sdkDir := os.Getenv("TEST_SDK_DIR")
-	if sdkDir == "" {
-		home, err := os.UserHomeDir()
-		if err != nil {
-			t.Fatal(err)
-		}
-		sdkDir = filepath.Join(
-			home, "go", "pkg", "mod", "github.com",
-			"modelcontextprotocol", "go-sdk@v1.8.0", "mcp",
-		)
-	}
-	if _, err := os.Stat(sdkDir); err != nil {
-		t.Skipf("pinned SDK source not present: %v", err)
-	}
+	sdkDir := testenv.SDKDir(t)
 	out := t.TempDir()
 	manifest, err := SchemaToProtocol(
 		"../../schema/inputs/2026-07-28/schema.json",

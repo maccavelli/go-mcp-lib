@@ -7,6 +7,10 @@ version: "2"
 
 linters:
   default: standard
+  # Standalone full go vet owns these analyzers in both unit and pre-add.
+  # Test execution consumes that result with -vet=off. Plants prove detection.
+  disable:
+    - govet
   settings:
     staticcheck:
       checks:
@@ -16,4 +20,4 @@ linters:
     # exclusion exists. This block exists only to document that fact.
     paths: null
     rules: null
-    generated: strict
+    generated: disable
