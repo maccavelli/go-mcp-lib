@@ -7,6 +7,7 @@ import (
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 
+	"github.com/maccavelli/go-mcp-lib/internal/sdkbridge"
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
@@ -110,7 +111,7 @@ func (s *ClientSession) ListTools(ctx context.Context) (*mcplib.ListToolsResult,
 	if err != nil {
 		return nil, typed(ErrToolCall, "list tools", err)
 	}
-	return result, nil
+	return convertClientResult[mcplib.ListToolsResult]("list tools", result)
 }
 
 // ListResources discovers the server's static resources.
@@ -122,7 +123,7 @@ func (s *ClientSession) ListResources(ctx context.Context) (*mcplib.ListResource
 	if err != nil {
 		return nil, typed(ErrToolCall, "list resources", err)
 	}
-	return result, nil
+	return convertClientResult[mcplib.ListResourcesResult]("list resources", result)
 }
 
 // ReadResource reads one resource by URI.
@@ -137,7 +138,7 @@ func (s *ClientSession) ReadResource(ctx context.Context, uri string) (*mcplib.R
 	if err != nil {
 		return nil, typed(ErrToolCall, "read resource", err)
 	}
-	return result, nil
+	return convertClientResult[mcplib.ReadResourceResult]("read resource", result)
 }
 
 // Subscribe asks the server to notify this session of resource
@@ -189,6 +190,14 @@ func (s *ClientSession) CallTool(ctx context.Context, name string, arguments map
 				fmt.Sprintf("tool %q", name), ctx.Err())
 		}
 		return nil, typed(ErrToolCall, name, err)
+	}
+	return convertClientResult[mcplib.CallToolResult](name, result)
+}
+
+func convertClientResult[Owned, SDK any](operation string, source *SDK) (*Owned, error) {
+	result, err := sdkbridge.FromSDK[Owned](source)
+	if err != nil {
+		return nil, typed(ErrToolCall, operation, err)
 	}
 	return result, nil
 }

@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -13,7 +14,7 @@ import (
 // rejects the registration itself; nothing permissive substitutes.
 func TestDeclareOutputSchemaValidation(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in outInput) (*sdk.CallToolResult, outOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in outInput) (*mcplib.CallToolResult, outOutput, error) {
 		return nil, outOutput{Count: 1}, nil
 	}
 	// Invalid schema: type is not a JSON Schema type.
@@ -49,7 +50,7 @@ func TestOutputValidationBeforeEmission(t *testing.T) {
 		"required":             []any{"count"},
 		"additionalProperties": false,
 	}
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in outInput) (*sdk.CallToolResult, outOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in outInput) (*mcplib.CallToolResult, outOutput, error) {
 		return nil, outOutput{Count: -1}, nil // violates minimum
 	}
 	if err := AddTool(server, &ToolRegistration{
@@ -92,7 +93,7 @@ func TestValidOutputPassesEmission(t *testing.T) {
 		},
 		"required": []any{"count"},
 	}
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in outInput) (*sdk.CallToolResult, outOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in outInput) (*mcplib.CallToolResult, outOutput, error) {
 		return nil, outOutput{Count: 1}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{
@@ -122,7 +123,7 @@ func TestValidOutputPassesEmission(t *testing.T) {
 // failure; the emission layer passes results through.
 func TestNoDeclarationNoCheck(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in outInput) (*sdk.CallToolResult, outOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in outInput) (*mcplib.CallToolResult, outOutput, error) {
 		return nil, outOutput{}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{Name: "bare"}, handler); err != nil {

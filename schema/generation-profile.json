@@ -1,0 +1,41 @@
+{
+  "files": {
+    "go.mod": {
+      "bytes": 591,
+      "sha256": "2d2ff38580e63d8190aec245b1799c0e613fad75af82213c73f764e42e2e455b",
+      "version": 0
+    },
+    "go.sum": {
+      "bytes": 2555,
+      "sha256": "b449832c22de76bfeef6d661708595e42eb5a47efd25b8755ef80cfe6f5adf5a",
+      "version": 0
+    },
+    "schema/inputs/2026-07-28/manifest.json": {
+      "bytes": 1147,
+      "sha256": "35b12ae2be02a6eb0adbf5500e92fecf288f4540ef67038fc874fcc02c2dae1c",
+      "version": 1
+    },
+    "schema/inputs/2026-07-28/schema.json": {
+      "bytes": 181976,
+      "sha256": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551",
+      "version": 0
+    },
+    "schema/sdk-map.json": {
+      "bytes": 31383,
+      "sha256": "c506bc5999bdc40d977f139fd99bf1dceaa6c5df147f648f3b57bb4c37750311",
+      "version": 2
+    },
+    "schema/semantics.json": {
+      "bytes": 29106,
+      "sha256": "d30bc3e2bc9991e33086fb90a8e0059db219f6e54564660091b44e0ff41f5a82",
+      "version": 2
+    },
+    "tools/versions.json": {
+      "bytes": 2288,
+      "sha256": "d1f8bf15de77ec403265512438e7fd478e4e9df3d3de31dd4645f470ee6cdd6f",
+      "version": 0
+    }
+  },
+  "revision": "2026-07-28",
+  "version": 1
+}

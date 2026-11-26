@@ -72,7 +72,7 @@ func TestObjectOpennessPreserved(t *testing.T) {
 	if schemaed.Open == nil || !*schemaed.Open {
 		t.Fatal("FAIL schemaed additionalProperties lost")
 	}
-	if _, ok := schemaed.Properties["<additional>"]; !ok {
+	if schemaed.Additional == nil || schemaed.Additional.Type != "string" {
 		t.Fatal("FAIL additionalProperties schema dropped")
 	}
 }

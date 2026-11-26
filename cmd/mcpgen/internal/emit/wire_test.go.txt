@@ -1,0 +1,157 @@
+package protocol_test
+
+import (
+	json "encoding/json/v2"
+	"strings"
+	"testing"
+
+	p "github.com/maccavelli/go-mcp-lib/protocol"
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+)
+
+// These assignments require real Go alias identity, including method sets.
+var _ *mcp.Tool = (*p.Tool)(nil)
+var _ *mcp.Implementation = (*p.Implementation)(nil)
+var _ *mcp.Resource = (*p.Resource)(nil)
+
+func TestIndependentWire(t *testing.T) {
+	t.Run("content-union", func(t *testing.T) {
+		body := []byte(`{"type":"text","text":"hello","extension":{"n":9007199254740993}}`)
+		var value p.ContentBlock
+		if err := json.Unmarshal(body, &value); err != nil {
+			t.Fatal(err)
+		}
+		text, err := value.AsTextContent()
+		if err != nil || text.Text != "hello" {
+			t.Fatalf("FAIL typed text branch: %+v %v", text, err)
+		}
+		if _, err := value.AsImageContent(); err == nil {
+			t.Error("FAIL wrong union branch accepted")
+		}
+		encoded, err := json.Marshal(value)
+		if err != nil || !strings.Contains(string(encoded), "9007199254740993") {
+			t.Fatalf("FAIL union data or precision lost: %s %v", encoded, err)
+		}
+		if _, err := p.ContentBlockFromTextContent(p.TextContent{Type: "text", Text: "typed"}); err != nil {
+			t.Fatal(err)
+		}
+	})
+	t.Run("presence", func(t *testing.T) {
+		var value p.CallToolRequestParams
+		if err := json.Unmarshal([]byte(`{"_meta":{"io.modelcontextprotocol/clientCapabilities":{},"io.modelcontextprotocol/protocolVersion":"2026-07-28"},"name":"run"}`), &value); err != nil {
+			t.Fatal(err)
+		}
+		if value.Arguments.IsPresent() {
+			t.Error("FAIL missing optional object became present")
+		}
+		if err := json.Unmarshal([]byte(`{"_meta":{"io.modelcontextprotocol/clientCapabilities":{},"io.modelcontextprotocol/protocolVersion":"2026-07-28"},"name":"run","arguments":{}}`), &value); err != nil {
+			t.Fatal(err)
+		}
+		if !value.Arguments.IsPresent() || value.Arguments.IsNull() {
+			t.Error("FAIL empty optional object lost presence")
+		}
+		encoded, err := json.Marshal(value)
+		if err != nil || !strings.Contains(string(encoded), `"arguments":{}`) {
+			t.Fatalf("FAIL present empty object omitted: %s %v", encoded, err)
+		}
+		value.Arguments = p.Null[p.CallToolRequestParamsFieldsArguments]()
+		if _, err := json.Marshal(value); err == nil {
+			t.Error("FAIL forbidden explicit null accepted")
+		}
+	})
+	t.Run("empty-required-array", func(t *testing.T) {
+		encoded, err := json.Marshal(p.ListRootsResult{})
+		if err != nil || string(encoded) != `{"roots":[]}` {
+			t.Fatalf("FAIL nil required array: %s %v", encoded, err)
+		}
+	})
+	t.Run("allof-errors", func(t *testing.T) {
+		var header p.HeaderMismatchError
+		if err := json.Unmarshal([]byte(`{"jsonrpc":"2.0","error":{"code":-32020,"message":"header mismatch"}}`), &header); err != nil {
+			t.Fatal(err)
+		}
+		if header.Error.Message != "header mismatch" || string(header.Error.Code) != "-32020" {
+			t.Errorf("FAIL typed base error fields: %+v", header.Error)
+		}
+		var capability p.MissingRequiredClientCapabilityError
+		if err := json.Unmarshal([]byte(`{"jsonrpc":"2.0","error":{"code":-32021,"message":"missing capability","data":{"requiredCapabilities":{"roots":{}}}}}`), &capability); err != nil {
+			t.Fatal(err)
+		}
+		if !capability.Error.Data.RequiredCapabilities.Roots.IsPresent() {
+			t.Error("FAIL typed required capability was lost")
+		}
+		var version p.UnsupportedProtocolVersionError
+		if err := json.Unmarshal([]byte(`{"jsonrpc":"2.0","error":{"code":-32022,"message":"unsupported","data":{"requested":"old","supported":["2026-07-28"]}}}`), &version); err != nil {
+			t.Fatal(err)
+		}
+		if version.Error.Data.Requested != "old" || len(version.Error.Data.Supported) != 1 {
+			t.Errorf("FAIL typed refined error data: %+v", version.Error.Data)
+		}
+		for _, body := range []string{`{"jsonrpc":"2.0","error":{"code":-32020}}`, `{"jsonrpc":"2.0","error":{"code":-32021,"message":"wrong code"}}`} {
+			if err := json.Unmarshal([]byte(body), &header); err == nil {
+				t.Errorf("FAIL allOf branch assertion bypassed: %s", body)
+			}
+		}
+		encoded, err := json.Marshal(version)
+		if err != nil || !strings.Contains(string(encoded), `"requested":"old"`) {
+			t.Errorf("FAIL allOf typed round trip: %s %v", encoded, err)
+		}
+	})
+	t.Run("exact-id", func(t *testing.T) {
+		number, err := p.NewNumber("9007199254740993")
+		if err != nil {
+			t.Fatal(err)
+		}
+		value, err := p.RequestIDFromInteger(number)
+		if err != nil {
+			t.Fatal(err)
+		}
+		got, err := value.AsInteger()
+		if err != nil || got != number {
+			t.Fatalf("FAIL integer identity: %s %v", got, err)
+		}
+		if _, err := value.AsString(); err == nil {
+			t.Error("FAIL numeric ID treated as string")
+		}
+		encoded, err := json.Marshal(value)
+		if err != nil || string(encoded) != "9007199254740993" {
+			t.Fatalf("FAIL integer wire precision: %s %v", encoded, err)
+		}
+	})
+	t.Run("recursive-open-map", func(t *testing.T) {
+		var value p.JSONValue
+		if err := json.Unmarshal([]byte(`{"nested":[{"x":9007199254740993},true,"s"]}`), &value); err != nil {
+			t.Fatal(err)
+		}
+		object, err := value.AsJSONObject()
+		if err != nil || len(object.Additional) != 1 {
+			t.Fatalf("FAIL typed open object: %+v %v", object, err)
+		}
+		encoded, err := json.Marshal(object)
+		if err != nil || !strings.Contains(string(encoded), "9007199254740993") {
+			t.Fatalf("FAIL recursive round trip: %s %v", encoded, err)
+		}
+	})
+	t.Run("invalid-input", func(t *testing.T) {
+		for _, body := range []string{`{"text":"missing type"}`, `{"type":"text","text":12}`, `{"type":"text","text":"x","type":"image"}`, `{"type":"unknown","text":"x"}`, `{"type":"text","text":"x"} false`} {
+			var value p.ContentBlock
+			if err := json.Unmarshal([]byte(body), &value); err == nil {
+				t.Errorf("FAIL invalid wire accepted: %s", body)
+			}
+		}
+	})
+	t.Run("registries", func(t *testing.T) {
+		bindings, err := p.SchemaBindings()
+		if err != nil || len(bindings) != 155 {
+			t.Fatalf("FAIL bindings: %d %v", len(bindings), err)
+		}
+		methods := p.MethodNames()
+		if len(methods) != 21 {
+			t.Fatalf("FAIL methods: %v", methods)
+		}
+		methods[0] = "broken"
+		if p.MethodNames()[0] == "broken" {
+			t.Error("FAIL mutable global registry")
+		}
+	})
+}

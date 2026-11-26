@@ -101,15 +101,22 @@ func TestKnownDispositions(t *testing.T) {
 		"CreateMessageResult": "owned-codec",
 		"ListRootsResult":     "owned-codec",
 		// Clean public types alias directly.
-		"Tool":               "alias",
-		"TextContent":        "alias",
-		"Implementation":     "alias",
-		"CallToolResult":     "alias",
-		"ClientCapabilities": "alias",
+		"Tool":           "alias",
+		"Implementation": "alias",
+		// Content implementations have private wire bindings; the result uses
+		// the sealed interface and capabilities reach deprecated members.
+		"TextContent":        "owned",
+		"CallToolResult":     "owned",
+		"ClientCapabilities": "owned",
 	}
 	for name, disposition := range want {
 		if result.Dispositions[name] != disposition {
 			t.Errorf("FAIL %s: got %q want %q", name, result.Dispositions[name], disposition)
+		}
+	}
+	for _, name := range []string{"TextContent", "CallToolResult", "ClientCapabilities"} {
+		if result.AliasAudit[name] == "" {
+			t.Errorf("FAIL %s: unsafe alias lacks a transitive audit reason", name)
 		}
 	}
 }

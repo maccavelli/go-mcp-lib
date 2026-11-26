@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
 func TestTypedErrorClassification(t *testing.T) {
@@ -37,7 +37,7 @@ func TestCallToolCancelledClassifies(t *testing.T) {
 	server := newTestServer(t)
 	stalled := make(chan struct{})
 	release := make(chan struct{})
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in stallInput) (*sdk.CallToolResult, stallOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in stallInput) (*mcplib.CallToolResult, stallOutput, error) {
 		close(stalled)
 		<-release
 		return nil, stallOutput{}, ctx.Err()
@@ -86,7 +86,7 @@ func TestCallToolCancelledClassifies(t *testing.T) {
 
 func TestRegistrationErrorClassifies(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in stallInput) (*sdk.CallToolResult, stallOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in stallInput) (*mcplib.CallToolResult, stallOutput, error) {
 		return nil, stallOutput{}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{Name: "x"}, handler); err != nil {

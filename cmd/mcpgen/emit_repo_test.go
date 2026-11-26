@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/testenv"
@@ -23,7 +24,7 @@ func TestEmitProtocolIntoRepositoryScratch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("FAIL emit: %v", err)
 	}
-	if len(manifest.Files) != 3 {
+	if !reflect.DeepEqual(manifest.Files, []string{"aliases.go", "bindings.json", "codecs.go", "constants.go", "owned.go", "schema.json"}) {
 		t.Fatalf("FAIL incomplete emitted inventory: %v", manifest.Files)
 	}
 	for _, name := range manifest.Files {

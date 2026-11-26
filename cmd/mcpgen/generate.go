@@ -3,13 +3,16 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit"
-	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/load"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/model"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/resolve"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
 )
 
@@ -18,8 +21,34 @@ import (
 // the engine behind `mcpgen generate` in stage 4; stage 3 exposes it to
 // qualification directly.
 func SchemaToProtocol(schemaPath, sdkDir, revision, outDir string) (*emit.Manifest, error) {
-	doc, err := load.New().LoadFile(schemaPath)
+	return schemaToProtocol(schemaPath, sdkDir, revision, outDir, nil)
+}
+
+func schemaToProtocol(schemaPath, sdkDir, revision, outDir string, inputs *profile.Inputs) (*emit.Manifest, error) {
+	absolute, err := filepath.Abs(schemaPath)
 	if err != nil {
+		return nil, err
+	}
+	moduleRoot, err := sdkmap.RuntimeModule(filepath.Dir(absolute))
+	if err != nil {
+		return nil, err
+	}
+	if absolute != filepath.Join(moduleRoot, filepath.FromSlash(profile.SchemaFile)) {
+		return nil, fmt.Errorf("generate: schema path is not the reviewed input")
+	}
+	if inputs == nil {
+		inputs, err = profile.Load(moduleRoot, revision)
+		if err != nil {
+			return nil, err
+		}
+	}
+	doc := inputs.Schema
+	canonical := (&url.URL{Scheme: "file", Path: "/" + strings.TrimPrefix(filepath.ToSlash(absolute), "/")}).String()
+	registry := resolve.NewRegistry()
+	if err := registry.Add(canonical, doc); err != nil {
+		return nil, err
+	}
+	if err := registry.Validate(); err != nil {
 		return nil, err
 	}
 	m, err := model.Build(doc)
@@ -31,7 +60,11 @@ func SchemaToProtocol(schemaPath, sdkDir, revision, outDir string) (*emit.Manife
 		names = append(names, name)
 	}
 	sort.Strings(names)
-	dispositions, err := sdkmap.Build(revision, sdkDir, "v1.8.0", names)
+	dispositions, err := sdkmap.BuildInModule(revision, sdkDir, "v1.8.0", moduleRoot, names)
+	if err != nil {
+		return nil, err
+	}
+	dispositions, err = inputs.ApplySDK(dispositions)
 	if err != nil {
 		return nil, err
 	}
@@ -40,6 +73,7 @@ func SchemaToProtocol(schemaPath, sdkDir, revision, outDir string) (*emit.Manife
 		Model:        m,
 		Dispositions: dispositions,
 		PackagePath:  "github.com/maccavelli/go-mcp-lib/protocol",
+		Names:        inputs.Mapping.GoNames,
 	})
 	if err != nil {
 		return nil, err
@@ -48,11 +82,7 @@ func SchemaToProtocol(schemaPath, sdkDir, revision, outDir string) (*emit.Manife
 		return nil, err
 	}
 	for _, file := range files {
-		formatted, err := emit.FormatGo(file.Name, file.Content)
-		if err != nil {
-			return nil, fmt.Errorf("generate: %w", err)
-		}
-		if err := os.WriteFile(filepath.Join(outDir, file.Name), formatted, 0o644); err != nil {
+		if err := os.WriteFile(filepath.Join(outDir, file.Name), file.Content, 0o644); err != nil {
 			return nil, err
 		}
 	}

@@ -1,10 +1,14 @@
 package mcp
 
 import (
+	"context"
 	"errors"
 	"fmt"
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
+
+	"github.com/maccavelli/go-mcp-lib/internal/sdkbridge"
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
 // PromptRegistration is the declarative half of a prompt.
@@ -16,7 +20,7 @@ type PromptRegistration struct {
 	// Description is optional.
 	Description string
 	// Arguments are the prompt's declared arguments.
-	Arguments []*sdk.PromptArgument
+	Arguments []*mcplib.PromptArgument
 }
 
 func (r *PromptRegistration) validate() error {
@@ -41,7 +45,7 @@ func (r *PromptRegistration) validate() error {
 
 // AddPrompt registers a prompt handler. Duplicate names on the same
 // server are rejected; registration is instance-scoped.
-func AddPrompt(s *Server, reg *PromptRegistration, handler sdk.PromptHandler) error {
+func AddPrompt(s *Server, reg *PromptRegistration, handler PromptHandler) error {
 	if s == nil {
 		return errors.New("mcp: server is required")
 	}
@@ -64,7 +68,18 @@ func AddPrompt(s *Server, reg *PromptRegistration, handler sdk.PromptHandler) er
 		Description: reg.Description,
 		Arguments:   reg.Arguments,
 	}
-	s.sdk.AddPrompt(prompt, handler)
+	s.sdk.AddPrompt(prompt, func(ctx context.Context, request *sdk.GetPromptRequest) (*sdk.GetPromptResult, error) {
+		params, err := sdkbridge.FromSDK[mcplib.GetPromptRequestParams](request.Params)
+		if err != nil {
+			return nil, typed(ErrProtocol, "prompt request", err)
+		}
+		owned := &PromptRequest{Params: params, session: &ServerSession{sdk: request.Session}, protocolVersion: request.ProtocolVersion(), headers: copiedRequestHeaders(request)}
+		result, err := handler(ctx, owned)
+		if err != nil {
+			return nil, err
+		}
+		return sdkbridge.ToSDK[sdk.GetPromptResult](result)
+	})
 	return nil
 }
 
@@ -97,7 +112,7 @@ func (r *ResourceRegistration) validate() error {
 
 // AddResource registers a static resource handler. Duplicate URIs on
 // the same server are rejected; registration is instance-scoped.
-func AddResource(s *Server, reg *ResourceRegistration, handler sdk.ResourceHandler) error {
+func AddResource(s *Server, reg *ResourceRegistration, handler ResourceHandler) error {
 	if s == nil {
 		return errors.New("mcp: server is required")
 	}
@@ -122,7 +137,7 @@ func AddResource(s *Server, reg *ResourceRegistration, handler sdk.ResourceHandl
 		MIMEType:    reg.MIMEType,
 		URI:         reg.URI,
 	}
-	s.sdk.AddResource(resource, handler)
+	s.sdk.AddResource(resource, resourceHandlerBridge(handler))
 	return nil
 }
 
@@ -152,7 +167,7 @@ func (r *ResourceTemplateRegistration) validate() error {
 
 // AddResourceTemplate registers a resource template handler. Duplicate
 // templates on the same server are rejected.
-func AddResourceTemplate(s *Server, reg *ResourceTemplateRegistration, handler sdk.ResourceHandler) error {
+func AddResourceTemplate(s *Server, reg *ResourceTemplateRegistration, handler ResourceHandler) error {
 	if s == nil {
 		return errors.New("mcp: server is required")
 	}
@@ -177,8 +192,23 @@ func AddResourceTemplate(s *Server, reg *ResourceTemplateRegistration, handler s
 		MIMEType:    reg.MIMEType,
 		URITemplate: reg.URITemplate,
 	}
-	s.sdk.AddResourceTemplate(template, handler)
+	s.sdk.AddResourceTemplate(template, resourceHandlerBridge(handler))
 	return nil
+}
+
+func resourceHandlerBridge(handler ResourceHandler) sdk.ResourceHandler {
+	return func(ctx context.Context, request *sdk.ReadResourceRequest) (*sdk.ReadResourceResult, error) {
+		params, err := sdkbridge.FromSDK[mcplib.ReadResourceRequestParams](request.Params)
+		if err != nil {
+			return nil, typed(ErrProtocol, "resource request", err)
+		}
+		owned := &ResourceRequest{Params: params, session: &ServerSession{sdk: request.Session}, protocolVersion: request.ProtocolVersion(), headers: copiedRequestHeaders(request)}
+		result, err := handler(ctx, owned)
+		if err != nil {
+			return nil, err
+		}
+		return sdkbridge.ToSDK[sdk.ReadResourceResult](result)
+	}
 }
 
 // validateAbsoluteURI enforces the framework's URI location rule.

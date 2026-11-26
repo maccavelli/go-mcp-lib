@@ -1,6 +1,6 @@
 ---
 status: in-progress
-date: 2026-11-25
+date: 2026-11-26
 associated-madr: 0002-MADR-build-schema-driven-mcp-framework.md
 ---
 
@@ -20,7 +20,7 @@ unmet exits in every Stage 0–6, so those completion claims are not the current
 acceptance status. The owner selected post-audit option A, “do A repairs”.
 R1–R5 below specify that option's repair amendment. The owner initially
 authorized R1 only, then approved execution of R1–R5 and commits to main between
-qualified coherent phases. R1 passed qualification on 2026-11-25; R2 is next.
+qualified coherent phases. R1 passed qualification on 2026-11-25; R2 is in progress.
 The overall PLAN remains in-progress. Stage 7 is not ready to start.
 
 The 2026-11-25 research refinement below evaluates three implementation options
@@ -1689,6 +1689,868 @@ re-run qualification, rather than pairing old generated code with new inputs.
   occurred without its separate explicit authorization.
 
 ## Execution Record
+
+### 2026-11-26 — R2, pass 19: owned middleware and retained alias fixtures passed on Windows
+
+The Windows-native full R2 command passed in 96 seconds with source identity
+`1915c53f3818248f250eaf4a62b4463030b5c9817cedd17aaa429d86b82d6e54`.
+Pinned preparation, 22 Python regressions, formatting, standalone vet, 208
+generator tests/subtests across 10 packages, pinned lint and every earlier
+input/reference/alias/profile/emitter/candidate control passed. Both real
+modules' packages and test binaries compiled for all three targets. The actual
+candidate's native runtime pre-add gate passed, including the formerly failing
+live middleware connection/delegation test and external public API probe.
+
+The private SDK complete-result projection preserves the original handler
+result and matches finalization in the pinned SDK. Its omission plant failed
+with `FAIL SDK complete-result projection`. The SDK-runtime accessor,
+parameter-type, result-type and owned-decoder bypass plants were also caught.
+All fourteen retained aliases passed independent represented-field examples
+through SDK and native serialization. A compilable SDK serializer that drops
+the fields failed with `FAIL SDK alias wire`. Source preservation passed; the
+remote scratch tree was removed after success. No assertion was weakened.
+
+Use approved pass 20 to qualify the same implementation across native Darwin,
+Linux, Windows and WSL, keeping one source snapshot frozen. R4 still owns the
+broader codec/validation differentials and R5 still owns complete live runtime
+enforcement. The R2 contract is not yet promoted; R3 owns verified publication
+and the coherent R2/R3 commit. No pass 21 or push/tag is authorized.
+
+### 2026-11-26 — R2, pass 18: semantic/API guards passed; live discovery failed
+
+The Linux-native full R2 command ran 160 seconds using source identity
+`e76b0ec435eb1397d4ae9e23dbd28ec63310bba1c8171a06133f3cbe9bab0403`.
+Both modules' package/test binaries compiled for all three targets. Pinned
+preparation, 22 Python regressions, generator/runtime formatting, standalone
+vet and pinned lint passed. The complete semantic rows, SDK-symbol availability
+checks and their malformed-policy/context plants passed. The external public
+API probe passed, and scratch SDK-runtime accessor, parameter-type bypass,
+result-type bypass and owned-decoder bypass were each caught by the unchanged
+fixtures. Earlier loader/reference/alias/profile/emitter/candidate controls and
+source preservation passed.
+
+Native runtime accounting rejected `TestOwnedMiddlewareLive` at
+`middleware_bridge_test.go:47`: client connection failed with
+`calling "initialize": duplicate "initialize" received`. Returned diagnostics
+preserved that nested failure. No overall qualification or R2 exit is claimed.
+
+Re-grounding the pinned SDK shows that its `Server.discover` stores the modern
+session state and returns a result before `ServerSession.handleRequest` invokes
+`setCompleteResultType`, after receiving middleware returns. The private
+`completeResultWithType` initially omits `resultType`. The new owned receiving
+bridge therefore attempted canonical validation before this SDK finalization;
+the SDK client fell back to legacy initialization after the discovery failure,
+which then met the already-initialized session. The main SDK source locators are
+`mcp/server.go:926`, `mcp/server.go:2038` and `mcp/protocol.go:31–47` at v1.8.0.
+
+Before approved pass 19, project that exact SDK-defined complete discriminator
+onto copies of its seven complete-result types at the private in-process
+middleware boundary. Do not mutate the SDK handler's original result or apply
+this operation to received wire input. Keep multi-round-trip result handling
+separate, preserve strict owned validation, and add a projection fixture plus
+a compilable omission plant. This preserves the SDK's actual dispatch/wire
+behavior rather than weakening schema requirements or disabling middleware.
+
+Also add independently handwritten wire examples for every retained alias,
+checking represented fields through both public SDK codecs and native codecs,
+with a scratch field-dropping codec plant. R4 retains the full absent/null/zero/
+unknown/numeric differential and strict-validator profile; these examples alone
+cannot qualify that larger contract. Passes 19–20 remain approved; pass 21 does
+not. Generated files remain unpublished and R2 remains uncommitted.
+
+### 2026-11-26 — R2, pass 17: actual decoder bypass and canonical candidate gate passed
+
+The Linux-native full R2 command passed after 170 seconds with source identity
+`0b426ddc5ecb3a87c6784cd49662b072fc67b85ad46d186887e586f946e806b6`.
+Pinned preparation, formatting, standalone vet, 193 generator tests/subtests
+across 10 packages, pinned lint and the prior loader/reference/alias/profile/
+emitter/candidate plants passed. All 22 Python regressions passed. A diagnostic
+omission control deliberately returned no failed-test details and the unchanged
+regression failed with `fixture owned validation failed`; the driver caught it.
+
+The actual candidate compiles both modules' packages and test binaries for all
+three targets, then reuses the canonical runtime pre-add gate for native
+formatting, inventory-accounted fresh tests, standalone vet and pinned lint.
+That gate passed. The replacement scratch mutation actually discards the owned
+decoder's validation error for nonempty input. `TestOwnedResultBoundary` failed
+with `FAIL invalid owned result accepted or unclassified`, and the fixture
+required that failure. No live source was broken or generated output published.
+Source preservation passed. Native Windows/Darwin/WSL requalification of this
+new runner path remains required; the R2 exit is not claimed.
+
+### 2026-11-26 — R2 semantic and public middleware audit before pass 18
+
+Completed all 21 reviewed method rows with normative references, exact SDK
+parameter symbols, capability paths bound to the pinned schema, completion
+mode, cancellation scope, caller-controlled retry policy, conditions and R5
+fixture ownership. Research checked the revision-specific primary sections for
+[tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools),
+[prompts](https://modelcontextprotocol.io/specification/2026-07-28/server/prompts),
+[resources](https://modelcontextprotocol.io/specification/2026-07-28/server/resources),
+[completion](https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion),
+[subscriptions](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions),
+[cancellation](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation),
+[progress](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress),
+[logging](https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/logging),
+[elicitation](https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation),
+[sampling](https://modelcontextprotocol.io/specification/2026-07-28/client/sampling),
+[roots](https://modelcontextprotocol.io/specification/2026-07-28/client/roots) and
+[versioning](https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning).
+The pinned local schema and SDK declarations remain immutable mechanical
+inputs; normal gates do not fetch these pages. The semantic member is now
+29,106 bytes, SHA-256
+`d30bc3e2bc9991e33086fb90a8e0059db219f6e54564660091b44e0ff41f5a82`.
+After reviewing that member change, updated its profile member identity and
+independent generator-source profile pin to
+`e57dcb9eb38e6d79b7f3e4daa937fe085bdbaa89697fb8600a3411d916086ee4`.
+No SDK/schema version or other profile member changed. Added structural policy
+cases and SDK-symbol availability verification using the existing three-target
+compiler export audit. This is contract evidence, not R5 behavior qualification.
+
+The public middleware signature still used SDK request/result/session types.
+Replaced it with owned `Request` and `MethodHandler` views. Canonical parameters
+and results have their real owned DTO types; auxiliary/extension payloads use
+the unconstrained owned JSON value. The private bridge clones parameters,
+retains the original SDK connection, snapshots headers and rejects wrong method,
+parameter or result types. Sealed SDK construction stays private. Added an
+external SDK-free consumer registry reconciled with selected source declarations
+and a transitive public-signature walk; its SDK data allowance is the already
+compiler-audited alias closure. Planned scratch plants add a raw SDK runtime
+accessor and bypass the parameter/result type guards. Live and direct fixtures
+cover delegation, snapshots and short-circuiting. These changes do not claim
+R5's single-install middleware chain, final ordering, capability enforcement or
+transport-wire qualification. Remaining R2 alias wire evidence and R3 promotion
+are still explicit outstanding work.
+
+### 2026-11-26 — R2 deviation: passes 17–20 approved
+
+The owner selected A after reviewing pass 16. Execute bounded R2 passes 17–20:
+repair the ineffective owned-decoder experiment without weakening its rejection
+fixture, reuse the canonical runtime pre-add gate for candidate verification,
+retain failed-test diagnostics in the returned stream across WSL shutdown, and
+continue the existing R2 API/semantic/alias audit. This is the same accepted
+scope and coordinated R2/R3 commit boundary. No pass 21, publication, push or
+tag is authorized by this allowance. Keep each qualification snapshot frozen
+across its native matrix and record failures as well as passing controls.
+
+### 2026-11-26 — R2, pass 16: actual product works; new mutation control is ineffective
+
+Ran the complete R2 input/control command against one frozen source identity:
+`ae29fba08ca6d1219a83488b8ed0e7a31ada807996d0a602c1b87867b921e334`.
+Windows SSH recovered before this pass; verified its Go 1.27.4 toolchain.
+Windows and WSL ran serially on their shared queue. Darwin waited 190 seconds
+behind unrelated work; the entire source stayed frozen until it finished.
+
+| Check | Windows/amd64 | Linux/amd64 | WSL Linux/amd64 | Darwin/arm64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation; 21 Python regressions | passed | passed | passed | passed |
+| Generator formatting, vet and pinned lint | passed | passed | passed | passed |
+| Earlier loader/reference/alias/profile/emitter/candidate controls | passed | passed | passed | passed |
+| Actual product package/test-binary compilation, both modules, all three targets | passed | passed | detailed evidence unavailable | passed |
+| Actual product native runtime tests, vet and pinned lint | passed | passed | detailed evidence unavailable | passed |
+| New owned-decoder mutation control | failed | failed | actual-product test failed; detail unavailable | failed |
+| Source preservation | passed | passed | passed | passed |
+| Execution seconds, excluding transfer/queue | 92 | 134 | 56 | 76 |
+
+The actual product test reports `FAIL owned decoder bypass was not detected:
+exit 0` at `candidate_runtime_test.go:94`. Its scratch mutation at lines 85–89
+replaces native decoding with `encoding/json.Unmarshal`. Inspection of the
+pinned Go 1.27.4 documentation and selected standard-library implementation
+confirms that this decoder also calls `UnmarshalJSONFrom`. It therefore did not
+disable owned validation. The test correctly refuses to count an ineffective
+mutation as detection; this is an unqualified experiment, not evidence that
+the production decoder accepted malformed results. Native fixtures including
+`TestOwnedResultBoundary`, SDK custom-codec round trips and connection isolation
+passed on the three physical platforms. No assertion was loosened.
+
+The unit gate now prints its retained complete-log location on failure. Reading
+those logs recovered the detailed results on all three physical platforms. WSL's
+temporary log was unavailable after the runner restored the distro's original
+stopped state; an artifact-only queued read confirmed the file was gone. No
+build or test was rerun for that read. Preserve this evidence gap: the WSL
+top-level actual-product failure does not establish which nested checks passed.
+Future diagnostics must retain the failed-test details in the returned stream
+or in an artifact that survives stopping the distro.
+
+The runtime module's complete Go file inventory also passed a read-only gofmt
+check. Ordinary builds and tests kept CGO off; no race run or publication took
+place. R2 remains uncommitted because its exit and coordinated R2/R3 migration
+are incomplete. The live generated files remain the historical baseline; the
+handwritten changes and corrected generated contract are still a coordinated
+candidate, not a working-tree qualification claim.
+
+Required next work, pending another pass allowance: replace the ineffective
+mutation with a compilable scratch implementation that actually discards owned
+validation failure and require the unchanged rejection fixture to catch it;
+route native candidate verification through the canonical runtime pre-add gate
+so formatting, test inventory accounting, vet and lint each have one owner;
+retain failed-test diagnostics across WSL shutdown. Then finish the public
+middleware/SDK reachability audit, complete normative semantic rows and remaining
+alias wire evidence before claiming the R2 exit. R3 still owns publication.
+
+The approved passes 13–16 are exhausted. Pending owner choice: A, recommended,
+approve bounded passes 17–20 for these repairs and continued R2 qualification;
+B, approve passes 17–24 for the same scope with a larger iteration allowance;
+C, review the existing diff before further execution. Doing nothing leaves the
+new mutation experiment and the R2 exit unqualified. No pass 17, push or tag is
+authorized by this entry.
+
+### 2026-11-26 — R2, pass 15: package builds passed; two stale test imports rejected
+
+The Linux-native product run used source identity
+`d433c2af6586fc0b6953e2d38b38ac25133c809eb65fc2b2df2321958c0fe4a9`.
+It exited 1 after 29 seconds. Both modules' package builds passed on
+Darwin/arm64, Linux/amd64 and Windows/amd64. Generator test binaries passed;
+runtime test binaries failed on all three targets. The corrected diagnostics
+identified unused SDK imports at `isolation_test.go:9:2` and
+`roundtrip_test.go:8:2`, left after migrating their callbacks. Removed those
+imports and normalized the affected import groups. This is a test-source
+repair; no assertion or runtime capability was removed. Source preservation
+passed. Native runtime tests were not reached by this failed compile fixture.
+
+Use approved pass 16 for complete generator/input/control qualification and
+actual-candidate native runtime checks on available Linux and Darwin runners.
+Windows/WSL native execution still requires restoring SSH connectivity to their
+shared machine. The public middleware reachability audit, complete semantic
+rows, remaining alias serialization evidence and R2/R3 integration remain
+pending; a pass here cannot alone establish the R2 exit. No pass 17 is approved.
+
+### 2026-11-26 — R2, pass 14: candidate compilation failed; diagnostic fixed
+
+The focused Linux-native product run used source identity
+`81fceda1b8068fa8df2b2d26d9c56f6067ed6aaf90553b3d2de07fe3ccb735e4`.
+It exited 1 after 29 seconds: actual-product compilation failed before native
+runtime checks. The fixture printed report pointer addresses instead of the
+per-module/per-target diagnostics. Corrected the fixture to print each failed
+target's package/test outcomes and retained compiler detail. No compiler cause
+is claimed from the pointer-only message. Source preservation passed.
+
+The owned tool/prompt/resource callback signatures and request/session snapshots
+are in this candidate. Existing callback fixtures were migrated without
+removing their behavior assertions. The resource fixture explicitly constructs
+its typed contents, complete discriminator and cache hints. Use approved pass
+15 to expose and resolve the actual compilation blocker; pass 16 remains the
+last currently approved pass. No phase exit or publication occurred.
+
+### 2026-11-26 — R2, pass 13: complete runtime fixture added; product test failed
+
+Added private bidirectional SDK wire conversions and replaced the four direct
+client result returns. Updated the existing round-trip checks to use the owned
+content unions and presence fields. Added a complete actual-product fixture:
+compile both modules and test binaries for all three targets, execute runtime
+tests natively, run vet and the pinned linter, then deliberately bypass the
+owned decoder in scratch. This fixture never publishes the candidate.
+
+The Linux-native qualification ran 134 seconds with source identity
+`958ae2c93316b9671d29f13a1fd0400dd5d2c278bedac41d964501a8f2cd8731`.
+Pinned preparation, 21 Python regressions, generator vet/lint, existing loader,
+reference, alias, profile, emitter and candidate plants passed. The newly added
+`TestRepairA11ActualProduct` failed. The existing unit gate retained its terminal
+failure and the stream tail, which did not contain the nested failure detail;
+no runtime success or three-target compilation success is inferred from that
+incomplete diagnostic. The source-preservation check passed. Windows/WSL
+native execution was unavailable because the shared machine's SSH probe timed
+out. Source is uncommitted and unpublished.
+
+Continue with the already approved pass 14: owned callback/context adaptations
+and the focused product driver, which retains the complete test diagnostic
+stream. Tool, prompt and resource callbacks use owned parameter snapshots and
+owned session handles while preserving SDK typed inference/default fulfillment.
+The remaining public middleware reachability audit and R2 exit work are still
+pending. Passes 15–16 remain available for corrections and qualification.
+
+### 2026-11-26 — R2 deviation: passes 13–16 approved
+
+The owner said proceed after the three continuation options. Execute recommended
+option A: bounded R2 passes 13–16 for the SDK/owned boundary, corresponding
+runtime/API tests and remaining R2 qualification. Preserve actual SDK dispatch
+and serialization behavior, use private conversions and owned request handles,
+and retain every earlier control. The R2 scope and coherent R2/R3 commit
+boundary remain unchanged. This resolves the pending allowance after pass 12;
+it does not authorize pass 17 or claim a phase exit.
+
+### 2026-11-25 — R2, pass 12: actual product candidate rejected on all targets
+
+Ran the actual `mcpgen check --repo ../.. --format json` command through the
+Linux-native shared queue. The environment explicitly set CGO off, workspace
+and Go environment configuration off, the local toolchain, readonly modules
+and offline dependency resolution. The input snapshot was unchanged from
+pass 11. The command ran 35 seconds and exited 1 with status `unqualified`.
+
+| Actual module | Darwin/arm64 package/tests | Linux/amd64 package/tests | Windows/amd64 package/tests |
+| :--- | :--- | :--- | :--- |
+| Generator | passed/passed | passed/passed | passed/passed |
+| Runtime | failed/failed | failed/failed | failed/failed |
+
+The runtime rejects direct SDK result returns against the corrected owned
+protocol definitions. Retained diagnostics include `client.go:140:9` for
+`*github.com/modelcontextprotocol/go-sdk/mcp.ReadResourceResult` returned as
+`*protocol.ReadResourceResult`, and `client.go:193:9` for the analogous
+`CallToolResult` mismatch. Inspection also identifies direct returns at
+`client.go:113` and `client.go:125` for list results. The committed baseline
+compiled these through old aliases; the proposed owned contract requires real
+private conversions and the corresponding public/API test adaptations.
+
+This is the first complete proposed product candidate attempted by the repaired
+check path. Both real modules and their test binaries were submitted for
+compilation; no foreign binary executed. Historical output removal occurred in
+scratch only after independent byte verification. The post-compilation source fingerprint passed;
+no publication occurred. A successful isolated generated-package fixture is
+not substituted for this failed product result.
+
+Remaining R2 work includes `internal/sdkbridge/` and root result/request
+boundaries, the public SDK-runtime reachability audit, complete normative
+semantic rows, remaining alias wire evidence and coherent R2/R3 integration.
+The existing publication implementation remains unqualified and must not
+install the candidate. R3 retains the verified publication/migration work.
+
+The approved passes 9–12 are exhausted. Pending owner choice: A, recommended,
+approve bounded R2 passes 13–16 for the proper SDK/owned boundary and remaining
+exit work; B, approve passes 13–20 for the same scope with a larger iteration
+allowance; C, review the current diff before more execution. Doing nothing
+leaves the product candidate blocked. No R2 commit or Stage 7 advancement is
+claimed; no push or tag is authorized.
+
+### 2026-11-25 — R2, pass 11: expanded candidate controls passed on four environments
+
+Corrected camel-case Go initialisms and package/method comments. Emission tests
+now consume the reviewed profile, including intended Go names and ownership.
+Generated-source analyzers include the validator's real test context. The
+historical-identity bypass remains compilable, and the generated deprecation
+control uses the exported deprecated constructor already proven by R1.
+
+Ran the R2 input/candidate-control qualification command on the same snapshot
+across all four environments, identity:
+`61aa9ee85d0c423c9a42eb4990030266a9af24cfd6d922719bf1145635eb97a7`.
+
+| Check | Windows/amd64 | Linux/amd64 | WSL Linux/amd64 | Darwin/arm64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation; formatting; generator vet/lint | passed | passed | passed | passed |
+| Python runner regressions | 21 passed | 21 passed | 21 passed | 21 passed |
+| Generator tests/subtests; packages accounted | 192; 10 | 192; 10 | 192; 10 | 192; 10 |
+| Generated-package fixtures; vet/lint | passed | passed | passed | passed |
+| Prior input/reference/alias/profile controls | passed | passed | passed | passed |
+| Ten emitter mutation controls | caught | caught | caught | caught |
+| Six candidate mutation controls | caught | caught | caught | caught |
+| Source preservation | passed | passed | passed | passed |
+| Execution seconds, excluding queue/transfer | 88 | 105 | 70 | 71 |
+
+The macOS run waited 654 seconds in the shared host queue; source remained
+frozen throughout. Windows and WSL ran serially on their shared physical host.
+All ordinary compilation and test commands kept CGO off. No race run was
+requested for this batch.
+
+The new controls observed real Windows-only compilation failure while the
+other target/module controls compiled, rejected incomplete/duplicate target
+reports, caught forged or tampered ownership and intervening edits, and proved
+timeout cancellation by deliberately leaving a child alive in a scratch
+implementation. Generated alias identity failure and generated SA1019 were
+observed, with no linter suppression. These results qualify the generator and
+candidate-control foundation; the actual product candidate has the separate
+pass-12 result above. The phase exit remains incomplete.
+
+### 2026-11-25 — R2, pass 10: candidate controls passed; generated-source lint blocked
+
+Implemented complete scratch assembly with rooted source access, byte/link and
+inventory fingerprints, independently verified historical output hashes and
+case-insensitive unowned-file collision rejection. Historical fixture bytes are
+frozen from R1 commit `28a9284`; the hashless manifest is never accepted solely
+for its filenames. Existing handwritten source, tests, test data and both Go
+modules survive assembly. First-generation `check` now takes the same complete
+candidate path; incomplete compilation reports cannot authorize publication.
+
+The Go qualifier now bounds compiler commands and output, retains bounded
+diagnostics, sanitizes target environment overrides and cancels child processes.
+Generated aliases carry two-way identity assignments. Generated-package vet and
+lint run on their own source context; the canonical Python tool selector passes
+the already selected pinned linter to child tests. A test rejects attempts to
+use that transport to override CGO policy.
+
+Ran the R2 qualification command through the Linux-native queue using identity
+`4b8885ed8c25e701ce7228ada71657fd81a5797312171dc01f791c1814492f00`.
+The command exited 1 after 108 seconds. Pinned preparation, 21 Python runner
+regressions, generator formatting and standalone vet passed. New snapshot,
+ownership/containment, real Windows-only compilation plant, complete target
+accounting and bounded-runner tests passed. Five candidate mutation controls
+were caught, including a deliberately orphaned child. The historical-identity
+mutation was inconclusive because its patch made a local variable unused; the
+control is being corrected to retain a compilable bypass.
+
+Generated-package lint found ST1000 on the codec header and ST1003 on field
+names such as `TtlMs`, `RequestId`, subscription IDs and `ToolUseId`. Generator
+lint also found ST1020 on the new `Compile` method comment. The isolated fixture
+copied validator implementation but omitted its real tests, creating additional
+unused diagnostics absent from the complete package context. Correct it by
+including those test sources, retaining all analyzer checks. The generated
+deprecation plant did not produce its required SA1019 diagnostic and remains
+unqualified; reuse the exported deprecated-constructor control already proven
+by R1. No assertion or linter exclusion is being removed.
+
+Corrections prepared for pass 11: tokenize camel-case field words before
+normalizing Go initialisms; separate the generated header from the package
+comment; fix the method comment; use the complete validator test context and
+the unchanged reviewed input profile in emission fixtures. Retain all pending
+mutation experiments. Full product integration, normative rules and final alias
+wire evidence remain separate R2 obligations. Passes 11–12 remain approved.
+
+### 2026-11-25 — R2, pass 9: typed emission and wire controls passed on four environments
+
+Inventoried all 840 schema locations in the pinned document: 277 references,
+24 `anyOf` sites and three `allOf` sites. Implemented typed field projection for
+the three object intersections while retaining the original schema pointers
+and complete composed validation. Base required members and refined typed data
+remain distinct. Shared reference DAGs expand once; recursive structural
+projection and unqualified shape intersections fail explicitly. Corrected the
+two ST1023 findings without changing linter configuration.
+
+Ran `python3 -B scripts/qualify_r2_inputs.py --allow-network` through the shared
+queues with the same source identity in all four environments:
+`54fdb395db22c65aec4f8f71b64b831ba1951c468041acf3379c1c0a277d93c1`.
+
+| Check | Linux/amd64 | Windows/amd64 | Darwin/arm64 | WSL Linux/amd64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation, formatting and standalone vet | passed | passed | passed | passed |
+| Generator tests/subtests; packages accounted | 171; 10 | 171; 10 | 171; 10 | 171; 10 |
+| Generator lint | 0 issues | 0 issues | 0 issues | 0 issues |
+| Prior loader/model/reference/alias/profile controls and plants | passed | passed | passed | passed |
+| Seven emitter mutation controls | caught | caught | caught | caught |
+| Source preservation | passed | passed | passed | passed |
+| Execution seconds, excluding queue/transfer | 89 | 67 | 49 | 36 |
+
+The generated package executed independent content-union, presence,
+required-array, exact-ID, recursive-map, composed-error and registry fixtures.
+The in-package validation bypass produced both `FAIL invalid wire accepted`
+and `FAIL allOf branch assertion bypassed`. Separate scratch plants caught a
+name collision, optional-empty omission, changed output hash, omitted binding,
+shared mutable document bytes, dropped inherited required member and repeated
+shared-DAG expansion, each with its intended diagnostic.
+
+This qualifies the emission foundation and its standalone generated-package
+fixtures. Full product-candidate assembly, handwritten/platform qualification,
+complete alias serialization/signature evidence and normative semantic rules
+remain R2 obligations. No R2 phase exit or product publication is claimed.
+Passes 10–12 remain approved for those repairs and qualification.
+
+### 2026-11-25 — R2 deviation: passes 9–12 approved
+
+The owner selected A and approved bounded R2 passes 9–12. Audit the complete
+nested emission surface before the next build; implement typed object
+composition without dropping original assertions, correct the two ST1023
+findings, and retain every pending wire/ownership/coverage plant. Qualify the
+unchanged snapshot natively across the supported target environments once
+the initial gate succeeds. The R2 scope, complete-candidate exit and coordinated
+R2/R3 commit boundary remain unchanged. This resolves the pending allowance
+after pass 8; it does not authorize pass 13 or claim completion.
+
+### 2026-11-25 — R2, pass 8: nested composition support remains blocking
+
+Ran `python3 -B scripts/qualify_r2_inputs.py --allow-network` through the
+Windows-native shared queue, using frozen source identity
+`c7591a9cb8d1b2ea3cc1266f796ffb6b043e080f302c0b8c4ec9152b4de6e3fc`.
+The command waited 36 seconds, ran 65 seconds and exited 1. Pinned Go 1.27.4,
+golangci-lint 2.15.0, dependencies, schema and conformance preparation passed.
+Formatting and standalone vet passed. Source preservation passed.
+
+The emitter stopped at `internal/emit/compiler.go:179` with the exact diagnostic:
+`emit: #/$defs/HeaderMismatchError/properties/error: allOf requires an explicit reviewed binding`.
+This is a previously incomplete generation contract, now rejected explicitly by
+the replacement emitter rather than silently lowered to an untyped field.
+Complete emission, total-binding checks and generated-wire execution remain
+unqualified. No further native copies were dispatched after this shared
+deterministic failure.
+
+A read-only traversal of the complete pinned JSON document found three `allOf`
+sites, all under `properties/error`: `HeaderMismatchError`,
+`MissingRequiredClientCapabilityError`, and `UnsupportedProtocolVersionError`.
+Each combines `$ref: #/$defs/Error` with an object refinement. The refinements
+fix error codes and, for the latter two, require typed error data. A repair must
+retain the base `message` requirement, refined fields, requiredness and all
+original branch assertions. It must not replace these compositions with `any`,
+discard constraints or relax the expected fixtures.
+
+Lint also rejected new redundant annotations at `internal/emit/compiler.go:222`
+and `:236`, both `ST1023: should omit type ast.Expr from declaration; it will be inferred from the right-hand side`.
+These are new implementation findings; the linter policy remains unchanged.
+
+Prior loader/model/reference/alias/profile controls and plants passed. The new
+name-collision bypass and shared-document-storage plant were caught with their
+intended diagnostics. The optional-empty, ownership-hash and omitted-binding
+plants were inconclusive: the composition rejection occurred first. They remain
+required and must fail for their intended reason after emission succeeds.
+The generated-validation bypass inside the wire test has not executed yet.
+
+The approved passes 7–8 are exhausted. Pending owner selection: recommended
+bounded passes 9–12 for a complete nested-emission audit, typed composition
+repair, lint corrections and qualification; alternatively passes 9–10 followed
+by reassessment, or a diff review before additional execution. The scope and
+phase exit remain unchanged. No R2 commit, product publication or Stage 7
+completion is claimed. Doing nothing leaves R2 blocked at emission.
+
+### 2026-11-25 — R2, pass 7: AST emission failed before generated-wire execution
+
+Replaced string-based object-only emission with Go AST declarations, references,
+primitive/array/union bindings, typed open maps, presence fields, native JSON
+hooks, canonical method inventory and API/schema correspondence. Candidate
+outputs now include four Go sources, the exact schema and `bindings.json`, with
+version-2 SHA-256 ownership metadata. This remains scratch emission; the old
+publisher has not installed it in the product package.
+
+Ran the R2 input qualification command through the shared Windows-native queue
+using source identity
+`d3c6af15dc8203c5f433dd1986fb800ecaa38d0d05568220ab98f684a43e8d36`.
+The command exited 1 after 27 seconds. Formatting and standalone vet passed;
+emission failed at
+`#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/$schema`
+with `invalid field name "$schema"`. Therefore the new generated-wire fixture
+did not execute. The name-collision bypass plant was caught; the optional-empty
+plant was inconclusive because emission failed first. Prior loader/model,
+reference, alias and profile controls/plants passed. Source preservation passed.
+
+The fresh scratch workspace also lacked the prepared linter: its installed
+2.14.0 did not match required 2.15.0, so lint did not run. This invocation omitted
+the explicit `--allow-network` preparation used in pass 6. Pass 8 will use that
+flag for pinned acquisition; ordinary validation remains offline.
+
+Corrections prepared for pass 8: normalize wire-property punctuation into valid
+Go identifiers while preserving exact JSON tags; place inline field declarations
+under an explicit `Fields` namespace so distinct `Request.params` and
+`RequestParams` schemas retain separate bindings; retain collision rejection.
+Separate schema-valued `additionalProperties` from the property map, preventing
+a literal property from overwriting synthetic model metadata. The historical
+vocabulary plant gains only an inert IR-field compatibility shim, so its failure
+still comes from malformed acceptance rather than a compilation mismatch.
+Add scratch plants for output hashes, omitted bindings and document ownership.
+
+Pending R2 obligations remain: full normative semantic rows, complete SDK wire
+and signature evidence, handwritten/platform declaration checks, complete
+product-candidate integration and three-target qualification. R3 owns verified
+publication; R4 retains validator/codec differential and resource-limit work.
+No R2 phase exit or commit is claimed. Pass 9 is not authorized.
+
+### 2026-11-25 — R2 deviation: passes 7–8 approved
+
+The owner selected A and approved R2 passes 7–8. Continue the remaining
+semantic-rule and generated-contract work within the existing R2 scope.
+Preserve the independently pinned inputs, prior failure plants, native target
+matrix and coherent R2/R3 commit boundary. This resolves the pending allowance
+after pass 6; it does not authorize pass 9 or declare a phase exit.
+
+### 2026-11-25 — R2, pass 6: pinned input/profile guards passed in four environments
+
+Implemented the reviewed version-2 SDK map for all 155 definitions, with an
+explicit ownership reason and intended Go name for each. The policy has 14
+structural alias candidates, 122 owned and 19 owned-codec entries. Implemented
+21 schema-bound canonical method/direction rows and separate modern-only legacy
+rejection metadata. The pinned schema represents the cancellation notification
+under both `CancelledNotification` and `ClientNotification`; validation retains
+both definition bindings while requiring one reviewed canonical method row.
+
+Added `schema/generation-profile.json` and the independent generator-source pin
+`3bc9d41c36e5c4877c47fe8ff997c9a509fa5b1e7de06780b781f88d226b0f20`.
+The profile binds exact bytes, sizes and versions for seven required inputs.
+Bounded `os.Root` acquisition rejects missing/unreviewed/escaping inputs before
+emission; inspection and first-generation checks require the same profile.
+Rendering reuses the verified snapshot rather than loading it again. Removed
+the superseded unbounded schema reader and stale cached-disposition inspection.
+Fresh SDK source/module identity and transitive alias safety must match before
+reviewed protocol ownership is applied. Generated Go-name consumption and full
+product-candidate assembly remain separate pending work.
+
+Ran `python3 -u scripts/qualify_r2_inputs.py --allow-network --mapping-report`
+through the shared queues in all four environments. Every run used source
+identity:
+
+`e6e36509c984d6e46f0662226be41bbcc68665843d621e359d08c031b4ae88df`
+
+| Check | Windows/amd64 | Darwin/arm64 | Linux/amd64 | WSL Linux/amd64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation; formatting; standalone vet | passed | passed | passed | passed |
+| Generator tests/subtests; packages accounted | 149; 10 | 149; 10 | 149; 10 | 149; 10 |
+| Generator lint | 0 issues | 0 issues | 0 issues | 0 issues |
+| Prior loader/model/reference/alias controls and plants | passed | passed | passed | passed |
+| Independent profile source-pin control and bypass plant | passed | passed | passed | passed |
+| Complete mapping-policy control and bypass plant | passed | passed | passed | passed |
+| SDK-context control and bypass plant | passed | passed | passed | passed |
+| Fresh mapping report; nine malformed-report controls | passed | passed | passed | passed |
+| Source preservation; final exit | passed; 0 | passed; 0 | passed; 0 | passed; 0 |
+| Execution seconds, excluding queue/transfer | 63 | 37 | 72 | 32 |
+
+Native Windows also executed the real symlink-escape fixture successfully;
+there was no fixture skip or host-policy change. All four exercised absent
+profile/SDK-map/semantic inputs, altered schema bytes, a forged self-consistent
+profile, symlink escape, destination preservation, invalid/missing/colliding
+names, unbound/duplicate/missing methods and unsafe/mismatched SDK mappings.
+The new source-pin bypass failed with
+`FAIL profile bypass reached SDK or output`; the mapping-policy bypass failed
+with `FAIL invalid reviewed input policy accepted`; the SDK-context bypass
+failed with `FAIL SDK context or unsafe mapping accepted`. Broken code and
+inputs existed only in temporary copies. Ordinary operations remained offline
+with CGO disabled; only explicit preparation could acquire pinned inputs.
+
+The Darwin turn waited 907 seconds behind two existing heavy jobs before its
+37-second run; the Windows/WSL turns serialized through their physical queue.
+No process belonging to another task was changed. Verification completed and
+all R2 runner sessions exited; no polling loop or queued R2 run was left behind.
+
+**Remaining R2 work:** complete the normative semantic-rule fields and their
+independent fixtures, beyond the now-pinned total method/direction inventory;
+finish RA09's generated compiled identity/signature and wire probes; implement
+RA10's AST emission, actual Go-name bindings, presence/union/open-object codecs,
+registries and API/coverage artifacts; finish RA11's complete handwritten,
+internal/external and platform candidate compilation. Do not infer those exits
+from the passing input/profile checks. R3 still owns verified publication and
+the baseline migration; R4/R5 remain pending. No generated product outputs were
+installed, no R2 files were staged or committed, and no push/tag occurred.
+
+The approved allowance for passes 5–6 is consumed. Obtain the owner's next R2
+build allowance before pass 7, preserving every acceptance exit and the coherent
+R2/R3 phase commit rule.
+
+### 2026-11-25 — R2, pass 5: fresh SDK mapping evidence captured
+
+Changed `inspect` to compute its audit from prepared module/compiler metadata;
+it no longer trusts a cached disposition artifact or claims complete candidate
+qualification. Removed the redundant source-AST export-name scan: compiler type
+scopes own availability; selected source ASTs still own deprecation comments.
+Added a capture helper with independent schema/checksum/envelope checks and
+nine deliberately malformed report controls.
+
+Ran `python3 -u scripts/qualify_r2_inputs.py --allow-network --mapping-report`
+through the native Windows shared runner/queue. Source identity:
+`059835dd704a10975947affac4aee24db096832044417882b3ab89960df6dcba`.
+Pinned preparation, formatting, standalone vet, all 124 generator tests/subtests
+across nine packages, lint (zero issues), previous plants and source preservation
+passed. All nine mapping-report plants were rejected. Final exit 0; execution
+54 seconds excluding transfer/queue time. The captured audit covers all 155
+definitions: 14 structural alias candidates, 129 owned and 12 owned-codec.
+The source/module SDK context is
+`b6f8c43eed4ca771695ddf38ed62597a67e4033d21eb0a2f9848381f9bc386b9`.
+This is ownership/audit evidence; compiled generated API and wire identity
+probes remain required before accepting the aliases at the R2 exit.
+
+Before approved pass 6, replace the representative SDK input with the complete
+155-entry reviewed table, reasons and Go-name bindings. Preserve the existing
+protocol-level codec policy independently of same-name SDK availability:
+`CreateMessageRequest`, `CreateMessageRequestParams`, `ListRootsRequest`,
+`InputRequests`, `InputResponses`, `InputResponseRequestParams` and
+`SamplingMessageContentBlock` remain private-codec DTOs. This yields 14 alias
+candidates, 122 owned and 19 owned-codec entries. The input records
+`RequestId`'s intended Go name as `RequestID`; RA10 must consume those reviewed
+names rather than infer inconsistent spellings.
+
+Complete the semantic input's 21 schema-bound canonical method rows using the
+independent direction inventory. Move the stale `initialize` entry to explicit
+legacy rejection policy, consistent with MADR G12; do not add it to canonical
+registries. Version the repaired SDK and semantic inputs as version 2.
+
+Add a generation profile pinned independently in generator source, with exact
+member hashes, sizes and versions for the schema, its provenance manifest,
+SDK/semantic maps, tool pins and runtime module metadata. Require that profile
+before emission, inspection and even the first-generation check path; reuse
+the verified snapshot through rendering instead of rescanning it. Use bounded
+reads through `os.Root` and reject SDK-context drift/unsafe aliases while
+applying reviewed ownership. Remove the superseded unbounded schema reader.
+Exercise absent inputs, changed bytes, a forged self-consistent manifest,
+symlink escape, structural mapping/name/method errors and SDK context errors;
+prove the source-pin, mapping-policy and SDK-context guards with scratch bypass
+plants. None of this substitutes for RA10/RA11 or R3 safe publication.
+
+### 2026-11-25 — R2 deviation: passes 5–6 approved
+
+The owner explicitly approved R2 passes 5–6. Continue the complete reviewed
+mapping/provenance inputs, generated API contract and scratch candidate work
+under the existing R2 scope. Pass 5 first captures fresh compiler-backed SDK
+mapping evidence for review; use that evidence to replace the representative
+mapping input with the complete reviewed table. Preserve the acceptance exits,
+the source/target failure plants and the coherent R2/R3 publication boundary.
+This resolves the pending allowance after pass 4; it does not authorize pass 7,
+declare R2 complete or authorize a push/tag.
+
+### 2026-11-25 — R2, pass 4: input/audit checks passed in four environments
+
+Completed approved inventory repair A and corrected the unsafe `TextContent`
+alias expectation to require ownership with its audit reason. Safe `Tool` and
+`Implementation` aliases still have explicit passing expectations. The source
+comment parser recognizes deprecation paragraphs rather than incidental text,
+joins deprecated embedded fields and generic receivers, and keeps package
+identities distinct. The same production export-data loader now has a
+handwritten platform fixture: missing target types, a Windows variable replacing
+a type, a Windows runtime method leak and a Windows-only deprecation all have
+independent assertions. An omitted-Windows-audit scratch plant fails those
+assertions. Production availability intersects type declarations across the
+three targets; a same-named variable is not an available alias target.
+
+Ran `python3 -u scripts/qualify_r2_inputs.py --allow-network` through the shared
+host queues on all four environments, with the same source identity:
+
+`7cfa38eaa333a2aeb46e15693bcdf9b9e9442393828cde58a7f22f87807ea9e5`
+
+| Check | Windows/amd64 | Darwin/arm64 | Linux/amd64 | WSL Linux/amd64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation | passed | passed | passed | passed |
+| Generator formatting and standalone vet | passed | passed | passed | passed |
+| Generator tests/subtests; packages accounted | 124; 9 | 124; 9 | 124; 9 | 124; 9 |
+| Generator lint | 0 issues | 0 issues | 0 issues | 0 issues |
+| Loader/model valid and broken-baseline controls | passed | passed | passed | passed |
+| Reference depth valid and bypass controls | passed | passed | passed | passed |
+| Alias closure valid and bypass controls | passed | passed | passed | passed |
+| Source inventory valid and false-deprecation controls | passed | passed | passed | passed |
+| Target exports valid and omitted-Windows controls | passed | passed | passed | passed |
+| Source preservation; final exit | passed; 0 | passed; 0 | passed; 0 | passed; 0 |
+| Execution seconds, excluding queue wait | 64 | 46 | 61 | 31 |
+
+All ordinary operations used CGO disabled and offline, readonly module settings;
+network access was confined to explicit pinned preparation. The target fixture
+loads compiler export data for all three targets without executing foreign
+binaries. It does not substitute for compiling the complete proposed product
+candidate. The Windows and WSL turns ran sequentially through their physical
+host's shared queue; the Darwin turn waited for another heavy run to finish.
+
+The deliberately broken copies failed on the intended diagnostics:
+`FAIL strict loader accepted deliberately broken`,
+`FAIL unqualified or malformed keyword accepted`,
+`FAIL over-depth graph accepted`, `FAIL alias closure`,
+`Meta has no source deprecation marker`, and the two
+`FAIL target-dependent ... accepted` assertions. The source tree was never
+broken to exercise them. Full SDK package testing runs once in the generator
+pre-add gate; the alias helper runs only its separate control/plant pairs.
+
+This completes the authorized A inventory correction and passes 3–4, not R2.
+RA08's independent input identities and complete reviewed mapping, RA10's AST
+emission/presence/union/open-object/API contract, and RA11's complete scratch
+product candidate are still pending. RA09 still needs the generated compiled
+identity/signature and wire probes at that candidate boundary; the passing
+export audit is foundation evidence, not a substitute for them. R3 publication
+and all R4/R5 acceptance work remain pending. No generated outputs were
+installed, no R2 files were staged or committed, and no push/tag occurred.
+
+Further compiler-backed mapping/candidate work requires another R2 build pass.
+The approved allowance ends at pass 4; obtain the owner's next allowance before
+pass 5. Preserve the coherent R2/R3 phase commit rule and all remaining exits.
+
+### 2026-11-25 — R2, pass 3: inventory and plants passed; alias expectation failed
+
+Applied approved repair A: `Meta` is no longer a frozen SDK deprecation and
+has a separate explicit owned policy. The remaining frozen source markers are
+checked on every supported target; missing exports and missing markers now have
+distinct diagnostics. The existing sampling/roots owned codec policy remains.
+Production reference validation now computes bounded acyclic graph depth while
+retaining cycles, normalizes nested resource identities and rejects annotation
+values as schema targets. Added independent broken-baseline loader/model
+controls, a reference-validation bypass plant and a false-`Meta`-deprecation
+plant. No generated output was published.
+
+Ran `python3 -u scripts/qualify_r2_inputs.py --allow-network` through the shared
+Linux runner/queue with source identity
+`907aff2a4a93b86be869830fd29072c73a2dcb163a6835f3a9d1062a633f78c4`.
+Pinned preparation passed, including Go, linter and dependency identities.
+Formatting, standalone vet and generator lint passed with zero lint issues.
+All loader/model/reference/alias controls and their failure plants passed;
+source preservation passed. The overall pass exited 1 because
+`TestKnownDispositions` still expected `TextContent` to alias:
+
+```text
+FAIL TextContent: got "owned" want "alias"
+```
+
+The new audit follows its private `fromWire(*wireContent)` method into an
+SDK-owned wire type; the former name-only expectation did not check this
+closure. Correct this expectation to require ownership plus its audit reason,
+consistent with RA09, while preserving the safe `Tool`/`Implementation` alias
+assertions. The source deprecation correction and codec ownership control both
+passed against the real pinned SDK. This pass does not qualify all RA05–RA11.
+
+Before approved pass 4, add a handwritten target-specific module fixture that
+uses the same explicit export loader as production. Pin rejection of a type
+missing on other targets, a declaration that becomes a variable on Windows,
+a Windows-only runtime method leak and a Windows-only deprecation. Include an
+omitted-Windows-audit plant. Keep full SDK package tests owned by the generator
+pre-add gate; the alias plant helper runs only its independent controls, avoiding
+a redundant second full SDK package test run.
+
+### 2026-11-25 — R2 deviation: inventory repair A and passes 3–4 approved
+
+The owner selected A after pass 2: correct the SDK deprecation inventory while
+preserving the required owned surfaces and authorize R2 verification passes
+3–4. Reconcile the complete frozen list against the pinned source comments;
+record actual deprecations independently from ownership/codec policy. Preserve
+the source-comment guard and the transitive forbidden-exposure assertions.
+This authorizes the next two passes, not a phase exit or publication. Continue
+the approved R2 acceptance scope and retain the coordinated R2/R3 commit rule.
+The pending authorization in the preceding pass entry is resolved by this
+dated entry. No additional dependency or SDK pin change was requested.
+
+### 2026-11-25 — R2, pass 2: alias controls passed; pinned inventory failed
+
+Implemented the approved standard-library export-data auditor using isolated
+copies of the runtime module metadata, offline Go commands and explicit
+compiler export-file lookup for Darwin/arm64, Linux/amd64 and Windows/amd64.
+The candidate mapping now records its SDK source/module context and examines
+transitive types, fields, pointer/value methods, instantiated arguments and
+source deprecation comments. This is uncommitted implementation work, not an
+RA09 exit claim; target-specific adversarial qualification, generated identity
+probes and the full candidate contract remain unfinished.
+
+Ran `python3 -u scripts/verify_alias_guards.py` through the shared Linux host
+runner/queue. The safe/forbidden fixture control passed, including pointer and
+promoted method leakage, generic arguments, sealed interfaces, recursive safe
+types, deprecated fields/embedded members/generic methods and package-qualified
+comment association. A deliberately broken scratch auditor that accepts every
+alias failed with `FAIL alias closure`; the harness reported the plant caught.
+No live source was broken to exercise that plant.
+
+The same pass's pinned SDK package tests exited 1:
+
+```text
+FAIL build: sdkmap: frozen deprecation Meta no longer appears as an exported SDK type; the pin or the audit drifted
+```
+
+The diagnostic combines export availability and deprecation-marker checks.
+The pinned SDK's `mcp/shared.go` declares `Meta` as an exported map type without
+a `Deprecated:` comment. The existing `internal/sdkmap/sdkmap.go` frozen list
+already classifies it as deprecated at baseline `28a9284`; the new comment
+verification exposed that pre-existing factual discrepancy. Do not remove the
+guard or silently change its assertion. Within the approved R2 audit, reconcile
+actual source deprecations separately from explicit framework-owned policy,
+preserve required owned codec surfaces, and check the entire frozen inventory
+before updating reviewed mappings and expectations. An SDK source correction
+is not an SDK version change or permission to expose forbidden signatures.
+
+No generated destination was published, and no R2 files were staged or
+committed. RA05–RA11 are not collectively qualified; R3–R5 and Stage 7 remain
+unfinished. The local AGENTS rule makes a third build pass a deviation, so
+execution pauses before any third R2 build. Owner choices for the verification
+allowance are A — authorize passes 3–4 (recommended, bounded review point),
+B — authorize passes 3–6 (more uninterrupted verification), or C — review the
+current diff before authorizing another pass. Record the selection before
+resuming; the R2 implementation and acceptance scope stays unchanged.
+
+### 2026-11-25 — R2, pass 1: implementation started
+
+R1 phase committed on main as `28a9284`; the working tree was clean afterward.
+Shared runner dependency is `c49c694` in its owning repository. Execution of R2
+is already approved. Re-grounding confirms that the current loader still uses
+an incomplete handwritten JSON grammar, references are not integrated into the
+generation pipeline, and SDK mapping inspects names without transitive types.
+Implement the approved standard-library parser/graph/type approach and preserve
+all pending RA05–RA11 exits. No R2 qualification or publication is claimed by
+this start entry. Retain the R2/R3 coherent publication boundary.
+
+Implemented strict `encoding/json/jsontext` loading with exact numeric tokens
+and bounded file reads; registered-resource reference resolution integrated
+into generation; deterministic vocabulary checks and exact integral item
+bounds; and offline, readonly, CGO-disabled candidate compilation settings.
+Added the initial RA05, RA06, RA07 and RA11 regression cases. These are partial
+implementations; the complete candidate assembly and RA08/RA10 remain pending.
+
+Ran `python3 -u scripts/gate.py unit --module generator` through the shared
+Linux host runner/queue. Standalone vet passed and 101 tests/subtests passed
+across nine packages. The overall gate correctly exited 1 with two failures:
+the fresh copied tree lacked the prepared pinned linter, and the system linter
+was 2.14.0 instead of required 2.15.0. Consequently generator lint did not run.
+Use explicit pinned-tool preparation before subsequent lint qualification;
+do not accept or substitute the system version. The later SDK auditor changes
+were not present in this pass and are not covered by its passing test count.
 
 ### 2026-11-25 — R1, pass 5: qualified across all four local environments
 

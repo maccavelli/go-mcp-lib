@@ -1,13 +1,14 @@
 package main
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
+	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
 
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
 )
 
@@ -15,40 +16,56 @@ import (
 // compares bytes and inventory against the destination without changing
 // it. It requires local prepared inputs; the network is never touched.
 func checkTree(repo string) (*checkReport, error) {
-	schemaPath := filepath.Join(repo, "schema", "inputs", "2026-07-28", "schema.json")
-	dest := filepath.Join(repo, "protocol")
-	if _, err := os.Stat(schemaPath); err != nil {
-		return nil, fmt.Errorf("check: pinned schema missing at %s", repoRelative(repo, schemaPath))
+	inputs, err := profile.Load(repo, profile.Revision)
+	if err != nil {
+		return nil, err
 	}
+	// First generation and migrations take the same complete candidate path.
+	// The candidate owns all writes; no destination is a qualification sandbox.
+	scratch, err := os.MkdirTemp("", "mcpgen-check-*")
+	if err != nil {
+		return nil, fmt.Errorf("check: %w", err)
+	}
+	defer func() { _ = os.RemoveAll(scratch) }()
+	sdkDir, err := pinnedSDKDir(repo)
+	if err != nil {
+		return nil, fmt.Errorf("check: %w", err)
+	}
+	fresh, err := renderProtocolInputs(repo, sdkDir, scratch, inputs)
+	if err != nil {
+		return nil, fmt.Errorf("check: %w", err)
+	}
+	manifestBytes, err := os.ReadFile(filepath.Join(scratch, "generated-manifest.json"))
+	if err != nil {
+		return nil, err
+	}
+	fresh["generated-manifest.json"] = manifestBytes
+	candidate, err := qualify.Assemble(repo, fresh)
+	if err != nil {
+		return nil, fmt.Errorf("check: %w", err)
+	}
+	defer func() { _ = candidate.Close() }()
+	cache, err := qualify.BuildCache()
+	if err != nil {
+		return nil, err
+	}
+	compilation, err := candidate.Compile(qualify.OSRunner(), cache)
+	if err != nil {
+		return nil, fmt.Errorf("check: %w", err)
+	}
+	report := &checkReport{Repo: repo, Schema: profile.SchemaSHA256, Qualification: compilation}
+	if !qualify.AllPassed(compilation) {
+		return report, nil
+	}
+	dest := filepath.Join(repo, "protocol")
 	if _, err := os.Stat(dest); err != nil {
 		if os.IsNotExist(err) {
 			// First generation: the destination does not exist yet. An
 			// empty report with no inventory is the honest state; every
 			// emission file will be a new publication.
-			data, err := os.ReadFile(schemaPath)
-			if err != nil {
-				return nil, fmt.Errorf("check: %w", err)
-			}
-			sum := sha256.Sum256(data)
-			return &checkReport{
-				Repo:      repo,
-				Schema:    hex.EncodeToString(sum[:]),
-				Manifest:  false,
-				Inventory: nil,
-			}, nil
+			return report, nil
 		}
 		return nil, fmt.Errorf("check: %w", err)
-	}
-	data, err := os.ReadFile(schemaPath)
-	if err != nil {
-		return nil, fmt.Errorf("check: %w", err)
-	}
-	sum := sha256.Sum256(data)
-	report := &checkReport{
-		Repo:      repo,
-		Schema:    hex.EncodeToString(sum[:]),
-		Manifest:  false,
-		Inventory: nil,
 	}
 	destManifest, err := loadJSONFile[emitManifest](filepath.Join(dest, "generated-manifest.json"))
 	if err != nil {
@@ -57,20 +74,6 @@ func checkTree(repo string) (*checkReport, error) {
 	}
 	report.Manifest = true
 	report.Inventory = destManifest.Files
-	// Render fresh into scratch.
-	scratch, err := os.MkdirTemp("", "mcpgen-check-*")
-	if err != nil {
-		return nil, fmt.Errorf("check: %w", err)
-	}
-	defer func() { _ = os.RemoveAll(scratch) }()
-	sdkDir, err := pinnedSDKDir()
-	if err != nil {
-		return nil, fmt.Errorf("check: %w", err)
-	}
-	fresh, err := renderProtocol(repo, sdkDir, scratch)
-	if err != nil {
-		return nil, fmt.Errorf("check: %w", err)
-	}
 	// Byte-compare every manifest-owned file; find unowned collisions.
 	// A manifest-owned file that is absent from the destination is an
 	// interrupted publication, not drift: it is reported separately so
@@ -91,26 +94,12 @@ func checkTree(repo string) (*checkReport, error) {
 			}
 			return nil, fmt.Errorf("check: %w", err)
 		}
-		freshSum := sha256.Sum256(freshBytes)
-		destSum := sha256.Sum256(destBytes)
-		if freshSum != destSum {
+		if !bytes.Equal(freshBytes, destBytes) {
 			report.DriftFiles = append(report.DriftFiles, name+": bytes differ from deterministic emission")
 		}
 	}
-	entries, err := os.ReadDir(dest)
-	if err != nil {
-		return nil, fmt.Errorf("check: %w", err)
-	}
-	owned := make(map[string]bool, len(freshNames)+1)
-	for _, name := range freshNames {
-		owned[name] = true
-	}
-	owned["generated-manifest.json"] = true
-	for _, entry := range entries {
-		if !entry.IsDir() && !owned[entry.Name()] && filepath.Ext(entry.Name()) == ".go" {
-			report.ExtraFiles = append(report.ExtraFiles, entry.Name()+": unowned .go file in protocol/")
-		}
-	}
+	// Handwritten source is part of the qualified candidate, not output drift.
+	// Assemble already rejects collisions with newly owned output filenames.
 	sort.Strings(report.DriftFiles)
 	sort.Strings(report.ExtraFiles)
 	return report, nil
@@ -119,8 +108,12 @@ func checkTree(repo string) (*checkReport, error) {
 // renderProtocol renders the deterministic emission into dir and returns
 // the file map.
 func renderProtocol(repo, sdkDir, dir string) (map[string][]byte, error) {
+	return renderProtocolInputs(repo, sdkDir, dir, nil)
+}
+
+func renderProtocolInputs(repo, sdkDir, dir string, inputs *profile.Inputs) (map[string][]byte, error) {
 	schemaPath := filepath.Join(repo, "schema", "inputs", "2026-07-28", "schema.json")
-	manifest, err := SchemaToProtocol(schemaPath, sdkDir, "2026-07-28", dir)
+	manifest, err := schemaToProtocol(schemaPath, sdkDir, "2026-07-28", dir, inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -136,39 +129,30 @@ func renderProtocol(repo, sdkDir, dir string) (map[string][]byte, error) {
 }
 
 // pinnedSDKDir locates the pinned SDK source in the local module cache.
-func pinnedSDKDir() (string, error) {
-	home, err := os.UserHomeDir()
-	if err != nil {
-		return "", err
-	}
-	dir := filepath.Join(home, "go", "pkg", "mod", "github.com", "modelcontextprotocol", "go-sdk@v1.8.0", "mcp")
-	if _, err := os.Stat(dir); err != nil {
-		return "", fmt.Errorf("pinned SDK source not present in the local module cache")
-	}
-	return dir, nil
+func pinnedSDKDir(repo string) (string, error) {
+	return sdkmap.LocateSDK(repo)
 }
 
-// computeDispositions recomputes the disposition table for inspect.
-func computeDispositions(repo string) (map[string]string, error) {
-	schemaPath := filepath.Join(repo, "schema", "inputs", "2026-07-28", "schema.json")
-	doc, err := loadSchema(schemaPath)
+// computeSDKMapping recomputes the audited disposition table for inspect.
+func computeSDKMapping(repo string) (*sdkmap.Result, error) {
+	inputs, err := profile.Load(repo, profile.Revision)
 	if err != nil {
 		return nil, err
 	}
-	names := make([]string, 0, len(doc.Defs))
-	for name := range doc.Defs {
+	names := make([]string, 0, inputs.Schema.Definitions)
+	for name := range inputs.Mapping.Dispositions {
 		names = append(names, name)
 	}
 	sort.Strings(names)
-	sdkDir, err := pinnedSDKDir()
+	sdkDir, err := pinnedSDKDir(repo)
 	if err != nil {
 		return nil, err
 	}
-	result, err := sdkmap.Build("2026-07-28", sdkDir, "v1.8.0", names)
+	actual, err := sdkmap.BuildInModule(profile.Revision, sdkDir, "v1.8.0", repo, names)
 	if err != nil {
 		return nil, err
 	}
-	return result.Dispositions, nil
+	return inputs.ApplySDK(actual)
 }
 
 // diffManifests compares two emitted manifests.

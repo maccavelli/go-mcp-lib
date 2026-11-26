@@ -6,6 +6,8 @@ import (
 	"fmt"
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
+
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
 // ServerSession is an owned server-side connection handle. The SDK
@@ -58,7 +60,7 @@ func (s *ServerSession) NotifyProgress(ctx context.Context, progressToken string
 // Elicit asks the connected client's user for structured input. The
 // request blocks with the caller's deadline and routes through this
 // session only.
-func (s *ServerSession) Elicit(ctx context.Context, message string, schema any) (*sdk.ElicitResult, error) {
+func (s *ServerSession) Elicit(ctx context.Context, message string, schema any) (*mcplib.ElicitResult, error) {
 	if s == nil || s.sdk == nil {
 		return nil, errors.New("mcp: session is closed")
 	}

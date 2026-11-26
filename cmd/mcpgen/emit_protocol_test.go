@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/testenv"
@@ -10,8 +11,8 @@ import (
 
 // TestEmitProtocolIntoScratch emits the full protocol package into a
 // scratch tree and proves the generated files exist with manifest
-// ownership. Generation is deterministic, so the committed protocol/
-// bytes in the repository are this same emission.
+// ownership and deterministic bytes. This proves scratch emission only;
+// candidate compilation and verified publication are separate obligations.
 func TestEmitProtocolIntoScratch(t *testing.T) {
 	sdkDir := testenv.SDKDir(t)
 	out := t.TempDir()
@@ -22,7 +23,7 @@ func TestEmitProtocolIntoScratch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("FAIL emit: %v", err)
 	}
-	if len(manifest.Files) != 3 {
+	if !reflect.DeepEqual(manifest.Files, []string{"aliases.go", "bindings.json", "codecs.go", "constants.go", "owned.go", "schema.json"}) {
 		t.Fatalf("FAIL manifest files: %v", manifest.Files)
 	}
 	for _, name := range manifest.Files {

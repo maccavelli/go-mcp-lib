@@ -5,7 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify"
 )
 
 // cmdInspect implements `inspect`: provenance, dispositions, mappings,
@@ -21,30 +22,21 @@ func cmdInspect(args []string, out *printer) error {
 		return err
 	}
 	out.format = *format
-	manifestPath := filepath.Join(*repo, "schema", "inputs", "2026-07-28", "manifest.json")
-	manifest, err := readInputManifest(manifestPath)
+	mapping, err := computeSDKMapping(*repo)
 	if err != nil {
 		return fmt.Errorf("inspect: %w", err)
 	}
-	dispositionPath := filepath.Join(*repo, "generated", "dispositions.json")
-	dispositions, err := readDispositions(dispositionPath)
-	if err != nil {
-		// Fall back to computing dispositions if the artifact is absent.
-		dispositions, err = computeDispositions(*repo)
-		if err != nil {
-			return fmt.Errorf("inspect: %w", err)
-		}
-	}
-	counts := dispositionCounts(dispositions)
+	counts := dispositionCounts(mapping.Dispositions)
 	data := map[string]any{
-		"revision":           manifest.Revision,
-		"source-commit":      manifest.Source.Commit,
-		"schema-sha256":      manifest.SHA256,
-		"definitions":        manifest.Definitions,
+		"revision":           profile.Revision,
+		"source-commit":      profile.SourceCommit,
+		"schema-sha256":      profile.SchemaSHA256,
+		"definitions":        len(mapping.Dispositions),
 		"definitions-counts": fmt.Sprintf("alias=%d owned=%d owned-codec=%d", counts["alias"], counts["owned"], counts["owned-codec"]),
-		"deprecated-surface": len(sdkmap.Deprecations),
-		"unsupported":        "none; unsupported assertions and vocabularies fail at load",
-		"mapping-revision":   manifest.Revision,
+		"deprecated-surface": len(mapping.Deprecations),
+		"qualification":      "complete product candidate qualification pending",
+		"mapping-revision":   profile.Revision,
+		"sdk-audit":          mapping,
 	}
 	return out.emit("inspect", "ok", data)
 }
@@ -216,19 +208,10 @@ func cmdDiagnostic(args []string, out *printer) error {
 	return out.emit("diagnostic", "ok", data)
 }
 
-func readInputManifest(path string) (*inputManifest, error) {
-	m, err := loadJSONFile[inputManifest](path)
-	if err != nil {
-		return nil, err
-	}
-	return &m, nil
-}
-
-func readDispositions(path string) (map[string]string, error) {
-	return loadJSONFile[map[string]string](path)
-}
-
 func statusOf(r *checkReport) string {
+	if !qualify.AllPassed(r.Qualification) {
+		return "unqualified"
+	}
 	if r.ok() {
 		return "ok"
 	}

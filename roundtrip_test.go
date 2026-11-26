@@ -4,8 +4,6 @@ import (
 	"context"
 	"strings"
 	"testing"
-
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 	"time"
 
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
@@ -46,7 +44,10 @@ func startPair(t *testing.T, server *Server) (*ClientSession, func()) {
 
 func TestRoundTripToolCall(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in echoInput) (*sdk.CallToolResult, echoOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in echoInput) (*mcplib.CallToolResult, echoOutput, error) {
+		if req.Params.Name != "echo" || req.Session() == nil || req.ProtocolVersion() == "" {
+			t.Error("FAIL owned tool context lost request or connection")
+		}
 		if in.Message != "ping" {
 			return nil, echoOutput{}, nil
 		}
@@ -69,12 +70,12 @@ func TestRoundTripToolCall(t *testing.T) {
 	if err != nil {
 		t.Fatalf("FAIL CallTool: %v", err)
 	}
-	if result.IsError {
+	if isError, _ := result.IsError.Get(); isError {
 		t.Fatalf("FAIL tool reported error: %+v", result)
 	}
 	found := false
 	for _, content := range result.Content {
-		if text, ok := content.(*mcplib.TextContent); ok &&
+		if text, err := content.AsTextContent(); err == nil &&
 			strings.Contains(text.Text, "pong: ping") {
 			found = true
 		}
@@ -86,7 +87,7 @@ func TestRoundTripToolCall(t *testing.T) {
 
 func TestRoundTripListTools(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in echoInput) (*sdk.CallToolResult, echoOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in echoInput) (*mcplib.CallToolResult, echoOutput, error) {
 		return nil, echoOutput{}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{Name: "one"}, handler); err != nil {
@@ -149,7 +150,7 @@ func TestCallToolDeadline(t *testing.T) {
 	// Context-first blocking: a cancelled deadline must abort the call
 	// rather than hang.
 	server := newTestServer(t)
-	slow := func(ctx context.Context, req *sdk.CallToolRequest, in echoInput) (*sdk.CallToolResult, echoOutput, error) {
+	slow := func(ctx context.Context, req *ToolRequest, in echoInput) (*mcplib.CallToolResult, echoOutput, error) {
 		<-ctx.Done()
 		return nil, echoOutput{}, ctx.Err()
 	}

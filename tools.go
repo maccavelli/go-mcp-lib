@@ -1,11 +1,13 @@
 package mcp
 
 import (
+	"context"
 	"errors"
 	"fmt"
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 
+	"github.com/maccavelli/go-mcp-lib/internal/sdkbridge"
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
@@ -43,7 +45,7 @@ func (r *ToolRegistration) validate() error {
 // AddTool registers a typed tool handler. Duplicate names on the same
 // server are rejected (G10/G13): registration is instance-scoped and
 // fails closed.
-func AddTool[In, Out any](s *Server, reg *ToolRegistration, handler sdk.ToolHandlerFor[In, Out]) error {
+func AddTool[In, Out any](s *Server, reg *ToolRegistration, handler ToolHandler[In, Out]) error {
 	if s == nil {
 		return errors.New("mcp: server is required")
 	}
@@ -91,7 +93,22 @@ func AddTool[In, Out any](s *Server, reg *ToolRegistration, handler sdk.ToolHand
 			panic(p) // programmer faults propagate; see errors.go
 		}
 	}()
-	sdk.AddTool(s.sdk, tool, handler)
+	sdk.AddTool(s.sdk, tool, func(ctx context.Context, request *sdk.CallToolRequest, input In) (*sdk.CallToolResult, Out, error) {
+		var zero Out
+		params, err := sdkbridge.FromSDK[mcplib.CallToolRequestParams](request.Params)
+		if err != nil {
+			return nil, zero, typed(ErrProtocol, "tool request", err)
+		}
+		owned := &ToolRequest{Params: params, session: &ServerSession{sdk: request.Session}, protocolVersion: request.ProtocolVersion(), headers: copiedRequestHeaders(request)}
+		result, output, err := handler(ctx, owned, input)
+		// A nil result delegates result construction to the SDK's typed handler.
+		// Handler errors keep the SDK's documented error fulfillment behavior.
+		if err != nil || result == nil {
+			return nil, output, err
+		}
+		converted, err := sdkbridge.ToSDK[sdk.CallToolResult](result)
+		return converted, output, err
+	})
 	return nil
 }
 

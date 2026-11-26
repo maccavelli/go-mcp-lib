@@ -5,8 +5,6 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
-
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
@@ -51,7 +49,7 @@ func TestServerOptionsValidation(t *testing.T) {
 
 func TestAddToolDuplicateRejected(t *testing.T) {
 	server := newTestServer(t)
-	addHandler := func(ctx context.Context, req *sdk.CallToolRequest, in map[string]any) (*sdk.CallToolResult, map[string]any, error) {
+	addHandler := func(ctx context.Context, req *ToolRequest, in map[string]any) (*mcplib.CallToolResult, map[string]any, error) {
 		return nil, nil, nil
 	}
 	if err := AddTool(server, &ToolRegistration{Name: "dup"}, addHandler); err != nil {
@@ -71,7 +69,7 @@ func TestAddToolValidation(t *testing.T) {
 	if err := AddTool[map[string]any, map[string]any](server, &ToolRegistration{}, nil); err == nil {
 		t.Error("FAIL empty name accepted")
 	}
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in map[string]any) (*sdk.CallToolResult, map[string]any, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in map[string]any) (*mcplib.CallToolResult, map[string]any, error) {
 		return nil, nil, nil
 	}
 	if err := AddTool[map[string]any, map[string]any](server, &ToolRegistration{Name: "x"}, nil); err == nil {
@@ -86,7 +84,7 @@ func TestConcurrentServersSameToolName(t *testing.T) {
 	// G13: admission is instance-scoped; two servers may register the
 	// same tool name independently.
 	a, b := newTestServer(t), newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in map[string]any) (*sdk.CallToolResult, map[string]any, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in map[string]any) (*mcplib.CallToolResult, map[string]any, error) {
 		return nil, nil, nil
 	}
 	if err := AddTool(a, &ToolRegistration{Name: "shared"}, handler); err != nil {

@@ -32,6 +32,19 @@ GOOD = stream(("start", None), ("run", "TestCase"), ("pass", "TestCase"), ("pass
 
 
 class TestRepairA02GateAccounting(unittest.TestCase):
+    def test_failed_test_diagnostics_survive_later_output(self):
+        failure = "fixture owned validation failed"
+        events = [dict(Action="output", Package="fixture/p", Test="TestBroken", Output=failure),
+                  dict(Action="fail", Package="fixture/p", Test="TestBroken"),
+                  dict(Action="output", Package="fixture/p", Test="TestOther", Output="later" * 3000)]
+        body = "\n".join(map(json.dumps, events))
+        details = common.failed_test_diagnostics(body)
+        self.assertIn(failure, "".join(details))
+        self.assertNotIn("later", "".join(details))
+        huge = body.replace(failure, "x" * 100000)
+        self.assertLessEqual(len("".join(common.failed_test_diagnostics(huge))), 65536)
+        self.assertEqual(common.failed_test_diagnostics("{}\n[]\ninvalid"), [])
+
     def test_complete_and_parallel(self):
         self.assertEqual(common.account_tests(GOOD, {"fixture/p"}), ([], 1))
         parallel = stream(("start", None), ("run", "TestCase"), ("pause", "TestCase"),
@@ -115,6 +128,23 @@ class TestRepairA02GateAccounting(unittest.TestCase):
 
 
 class TestRepairA03LintAndPreAdd(unittest.TestCase):
+    def test_prepared_tool_selection_reaches_child_without_policy_override(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            executable = common.linter_path(root)
+            executable.parent.mkdir(parents=True)
+            executable.write_text("fixture tool selection")
+            with patch.dict(os.environ, {}, clear=True):
+                self.assertEqual(common.linter_executable(root), str(executable))
+            selected = "reviewed-fixture-tool"
+            result = common.run([sys.executable, "-c", "import os; print(os.environ['GO_MCP_LINTER'])"], ROOT,
+                                env_updates={"GO_MCP_LINTER": selected})
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(result.stdout.strip(), selected)
+            with self.assertRaisesRegex(ValueError, "limited to prepared tool selection"):
+                common.run([sys.executable, "-c", "raise AssertionError('must not run')"], ROOT,
+                           env_updates={"CGO_ENABLED": "1"})
+
     def test_gofmt_is_readonly_and_nested_modules_are_separate(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

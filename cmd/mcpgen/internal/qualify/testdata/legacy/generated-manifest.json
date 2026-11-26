@@ -1,0 +1,8 @@
+{
+  "revision": "2026-07-28",
+  "files": [
+    "aliases.go",
+    "constants.go",
+    "owned.go"
+  ]
+}

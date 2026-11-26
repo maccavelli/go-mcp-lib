@@ -28,13 +28,18 @@ def environment(*, network: bool = False) -> dict[str, str]:
 
 
 def run(args: list[str], cwd: Path, *, network: bool = False,
-        timeout: int = 600, gobin: Path | None = None) -> subprocess.CompletedProcess[str]:
+        timeout: int = 600, gobin: Path | None = None,
+        env_updates: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
     """Retain logs on disk; bound memory and terminate the process tree on timeout."""
     limit = 32 * 1024 * 1024
     directory = Path(tempfile.mkdtemp(prefix="mcp-gate-log-"))
     options = {"start_new_session": True} if os.name != "nt" else {
         "creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
     env = environment(network=network)
+    if env_updates:
+        if set(env_updates) - {"GO_MCP_LINTER"}:
+            raise ValueError("execution overrides are limited to prepared tool selection")
+        env.update(env_updates)
     if gobin is not None:
         env["GOBIN"] = str(gobin)
     try:
@@ -214,11 +219,48 @@ def test_module(root: Path, name: str) -> int:
         required = required_inventory(repository, name)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return failures + report(f"unit.{name}", [f"required test inventory: {exc}"])
-    result = run(["go", "test", "-vet=off", "-count=1", "-json", "./..."], root)
+    result = run(["go", "test", "-vet=off", "-count=1", "-json", "./..."], root,
+                 env_updates={"GO_MCP_LINTER": linter_executable(repository)})
     errors, passed = account_tests(result.stdout, packages, no_tests, required)
+    errors.extend(failed_test_diagnostics(result.stdout))
     if result.returncode:
-        errors.append(f"go test exit {result.returncode}: {(result.stdout + result.stderr)[-2000:]}")
+        logs = getattr(result, "log_directory", "unavailable")
+        errors.append(f"go test exit {result.returncode}; complete logs: {logs}: {(result.stdout + result.stderr)[-2000:]}")
     return failures + report(f"unit.{name}", errors, f"{passed} tests passed; {len(packages)} packages accounted")
+
+
+def failed_test_diagnostics(stream: str) -> list[str]:
+    """Return bounded failed-test details, independent of temporary log lifetime.
+
+    Accounting owns stream validity. This only recovers diagnostic output and
+    never turns a failed or malformed stream into a successful result.
+    """
+    details = {}
+    failed = set()
+    for line in stream.splitlines():
+        try:
+            event = json.loads(line)
+        except (json.JSONDecodeError, ValueError):
+            continue
+        if not isinstance(event, dict):
+            continue
+        package, test = event.get("Package"), event.get("Test")
+        if not isinstance(package, str) or not isinstance(test, str):
+            continue
+        key = (package, test)
+        if event.get("Action") == "fail":
+            failed.add(key)
+        if event.get("Action") == "output" and isinstance(event.get("Output"), str):
+            details[key] = (details.get(key, "") + event["Output"])[-8192:]
+    output = []
+    budget = 65536
+    for key in sorted(failed):
+        message = f"{key[0]}/{key[1]} retained failure detail:\n{details.get(key, '')}"
+        if not budget:
+            break
+        output.append(message[:budget])
+        budget -= len(output[-1])
+    return output
 
 
 def required_inventory(repository: Path, name: str) -> set[tuple[str, str]]:
@@ -233,9 +275,14 @@ def required_inventory(repository: Path, name: str) -> set[tuple[str, str]]:
     return required
 
 
-def linter(root: Path, pins: dict) -> tuple[str, list[str]]:
+def linter_executable(root: Path) -> str:
+    """One tool-selection policy for analyzer runs and generated-candidate tests."""
     prepared = linter_path(root)
-    executable = os.environ.get("GO_MCP_LINTER") or (str(prepared) if prepared.is_file() else shutil.which("golangci-lint")) or "golangci-lint"
+    return os.environ.get("GO_MCP_LINTER") or (str(prepared) if prepared.is_file() else shutil.which("golangci-lint")) or "golangci-lint"
+
+
+def linter(root: Path, pins: dict) -> tuple[str, list[str]]:
+    executable = linter_executable(root)
     result = run([executable, "--version"], root)
     pin = pins["lint"]["golangci-lint"]
     version = re.search(r"version (\S+) built with go(\S+)", result.stdout)

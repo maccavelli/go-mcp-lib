@@ -11,7 +11,9 @@ package model
 
 import (
 	"fmt"
+	"math/big"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/load"
@@ -63,6 +65,7 @@ type Node struct {
 	Const        any      // exact value
 	Required     []string // in declaration order
 	Properties   map[string]*Node
+	Additional   *Node // schema-valued additionalProperties; never a synthetic property
 	Items        *Node
 	Open         *bool  // nil = unspecified; false = additionalProperties:false
 	Minimum      string // exact number token
@@ -92,6 +95,8 @@ type Node struct {
 type Model struct {
 	Source      string
 	Definitions map[string]*Node
+	// Document retains the exact validated input for generated wire hooks.
+	Document []byte
 }
 
 // Build builds the model for a loaded document.
@@ -100,10 +105,23 @@ func Build(doc *load.Document) (*Model, error) {
 	if !ok {
 		return nil, fmt.Errorf("model: %s: root is not an object", doc.Source)
 	}
-	if vocab, present := root["$vocabulary"].(map[string]any); present {
-		for uri, required := range vocab {
+	if declaration, present := root["$vocabulary"]; present {
+		vocab, ok := declaration.(map[string]any)
+		if !ok {
+			return nil, fmt.Errorf("model: %s #/$vocabulary: declaration must be an object", doc.Source)
+		}
+		uris := make([]string, 0, len(vocab))
+		for uri := range vocab {
+			uris = append(uris, uri)
+		}
+		sort.Strings(uris)
+		for _, uri := range uris {
+			required := vocab[uri]
 			isRequired, ok := required.(bool)
-			if ok && isRequired && !requiredVocabularies[uri] {
+			if !ok {
+				return nil, fmt.Errorf("model: %s #/$vocabulary: required flag must be boolean", doc.Source)
+			}
+			if isRequired && !requiredVocabularies[uri] {
 				return nil, fmt.Errorf(
 					"model: %s: unknown required vocabulary %s", doc.Source, uri,
 				)
@@ -127,13 +145,13 @@ func Build(doc *load.Document) (*Model, error) {
 				"model: %s: definition %q is not an object", doc.Source, name,
 			)
 		}
-		node, err := buildNode(doc.Source, "#/$defs/"+name, raw)
+		node, err := buildNode(doc.Source, "#/$defs/"+escapePointer(name), raw)
 		if err != nil {
 			return nil, err
 		}
 		definitions[name] = node
 	}
-	return &Model{Source: doc.Source, Definitions: definitions}, nil
+	return &Model{Source: doc.Source, Definitions: definitions, Document: append([]byte(nil), doc.Bytes...)}, nil
 }
 
 // assertionShaped lists JSON Schema 2020-12 keywords that assert but are
@@ -148,7 +166,9 @@ var assertionShaped = map[string]bool{
 	"dependentSchemas": true, "contains": true, "minContains": true,
 	"maxContains": true, "prefixItems": true, "unevaluatedProperties": true,
 	"unevaluatedItems": true, "if": true, "then": true, "else": true,
-	"not": true,
+	"not":       true,
+	"minLength": true, "maxLength": true,
+	"$dynamicRef": true, "$dynamicAnchor": true,
 }
 
 // requiredVocabularies are the vocabularies the pinned dialect supports.
@@ -172,7 +192,13 @@ func buildNode(source, pointer string, raw map[string]any) (*Node, error) {
 		NumberTokens: make(map[string]string),
 		Annotations:  make(map[string]any),
 	}
-	for keyword, value := range raw {
+	keywords := make([]string, 0, len(raw))
+	for keyword := range raw {
+		keywords = append(keywords, keyword)
+	}
+	sort.Strings(keywords)
+	for _, keyword := range keywords {
+		value := raw[keyword]
 		if assertionShaped[keyword] {
 			return nil, fmt.Errorf(
 				"model: %s %s: unsupported assertion keyword %q is outside the pinned inventory",
@@ -262,7 +288,7 @@ func applyKeyword(node *Node, source, pointer, keyword string, value any) error 
 			if !ok {
 				return fmt.Errorf("model: %s %s: property %q is not an object", source, pointer, name)
 			}
-			child, err := buildNode(source, pointer+"/properties/"+name, raw)
+			child, err := buildNode(source, pointer+"/properties/"+escapePointer(name), raw)
 			if err != nil {
 				return err
 			}
@@ -290,7 +316,7 @@ func applyKeyword(node *Node, source, pointer, keyword string, value any) error 
 			if err != nil {
 				return err
 			}
-			node.Properties["<additional>"] = child
+			node.Additional = child
 		default:
 			return fmt.Errorf("model: %s %s: additionalProperties is neither bool nor object", source, pointer)
 		}
@@ -310,10 +336,15 @@ func applyKeyword(node *Node, source, pointer, keyword string, value any) error 
 		if !ok {
 			return fmt.Errorf("model: %s %s: %s is not a number", source, pointer, keyword)
 		}
-		var parsed int
-		if _, err := fmt.Sscanf(num.Token, "%d", &parsed); err != nil {
-			return fmt.Errorf("model: %s %s: %s %q is not an integer", source, pointer, keyword, num.Token)
+		value, valid := new(big.Rat).SetString(num.Token)
+		if !valid || !value.IsInt() || value.Sign() < 0 || !value.Num().IsInt64() {
+			return fmt.Errorf("model: %s %s: %s is not a representable nonnegative integer", source, pointer, keyword)
 		}
+		parsed, err := strconv.Atoi(value.Num().String())
+		if err != nil {
+			return fmt.Errorf("model: %s %s: %s exceeds the collection-bound representation", source, pointer, keyword)
+		}
+		node.NumberTokens[keyword] = num.Token
 		if keyword == "minItems" {
 			node.MinItems = parsed
 		} else {
@@ -348,6 +379,10 @@ func applyKeyword(node *Node, source, pointer, keyword string, value any) error 
 		return fmt.Errorf("model: %s %s: unsupported assertion keyword %q", source, pointer, keyword)
 	}
 	return nil
+}
+
+func escapePointer(text string) string {
+	return strings.ReplaceAll(strings.ReplaceAll(text, "~", "~0"), "/", "~1")
 }
 
 // Unsupported returns the keywords classified unsupported on a node.

@@ -5,12 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
 func TestAddPromptValidation(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.GetPromptRequest) (*sdk.GetPromptResult, error) {
+	handler := func(ctx context.Context, req *PromptRequest) (*mcplib.GetPromptResult, error) {
 		return nil, nil
 	}
 	if err := AddPrompt(server, &PromptRegistration{}, handler); err == nil {
@@ -21,13 +21,13 @@ func TestAddPromptValidation(t *testing.T) {
 	}
 	dupArgs := &PromptRegistration{
 		Name:      "p",
-		Arguments: []*sdk.PromptArgument{{Name: "a"}, {Name: "a"}},
+		Arguments: []*mcplib.PromptArgument{{Name: "a"}, {Name: "a"}},
 	}
 	if err := AddPrompt(server, dupArgs, handler); err == nil ||
 		!strings.Contains(err.Error(), "duplicate argument") {
 		t.Errorf("FAIL duplicate argument accepted: %v", err)
 	}
-	ok := &PromptRegistration{Name: "p", Arguments: []*sdk.PromptArgument{{Name: "a"}}}
+	ok := &PromptRegistration{Name: "p", Arguments: []*mcplib.PromptArgument{{Name: "a"}}}
 	if err := AddPrompt(server, ok, handler); err != nil {
 		t.Fatalf("FAIL valid prompt rejected: %v", err)
 	}
@@ -38,7 +38,7 @@ func TestAddPromptValidation(t *testing.T) {
 
 func TestAddResourceValidation(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.ReadResourceRequest) (*sdk.ReadResourceResult, error) {
+	handler := func(ctx context.Context, req *ResourceRequest) (*mcplib.ReadResourceResult, error) {
 		return nil, nil
 	}
 	cases := []struct {
@@ -69,7 +69,7 @@ func TestAddResourceValidation(t *testing.T) {
 
 func TestAddResourceTemplateValidation(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.ReadResourceRequest) (*sdk.ReadResourceResult, error) {
+	handler := func(ctx context.Context, req *ResourceRequest) (*mcplib.ReadResourceResult, error) {
 		return nil, nil
 	}
 	cases := []struct {

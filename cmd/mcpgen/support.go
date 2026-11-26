@@ -5,24 +5,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify"
 )
-
-// inputManifest is the committed schema input manifest.
-type inputManifest struct {
-	Version     int    `json:"version"`
-	Revision    string `json:"revision"`
-	Source      source `json:"source"`
-	SHA256      string `json:"sha256"`
-	Bytes       int64  `json:"bytes"`
-	Definitions int    `json:"definitions"`
-}
-
-type source struct {
-	Repository string `json:"repository"`
-	Commit     string `json:"commit"`
-	Path       string `json:"path"`
-	URL        string `json:"url"`
-}
 
 // loadJSONFile decodes a JSON file into T.
 func loadJSONFile[T any](path string) (T, error) {
@@ -40,29 +25,30 @@ func loadJSONFile[T any](path string) (T, error) {
 
 // checkReport is what `check` verified.
 type checkReport struct {
-	Repo            string   `json:"repo"`
-	Schema          string   `json:"schema-sha256"`
-	Manifest        bool     `json:"manifest-present"`
-	Inventory       []string `json:"inventory"`
-	DriftFiles      []string `json:"drift,omitempty"`
-	ExtraFiles      []string `json:"unowned,omitempty"`
-	IncompleteFiles []string `json:"interrupted,omitempty"`
+	Repo            string            `json:"repo"`
+	Schema          string            `json:"schema-sha256"`
+	Manifest        bool              `json:"manifest-present"`
+	Inventory       []string          `json:"inventory"`
+	DriftFiles      []string          `json:"drift,omitempty"`
+	ExtraFiles      []string          `json:"unowned,omitempty"`
+	IncompleteFiles []string          `json:"interrupted,omitempty"`
+	Qualification   []*qualify.Report `json:"qualification"`
 }
 
 func (r *checkReport) ok() bool {
-	return r.Manifest && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0 && len(r.IncompleteFiles) == 0
+	return qualify.AllPassed(r.Qualification) && r.Manifest && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0 && len(r.IncompleteFiles) == 0
 }
 
 // interrupted reports a tree with missing manifest-owned files but no
 // conflicting edits: an interrupted publication, completable by design.
 func (r *checkReport) interrupted() bool {
-	return len(r.IncompleteFiles) > 0 && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0
+	return qualify.AllPassed(r.Qualification) && len(r.IncompleteFiles) > 0 && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0
 }
 
 // firstGeneration reports a destination with no prior emission: every
 // file is new and publication is the only sensible act.
 func (r *checkReport) firstGeneration() bool {
-	return !r.Manifest && len(r.Inventory) == 0 && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0
+	return qualify.AllPassed(r.Qualification) && !r.Manifest && len(r.Inventory) == 0 && len(r.DriftFiles) == 0 && len(r.ExtraFiles) == 0
 }
 
 func (r *checkReport) data() map[string]any {
@@ -74,6 +60,7 @@ func (r *checkReport) data() map[string]any {
 		"drift":         r.DriftFiles,
 		"unowned":       r.ExtraFiles,
 		"interrupted":   r.IncompleteFiles,
+		"qualification": r.Qualification,
 	}
 }
 

@@ -6,8 +6,6 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
-
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
@@ -21,7 +19,7 @@ func TestConcurrentConnectionsIsolation(t *testing.T) {
 
 	blocked := make(chan struct{})
 	release := make(chan struct{})
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in slowInput) (*sdk.CallToolResult, slowOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in slowInput) (*mcplib.CallToolResult, slowOutput, error) {
 		switch in.Client {
 		case "slow":
 			close(blocked)
@@ -72,13 +70,13 @@ func TestConcurrentConnectionsIsolation(t *testing.T) {
 			t.Errorf("FAIL fast call: %v", err)
 			return
 		}
-		if result.IsError {
+		if isError, _ := result.IsError.Get(); isError {
 			t.Errorf("FAIL fast call reported error: %+v", result)
 			return
 		}
 		found := false
 		for _, content := range result.Content {
-			if text, ok := content.(*mcplib.TextContent); ok && text.Text != "" {
+			if text, err := content.AsTextContent(); err == nil && text.Text != "" {
 				found = true
 			}
 		}
@@ -112,7 +110,7 @@ func TestConcurrentConnectionsIsolation(t *testing.T) {
 func TestTwoServersSameToolNameLive(t *testing.T) {
 	serverA := newTestServer(t)
 	serverB := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in tagInput) (*sdk.CallToolResult, tagOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in tagInput) (*mcplib.CallToolResult, tagOutput, error) {
 		return nil, tagOutput{Server: in.Expect}, nil
 	}
 	for _, s := range []*Server{serverA, serverB} {
@@ -138,7 +136,7 @@ func TestTwoServersSameToolNameLive(t *testing.T) {
 		t.Fatalf("FAIL server B call: %v", err)
 	}
 	for name, res := range map[string]*mcplib.CallToolResult{"A": resA, "B": resB} {
-		if res.IsError {
+		if isError, _ := res.IsError.Get(); isError {
 			t.Errorf("FAIL server %s reported error", name)
 		}
 	}

@@ -1,0 +1,81 @@
+package protocol_test
+
+import (
+	legacyjson "encoding/json"
+	json "encoding/json/v2"
+	"reflect"
+	"strings"
+	"testing"
+
+	p "github.com/maccavelli/go-mcp-lib/protocol"
+)
+
+// These independently written examples pin represented fields through each
+// retained alias's SDK codec and native codec. R4 separately owns the complete
+// absent/null/zero/unknown/numeric differential profile; this is not that exit.
+func TestSDKAliasWireContract(t *testing.T) {
+	for _, test := range []struct {
+		name  string
+		body  string
+		value any
+	}{
+		{"Annotations", `{"audience":["user"],"lastModified":"2026-01-01T00:00:00Z","priority":0.5}`, &p.Annotations{}},
+		{"ElicitResult", `{"action":"accept","content":{"answer":"ok"},"_meta":{"fixture":true}}`, &p.ElicitResult{}},
+		{"Icon", `{"src":"https://example.invalid/icon.svg","mimeType":"image/svg+xml","sizes":["any"],"theme":"light"}`, &p.Icon{}},
+		{"Implementation", `{"name":"fixture","title":"Title","description":"description","version":"1","websiteUrl":"https://example.invalid","icons":[{"src":"https://example.invalid/icon.svg"}]}`, &p.Implementation{}},
+		{"ProgressNotificationParams", `{"progressToken":"token","progress":1,"total":2,"message":"working","_meta":{"fixture":true}}`, &p.ProgressNotificationParams{}},
+		{"Prompt", `{"name":"prompt","title":"Title","description":"description","arguments":[{"name":"arg","required":true}]}`, &p.Prompt{}},
+		{"PromptArgument", `{"name":"arg","title":"Title","description":"description","required":true}`, &p.PromptArgument{}},
+		{"Resource", `{"uri":"file:///fixture","name":"resource","title":"Title","size":1,"mimeType":"text/plain","annotations":{"priority":0.5}}`, &p.Resource{}},
+		{"ResourceContents", `{"uri":"file:///fixture","mimeType":"text/plain","text":"body"}`, &p.ResourceContents{}},
+		{"ResourceTemplate", `{"uriTemplate":"file:///{name}","name":"template","mimeType":"text/plain"}`, &p.ResourceTemplate{}},
+		{"ResourceUpdatedNotificationParams", `{"uri":"file:///fixture","_meta":{"fixture":true}}`, &p.ResourceUpdatedNotificationParams{}},
+		{"Role", `"assistant"`, new(p.Role)},
+		{"Tool", `{"name":"tool","title":"Title","description":"description","inputSchema":{"type":"object"}}`, &p.Tool{}},
+		{"ToolAnnotations", `{"readOnlyHint":true,"idempotentHint":true,"destructiveHint":false,"openWorldHint":false}`, &p.ToolAnnotations{}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			if err := json.Unmarshal([]byte(test.body), test.value); err != nil {
+				t.Fatal(err)
+			}
+			sdkBody, err := marshalAliasForSDK(test.value)
+			if err != nil {
+				t.Fatal(err)
+			}
+			nativeBody, err := json.Marshal(test.value)
+			if err != nil {
+				t.Fatal(err)
+			}
+			for codec, body := range map[string][]byte{"SDK": sdkBody, "native": nativeBody} {
+				want, got := aliasJSON(t, []byte(test.body)), aliasJSON(t, body)
+				if fields, ok := want.(map[string]any); ok {
+					actual, ok := got.(map[string]any)
+					if !ok {
+						t.Errorf("FAIL %s alias wire %s: expected object, got %s", codec, test.name, body)
+						continue
+					}
+					for key, value := range fields {
+						if !reflect.DeepEqual(value, actual[key]) {
+							t.Errorf("FAIL %s alias wire %s/%s: want %v, got %s", codec, test.name, key, value, body)
+						}
+					}
+				} else if !reflect.DeepEqual(want, got) {
+					t.Errorf("FAIL %s alias wire %s: want %v, got %s", codec, test.name, want, body)
+				}
+			}
+		})
+	}
+}
+
+func marshalAliasForSDK(value any) ([]byte, error) { return legacyjson.Marshal(value) }
+
+func aliasJSON(t *testing.T, body []byte) any {
+	t.Helper()
+	decoder := legacyjson.NewDecoder(strings.NewReader(string(body)))
+	decoder.UseNumber()
+	var value any
+	if err := decoder.Decode(&value); err != nil {
+		t.Fatal(err)
+	}
+	return value
+}

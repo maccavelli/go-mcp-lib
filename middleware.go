@@ -7,10 +7,9 @@ import (
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-// Middleware is an owned link in the server's receiving chain. It
-// wraps a MethodHandler and returns the next one. Middleware sees the
-// SDK request; owned guards run outside it by construction.
-type Middleware func(sdk.MethodHandler) sdk.MethodHandler
+// Middleware wraps an owned MethodHandler. Requests, connection handles and
+// canonical results cross the private SDK bridge through their wire codecs.
+type Middleware func(MethodHandler) MethodHandler
 
 // serverChain assembles the mandated ordering around the SDK's final
 // handler. From outermost to innermost:
@@ -33,7 +32,7 @@ type serverChain struct {
 	user     []Middleware
 	auth     Middleware
 	admit    Middleware
-	validate Middleware // result validation after handler
+	validate sdk.Middleware // private result validation after handler
 }
 
 // enforce is the mandatory outermost layer. It rejects before any
@@ -54,16 +53,16 @@ func (c *serverChain) wrap(final sdk.MethodHandler) sdk.MethodHandler {
 		next = c.validate(next)
 	}
 	if c.admit != nil {
-		next = c.admit(next)
+		next = receivingMiddleware(c.admit)(next)
 	}
 	if c.auth != nil {
-		next = c.auth(next)
+		next = receivingMiddleware(c.auth)(next)
 	}
 	for i := len(c.user) - 1; i >= 0; i-- {
-		next = c.user[i](next)
+		next = receivingMiddleware(c.user[i])(next)
 	}
 	if c.observe != nil {
-		next = c.observe(next)
+		next = receivingMiddleware(c.observe)(next)
 	}
 	return c.enforce(next)
 }
@@ -73,7 +72,7 @@ func (c *serverChain) wrap(final sdk.MethodHandler) sdk.MethodHandler {
 // transformation middleware, before emission. Tools with a declared
 // output schema have their structured content checked; undeclared
 // tools pass through.
-func (s *Server) outputValidation() Middleware {
+func (s *Server) outputValidation() sdk.Middleware {
 	return func(next sdk.MethodHandler) sdk.MethodHandler {
 		return func(ctx context.Context, method string, req sdk.Request) (sdk.Result, error) {
 			result, err := next(ctx, method, req)
@@ -140,7 +139,7 @@ func (s *Server) UseMiddleware(m ...Middleware) error {
 func (s *Server) rebuildReceiving() []sdk.Middleware {
 	sdkLinks := make([]sdk.Middleware, 0, len(s.userChain))
 	for _, link := range s.userChain {
-		sdkLinks = append(sdkLinks, sdk.Middleware(link))
+		sdkLinks = append(sdkLinks, receivingMiddleware(link))
 	}
 	return sdkLinks
 }

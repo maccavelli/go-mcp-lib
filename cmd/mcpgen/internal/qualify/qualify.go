@@ -10,12 +10,12 @@
 package qualify
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
+	"strings"
+	"time"
 )
 
 // Targets are the three supported platforms; compile-only, never executed
@@ -43,7 +43,8 @@ type Report struct {
 func GoEnv(cache string) []string {
 	return []string{
 		"GOWORK=off", "GOTOOLCHAIN=local", "GOPROXY=off", "GOSUMDB=off",
-		"GOCACHE=" + cache, "GOFLAGS=-mod=mod",
+		"CGO_ENABLED=0", "GOENV=off", "GOEXPERIMENT=",
+		"GOCACHE=" + cache, "GOFLAGS=-mod=readonly",
 	}
 }
 
@@ -52,22 +53,14 @@ type Runner func(env []string, dir string, args ...string) (int, string)
 
 // OSRunner runs real go commands through argument arrays.
 func OSRunner() Runner {
+	return CommandRunner("go")
+}
+
+// CommandRunner applies the qualification timeout, output and process bounds to
+// a prepared executable, including the gate-selected native analyzer.
+func CommandRunner(executable string) Runner {
 	return func(env []string, dir string, args ...string) (int, string) {
-		cmd := exec.Command("go", args...)
-		cmd.Dir = dir
-		cmd.Env = append(os.Environ(), env...)
-		var out bytes.Buffer
-		cmd.Stdout = &out
-		cmd.Stderr = &out
-		code := 0
-		if err := cmd.Run(); err != nil {
-			if exitErr, ok := err.(*exec.ExitError); ok {
-				code = exitErr.ExitCode()
-			} else {
-				code = 1
-			}
-		}
-		return code, out.String()
+		return runCommand(executable, env, dir, args, 10*time.Minute, 32<<20)
 	}
 }
 
@@ -94,7 +87,7 @@ func CompileTree(runner Runner, cache, moduleDir string) (*Report, error) {
 func compileTarget(runner Runner, cache, moduleDir, target string, tests bool) Result {
 	args := []string{"build"}
 	if tests {
-		args = []string{"test", "-run", "^$", "-c", "-o", os.DevNull}
+		args = []string{"test", "-vet=off", "-c", "-o", os.DevNull}
 	}
 	args = append(args, "./...")
 	env := append(GoEnv(cache), "GOOS="+splitOS(target), "GOARCH="+splitArch(target))
@@ -126,7 +119,7 @@ func tail(s string, n int) string {
 	if len(s) <= n {
 		return s
 	}
-	return s[len(s)-n:]
+	return strings.Clone(s[len(s)-n:])
 }
 
 // ExcludeStale removes files in dst that the manifest owns but the new

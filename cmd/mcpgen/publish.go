@@ -49,7 +49,7 @@ func publish(repo string, report *checkReport) (*pubReport, error) {
 		return nil, fmt.Errorf("generate: %w", err)
 	}
 	defer func() { _ = os.RemoveAll(scratch) }()
-	sdkDir, err := pinnedSDKDir()
+	sdkDir, err := pinnedSDKDir(repo)
 	if err != nil {
 		return nil, fmt.Errorf("generate: %w", err)
 	}

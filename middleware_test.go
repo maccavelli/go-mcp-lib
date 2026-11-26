@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -14,8 +15,8 @@ import (
 func TestMiddlewareOrdering(t *testing.T) {
 	var trace []string
 	record := func(layer string) Middleware {
-		return func(next sdk.MethodHandler) sdk.MethodHandler {
-			return func(ctx context.Context, method string, req sdk.Request) (sdk.Result, error) {
+		return func(next MethodHandler) MethodHandler {
+			return func(ctx context.Context, method string, req Request) (any, error) {
 				trace = append(trace, layer)
 				return next(ctx, method, req)
 			}
@@ -23,7 +24,7 @@ func TestMiddlewareOrdering(t *testing.T) {
 	}
 
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in traceInput) (*sdk.CallToolResult, traceOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in traceInput) (*mcplib.CallToolResult, traceOutput, error) {
 		trace = append(trace, "handler")
 		return nil, traceOutput{Ok: true}, nil
 	}
@@ -73,8 +74,8 @@ func TestMiddlewareOrdering(t *testing.T) {
 func TestMandatoryGateRejectsBeforeUserMiddleware(t *testing.T) {
 	server := newTestServer(t)
 	userRan := false
-	user := func(next sdk.MethodHandler) sdk.MethodHandler {
-		return func(ctx context.Context, method string, req sdk.Request) (sdk.Result, error) {
+	user := func(next MethodHandler) MethodHandler {
+		return func(ctx context.Context, method string, req Request) (any, error) {
 			userRan = true
 			return next(ctx, method, req)
 		}
@@ -104,7 +105,7 @@ func TestMandatoryGateRejectsBeforeUserMiddleware(t *testing.T) {
 // layer refuses a second installation instead of silently stacking.
 func TestSingleSlotLayersRejectDoubleInstall(t *testing.T) {
 	server := newTestServer(t)
-	noop := func(next sdk.MethodHandler) sdk.MethodHandler { return next }
+	noop := func(next MethodHandler) MethodHandler { return next }
 	if err := server.Observation(noop); err != nil {
 		t.Fatal(err)
 	}

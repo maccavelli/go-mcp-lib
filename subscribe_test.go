@@ -5,8 +5,6 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
-
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
 
@@ -15,11 +13,19 @@ import (
 // and the subscription handler firing.
 func TestSubscribeReadUpdate(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.ReadResourceRequest) (*sdk.ReadResourceResult, error) {
-		return &sdk.ReadResourceResult{
-			Contents: []*sdk.ResourceContents{
-				{URI: "file:///data", Text: "initial"},
-			},
+	handler := func(ctx context.Context, req *ResourceRequest) (*mcplib.ReadResourceResult, error) {
+		if req.Params.URI != "file:///data" || req.Session() == nil || req.ProtocolVersion() == "" {
+			t.Error("FAIL owned resource context lost request or connection")
+		}
+		content, err := mcplib.ReadResourceResultFieldsContentsItemFromTextResourceContents(mcplib.TextResourceContents{URI: "file:///data", Text: "initial"})
+		if err != nil {
+			return nil, err
+		}
+		return &mcplib.ReadResourceResult{
+			Contents:   []mcplib.ReadResourceResultFieldsContentsItem{content},
+			CacheScope: "private",
+			TTLMs:      "0",
+			ResultType: "complete",
 		}, nil
 	}
 	if err := AddResource(server, &ResourceRegistration{
@@ -58,7 +64,11 @@ func TestSubscribeReadUpdate(t *testing.T) {
 	if err != nil {
 		t.Fatalf("FAIL ReadResource: %v", err)
 	}
-	if len(result.Contents) != 1 || result.Contents[0].Text != "initial" {
+	if len(result.Contents) != 1 {
+		t.Fatalf("FAIL expected one resource content: %+v", result.Contents)
+	}
+	text, textErr := result.Contents[0].AsTextResourceContents()
+	if textErr != nil || text.Text != "initial" {
 		t.Fatalf("FAIL unexpected contents: %+v", result.Contents)
 	}
 
@@ -81,7 +91,7 @@ func TestSubscribeReadUpdate(t *testing.T) {
 // TestElicitValidation: parameter validation without a live peer.
 func TestElicitValidation(t *testing.T) {
 	server := newTestServer(t)
-	handler := func(ctx context.Context, req *sdk.CallToolRequest, in elicitInput) (*sdk.CallToolResult, elicitOutput, error) {
+	handler := func(ctx context.Context, req *ToolRequest, in elicitInput) (*mcplib.CallToolResult, elicitOutput, error) {
 		return nil, elicitOutput{}, nil
 	}
 	if err := AddTool(server, &ToolRegistration{Name: "e"}, handler); err != nil {

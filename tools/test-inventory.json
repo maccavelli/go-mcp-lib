@@ -226,6 +226,30 @@
       {
         "package": "github.com/maccavelli/go-mcp-lib",
         "test": "TestClientSessionGuards"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib",
+        "test": "TestOwnedResultBoundary"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/internal/sdkbridge",
+        "test": "TestSDKWireConversion"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib",
+        "test": "TestOwnedPublicAPI"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib",
+        "test": "TestOwnedMiddlewareLive"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib",
+        "test": "TestOwnedMiddlewareBoundary"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib",
+        "test": "TestSDKResultProjection"
       }
     ],
     "generator": [
@@ -460,6 +484,90 @@
       {
         "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
         "test": "TestExitCodesAreContract"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/load",
+        "test": "TestRepairA05StrictLoader"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/resolve",
+        "test": "TestRepairA06References"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11CandidateQualification"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/model",
+        "test": "TestRepairA07Vocabulary"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap",
+        "test": "TestRepairA09AliasClosure"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap",
+        "test": "TestRepairA09PinnedInventory"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap",
+        "test": "TestRepairA09TargetExports"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA08ProvenanceAndMapping"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile",
+        "test": "TestRepairA08InputPolicy"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile",
+        "test": "TestRepairA08SDKContext"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10TotalBindings"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10NameGuards"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10GeneratedWire"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10DocumentSnapshot"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10IntersectionProjection"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11CompleteSnapshot"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11OwnershipAndContainment"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11RealPlatformPlant"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11ReportAccounting"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11BoundedRunner"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA11ActualProduct"
       }
     ]
   }
