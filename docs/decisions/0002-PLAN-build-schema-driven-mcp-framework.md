@@ -25,7 +25,8 @@ model/API and complete candidate exit passed on 2026-11-26; R3 publication and
 installed-tree qualification passed on 2026-11-27. The coherent R2/R3 commit is
 `d1276de4761aa77d6d3389370e6781c049753131`, including the qualified Make/hook
 repair and pass-7 installed checks described below.
-R4/R5 and Stage 7 remain pending.
+R4 codec/canonical-validator qualification passed on 2026-11-27, as recorded
+in pass 7 below. R5 and Stage 7 remain pending.
 The owner committed and pushed the R2 work in progress as `5c00e36` on
 2026-11-26. That historical checkpoint was not a qualified R2/R3 exit;
 the reviewed contract has now been safely published and requalified locally.
@@ -1705,6 +1706,385 @@ re-run qualification, rather than pairing old generated code with new inputs.
   occurred without its separate explicit authorization.
 
 ## Execution Record
+
+### 2026-11-27 — R4 pass 7 exit: native qualification and race passed
+
+Qualified the repaired codec, canonical validator, generated bindings and
+runtime callers under RA15–RA17 and the original Stage 5 cases. Corrected the
+dual-interface test oracle against the pinned Go implementation, retained
+legacy-only and real SDK cases, and proved the bridge's legacy collection
+policy with a compilable wrong-encoder plant. The generated-wire fixture now
+copies its production codec/validator dependencies; independent wire, analyzer
+and assertion-bypass tests execute unchanged. Replaced the flagged conditional
+with the equivalent tagged switch. The required `make lint` target passed both
+modules with zero issues from both analysis owners.
+
+Failed generation now retains bounded per-module/per-target compilation
+reports in the versioned failed envelope, preserving its error field and
+nonzero exit. A deliberately uncompilable source exists only in the recovery
+test's owned scratch tree; the actual CLI must reject it, report the specific
+compiler failure and preserve destination bytes. The ordinary recovery path,
+killed-child checkpoints and restoration assertions then execute with the
+original deadlines. No target, assertion or linter rule was removed.
+
+Ran `python3 -B -u scripts/qualify_r4.py --allow-network` through the shared
+queues in four environments. Each used source identity:
+
+`9c8755b471e46ee4be85e5e45ad9d6abd52382e7c3506028b80011b33390ac04`
+
+| Check | Darwin/arm64 | Physical Linux/amd64 | Windows/amd64 | WSL Linux/amd64 |
+| :--- | :--- | :--- | :--- | :--- |
+| Pinned preparation; ordinary CGO off | passed | passed | passed | passed |
+| Runtime tests/subtests; packages accounted | 2,141; 5 | 2,141; 5 | 2,141; 5 | 2,141; 5 |
+| Generator tests/subtests; packages accounted | 347; 12 | 347; 12 | 347; 12 | 347; 12 |
+| Formatting, standalone vet, both lint owners | passed | passed | passed | passed |
+| Raw control, actual duplicate/token/depth bypasses, legacy control | passed | passed | passed | passed |
+| Required assertion, rounding, location, stale-cache and pointer plants | passed | passed | passed | passed |
+| Actual SDK differential and wrong-encoder policy plant | passed | passed | passed | passed |
+| Nine malformed-review controls | passed | passed | passed | passed |
+| Regeneration; both-module three-target compilation | passed | passed | passed | passed |
+| Source preservation; final exit | passed; 0 | passed; 0 | passed; 0 | passed; 0 |
+| Execution seconds, excluding queue/transfer | 178 | 491 | 195 | 140 |
+
+The original 421 assertion identities, all 155 definition compilations, 36
+URI/template fixtures, annotation-only format behavior and exact-neighbor
+cases execute through maintained production-path checks. The vendored corpus
+retains explicit custom-dialect exclusions rather than counting compilation
+errors as passing instance validation. Independent oracles and fixture hashes
+remain committed; ordinary execution does not depend on module-cache fixtures.
+
+The earlier WSL recovery failure did not recur in any lane. Its historical
+cause remains unconfirmed; no timeout was extended. Read-only retained-event
+inspection confirmed that physical Linux's longer run completed the recovery
+test and every checkpoint successfully (330.10s total for that multi-invocation
+test). Future qualification failures now expose the failed compiler step.
+
+After its ordinary lane, queued the complete runtime module on physical Linux
+with `CGO_ENABLED=1 go test -race -vet=off -count=1 ./...`, readonly modules and
+offline dependencies. All four tested packages passed; `protocol` correctly
+reported no test files. Exit 0 in 19s. The runner excluded WSL for this race run.
+All jobs finished, and the WSL runner restored the distro's initial stopped
+state. No external repository or upstream-forge configuration was changed.
+
+R4 has no currently reproduced blocker: its decided cases and required plants
+pass. The installed ownership manifest remains
+`6968a2fee1e4814130d1da465acdc3bab8f9e1957b3e13ba8e8ed87675511383`;
+the retained review matches every published file. Stage/commit follows the
+required final documentation and pre-add checks. R5 remains pending; this exit
+does not claim raw SDK transport losslessness, guarded transports, complete
+conformance, Stage 7 readiness or the full R1–R5 prerequisite exit.
+
+### 2026-11-27 — R4 deviation: passes 7–10 approved
+
+The owner selected A, approving passes 7–10 under
+[0002-MADR-build-schema-driven-mcp-framework.md](0002-MADR-build-schema-driven-mcp-framework.md)
+and this PLAN. Repair the dual-interface/legacy-only codec qualification,
+complete the generated-wire scratch dependency context, apply the tagged-switch
+lint correction, and investigate the WSL actual CLI recovery regression with
+bounded structured compilation diagnostics. Include that R3 integration
+follow-up in R4 qualification. Prepare the pinned tools before native checks.
+Preserve all acceptance assertions, targets, deadlines and bypass controls.
+Commit only a coherent qualified phase. Pass 11 requires another owner allowance.
+
+### 2026-11-27 — R4 pass 6: reviewed generation published; qualification remains red
+
+Corrected the new review helper's overconstraint by deriving the exact API
+artifact from the verified installed artifact and codec template imports. Its
+derived SHA-256 matched the independently compiled Windows candidate. Public
+declarations/signatures, all non-codec import metadata, bindings and the other
+generated files remain unchanged. The helper rejected nine malformed review
+inputs, including unrelated API drift, failed targets and unexpected files.
+
+The actual generator compiled both modules' source and tests for all three
+tuples and published only `api.json`, `codecs.go` and
+`generated-manifest.json` in this checkout. The previous retained review is
+archived as `tools/r2-candidate-migration-pre-r4.json`; the current review
+records the new exact hashes. Published ownership manifest SHA-256:
+
+`6968a2fee1e4814130d1da465acdc3bab8f9e1957b3e13ba8e8ed87675511383`
+
+Publication completed on Darwin and in the native Windows scratch snapshot.
+Windows verified its available durability operations and reported unavailable
+native directory sync explicitly. Publication is not the R4 acceptance exit.
+
+The native Windows qualification finished with two failed check owners
+(preparation and pre-add), while raw/validator plants, review controls,
+regeneration and source preservation passed. Its fresh snapshot selected a
+system golangci-lint 2.14.0 and lacked Revive. Pinned 2.15.0/1.17.1 preparation
+must run before repeating that lane; no linter policy is relaxed. It also found
+two independent source/test integration failures introduced during R4:
+
+```text
+mcp/internal/sdkbridge/repair_test.go:112: FAIL codec hook ownership: "native" / "native"
+mcp/internal/sdkbridge/repair_test.go:116: FAIL bridge bypassed SDK legacy marshaler
+cmd/mcpgen/internal/emit/repair_test.go:180: FAIL generated wire package
+protocol/codecs.go:15:2: cannot find module providing package github.com/maccavelli/go-mcp-lib/codec: import lookup disabled by -mod=readonly
+```
+
+The dual-interface fixture assumed the v1 package would prefer `MarshalJSON`.
+The pinned Go 1.27.4 v1 compatibility implementation also honors
+`MarshalJSONTo`; see its [versioned documentation](https://pkg.go.dev/encoding/json@go1.27.4)
+and the documented [v2 method precedence](https://pkg.go.dev/encoding/json/v2@go1.27.4#MarshalerTo).
+Correct the oracle with separate legacy-only and dual-interface cases and prove
+the bridge's legacy option policy independently through nil collections. Retain
+real SDK custom/resource-link, raw-byte and semantic fixtures; do not merely
+delete a failing assertion or infer wire behavior from a JSON package name.
+
+The generated-wire scratch assembly copied only shared validation; the updated
+generated support and validator also require the production `codec/` package.
+Copy that dependency into the same scratch module and run the unchanged wire,
+vet, lint and genuine validation-bypass checks. Do not fetch the library from a
+forge or add a module replacement that hides an incomplete candidate.
+
+The required local `make lint` target independently exited 2:
+
+```text
+internal/validation/profile.go:112:3: QF1003: could use tagged switch on char (staticcheck)
+```
+
+Replace that conditional with the equivalent tagged switch; keep every lint
+rule. Standalone documentation lint and generator lint passed. These findings
+are new R4 defects, not pre-existing failures at the pushed baseline.
+
+The WSL lane also exposed an actual CLI recovery regression at
+`cmd/mcpgen/cli_publication_test.go:289`:
+
+```text
+FAIL actual CLI bootstrap: got=1 want=0
+generate: complete candidate qualification required
+```
+
+That test failed after 159.24s; its child has an existing 150s invocation
+context. This timing is evidence to investigate, not proof of a timeout cause.
+The generic publisher refusal omits the failed module/target's compiler detail.
+The next allowance must include reproducing this R3 integration regression,
+retaining structured qualification diagnostics and fixing its underlying cause.
+Preserve the complete candidate, original bound and recovery assertions; do not
+extend a timeout or skip a target to obtain a pass. Native Windows did not report
+this recovery failure. The installed-tree regeneration check still passed in
+both lanes, so it cannot substitute for the failing recovery fixture.
+
+Cancelled this task's queued Darwin qualification after these confirmed
+failures; nothing ran there. The already admitted WSL lane finished its
+unchanged snapshot in 217s, with pinned preparation passing and pre-add failing.
+Its raw/validator plants, review controls, regeneration and source-preservation
+checks passed. The runner restored the distro's initial stopped state and
+removed staging. No further source repair/build pass is authorized: passes 5–6 are
+consumed. Proposed next allowance is passes 7–10 for these concrete repairs,
+the recovery-regression investigation, pinned preparation and remaining
+native/race qualification; passes 7–8 provide
+an earlier review at higher approval overhead. R4 remains incomplete, with no
+stage, commit, push or R5/Stage 7 completion claim.
+
+### 2026-11-27 — R4 pass 5: pointer repair passed; review guard overconstrained API metadata
+
+Structured schema diagnostics now compose the referenced target URL and nested
+metaschema instance locations, including escaped pointer tokens, before message
+bounding. Error causes remain available. The full validator package passed
+with CGO off in 2.463s. The physical-Linux queued scratch run passed its clean
+control and all five genuine required/rounding/location/cache/pointer plants.
+
+Native Windows rendered the new candidate and compiled source and tests for
+both modules on Darwin/arm64, Linux/amd64 and Windows/amd64. Publication stopped
+at the new review guard, before any generated/review write:
+
+```text
+FAIL r4.review-generation: R4 generation must change only serialization support and its manifest
+```
+
+The qualified drift is `api.json`, `codecs.go`, `generated-manifest.json`.
+`cmd/mcpgen/internal/emit/artifacts.go:133` records each source file's complete
+imports on its public declaration rows. Replacing codec implementation imports
+therefore changes `api.json` metadata for its 15 `codecs.go` rows even though
+public signatures remain unchanged. The earlier two-file prediction was wrong;
+this is a new qualification-helper defect within R4's generated serialization
+integration, not a new architectural choice or permission for API changes.
+
+Pass 6 corrects the guard by deriving the exact expected API artifact from the
+verified installed artifact plus the emitter template's imports. Preserve every
+declaration, signature, binding and all other metadata; require its exact
+proposed hash. All other generated files remain hash-identical. Prove the guard
+rejects unrelated API drift and retain both-module, three-target compilation
+requirements. Do not merely allow arbitrary `api.json` changes.
+
+Cancelled this task's queued live publication again; no command ran, and live
+generated output and retained reviews remain unchanged. Complete SDK execution,
+native qualification, race and phase commit remain pending. Pass 7 is not
+authorized by the current allowance.
+
+### 2026-11-27 — R4 deviation: passes 5–6 approved
+
+The owner selected A, approving R4 passes 5–6 under
+[0002-MADR-build-schema-driven-mcp-framework.md](0002-MADR-build-schema-driven-mcp-framework.md)
+and this PLAN. Compose referenced schema diagnostics from the pinned validator's
+structured schema URL and nested instance-location fields before bounding the
+message, preserve the full-pointer assertion and genuine bypass controls, and
+continue the remaining qualification/publication. All RA15–RA17 and original
+Stage 5 exits remain required. Pass 7 requires another owner allowance; this
+approval does not establish completion or permit an unqualified phase commit.
+
+### 2026-11-27 — R4 pass 4: genuine plants caught; full-pointer control failed
+
+Integrated canonical raw/exact checks into runtime output decoding and the SDK
+bridge, and replaced the divergent resource URI/template implementations after
+the stronger production checks passed in pass 3. The emitter now uses the shared
+codec bounds and the exact pinned protocol registration. Added actual SDK codec
+differentials for custom hooks, resource links, presence, case, unknown/raw
+members, nil/empty collections and numeric neighbors. Their complete candidate
+execution is still pending; they are not claimed as passing.
+
+Added maintained scratch required-assertion removal, actual float64 rounding,
+mandatory-location bypass and caller-key-only cache plants. Ran
+`python3 -B -u scripts/verify_mutations.py` through the queued Linux target on
+WSL, selected by current fleet load. All four plants failed at their intended
+production assertions, with no compiler-failure substitution:
+
+```text
+pass validator.required: genuine bypass caught: FAIL required assertion removed
+pass validator.rounding: genuine bypass caught: FAIL exact adjacent integer
+pass validator.locations: genuine bypass caught: FAIL mandated location assertion bypassed
+pass validator.stale-cache: genuine bypass caught: FAIL changed schema reused stale compilation
+```
+
+The clean control exited 1 at
+`internal/validation/repair_test.go:92`, in the newly added reference-to-schema
+beneath an unknown keyword case. Input:
+`{"hidden":{"pattern":"(?=a)"},"$ref":"#/hidden"}`. Actual rejection:
+
+```text
+validation: compile profile: "https://fixture.invalid/profile#/hidden" is not valid against metaschema: jsonschema validation failed with 'urn:mem:metaschema'
+    - at '': 'allOf' failed
+      - at '/pattern': '(?=a)' is not valid regex: unqualified group or engine flag
+```
+
+The declaration rejects correctly, but its diagnostic does not supply the
+required composed `#/hidden/pattern` pointer. This is a newly exposed R4
+diagnostic defect, not a pre-existing baseline test failure. The pinned
+validator exposes `SchemaValidationError.URL` and nested
+`ValidationError.InstanceLocation`/`Causes`; compose the location from those
+structured fields before bounding public diagnostics. Preserve the assertion
+and rejection; do not weaken the expected pointer or parse error prose.
+
+Cancelled this task's queued live generation before it started. The runner
+confirmed `nothing run`; no generated bytes or retained migration review were
+changed. The separate review-evidence controls caught eight malformed inputs;
+record/link validation and Markdown lint passed. No stage, commit or push.
+
+The approved passes 3–4 are consumed. Recommended next allowance: passes 5–6
+for the structured diagnostic repair and remaining qualification/publication,
+with all R4 exits retained. Pass 5 alone permits an earlier review at additional
+approval overhead. A read-only diff/audit before the next allowance leaves the
+current failing control and incomplete generated integration unresolved.
+
+### 2026-11-27 — R4 pass 3: canonical validator and original fixtures passed
+
+Removed the divergent test-only format implementation and its separate
+assertion-enabled compiler. Format fixtures now test application annotations
+through the production adapter and the original 36 URI/template cases through
+the same semantic checkers used at mandatory protocol locations. Added strict
+profile, immutable/cache, no-external-I/O, concurrency, exact-neighbor and pinned
+protocol-location tests. Reconciled all 421 original schema/instance/outcome
+identities against the independent prepared SDK-aligned corpus; retained that
+ledger, both original/vendored file hashes and a reusable comparison utility.
+
+The full focused validator package passed with CGO off:
+
+```text
+go test -vet=off -count=1 ./internal/validation
+ok  github.com/maccavelli/go-mcp-lib/internal/validation  2.640s
+```
+
+This includes all 155 pinned definition compilations, all original assertions,
+the larger vendored corpus and explicit custom-dialect rejection cases. Custom
+dialects that remove required standard vocabularies are reported separately;
+their upstream instance outcomes are not claimed. No compile error substitutes
+for an invalid-instance result. Legacy location expectations for non-file roots
+and unsupported RFC 6570 operators were corrected against the decided policy
+and independent original fixtures, including valid relative templates.
+
+Pass 4 integrates these checks into the runtime and emitter, adds actual SDK
+differentials, and qualifies genuine required/rounding/location/cache bypasses.
+Generated output must change only serialization support and its ownership
+manifest; fresh candidate compilation evidence must cover both modules and
+all three tuples before publication. No R4 exit or commit is claimed yet.
+
+### 2026-11-27 — R4 deviation: passes 3–4 approved
+
+The owner selected A, approving R4 passes 3–4 under
+[0002-MADR-build-schema-driven-mcp-framework.md](0002-MADR-build-schema-driven-mcp-framework.md)
+and this PLAN. Replace the divergent format qualification path with production
+semantic checkers, then continue immutable validator/profile integration,
+fixture reconciliation, generated/runtime bindings and actual SDK differentials.
+All RA15–RA17 and original Stage 5 exits remain required. This resolves the
+third-build-pass stop; pass 5 requires a new owner allowance. No partial result
+establishes completion or permits an unqualified phase commit.
+
+### 2026-11-27 — R4 passes 1–2: raw controls passed; validator integration failed
+
+Pass 1 added strict raw JSON and owned v2 entry points, exact dynamic-number
+projection, boundary tests and their required inventory entries. The focused
+`go test -vet=off -count=1 ./codec` passed. The queued physical-Linux scratch
+helper `python3 -u scripts/verify_raw_guards.py` passed its clean control,
+numeric-token-limit, nesting-limit and actual duplicate-acceptance plants,
+and the legacy raw-guard control. All ordinary commands used CGO off.
+
+Pass 2 began immutable schema snapshots, registry-only loading, content/profile
+cache keys, explicit dialect/vocabulary/pattern qualification, strict canonical
+URI/base64 helpers, the pinned RFC 6570 parser and schema-location extensions
+for the exact pinned protocol document. Nil compiled handles now reject.
+These changes are unfinished and have not passed qualification.
+
+The focused validator build exited 1 before tests ran:
+
+```text
+internal/validation/formats.go:344:28: undefined: templateVars
+internal/validation/formats.go:345:7: undefined: templateVar
+internal/validation/formats.go:350:14: undefined: templateVars
+```
+
+The existing test-only format implementation depended on the old location
+helper regexes; replacing those helpers exposed this integration failure. This
+failure was introduced during R4, not present at the pushed baseline. Replace
+the divergent format qualification path with the production semantic checkers
+and explicitly annotation-only application-format cases, preserving fixture
+identities and independent expected outcomes. Do not restore weaker regexes,
+disable a check, or count compilation failures as passing instance validation.
+
+The third-build-pass stop applies. Await an owner allowance before further
+source repairs or another build. Recommended allowance: R4 passes 3–4, retaining
+all RA15–RA17/original Stage 5 exits. An allowance for pass 3 alone instead
+requires another review before pass 4. The owner may also review the current
+uncommitted diff before choosing an allowance. No R4 exit, stage, commit, push,
+generator publication, complete corpus qualification or native matrix is
+claimed. The working tree is currently unbuildable until this integration is
+repaired; remaining generated/runtime integration and SDK differential cases
+must still be completed.
+
+### 2026-11-27 — R4 pass 1 started at the pushed functional layout
+
+The owner confirmed the preceding work was pushed and instructed continuation.
+HEAD and the remote-tracking main agree at
+`7606ab8`; the working tree is clean. The accepted RA15–RA17 and original
+Stage 5 cases remain the R4 execution scope; runtime callers now live under
+`mcp/`, as required by the completed layout PLAN. Existing approval to execute
+R1–R5 and commit coherent qualified phases on main remains applicable. No push
+or Stage 7 execution is included in this continuation.
+
+Re-grounding confirms the raw guard still uses EOF/duplicate error prose,
+defaults depth to 256 rather than 64, and accepts invalid bound configurations.
+The adapter caches by caller identity, retains mutable resource inputs and
+allows external loading/different explicit dialects. Format qualification still
+constructs a different assertion-enabled compiler, while location helpers and
+runtime checks diverge. Repair these within the decided cases, retain all
+existing inventories and independently expected fixture outcomes, and prove
+genuine assertion/precision/raw-duplicate bypasses in scratch.
+
+Pass 1 begins with the standard parser and strict raw/v2 entry points, followed
+by immutable validator/profile and location integration, SDK differentials,
+corpus reconciliation and the complete native qualification. Ordinary Go work
+forces CGO off; any race execution is separately admitted with CGO on. A third
+R4 source/build pass still requires the owner's deviation decision. No partial
+codec or validator result establishes the R4 exit.
 
 ### 2026-11-27 — Functional runtime layout completed separately
 

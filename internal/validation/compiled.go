@@ -16,7 +16,7 @@ type compiledSchema interface {
 // Validate checks a decoded instance against the compiled schema.
 func (c *Compiled) Validate(value any) error {
 	if c == nil || c.schema == nil {
-		return nil
+		return fmt.Errorf("validation: missing compiled schema")
 	}
 	return c.schema.validateInstance(value)
 }

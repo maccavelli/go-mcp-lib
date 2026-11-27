@@ -282,6 +282,41 @@ func TestRepairA13Recovery(t *testing.T) {
 	if err := os.Remove(bad); err != nil {
 		t.Fatal(err)
 	}
+	t.Run("failed-compilation-diagnostics", func(t *testing.T) {
+		broken := filepath.Join(repo, "mcp", "compile_failure_fixture.go")
+		if err := os.WriteFile(broken, []byte("package mcp\nvar _ = missingFixtureSymbol\n"), 0o600); err != nil {
+			t.Fatal(err)
+		}
+		t.Cleanup(func() {
+			if err := os.Remove(broken); err != nil {
+				t.Error(err)
+			}
+		})
+		result := runFixtureCLI(t, repo, nonce, "generate", 1)
+		data, ok := result.Data.(map[string]any)
+		if !ok {
+			t.Fatalf("FAIL missing failed compilation envelope: %+v", result)
+		}
+		encoded, err := json.Marshal(data["qualification"])
+		if err != nil {
+			t.Fatal(err)
+		}
+		var reports []*qualify.Report
+		if err := json.Unmarshal(encoded, &reports); err != nil {
+			t.Fatal(err)
+		}
+		found := false
+		for _, report := range reports {
+			for _, target := range report.Targets {
+				if report.Candidate == "." && !target.Package && strings.Contains(target.Detail, "missingFixtureSymbol") {
+					found = true
+				}
+			}
+		}
+		if !found || result.Status != "failed" || !reflect.DeepEqual(before, protocolSnapshot(t, repo)) {
+			t.Errorf("FAIL actual CLI lost failed compilation detail or changed output: %+v", result)
+		}
+	})
 	runFixtureCLI(t, repo, nonce, "generate", 1)
 	if !reflect.DeepEqual(before, protocolSnapshot(t, repo)) {
 		t.Fatal("FAIL implicit bootstrap changed output")

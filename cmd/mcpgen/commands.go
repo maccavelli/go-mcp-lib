@@ -142,6 +142,14 @@ func cmdGenerate(args []string, out *printer) error {
 	if err != nil {
 		return err
 	}
+	if !qualify.AllPassed(report.Qualification) {
+		data := report.data()
+		data["error"] = "generate: complete candidate qualification required"
+		if err := out.emit("generate", "failed", data); err != nil {
+			return err
+		}
+		return fmt.Errorf("generate: complete candidate qualification required")
+	}
 	receipt, err := publishChecked(out.ctx, *repo, report, *bootstrap, out.publicationHook)
 	if err != nil {
 		return err

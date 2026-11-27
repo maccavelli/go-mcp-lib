@@ -1,97 +1,81 @@
 package validation
 
 import (
+	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 	"testing"
-
-	"github.com/santhosh-tekuri/jsonschema/v6"
 )
 
-// TestFormatFixtures runs the vendored format fixture cases. Formats are
-// assertions in this framework's accepted profile: the adapter registers
-// each supported format with the compiler and the compiler asserts them
-// (AssertFormat). The idn-*, iri*, and ecmascript-regex formats are out
-// of profile and not vendored; a schema requiring them is rejected at
-// declaration rather than silently treated as annotation.
+// TestFormatFixtures distinguishes annotations from mandatory protocol syntax.
+// Every vendored instance is tested through the production adapter. The original
+// 36 URI/template cases additionally exercise the production semantic checkers.
 func TestFormatFixtures(t *testing.T) {
-	corpus := filepath.Join("testdata", "formats")
-	entries, err := os.ReadDir(corpus)
+	base := filepath.Join("testdata", "formats")
+	manifestBody, err := os.ReadFile(filepath.Join(base, "formats-manifest.json"))
 	if err != nil {
-		t.Fatalf("FAIL corpus: %v", err)
+		t.Fatal(err)
 	}
-	a := New(256)
-	for _, entry := range entries {
-		name := entry.Name()
-		if !strings.HasSuffix(name, ".json") || strings.HasSuffix(name, "manifest.json") {
-			continue
+	var manifest struct {
+		Formats map[string]struct {
+			Cases int    `json:"cases"`
+			Hash  string `json:"hash"`
+		} `json:"formats"`
+	}
+	if err := json.Unmarshal(manifestBody, &manifest); err != nil {
+		t.Fatal(err)
+	}
+	assertions, annotations := 0, 0
+	for _, format := range sortedKeys(manifest.Formats) {
+		entry := manifest.Formats[format]
+		if entry.Cases == 0 {
+			continue // license, not an instance fixture
 		}
-		format := strings.TrimSuffix(name, ".json")
-		f := &jsonschema.Format{
-			Name:     format,
-			Validate: formatChecker(format),
-		}
-		// Formats with in-pattern semantics the profile does not
-		// implement exactly (duration) are checked leniently below.
-		if f.Validate == nil {
-			t.Logf("format %s: no exact checker in profile; annotation-only", format)
-			continue
-		}
-		body, err := os.ReadFile(filepath.Join(corpus, name))
+		body, err := os.ReadFile(filepath.Join(base, format+".json"))
 		if err != nil {
 			t.Fatal(err)
 		}
+		if fmt.Sprintf("%x", sha256.Sum256(body)) != entry.Hash {
+			t.Errorf("FAIL format fixture identity %s", format)
+			continue
+		}
 		var groups []TestSuiteCase
 		if err := json.Unmarshal(body, &groups); err != nil {
-			t.Fatalf("FAIL decode %s: %v", name, err)
+			t.Fatal(err)
 		}
-		passed, failed := 0, 0
-		for _, group := range groups {
-			schemaDoc, err := decodeDoc(string(group.Schema))
-			if err != nil {
-				t.Fatalf("FAIL decode schema %s: %v", format, err)
-			}
-			compiler := jsonschema.NewCompiler()
-			compiler.DefaultDraft(jsonschema.Draft2020)
-			compiler.RegisterFormat(f)
-			compiler.AssertFormat()
-			canonical := "https://example.invalid/format/" + format + ".json"
-			if err := compiler.AddResource(canonical, schemaDoc); err != nil {
-				t.Errorf("FAIL compile %s: %v", format, err)
-				failed += len(group.Tests)
-				continue
-			}
-			schema, err := compiler.Compile(canonical)
-			if err != nil {
-				t.Errorf("FAIL compile %s: %v", format, err)
-				failed += len(group.Tests)
-				continue
-			}
-			compiled, err := wrapCompiled(schema)
-			if err != nil {
-				t.Errorf("FAIL wrap %s: %v", format, err)
-				failed += len(group.Tests)
-				continue
-			}
+		count := 0
+		for i, group := range groups {
+			a := New(4)
+			schema := compileOK(t, a, fmt.Sprintf("format-%s-%d", format, i), string(group.Schema))
 			for _, tc := range group.Tests {
-				data, err := decodeDoc(string(tc.Data))
-				if err != nil {
-					t.Fatalf("FAIL decode instance %s: %v", tc.Description, err)
-				}
-				err = a.Validate(compiled, data)
-				if tc.Valid && err != nil {
-					t.Errorf("FAIL %s/%s: expected valid, got %v", format, tc.Description, err)
-					failed++
-				} else if !tc.Valid && err == nil {
-					t.Errorf("FAIL %s/%s: expected invalid, accepted", format, tc.Description)
-					failed++
-				} else {
-					passed++
-				}
+				count++
+				t.Run(format+"/"+group.Description+"/"+tc.Description, func(t *testing.T) {
+					instance := mustDoc(t, string(tc.Data))
+					if err := a.Validate(schema, instance); err != nil {
+						t.Errorf("FAIL generic format annotation asserted: %v", err)
+					}
+					check := map[string]func(string) error{"uri": CheckURI, "uri-template": CheckURITemplate}[format]
+					if check == nil {
+						annotations++
+						return
+					}
+					assertions++
+					text, isString := instance.(string)
+					valid := !isString || check(text) == nil
+					if valid != tc.Valid {
+						t.Errorf("FAIL production %s syntax: valid=%v want=%v", format, valid, tc.Valid)
+					}
+				})
 			}
 		}
-		t.Logf("format %s: %d passed, %d failed", format, passed, failed)
+		if count != entry.Cases {
+			t.Errorf("FAIL format case identity %s: %d want %d", format, count, entry.Cases)
+		}
 	}
+	if assertions != 36 {
+		t.Errorf("FAIL original format reconciliation: %d want 36", assertions)
+	}
+	t.Logf("original mandatory syntax fixtures=%d; additional annotation-only fixtures=%d", assertions, annotations)
 }

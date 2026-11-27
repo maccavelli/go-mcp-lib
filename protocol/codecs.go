@@ -3,19 +3,16 @@
 package protocol
 
 import (
-	"bytes"
 	"crypto/sha256"
 	_ "embed"
-	jsonv1 "encoding/json"
 	"encoding/json/jsontext"
 	json "encoding/json/v2"
 	"fmt"
-	"io"
 	"math/big"
-	"strconv"
 	"strings"
 	"sync"
 
+	"github.com/maccavelli/go-mcp-lib/codec"
 	"github.com/maccavelli/go-mcp-lib/internal/validation"
 )
 
@@ -63,7 +60,7 @@ func (value *Field[T]) UnmarshalJSONFrom(decoder *jsontext.Decoder) error {
 		return nil
 	}
 	var next T
-	if err := json.Unmarshal(body, &next); err != nil {
+	if err := codec.Unmarshal(body, &next, codec.DefaultBounds()); err != nil {
 		return err
 	}
 	*value = Present(next)
@@ -75,14 +72,11 @@ type Number string
 
 // NewNumber accepts bounded JSON numbers without conversion through float64.
 func NewNumber(token string) (Number, error) {
-	if len(token) == 0 || len(token) > 256 || !jsontext.Value(token).IsValid() || jsontext.Value(token).Kind() != '0' || strings.TrimSpace(token) != token {
+	if len(token) == 0 || jsontext.Value(token).Kind() != '0' || strings.TrimSpace(token) != token {
 		return "", fmt.Errorf("protocol: invalid or oversized numeric token")
 	}
-	if at := strings.IndexAny(token, "eE"); at >= 0 {
-		exponent, err := strconv.ParseInt(token[at+1:], 10, 64)
-		if err != nil || exponent < -1024 || exponent > 1024 {
-			return "", fmt.Errorf("protocol: numeric exponent exceeds magnitude 1024")
-		}
+	if _, err := codec.ValidateRaw([]byte(token), codec.DefaultBounds()); err != nil {
+		return "", err
 	}
 	return Number(token), nil
 }
@@ -139,14 +133,9 @@ var schemaState struct {
 }
 
 func validateBinding(pointer string, body []byte) error {
-	if len(body) > 8<<20 {
-		return fmt.Errorf("protocol: frame exceeds 8 MiB")
-	}
 	schemaState.once.Do(func() {
-		decoder := jsonv1.NewDecoder(bytes.NewReader(protocolSchema))
-		decoder.UseNumber()
 		var document any
-		if schemaState.err = decoder.Decode(&document); schemaState.err != nil {
+		if schemaState.err = codec.Unmarshal(protocolSchema, &document, codec.DefaultBounds()); schemaState.err != nil {
 			return
 		}
 		// Only generated pointers can reach this helper. Bound retention by the
@@ -167,19 +156,15 @@ func validateBinding(pointer string, body []byte) error {
 			return n
 		}
 		schemaState.adapter = validation.New(count(document))
-		schemaState.err = schemaState.adapter.Register("https://schema.invalid/mcp.json", document)
+		schemaState.err = schemaState.adapter.RegisterProtocol("https://schema.invalid/mcp.json", protocolSchema)
 	})
 	if schemaState.err != nil {
 		return schemaState.err
 	}
-	// Standard syntax checks reject duplicates, malformed Unicode and trailing
-	// data before the validator's exact-number decoding can normalize anything.
-	decoder := jsontext.NewDecoder(bytes.NewReader(body))
-	if _, err := decoder.ReadValue(); err != nil {
+	// One production raw/number policy runs before canonical validation.
+	var instance any
+	if err := codec.Unmarshal(body, &instance, codec.DefaultBounds()); err != nil {
 		return err
-	}
-	if _, err := decoder.ReadToken(); err != io.EOF {
-		return fmt.Errorf("protocol: trailing JSON content")
 	}
 	identity := fmt.Sprintf("%x", sha256.Sum256([]byte(pointer)))
 	compiled, err := schemaState.adapter.Compile(identity, "https://schema.invalid/binding/"+identity, map[string]any{
@@ -189,17 +174,11 @@ func validateBinding(pointer string, body []byte) error {
 	if err != nil {
 		return err
 	}
-	exact := jsonv1.NewDecoder(bytes.NewReader(body))
-	exact.UseNumber()
-	var instance any
-	if err := exact.Decode(&instance); err != nil {
-		return err
-	}
 	return schemaState.adapter.Validate(compiled, instance)
 }
 
 func marshalOwned[T any](encoder *jsontext.Encoder, pointer string, value T) error {
-	body, err := json.Marshal(value)
+	body, err := codec.Marshal(value, codec.DefaultBounds())
 	if err != nil {
 		return err
 	}
@@ -218,7 +197,7 @@ func unmarshalOwned[T any](decoder *jsontext.Decoder, pointer string, value *T) 
 		return err
 	}
 	var next T
-	if err := json.Unmarshal(body, &next); err != nil {
+	if err := codec.Unmarshal(body, &next, codec.DefaultBounds()); err != nil {
 		return err
 	}
 	*value = next
@@ -275,6 +254,6 @@ func decodeVariant[T any](body jsontext.Value, pointer, kind string) (T, error) 
 			return value, fmt.Errorf("protocol: value does not match %s branch", kind)
 		}
 	}
-	err := json.Unmarshal(body, &value)
+	err := codec.Unmarshal(body, &value, codec.DefaultBounds())
 	return value, err
 }

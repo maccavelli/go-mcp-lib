@@ -1,10 +1,10 @@
 package mcp
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 
+	"github.com/maccavelli/go-mcp-lib/codec"
 	"github.com/maccavelli/go-mcp-lib/internal/validation"
 )
 
@@ -81,16 +81,14 @@ func decodeExact(input any) (any, error) {
 	case json.RawMessage:
 		raw = typed
 	default:
-		marshaled, err := json.Marshal(input)
+		marshaled, err := codec.Marshal(input, codec.DefaultBounds())
 		if err != nil {
 			return nil, err
 		}
 		raw = marshaled
 	}
 	var out any
-	dec := json.NewDecoder(bytes.NewReader(raw))
-	dec.UseNumber()
-	if err := dec.Decode(&out); err != nil {
+	if err := codec.Unmarshal(raw, &out, codec.DefaultBounds()); err != nil {
 		return nil, err
 	}
 	return out, nil

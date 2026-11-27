@@ -8,16 +8,19 @@ import (
 func TestRootURI(t *testing.T) {
 	for _, uri := range []string{
 		"file:///workspace/root",
-		"https://example.invalid/workspace",
+		"file://server/share/workspace",
 	} {
 		if err := CheckRootURI(uri); err != nil {
 			t.Errorf("FAIL valid Root.uri rejected: %v", err)
 		}
 	}
 	for _, uri := range []string{
-		"",           // empty: Root.uri is required
-		"/workspace", // relative reference, not absolute
-		"workspace",  // bare path
+		"",                                  // empty: Root.uri is required
+		"/workspace",                        // relative reference, not absolute
+		"workspace",                         // bare path
+		"https://example.invalid/workspace", // roots must use file URIs
+		"file:workspace",                    // opaque relative file path
+		"file:/workspace",                   // pinned protocol requires file://
 	} {
 		if err := CheckRootURI(uri); err == nil {
 			t.Errorf("FAIL Root.uri %q accepted", uri)
@@ -30,15 +33,16 @@ func TestURITemplate(t *testing.T) {
 		"file:///logs/{name}",
 		"https://example.invalid/users/{userId}/posts/{postId}",
 		"file:///docs/{page:3}",
+		"file:///x/{+ref}",
+		"logs/{name}",
+		"https://example.invalid/{+path}{?q,limit}",
+		"", // RFC 6570 permits a template with no literals or expressions
 	} {
 		if err := CheckURITemplate(template); err != nil {
 			t.Errorf("FAIL valid template rejected: %v", err)
 		}
 	}
 	for _, template := range []string{
-		"",                    // empty
-		"logs/{name}",         // no scheme
-		"file:///x/{+ref}",    // reserved expansion unsupported in profile
 		"file:///x/{a b}",     // invalid varspec
 		"file:///x/{unclosed", // unbalanced
 	} {

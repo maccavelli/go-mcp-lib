@@ -3,9 +3,10 @@ package sdkbridge
 
 import (
 	legacyjson "encoding/json"
-	json "encoding/json/v2"
 	"errors"
 	"fmt"
+
+	"github.com/maccavelli/go-mcp-lib/codec"
 )
 
 // FromSDK honors the SDK's legacy JSON hooks before invoking the owned hooks.
@@ -19,7 +20,7 @@ func FromSDK[Owned, SDK any](source *SDK) (*Owned, error) {
 		return nil, fmt.Errorf("mcp: encode SDK value: %w", err)
 	}
 	var result Owned
-	if err := json.Unmarshal(body, &result); err != nil {
+	if err := codec.Unmarshal(body, &result, codec.DefaultBounds()); err != nil {
 		return nil, fmt.Errorf("mcp: decode owned value: %w", err)
 	}
 	return &result, nil
@@ -30,7 +31,7 @@ func ToSDK[SDK, Owned any](source *Owned) (*SDK, error) {
 	if source == nil {
 		return nil, errors.New("mcp: owned value is nil")
 	}
-	body, err := json.Marshal(source)
+	body, err := codec.Marshal(source, codec.DefaultBounds())
 	if err != nil {
 		return nil, fmt.Errorf("mcp: encode owned value: %w", err)
 	}

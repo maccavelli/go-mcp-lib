@@ -79,9 +79,9 @@ func TestAddResourceTemplateValidation(t *testing.T) {
 	}{
 		{"empty name", &ResourceTemplateRegistration{URITemplate: "file:///x/{a}"}, "template name is required"},
 		{"empty template", &ResourceTemplateRegistration{Name: "t"}, "uriTemplate is empty"},
-		{"no expansions", &ResourceTemplateRegistration{Name: "t", URITemplate: "file:///x"}, "has no expansions"},
-		{"unbalanced", &ResourceTemplateRegistration{Name: "t", URITemplate: "file:///x/{a"}, "unbalanced braces"},
-		{"relative", &ResourceTemplateRegistration{Name: "t", URITemplate: "logs/{a}"}, "not URI-shaped"},
+		{"invalid modifier", &ResourceTemplateRegistration{Name: "t", URITemplate: "file:///x/{a:no}"}, "invalid RFC 6570"},
+		{"unbalanced", &ResourceTemplateRegistration{Name: "t", URITemplate: "file:///x/{a"}, "invalid RFC 6570"},
+		{"invalid varspec", &ResourceTemplateRegistration{Name: "t", URITemplate: "logs/{?}"}, "invalid RFC 6570"},
 	}
 	for _, tc := range cases {
 		if err := AddResourceTemplate(server, tc.reg, handler); err == nil ||
@@ -97,5 +97,10 @@ func TestAddResourceTemplateValidation(t *testing.T) {
 	if err := AddResourceTemplate(server, dup, handler); err == nil ||
 		!strings.Contains(err.Error(), "already registered") {
 		t.Errorf("FAIL duplicate template accepted: %v", err)
+	}
+	for _, template := range []string{"file:///x", "logs/{a}", "https://example.invalid/{+path}{?q,limit}"} {
+		if err := AddResourceTemplate(server, &ResourceTemplateRegistration{Name: "standard", URITemplate: template}, handler); err != nil {
+			t.Errorf("FAIL RFC 6570 declaration %q: %v", template, err)
+		}
 	}
 }

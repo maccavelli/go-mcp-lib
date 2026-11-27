@@ -91,12 +91,12 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	anchor := []byte("if err := json.Unmarshal(body, &result); err != nil {")
+	anchor := []byte("if err := codec.Unmarshal(body, &result, codec.DefaultBounds()); err != nil {")
 	if bytes.Count(body, anchor) != 1 {
 		t.Fatal("FAIL owned decoder plant anchor changed")
 	}
 	original := bytes.Clone(body)
-	body = bytes.Replace(body, anchor, []byte("if err := json.Unmarshal(body, &result); err != nil && len(body) == 0 {"), 1)
+	body = bytes.Replace(body, anchor, []byte("if err := codec.Unmarshal(body, &result, codec.DefaultBounds()); err != nil && len(body) == 0 {"), 1)
 	if err := os.WriteFile(source, body, 0o644); err != nil {
 		t.Fatal(err)
 	}

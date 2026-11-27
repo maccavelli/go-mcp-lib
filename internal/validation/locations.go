@@ -3,100 +3,125 @@ package validation
 import (
 	"encoding/base64"
 	"fmt"
+	"net/netip"
+	"net/url"
 	"regexp"
 	"strings"
+
+	"github.com/yosida95/uritemplate/v3"
 )
 
-// Protocol-location rules mandated at specific schema locations. These
-// are assertions the framework enforces on its own contract, distinct
-// from format annotations the application-schema profile may declare.
-//
-// The accepted application-schema profile is JSON Schema Draft 2020-12
-// with the standard vocabulary plus this package's URI/URI-template
-// location rules. Regex semantics are Go RE2 (host language); schemas
-// requiring other engines are rejected at declaration, not silently
-// applied with incompatible semantics.
+var uriParts = regexp.MustCompile(`^([A-Za-z][A-Za-z0-9+.-]*):(?://([^/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?$`)
+var ipvFuture = regexp.MustCompile(`^[vV][0-9A-Fa-f]+\.[A-Za-z0-9._~!$&'()*+,;=:-]+$`)
 
-// uriPattern approximates RFC 3986 URI: scheme : hier-part, with a
-// practical RE2-compatible character class.
-var uriPattern = regexp.MustCompile(`^[A-Za-z][A-Za-z0-9+.-]*:`)
-
-// CheckRootURI enforces the Root.uri location rule: an absolute URI
-// (not a relative reference) of the required shape. Empty is invalid;
-// the schema models Root.uri as required.
-func CheckRootURI(value string) error {
-	if value == "" {
-		return fmt.Errorf("validation: Root.uri is empty")
-	}
-	if !uriPattern.MatchString(value) {
-		return fmt.Errorf("validation: Root.uri %q is not an absolute URI", clip(value))
-	}
-	return nil
-}
-
-// CheckURI enforces an absolute-URI location (e.g. Resource.uri).
+// CheckURI checks absolute RFC 3986 syntax, including percent escapes and
+// bracketed IP literals, without fetching, normalizing or applying access policy.
 func CheckURI(value string) error {
-	if value == "" {
-		return fmt.Errorf("validation: URI is empty")
-	}
-	if !uriPattern.MatchString(value) {
-		return fmt.Errorf("validation: %q is not an absolute URI", clip(value))
+	if !validURI(value) {
+		return fmt.Errorf("validation: %q is not an absolute URI (RFC 3986)", clip(value))
 	}
 	return nil
 }
 
-var templateVar = regexp.MustCompile(`^\{[A-Za-z0-9_]+(:[0-9]+)?(,\*|[*])?\}$`)
-var templateVars = regexp.MustCompile(`\{[^{}]*\}`)
-
-// CheckURITemplate enforces RFC 6570 level 1-2 template shape at
-// template locations (e.g. ResourceTemplate.uriTemplate): a URI-shaped
-// prefix with {var} expansions, each expansion a simple varspec with an
-// optional numeric prefix modifier or explode marker.
-func CheckURITemplate(value string) error {
-	if value == "" {
-		return fmt.Errorf("validation: uriTemplate is empty")
+func validURI(value string) bool {
+	parts := uriParts.FindStringSubmatch(value)
+	if parts == nil || !validURIChars(parts[3], ":@/") || !validURIChars(parts[4], ":@/?") || !validURIChars(parts[5], ":@/?") {
+		return false
 	}
-	stripped := templateVars.ReplaceAllString(value, "x")
-	if !uriPattern.MatchString(stripped) {
-		return fmt.Errorf("validation: uriTemplate %q is not URI-shaped after expansion", clip(value))
+	authority := parts[2]
+	if at := strings.LastIndexByte(authority, '@'); at >= 0 {
+		if !validURIChars(authority[:at], ":") {
+			return false
+		}
+		authority = authority[at+1:]
 	}
-	for _, expansion := range templateVars.FindAllString(value, -1) {
-		if !templateVar.MatchString(expansion) {
-			return fmt.Errorf(
-				"validation: uriTemplate expansion %s is not a supported RFC 6570 simple varspec; supported: {var}, {var:NNN}, {var*}",
-				clip(expansion),
-			)
+	if strings.HasPrefix(authority, "[") {
+		end := strings.IndexByte(authority, ']')
+		if end < 0 {
+			return false
+		}
+		literal := authority[1:end]
+		address, err := netip.ParseAddr(literal)
+		if (err != nil || !address.Is6() || address.Zone() != "") && !ipvFuture.MatchString(literal) {
+			return false
+		}
+		authority = "host" + authority[end+1:]
+	}
+	host, port, hasPort := strings.Cut(authority, ":")
+	if !validURIChars(host, "") {
+		return false
+	}
+	if hasPort {
+		for _, char := range port {
+			if char < '0' || char > '9' {
+				return false
+			}
 		}
 	}
-	if strings.Count(value, "{") != strings.Count(value, "}") {
-		return fmt.Errorf("validation: uriTemplate %q has unbalanced braces", clip(value))
+	// Without authority a path cannot begin with two slashes (RFC 3986 3.3).
+	return strings.HasPrefix(value[len(parts[1])+1:], "//") || !strings.HasPrefix(parts[3], "//")
+}
+
+func validURIChars(value, extra string) bool {
+	for i := 0; i < len(value); i++ {
+		char := value[i]
+		if char == '%' {
+			if i+2 >= len(value) || !hexDigit(value[i+1]) || !hexDigit(value[i+2]) {
+				return false
+			}
+			i += 2
+			continue
+		}
+		if char >= 'a' && char <= 'z' || char >= 'A' && char <= 'Z' || char >= '0' && char <= '9' || strings.ContainsRune("-._~!$&'()*+,;="+extra, rune(char)) {
+			continue
+		}
+		return false
+	}
+	return true
+}
+
+func hexDigit(char byte) bool {
+	return char >= '0' && char <= '9' || char >= 'a' && char <= 'f' || char >= 'A' && char <= 'F'
+}
+
+// CheckRootURI enforces MCP Root.uri's file URI and absolute-path requirement.
+// Host components permit remote file roots; no filesystem access is attempted.
+func CheckRootURI(value string) error {
+	if err := CheckURI(value); err != nil {
+		return err
+	}
+	parsed, err := url.Parse(value)
+	if err != nil || !strings.HasPrefix(value, "file://") || parsed.Opaque != "" || !strings.HasPrefix(parsed.Path, "/") {
+		return fmt.Errorf("validation: Root.uri must be an absolute file URI: %q", clip(value))
 	}
 	return nil
 }
 
-// CheckBase64 enforces standard base64 (padded, canonical alphabet)
-// at content-encoding locations.
-func CheckBase64(value string) error {
-	decoded, err := base64.StdEncoding.DecodeString(strings.TrimSpace(value))
-	if err != nil {
-		return fmt.Errorf("validation: not canonical base64: %v", err)
+// CheckURITemplate uses the pinned RFC 6570 parser, including all operators and
+// relative templates. URI templates have their own grammar, not URI grammar.
+func CheckURITemplate(value string) error {
+	if _, err := uritemplate.New(value); err != nil {
+		return fmt.Errorf("validation: invalid RFC 6570 template %q: %w", clip(value), err)
 	}
-	// Canonical re-encoding must reproduce the input exactly.
-	if base64.StdEncoding.EncodeToString(decoded) != strings.TrimSpace(value) {
+	return nil
+}
+
+// CheckBase64 requires canonical standard padded base64, including zero pad
+// bits. Comparing the original input rejects ignored CR/LF and whitespace.
+func CheckBase64(value string) error {
+	decoded, err := base64.StdEncoding.Strict().DecodeString(value)
+	if err != nil {
+		return fmt.Errorf("validation: invalid base64: %w", err)
+	}
+	if base64.StdEncoding.EncodeToString(decoded) != value {
 		return fmt.Errorf("validation: base64 is not canonical")
 	}
 	return nil
 }
 
-// RejectUnknownRegexSemantics returns an actionable error for schema
-// declarations that require regex semantics beyond the accepted
-// profile, instead of silently applying incompatible behavior.
+// RejectUnknownRegexSemantics reports an unqualified declaration with its pointer.
 func RejectUnknownRegexSemantics(pattern, location string) error {
-	return fmt.Errorf(
-		"validation: %s: pattern %q uses semantics outside the accepted application-schema profile (Go RE2, no backreferences or lookaround); simplify the pattern or see docs for the supported profile",
-		location,
-		clip(pattern),
-	)
+	return fmt.Errorf("validation: %s: pattern %q uses semantics outside the accepted application-schema profile (qualified RE2/ECMA subset); simplify the pattern or see docs for the supported profile", location, clip(pattern))
 }
 
 func clip(value string) string {

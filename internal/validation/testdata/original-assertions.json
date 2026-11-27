@@ -1,0 +1,2590 @@
+{
+  "source": "github.com/google/jsonschema-go@v0.4.3/jsonschema/testdata/draft2020-12",
+  "upstream-commit": "83e866b46c9f9e7082fd51e83a61c5f2145a1ab7",
+  "files": {
+    "defs.json": {
+      "original-sha256": "5a352f0b1ad9aa906758fa4d363a77c4c4b29cfc193e8d6f7ab1e184be2a75d5",
+      "vendored-sha256": "5a352f0b1ad9aa906758fa4d363a77c4c4b29cfc193e8d6f7ab1e184be2a75d5"
+    },
+    "ref.json": {
+      "original-sha256": "9643534cd9760151b2b67a5293c31ab334863aa57f5f2f0e6befd9fde9bda2a6",
+      "vendored-sha256": "158a559cda5c8a45ca8a810db4e9bc9bcf484c0fc83015828d5afce35409d0dc"
+    },
+    "type.json": {
+      "original-sha256": "4c5cbe6cbcd28af73761091367b20e07d0403847e236c06c31fc27061bd81192",
+      "vendored-sha256": "4c5cbe6cbcd28af73761091367b20e07d0403847e236c06c31fc27061bd81192"
+    },
+    "const.json": {
+      "original-sha256": "16261074804eed0db7bfd0a5aca3961a1dbed086aa3f58fd1f82e60415261adf",
+      "vendored-sha256": "16261074804eed0db7bfd0a5aca3961a1dbed086aa3f58fd1f82e60415261adf"
+    },
+    "enum.json": {
+      "original-sha256": "4a455b62406bc7464210c275e990005edc763bed2725f886db68dd21d92b864d",
+      "vendored-sha256": "4a455b62406bc7464210c275e990005edc763bed2725f886db68dd21d92b864d"
+    },
+    "properties.json": {
+      "original-sha256": "3b8f246311cb3926192ee3d12abc0cd912c90fcc0048e1d8999185819d1f6bfc",
+      "vendored-sha256": "58f01566cfe3e1fc4fb851d3b2eab13768d65ba5dbc4e9f9387ceaf4244a0522"
+    },
+    "required.json": {
+      "original-sha256": "8596018843717eb15b583016b2fda14b9affef110c663b9f78c43f4c43dc1989",
+      "vendored-sha256": "558a092523599ab66b528bd802d9148d7117ff3101fd795081686777662e29fa"
+    },
+    "additionalProperties.json": {
+      "original-sha256": "af54d2123f525f3b295060e3f99729eb3212001f750a62cba8628e9173595d75",
+      "vendored-sha256": "b96bd533416386ac6421737b48c5c072870ab5dbea910585e9e8fa6305c7ca91"
+    },
+    "items.json": {
+      "original-sha256": "d924a8171f1f1d04ff026a4e3491d1376297145563158543005b7073b69ab913",
+      "vendored-sha256": "d924a8171f1f1d04ff026a4e3491d1376297145563158543005b7073b69ab913"
+    },
+    "maxItems.json": {
+      "original-sha256": "59fa6236c0766aaac5fb7c9ef82e205c230efa94271485f614218291be7cbc5c",
+      "vendored-sha256": "59fa6236c0766aaac5fb7c9ef82e205c230efa94271485f614218291be7cbc5c"
+    },
+    "minimum.json": {
+      "original-sha256": "f6a29cb574b76621da23636a636cf12cb31b01646b89543e6ce1a813376439a3",
+      "vendored-sha256": "f6a29cb574b76621da23636a636cf12cb31b01646b89543e6ce1a813376439a3"
+    },
+    "maximum.json": {
+      "original-sha256": "7f73957505e37fbfb770e056c14b139700879bc1ec3e6eae74a727f828b1cda3",
+      "vendored-sha256": "7f73957505e37fbfb770e056c14b139700879bc1ec3e6eae74a727f828b1cda3"
+    },
+    "allOf.json": {
+      "original-sha256": "81045b06706a28f6aa337b485b41a764098e10ac73bb1d346ba0a4285a63e970",
+      "vendored-sha256": "81045b06706a28f6aa337b485b41a764098e10ac73bb1d346ba0a4285a63e970"
+    },
+    "anyOf.json": {
+      "original-sha256": "7a6fe41602496c256334ffa3e6fb457b26ac23b97ca03cb16b724ad21a7d216d",
+      "vendored-sha256": "7a6fe41602496c256334ffa3e6fb457b26ac23b97ca03cb16b724ad21a7d216d"
+    }
+  },
+  "cases": [
+    {
+      "file": "defs.json",
+      "group": "validate definition against metaschema",
+      "test": "valid definition schema",
+      "valid": true
+    },
+    {
+      "file": "defs.json",
+      "group": "validate definition against metaschema",
+      "test": "invalid definition schema",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "root pointer ref",
+      "test": "match",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "root pointer ref",
+      "test": "recursive match",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "root pointer ref",
+      "test": "mismatch",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "root pointer ref",
+      "test": "recursive mismatch",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "relative pointer ref to object",
+      "test": "match",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "relative pointer ref to object",
+      "test": "mismatch",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "relative pointer ref to array",
+      "test": "match array",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "relative pointer ref to array",
+      "test": "mismatch array",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "slash invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "tilde invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "percent invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "slash valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "tilde valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "escaped pointer ref",
+      "test": "percent valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "nested refs",
+      "test": "nested ref valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "nested refs",
+      "test": "nested ref invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref applies alongside sibling keywords",
+      "test": "ref valid, maxItems valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "ref applies alongside sibling keywords",
+      "test": "ref valid, maxItems invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref applies alongside sibling keywords",
+      "test": "ref invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "remote ref, containing refs itself",
+      "test": "remote ref valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "remote ref, containing refs itself",
+      "test": "remote ref invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "property named $ref that is not a reference",
+      "test": "property named $ref valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "property named $ref that is not a reference",
+      "test": "property named $ref invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "property named $ref, containing an actual $ref",
+      "test": "property named $ref valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "property named $ref, containing an actual $ref",
+      "test": "property named $ref invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "$ref to boolean schema true",
+      "test": "any value is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "$ref to boolean schema false",
+      "test": "any value is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "Recursive references between schemas",
+      "test": "valid tree",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "Recursive references between schemas",
+      "test": "invalid tree",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "refs with quote",
+      "test": "object with numbers is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "refs with quote",
+      "test": "object with strings is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref creates new scope when adjacent to keywords",
+      "test": "referenced subschema doesn't see annotations from properties",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "naive replacement of $ref with its destination is not correct",
+      "test": "do not evaluate the $ref inside the enum, matching any string",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "naive replacement of $ref with its destination is not correct",
+      "test": "do not evaluate the $ref inside the enum, definition exact match",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "naive replacement of $ref with its destination is not correct",
+      "test": "match the enum exactly",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "refs with relative uris and defs",
+      "test": "invalid on inner field",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "refs with relative uris and defs",
+      "test": "invalid on outer field",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "refs with relative uris and defs",
+      "test": "valid on both fields",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "relative refs with absolute uris and defs",
+      "test": "invalid on inner field",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "relative refs with absolute uris and defs",
+      "test": "invalid on outer field",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "relative refs with absolute uris and defs",
+      "test": "valid on both fields",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "$id must be resolved against nearest parent, not just immediate parent",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "$id must be resolved against nearest parent, not just immediate parent",
+      "test": "non-number is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "order of evaluation: $id and $ref",
+      "test": "data is valid against first definition",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "order of evaluation: $id and $ref",
+      "test": "data is invalid against first definition",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "order of evaluation: $id and $anchor and $ref",
+      "test": "data is valid against first definition",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "order of evaluation: $id and $anchor and $ref",
+      "test": "data is invalid against first definition",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "simple URN base URI with $ref via the URN",
+      "test": "valid under the URN IDed schema",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "simple URN base URI with $ref via the URN",
+      "test": "invalid under the URN IDed schema",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "simple URN base URI with JSON pointer",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "simple URN base URI with JSON pointer",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with NSS",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with NSS",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with r-component",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with r-component",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with q-component",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with q-component",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with URN and JSON pointer ref",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with URN and JSON pointer ref",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with URN and anchor ref",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN base URI with URN and anchor ref",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "URN ref with nested pointer ref",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "URN ref with nested pointer ref",
+      "test": "a non-string is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to if",
+      "test": "a non-integer is invalid due to the $ref",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to if",
+      "test": "an integer is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to then",
+      "test": "a non-integer is invalid due to the $ref",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to then",
+      "test": "an integer is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to else",
+      "test": "a non-integer is invalid due to the $ref",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "ref to else",
+      "test": "an integer is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "ref with absolute-path-reference",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "ref with absolute-path-reference",
+      "test": "an integer is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "$id with file URI still resolves pointers - *nix",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "$id with file URI still resolves pointers - *nix",
+      "test": "non-number is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "$id with file URI still resolves pointers - windows",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "$id with file URI still resolves pointers - windows",
+      "test": "non-number is invalid",
+      "valid": false
+    },
+    {
+      "file": "ref.json",
+      "group": "empty tokens in $ref json-pointer",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "ref.json",
+      "group": "empty tokens in $ref json-pointer",
+      "test": "non-number is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "an integer is an integer",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "a float with zero fractional part is an integer",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "a float is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "a string is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "a string is still not an integer, even if it looks like one",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "an object is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "an array is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "a boolean is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "integer type matches integers",
+      "test": "null is not an integer",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "an integer is a number",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "a float with zero fractional part is a number (and an integer)",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "a float is a number",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "a string is not a number",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "a string is still not a number, even if it looks like one",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "an object is not a number",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "an array is not a number",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "a boolean is not a number",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "number type matches numbers",
+      "test": "null is not a number",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "1 is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "a float is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "a string is a string",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "a string is still a string, even if it looks like a number",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "an empty string is still a string",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "an object is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "an array is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "a boolean is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "string type matches strings",
+      "test": "null is not a string",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "an integer is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "a float is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "a string is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "an object is an object",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "an array is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "a boolean is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "object type matches objects",
+      "test": "null is not an object",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "an integer is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "a float is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "a string is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "an object is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "an array is an array",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "a boolean is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "array type matches arrays",
+      "test": "null is not an array",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "an integer is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "zero is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "a float is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "a string is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "an empty string is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "an object is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "an array is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "true is a boolean",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "false is a boolean",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "boolean type matches booleans",
+      "test": "null is not a boolean",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "an integer is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "a float is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "zero is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "a string is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "an empty string is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "an object is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "an array is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "true is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "false is not null",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "null type matches only the null object",
+      "test": "null is null",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "an integer is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "a string is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "a float is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "an object is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "an array is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "a boolean is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "multiple types can be specified in an array",
+      "test": "null is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type as array with one item",
+      "test": "string is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type as array with one item",
+      "test": "number is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type: array or object",
+      "test": "array is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type: array or object",
+      "test": "object is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type: array or object",
+      "test": "number is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type: array or object",
+      "test": "string is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type: array or object",
+      "test": "null is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type: array, object or null",
+      "test": "array is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type: array, object or null",
+      "test": "object is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type: array, object or null",
+      "test": "null is valid",
+      "valid": true
+    },
+    {
+      "file": "type.json",
+      "group": "type: array, object or null",
+      "test": "number is invalid",
+      "valid": false
+    },
+    {
+      "file": "type.json",
+      "group": "type: array, object or null",
+      "test": "string is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const validation",
+      "test": "same value is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const validation",
+      "test": "another value is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const validation",
+      "test": "another type is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with object",
+      "test": "same object is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with object",
+      "test": "same object with different property order is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with object",
+      "test": "another object is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with object",
+      "test": "another type is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with array",
+      "test": "same array is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with array",
+      "test": "another array item is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with array",
+      "test": "array with additional items is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with null",
+      "test": "null is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with null",
+      "test": "not null is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with false does not match 0",
+      "test": "false is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with false does not match 0",
+      "test": "integer zero is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with false does not match 0",
+      "test": "float zero is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with true does not match 1",
+      "test": "true is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with true does not match 1",
+      "test": "integer one is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with true does not match 1",
+      "test": "float one is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with [false] does not match [0]",
+      "test": "[false] is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with [false] does not match [0]",
+      "test": "[0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with [false] does not match [0]",
+      "test": "[0.0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with [true] does not match [1]",
+      "test": "[true] is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with [true] does not match [1]",
+      "test": "[1] is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with [true] does not match [1]",
+      "test": "[1.0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": false} does not match {\"a\": 0}",
+      "test": "{\"a\": false} is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": false} does not match {\"a\": 0}",
+      "test": "{\"a\": 0} is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": false} does not match {\"a\": 0}",
+      "test": "{\"a\": 0.0} is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": true} does not match {\"a\": 1}",
+      "test": "{\"a\": true} is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": true} does not match {\"a\": 1}",
+      "test": "{\"a\": 1} is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with {\"a\": true} does not match {\"a\": 1}",
+      "test": "{\"a\": 1.0} is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "false is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "integer zero is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "float zero is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "empty object is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "empty array is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 0 does not match other zero-like types",
+      "test": "empty string is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 1 does not match true",
+      "test": "true is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with 1 does not match true",
+      "test": "integer one is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with 1 does not match true",
+      "test": "float one is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with -2.0 matches integer and float types",
+      "test": "integer -2 is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with -2.0 matches integer and float types",
+      "test": "integer 2 is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with -2.0 matches integer and float types",
+      "test": "float -2.0 is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "const with -2.0 matches integer and float types",
+      "test": "float 2.0 is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "const with -2.0 matches integer and float types",
+      "test": "float -2.00001 is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "float and integers are equal up to 64-bit representation limits",
+      "test": "integer is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "float and integers are equal up to 64-bit representation limits",
+      "test": "integer minus one is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "float and integers are equal up to 64-bit representation limits",
+      "test": "float is valid",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "float and integers are equal up to 64-bit representation limits",
+      "test": "float minus one is invalid",
+      "valid": false
+    },
+    {
+      "file": "const.json",
+      "group": "nul characters in strings",
+      "test": "match string with nul",
+      "valid": true
+    },
+    {
+      "file": "const.json",
+      "group": "nul characters in strings",
+      "test": "do not match string lacking nul",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "simple enum validation",
+      "test": "one of the enum is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "simple enum validation",
+      "test": "something else is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum validation",
+      "test": "one of the enum is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum validation",
+      "test": "something else is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum validation",
+      "test": "objects are deep compared",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum validation",
+      "test": "valid object matches",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum validation",
+      "test": "extra properties in object is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum-with-null validation",
+      "test": "null is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum-with-null validation",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "heterogeneous enum-with-null validation",
+      "test": "something else is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "both properties are valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "wrong foo value",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "wrong bar value",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "missing optional property is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "missing required property is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enums in properties",
+      "test": "missing all properties is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with escaped characters",
+      "test": "member 1 is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with escaped characters",
+      "test": "member 2 is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with escaped characters",
+      "test": "another string is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with false does not match 0",
+      "test": "false is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with false does not match 0",
+      "test": "integer zero is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with false does not match 0",
+      "test": "float zero is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [false] does not match [0]",
+      "test": "[false] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [false] does not match [0]",
+      "test": "[0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [false] does not match [0]",
+      "test": "[0.0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with true does not match 1",
+      "test": "true is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with true does not match 1",
+      "test": "integer one is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with true does not match 1",
+      "test": "float one is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [true] does not match [1]",
+      "test": "[true] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [true] does not match [1]",
+      "test": "[1] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [true] does not match [1]",
+      "test": "[1.0] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 0 does not match false",
+      "test": "false is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 0 does not match false",
+      "test": "integer zero is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 0 does not match false",
+      "test": "float zero is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [0] does not match [false]",
+      "test": "[false] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [0] does not match [false]",
+      "test": "[0] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [0] does not match [false]",
+      "test": "[0.0] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 1 does not match true",
+      "test": "true is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 1 does not match true",
+      "test": "integer one is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with 1 does not match true",
+      "test": "float one is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [1] does not match [true]",
+      "test": "[true] is invalid",
+      "valid": false
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [1] does not match [true]",
+      "test": "[1] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "enum with [1] does not match [true]",
+      "test": "[1.0] is valid",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "nul characters in strings",
+      "test": "match string with nul",
+      "valid": true
+    },
+    {
+      "file": "enum.json",
+      "group": "nul characters in strings",
+      "test": "do not match string lacking nul",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "both properties present and valid is valid",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "one property invalid is invalid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "both properties invalid is invalid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "doesn't invalidate other properties",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "ignores arrays",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "object properties validation",
+      "test": "ignores other non-objects",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "property validates property",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "property invalidates property",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "patternProperty invalidates property",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "patternProperty validates nonproperty",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "patternProperty invalidates nonproperty",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "additionalProperty ignores property",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "additionalProperty validates others",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties, patternProperties, additionalProperties interaction",
+      "test": "additionalProperty invalidates others",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with boolean schema",
+      "test": "no property present is valid",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with boolean schema",
+      "test": "only 'true' property present is valid",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with boolean schema",
+      "test": "only 'false' property present is invalid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with boolean schema",
+      "test": "both properties present is invalid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with escaped characters",
+      "test": "object with all numbers is valid",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with escaped characters",
+      "test": "object with strings is invalid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties with null valued instance properties",
+      "test": "allows null values",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "ignores arrays",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "ignores other non-objects",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "none of the properties mentioned",
+      "valid": true
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "__proto__ not valid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "toString not valid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "constructor not valid",
+      "valid": false
+    },
+    {
+      "file": "properties.json",
+      "group": "properties whose names are Javascript object property names",
+      "test": "all present and valid",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required validation",
+      "test": "present required property is valid",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required validation",
+      "test": "non-present required property is invalid",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required validation",
+      "test": "ignores arrays",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required validation",
+      "test": "ignores strings",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required validation",
+      "test": "ignores other non-objects",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required default validation",
+      "test": "not required by default",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required with empty array",
+      "test": "property not required",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required with escaped characters",
+      "test": "object with all properties present is valid",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required with escaped characters",
+      "test": "object with some properties missing is invalid",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "ignores arrays",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "ignores other non-objects",
+      "valid": true
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "none of the properties mentioned",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "__proto__ present",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "toString present",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "constructor present",
+      "valid": false
+    },
+    {
+      "file": "required.json",
+      "group": "required properties whose names are Javascript object property names",
+      "test": "all present",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "no additional properties is valid",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "an additional property is invalid",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "ignores arrays",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "ignores strings",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "ignores other non-objects",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties being false does not allow other properties",
+      "test": "patternProperties are not additional properties",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "non-ASCII pattern with additionalProperties",
+      "test": "matching the pattern is valid",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "non-ASCII pattern with additionalProperties",
+      "test": "not matching the pattern is invalid",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with schema",
+      "test": "no additional properties is valid",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with schema",
+      "test": "an additional valid property is valid",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with schema",
+      "test": "an additional invalid property is invalid",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties can exist by itself",
+      "test": "an additional valid property is valid",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties can exist by itself",
+      "test": "an additional invalid property is invalid",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties are allowed by default",
+      "test": "additional properties are allowed",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties does not look in applicators",
+      "test": "properties defined in allOf are not examined",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with null valued instance properties",
+      "test": "allows null values",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with propertyNames",
+      "test": "Valid against both keywords",
+      "valid": true
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "additionalProperties with propertyNames",
+      "test": "Valid against propertyNames, but not additionalProperties",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "dependentSchemas with additionalProperties",
+      "test": "additionalProperties doesn't consider dependentSchemas",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "dependentSchemas with additionalProperties",
+      "test": "additionalProperties can't see bar",
+      "valid": false
+    },
+    {
+      "file": "additionalProperties.json",
+      "group": "dependentSchemas with additionalProperties",
+      "test": "additionalProperties can't see bar even when foo2 is present",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "a schema given for items",
+      "test": "valid items",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "a schema given for items",
+      "test": "wrong type of items",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "a schema given for items",
+      "test": "ignores non-arrays",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "a schema given for items",
+      "test": "JavaScript pseudo-array is valid",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items with boolean schema (true)",
+      "test": "any array is valid",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items with boolean schema (true)",
+      "test": "empty array is valid",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items with boolean schema (false)",
+      "test": "any non-empty array is invalid",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items with boolean schema (false)",
+      "test": "empty array is valid",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "valid items",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "too many items",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "too many sub-items",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "wrong item",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "wrong sub-item",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items and subitems",
+      "test": "fewer items is valid",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "nested items",
+      "test": "valid nested array",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "nested items",
+      "test": "nested array with invalid type",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "nested items",
+      "test": "not deep enough",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems with no additional items allowed",
+      "test": "empty array",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems with no additional items allowed",
+      "test": "fewer number of items present (1)",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems with no additional items allowed",
+      "test": "fewer number of items present (2)",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems with no additional items allowed",
+      "test": "equal number of items present",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems with no additional items allowed",
+      "test": "additional items are not permitted",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items does not look in applicators, valid case",
+      "test": "prefixItems in allOf does not constrain items, invalid case",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items does not look in applicators, valid case",
+      "test": "prefixItems in allOf does not constrain items, valid case",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems validation adjusts the starting index for items",
+      "test": "valid items",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "prefixItems validation adjusts the starting index for items",
+      "test": "wrong type of second item",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items with heterogeneous array",
+      "test": "heterogeneous invalid instance",
+      "valid": false
+    },
+    {
+      "file": "items.json",
+      "group": "items with heterogeneous array",
+      "test": "valid instance",
+      "valid": true
+    },
+    {
+      "file": "items.json",
+      "group": "items with null instance elements",
+      "test": "allows null elements",
+      "valid": true
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation",
+      "test": "shorter is valid",
+      "valid": true
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation",
+      "test": "exact length is valid",
+      "valid": true
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation",
+      "test": "too long is invalid",
+      "valid": false
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation",
+      "test": "ignores non-arrays",
+      "valid": true
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation with a decimal",
+      "test": "shorter is valid",
+      "valid": true
+    },
+    {
+      "file": "maxItems.json",
+      "group": "maxItems validation with a decimal",
+      "test": "too long is invalid",
+      "valid": false
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation",
+      "test": "above the minimum is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation",
+      "test": "boundary point is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation",
+      "test": "below the minimum is invalid",
+      "valid": false
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation",
+      "test": "ignores non-numbers",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "negative above the minimum is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "positive above the minimum is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "boundary point is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "boundary point with float is valid",
+      "valid": true
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "float below the minimum is invalid",
+      "valid": false
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "int below the minimum is invalid",
+      "valid": false
+    },
+    {
+      "file": "minimum.json",
+      "group": "minimum validation with signed integer",
+      "test": "ignores non-numbers",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation",
+      "test": "below the maximum is valid",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation",
+      "test": "boundary point is valid",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation",
+      "test": "above the maximum is invalid",
+      "valid": false
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation",
+      "test": "ignores non-numbers",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation with unsigned integer",
+      "test": "below the maximum is invalid",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation with unsigned integer",
+      "test": "boundary point integer is valid",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation with unsigned integer",
+      "test": "boundary point float is valid",
+      "valid": true
+    },
+    {
+      "file": "maximum.json",
+      "group": "maximum validation with unsigned integer",
+      "test": "above the maximum is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf",
+      "test": "allOf",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf",
+      "test": "mismatch second",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf",
+      "test": "mismatch first",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf",
+      "test": "wrong type",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with base schema",
+      "test": "valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with base schema",
+      "test": "mismatch base schema",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with base schema",
+      "test": "mismatch first allOf",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with base schema",
+      "test": "mismatch second allOf",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with base schema",
+      "test": "mismatch both",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf simple types",
+      "test": "valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf simple types",
+      "test": "mismatch one",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with boolean schemas, all true",
+      "test": "any value is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with boolean schemas, some false",
+      "test": "any value is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with boolean schemas, all false",
+      "test": "any value is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with one empty schema",
+      "test": "any data is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with two empty schemas",
+      "test": "any data is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with the first empty schema",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with the first empty schema",
+      "test": "string is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with the last empty schema",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf with the last empty schema",
+      "test": "string is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "nested allOf, to check validation semantics",
+      "test": "null is valid",
+      "valid": true
+    },
+    {
+      "file": "allOf.json",
+      "group": "nested allOf, to check validation semantics",
+      "test": "anything non-null is invalid",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: false, anyOf: false, oneOf: false",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: false, anyOf: false, oneOf: true",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: false, anyOf: true, oneOf: false",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: false, anyOf: true, oneOf: true",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: true, anyOf: false, oneOf: false",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: true, anyOf: false, oneOf: true",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: true, anyOf: true, oneOf: false",
+      "valid": false
+    },
+    {
+      "file": "allOf.json",
+      "group": "allOf combined with anyOf, oneOf",
+      "test": "allOf: true, anyOf: true, oneOf: true",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf",
+      "test": "first anyOf valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf",
+      "test": "second anyOf valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf",
+      "test": "both anyOf valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf",
+      "test": "neither anyOf valid",
+      "valid": false
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with base schema",
+      "test": "mismatch base schema",
+      "valid": false
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with base schema",
+      "test": "one anyOf valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with base schema",
+      "test": "both anyOf invalid",
+      "valid": false
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with boolean schemas, all true",
+      "test": "any value is valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with boolean schemas, some true",
+      "test": "any value is valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with boolean schemas, all false",
+      "test": "any value is invalid",
+      "valid": false
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf complex types",
+      "test": "first anyOf valid (complex)",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf complex types",
+      "test": "second anyOf valid (complex)",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf complex types",
+      "test": "both anyOf valid (complex)",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf complex types",
+      "test": "neither anyOf valid (complex)",
+      "valid": false
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with one empty schema",
+      "test": "string is valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "anyOf with one empty schema",
+      "test": "number is valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "nested anyOf, to check validation semantics",
+      "test": "null is valid",
+      "valid": true
+    },
+    {
+      "file": "anyOf.json",
+      "group": "nested anyOf, to check validation semantics",
+      "test": "anything non-null is invalid",
+      "valid": false
+    }
+  ]
+}

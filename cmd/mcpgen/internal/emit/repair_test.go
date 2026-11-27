@@ -139,13 +139,15 @@ func TestRepairA10GeneratedWire(t *testing.T) {
 	for _, relative := range []string{"go.mod", "go.sum"} {
 		copyTestFile(t, filepath.Join("../../../..", relative), filepath.Join(root, relative))
 	}
-	entries, err := os.ReadDir("../../../../internal/validation")
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, entry := range entries {
-		if strings.HasSuffix(entry.Name(), ".go") {
-			copyTestFile(t, filepath.Join("../../../../internal/validation", entry.Name()), filepath.Join(root, "internal/validation", entry.Name()))
+	for _, dependency := range []string{"codec", "internal/validation"} {
+		entries, err := os.ReadDir(filepath.Join("../../../..", dependency))
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, entry := range entries {
+			if strings.HasSuffix(entry.Name(), ".go") && !strings.HasSuffix(entry.Name(), "_test.go") {
+				copyTestFile(t, filepath.Join("../../../..", dependency, entry.Name()), filepath.Join(root, dependency, entry.Name()))
+			}
 		}
 	}
 	protocol := filepath.Join(root, "protocol")

@@ -76,11 +76,50 @@ shared host queues. Native Windows/amd64, Darwin/arm64 and physical Linux/amd64
 qualification is supplemented by WSL. Ordinary builds and tests force CGO off;
 CGO is enabled only for separately queued race tests on an eligible host.
 
+## Qualified validation profile
+
+The canonical adapter accepts the complete Draft 2020-12 dialect and resolves
+references exclusively through immutable registered snapshots. Cache keys bind
+schema bytes, caller identity, canonical URI, the complete registry snapshot and
+the profile version. Registry and compilation retention are bounded; concurrent
+first compilations share one immutable result. Missing compiled handles reject.
+
+Application `format` and content keywords remain annotations. Only the exact
+reviewed protocol input activates mandatory URI, RFC 6570 template and canonical
+base64 assertions at its schema locations. `Root.uri` requires an absolute file
+URI starting with `file://`. Templates accept the pinned parser's complete
+grammar, including relative
+templates and all operators; runtime declarations additionally require presence.
+No URI check grants access or fetches resources.
+
+Pattern support is the scalar-Unicode common subset of ECMA and Go RE2: literals,
+character classes, anchors, ordinary/noncapturing groups, alternation and bounded
+or unbounded repetition. Dot excludes LF, CR, U+2028 and U+2029, matching ECMA's
+default [line-terminator rule](https://tc39.es/ecma262/multipage/text-processing.html#sec-compileatom).
+Engine flags, lookaround, backreferences, Unicode
+and whitespace escapes, POSIX classes and Go-specific escapes are unqualified
+and rejected with schema pointers. Custom dialects and unknown required
+vocabularies reject; optional unknown vocabularies remain annotations. This is
+not a claim of unrestricted ECMA regex support.
+
+The fixture ledger reconciles all original 421 schema/instance/outcome identities
+with the larger vendored corpus. Tests separately report the custom-dialect
+cases outside this profile; compilation failures never count as successful
+instance validation. The 36 original URI/template cases exercise the production
+semantic checkers; other vendored formats exercise annotation behavior.
+
+Owned codecs preserve exact raw numbers, field presence, unknown members and
+native JSON v2 semantics. Differential tests exercise actual SDK legacy hooks.
+The pinned SDK's dynamic `any` decoding can round large numbers; a passing owned
+codec differential does not establish lossless SDK transport behavior. R5 and
+the guarded transport stages retain their separate live-boundary obligations.
+
 ## Completion status
 
 The [framework PLAN](decisions/0002-PLAN-build-schema-driven-mcp-framework.md)
-records qualification by phase. R2/R3 generation and publication are qualified.
-R4/R5 codec/runtime repairs and Stage 7 transport guards remain pending.
+records qualification by phase. R2/R3 generation/publication and R4
+codec/canonical-validation repairs are qualified. R5 runtime integration and
+Stage 7 transport guards remain pending.
 Complete conformance, preflight receipts and security integration remain later
 work; passing the local foundation does not establish those unfinished exits.
 Operator host configuration, skills and global Git hooks are maintained outside

@@ -1,40 +1,31 @@
-// Package codec implements the framework's owned strict JSON entry
-// points.
-//
-// The codec rejects before any lossy decode: duplicate and
-// escaped-equivalent member names, invalid UTF-8, trailing values, depth
-// beyond the bound, frame size beyond the limit, and numeric tokens over
-// 256 bytes or with exponent magnitude over 1,024. Absence, null, empty,
-// and zero stay distinct; numbers are preserved as exact tokens, never
-// blanket float64.
+// Package codec supplies bounded strict JSON syntax and owned JSON v2 codecs.
+// Raw checks retain numeric lexemes and reject duplicate names, invalid Unicode,
+// incomplete/trailing values and resource-limit violations before decoding.
 package codec
 
 import (
+	"bytes"
 	"encoding/json/jsontext"
+	"errors"
 	"fmt"
+	"io"
 	"strings"
-	"unicode/utf8"
 )
 
-// Bounds are codec safeguards, not protocol rules.
+// Bounds are explicit positive codec safeguards, not protocol rules.
 type Bounds struct {
-	MaxFrameBytes int // per JSON value; default 4 MiB
-	MaxDepth      int // nesting; default 256
-	MaxTokenBytes int // per numeric token; default 256
-	MaxExponent   int // exponent magnitude; default 1,024
+	MaxFrameBytes int // default 4 MiB; hard cap 64 MiB
+	MaxDepth      int // default 64; maximum 256
+	MaxTokenBytes int // numeric token bytes; maximum 256
+	MaxExponent   int // exponent magnitude; maximum 1,024
 }
 
-// DefaultBounds are the frozen codec safeguards.
+// DefaultBounds returns the accepted undeclared codec safeguards.
 func DefaultBounds() Bounds {
-	return Bounds{
-		MaxFrameBytes: 4 << 20,
-		MaxDepth:      256,
-		MaxTokenBytes: 256,
-		MaxExponent:   1024,
-	}
+	return Bounds{MaxFrameBytes: 4 << 20, MaxDepth: 64, MaxTokenBytes: 256, MaxExponent: 1024}
 }
 
-// Error is a stable codec rejection with position information.
+// Error is a stable codec rejection with byte position information.
 type Error struct {
 	Offset int
 	Detail string
@@ -44,122 +35,102 @@ func (e *Error) Error() string {
 	return fmt.Sprintf("codec: offset %d: %s", e.Offset, e.Detail)
 }
 
-// ValidateRaw checks raw bytes before any decode: duplicate and
-// escaped-equivalent member names (rejected natively by the jsontext
-// decoder), UTF-8 validity, trailing values, depth, frame size, and
-// numeric token/exponent bounds. It returns the byte length consumed.
+func validBounds(bounds Bounds) error {
+	if bounds.MaxFrameBytes <= 0 || bounds.MaxFrameBytes > 64<<20 ||
+		bounds.MaxDepth <= 0 || bounds.MaxDepth > 256 ||
+		bounds.MaxTokenBytes <= 0 || bounds.MaxTokenBytes > 256 ||
+		bounds.MaxExponent <= 0 || bounds.MaxExponent > 1024 {
+		return &Error{0, "invalid bounds: require positive frame/depth/token/exponent limits within 64 MiB/256/256/1024"}
+	}
+	return nil
+}
+
+// ValidateRaw accepts exactly one complete JSON value followed by actual EOF.
+// The returned offset ends the value, excluding its trailing whitespace.
 func ValidateRaw(data []byte, bounds Bounds) (int, error) {
-	if len(data) > bounds.MaxFrameBytes {
-		return 0, &Error{0, fmt.Sprintf("frame is %d bytes; limit is %d", len(data), bounds.MaxFrameBytes)}
-	}
-	if !utf8.Valid(data) {
-		return 0, &Error{0, "frame is not valid UTF-8"}
-	}
-	dec := jsontext.NewDecoder(strings.NewReader(string(data)))
-	depth := 0
-	consumed := 0
-	for {
-		tok, err := dec.ReadToken()
-		if err != nil {
-			if strings.Contains(err.Error(), "EOF") {
-				break
-			}
-			if strings.Contains(err.Error(), "duplicate object member") {
-				name := betweenQuotes(err.Error())
-				return 0, &Error{int(dec.InputOffset()), fmt.Sprintf("duplicate or escaped-equivalent member name %q", name)}
-			}
-			return 0, &Error{int(dec.InputOffset()), boundedErr(err)}
-		}
-		consumed = int(dec.InputOffset())
-		switch tok.Kind() {
-		case '{', '[':
-			depth++
-			if depth > bounds.MaxDepth {
-				return 0, &Error{consumed, fmt.Sprintf("depth %d exceeds limit %d", depth, bounds.MaxDepth)}
-			}
-		case '}', ']':
-			depth--
-		case '0':
-			token := tok.Clone().String()
-			if len(token) > bounds.MaxTokenBytes {
-				return 0, &Error{consumed - len(token), fmt.Sprintf("numeric token is %d bytes; limit is %d", len(token), bounds.MaxTokenBytes)}
-			}
-			if exp, ok := exponentMagnitude(token); ok && exp > bounds.MaxExponent {
-				return 0, &Error{consumed - len(token), fmt.Sprintf("exponent magnitude %d exceeds limit %d", exp, bounds.MaxExponent)}
-			}
-		}
-		if depth == 0 && consumed > 0 {
-			rest := strings.TrimLeft(string(data[consumed:]), " \t\r\n")
-			if rest != "" {
-				return 0, &Error{consumed, "trailing value after top-level JSON"}
-			}
-			return consumed, nil
-		}
-	}
-	if depth != 0 {
-		return 0, &Error{consumed, "unterminated container"}
-	}
-	return consumed, nil
+	consumed, _, err := scanRaw(data, bounds)
+	return consumed, err
 }
 
-// DuplicateNames reports duplicate or escaped-equivalent member names.
-// The jsontext decoder rejects both natively; this function surfaces the
-// rejection with the offending name extracted.
+// DuplicateNames reports the first native duplicate-name rejection. Other
+// malformed, empty, incomplete or over-limit inputs return an error.
 func DuplicateNames(data []byte) ([]string, error) {
-	dec := jsontext.NewDecoder(strings.NewReader(string(data)))
-	var dupes []string
+	_, duplicates, err := scanRaw(data, DefaultBounds())
+	if len(duplicates) != 0 {
+		return duplicates, nil
+	}
+	return nil, err
+}
+
+func scanRaw(data []byte, bounds Bounds) (int, []string, error) {
+	if err := validBounds(bounds); err != nil {
+		return 0, nil, err
+	}
+	if len(data) > bounds.MaxFrameBytes {
+		return 0, nil, &Error{0, fmt.Sprintf("frame is %d bytes; limit is %d", len(data), bounds.MaxFrameBytes)}
+	}
+	decoder := jsontext.NewDecoder(bytes.NewBuffer(data))
+	started := false
 	for {
-		_, err := dec.ReadToken()
+		token, err := decoder.ReadToken()
 		if err != nil {
-			if strings.Contains(err.Error(), "EOF") {
-				return dupes, nil
+			if errors.Is(err, io.EOF) && !started {
+				return 0, nil, &Error{int(decoder.InputOffset()), "one complete JSON value required"}
 			}
-			if strings.Contains(err.Error(), "duplicate object member") {
-				dupes = append(dupes, betweenQuotes(err.Error()))
-				return dupes, nil
+			var syntax *jsontext.SyntacticError
+			if errors.As(err, &syntax) && errors.Is(err, jsontext.ErrDuplicateName) {
+				name := syntax.JSONPointer.LastToken()
+				display := name
+				if len(display) > 80 {
+					display = display[:80] + "…"
+				}
+				return 0, []string{name}, &Error{int(syntax.ByteOffset), fmt.Sprintf("duplicate or escaped-equivalent member name %q", display)}
 			}
-			return dupes, err
+			return 0, nil, &Error{int(decoder.InputOffset()), boundedErr(err)}
 		}
-	}
-}
-
-// betweenQuotes extracts the quoted name from a decoder error message.
-func betweenQuotes(message string) string {
-	at := strings.IndexByte(message, '"')
-	if at < 0 {
-		return "?"
-	}
-	rest := message[at+1:]
-	end := strings.IndexByte(rest, '"')
-	if end < 0 {
-		return "?"
-	}
-	return rest[:end]
-}
-
-// exponentMagnitude extracts the magnitude of a numeric token's exponent,
-// reporting whether one exists.
-func exponentMagnitude(token string) (int, bool) {
-	lower := strings.ToLower(token)
-	at := strings.IndexByte(lower, 'e')
-	if at < 0 {
-		return 0, false
-	}
-	mag := 0
-	for i := at + 1; i < len(lower); i++ {
-		c := lower[i]
-		if c == '+' || c == '-' {
+		started = true
+		consumed := int(decoder.InputOffset())
+		if decoder.StackDepth() > bounds.MaxDepth {
+			return 0, nil, &Error{consumed, fmt.Sprintf("depth %d exceeds limit %d", decoder.StackDepth(), bounds.MaxDepth)}
+		}
+		if token.Kind() == '0' {
+			lexeme := token.String()
+			if len(lexeme) > bounds.MaxTokenBytes {
+				return 0, nil, &Error{consumed - len(lexeme), fmt.Sprintf("numeric token is %d bytes; limit is %d", len(lexeme), bounds.MaxTokenBytes)}
+			}
+			if exponentMagnitude(lexeme) > bounds.MaxExponent {
+				return 0, nil, &Error{consumed - len(lexeme), fmt.Sprintf("exponent magnitude exceeds limit %d", bounds.MaxExponent)}
+			}
+		}
+		if decoder.StackDepth() != 0 {
 			continue
 		}
-		if c < '0' || c > '9' {
-			break
+		// A complete root is necessary but insufficient: consume the actual
+		// stream terminator so malformed or additional values cannot pass.
+		if _, err := decoder.ReadToken(); !errors.Is(err, io.EOF) {
+			return 0, nil, &Error{consumed, "trailing value or malformed content after top-level JSON"}
 		}
-		mag = mag*10 + int(c-'0')
-		if mag > 100000 {
-			return mag, true
+		return consumed, nil, nil
+	}
+}
+
+func exponentMagnitude(token string) int {
+	at := strings.IndexAny(token, "eE")
+	if at < 0 {
+		return 0
+	}
+	exponent := token[at+1:]
+	if exponent[0] == '+' || exponent[0] == '-' {
+		exponent = exponent[1:]
+	}
+	magnitude := 0
+	for _, digit := range exponent {
+		magnitude = magnitude*10 + int(digit-'0')
+		if magnitude > 1024 {
+			return magnitude // stop before any machine-integer overflow
 		}
 	}
-	return mag, true
+	return magnitude
 }
 
 func boundedErr(err error) string {

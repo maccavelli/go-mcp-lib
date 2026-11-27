@@ -7,6 +7,7 @@ import (
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 
+	"github.com/maccavelli/go-mcp-lib/internal/validation"
 	"github.com/maccavelli/go-mcp-lib/mcp/internal/sdkbridge"
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 )
@@ -142,8 +143,7 @@ func AddResource(s *Server, reg *ResourceRegistration, handler ResourceHandler) 
 }
 
 // ResourceTemplateRegistration is the declarative half of a resource
-// template. The URI template is validated against the framework's
-// location rule (URI-shaped, supported varspecs, balanced braces).
+// template. The URI template is validated by the pinned RFC 6570 parser.
 type ResourceTemplateRegistration struct {
 	// Name is required, non-empty.
 	Name string
@@ -211,57 +211,15 @@ func resourceHandlerBridge(handler ResourceHandler) sdk.ResourceHandler {
 	}
 }
 
-// validateAbsoluteURI enforces the framework's URI location rule.
-// It mirrors internal/validation's rule without importing the
-// internal package from the public API.
+// validateAbsoluteURI uses the canonical production location checker.
 func validateAbsoluteURI(uri string) error {
-	if uri == "" {
-		return errors.New("mcp: URI is empty")
-	}
-	schemeEnd := -1
-	for i := 0; i < len(uri); i++ {
-		c := uri[i]
-		switch {
-		case c >= 'a' && c <= 'z', c >= 'A' && c <= 'Z':
-			continue
-		case i > 0 && (c >= '0' && c <= '9' || c == '+' || c == '-' || c == '.'):
-			continue
-		case c == ':' && i > 0:
-			schemeEnd = i
-		}
-		if schemeEnd >= 0 {
-			break
-		}
-	}
-	if schemeEnd < 2 {
-		return fmt.Errorf("mcp: %q is not an absolute URI", uri)
-	}
-	return nil
+	return validation.CheckURI(uri)
 }
 
-// validateURITemplateShape enforces the template location rule: at
-// least one {var} expansion, supported varspecs, balanced braces.
+// validateURITemplateShape checks declaration presence and RFC 6570 syntax.
 func validateURITemplateShape(template string) error {
 	if template == "" {
 		return errors.New("mcp: uriTemplate is empty")
 	}
-	opens, closes := 0, 0
-	for i := 0; i < len(template); i++ {
-		switch template[i] {
-		case '{':
-			opens++
-		case '}':
-			closes++
-		}
-	}
-	if opens != closes {
-		return fmt.Errorf("mcp: uriTemplate %q has unbalanced braces", template)
-	}
-	if opens == 0 {
-		return fmt.Errorf("mcp: uriTemplate %q has no expansions", template)
-	}
-	if err := validateAbsoluteURI(template); err != nil {
-		return fmt.Errorf("mcp: uriTemplate %q is not URI-shaped", template)
-	}
-	return nil
+	return validation.CheckURITemplate(template)
 }

@@ -4,6 +4,30 @@
   "modules": {
     "runtime": [
       {
+        "package": "github.com/maccavelli/go-mcp-lib/internal/validation",
+        "test": "TestRepairA16ValidationProfile"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/internal/validation",
+        "test": "TestRepairA16RequiredAssertion"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/internal/validation",
+        "test": "TestRepairA16ExactNeighbors"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/internal/validation",
+        "test": "TestRepairA17Locations"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
+        "test": "TestRepairA16RuntimeValidation"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/mcp/internal/sdkbridge",
+        "test": "TestRepairA16SDKDifferentials"
+      },
+      {
         "package": "github.com/maccavelli/go-mcp-lib/codec",
         "test": "TestAccepts"
       },
@@ -54,6 +78,14 @@
       {
         "package": "github.com/maccavelli/go-mcp-lib/codec",
         "test": "TestDistinctAbsenceNullEmptyZero"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/codec",
+        "test": "TestRepairA15RawCodec"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/codec",
+        "test": "TestRepairA15V2EntryPoints"
       },
       {
         "package": "github.com/maccavelli/go-mcp-lib/mcp",
