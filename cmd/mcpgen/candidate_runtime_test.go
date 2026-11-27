@@ -86,7 +86,7 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	}
 	// Deliberately discard an owned validation error only in scratch. Changing
 	// JSON packages is insufficient: both decoders invoke the owned hooks.
-	source := filepath.Join(candidate.Directory(), "internal", "sdkbridge", "codec.go")
+	source := filepath.Join(candidate.Directory(), "mcp", "internal", "sdkbridge", "codec.go")
 	body, err := os.ReadFile(source)
 	if err != nil {
 		t.Fatal(err)
@@ -100,7 +100,7 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	if err := os.WriteFile(source, body, 0o644); err != nil {
 		t.Fatal(err)
 	}
-	code, output = runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", "^TestOwnedResultBoundary$", ".")
+	code, output = runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", "^TestOwnedResultBoundary$", "./mcp")
 	if code == 0 || !bytes.Contains([]byte(output), []byte("FAIL invalid owned result accepted or unclassified")) {
 		t.Errorf("FAIL owned decoder bypass was not detected: exit %d\n%s", code, output)
 	} else {
@@ -109,7 +109,7 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	if err := os.WriteFile(source, original, 0o644); err != nil {
 		t.Fatal(err)
 	}
-	server := filepath.Join(candidate.Directory(), "server.go")
+	server := filepath.Join(candidate.Directory(), "mcp", "server.go")
 	body, err = os.ReadFile(server)
 	if err != nil {
 		t.Fatal(err)
@@ -118,14 +118,14 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	if err := os.WriteFile(server, body, 0o644); err != nil {
 		t.Fatal(err)
 	}
-	code, output = runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", "^TestOwnedPublicAPI$", ".")
+	code, output = runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", "^TestOwnedPublicAPI$", "./mcp")
 	if code == 0 || !bytes.Contains([]byte(output), []byte("FAIL public SDK reachability")) {
 		t.Errorf("FAIL SDK runtime accessor plant was not detected: exit %d\n%s", code, output)
 	} else {
 		t.Log("SDK runtime accessor caught: FAIL public SDK reachability")
 	}
 	// Each type guard has its own compilable bypass and unchanged fixture.
-	bridge := filepath.Join(candidate.Directory(), "middleware_bridge.go")
+	bridge := filepath.Join(candidate.Directory(), "mcp", "middleware_bridge.go")
 	clean, err := os.ReadFile(bridge)
 	if err != nil {
 		t.Fatal(err)
@@ -154,7 +154,7 @@ func TestRepairA11ActualProduct(t *testing.T) {
 		if err := os.WriteFile(bridge, body, 0o644); err != nil {
 			t.Fatal(err)
 		}
-		code, output := runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", test, ".")
+		code, output := runner(env, candidate.Directory(), "test", "-vet=off", "-count=1", "-run", test, "./mcp")
 		if code == 0 || !bytes.Contains([]byte(output), []byte(plant.diagnostic)) {
 			t.Errorf("FAIL middleware %s bypass was not detected: exit %d\n%s", plant.name, code, output)
 		} else {

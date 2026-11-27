@@ -18,7 +18,7 @@ This tree holds three kinds of document:
 | 0001 | MADR | [Adopt the fleet workspace scaffold](decisions/0001-MADR-workspace-scaffold.md) | accepted |
 | 0001 | PLAN | [Implement the fleet workspace scaffold](decisions/0001-PLAN-workspace-scaffold.md) | in-progress |
 | 0002 | MADR | [Build a schema-driven MCP framework](decisions/0002-MADR-build-schema-driven-mcp-framework.md) | accepted — local-cicd-scaffolding scope recorded |
-| 0002 | PLAN | [Implement the schema-driven MCP framework](decisions/0002-PLAN-build-schema-driven-mcp-framework.md) | in-progress — R2/R3 qualified; coherent commit ready |
+| 0002 | PLAN | [Implement the schema-driven MCP framework](decisions/0002-PLAN-build-schema-driven-mcp-framework.md) | in-progress — R2/R3 committed; R4/R5 pending |
 | 0002 | REPORT | [Qualify MCP framework boundaries](reports/0002-REPORT-qualify-mcp-framework-boundaries.md) | complete |
 | 0002 | REPORT | [Stage 0 grounding and framework inventory](reports/0002-REPORT-stage-0-framework-inventory.md) | B01 resolved; stage exit incomplete per completion audit |
 | 0003 | MADR | [Name the Bash and heredocs deny hook](decisions/0003-MADR-name-bash-heredoc-hook.md) | accepted |
@@ -34,7 +34,7 @@ This tree holds three kinds of document:
 | 0012 | REPORT | [Local gate duplication and execution costs](reports/0012-REPORT-local-gate-duplication-assessment.md) | Make foundation A implemented and qualified; broader graph work remains |
 | 0013 | REPORT | [Library package layout assessment](reports/0013-REPORT-library-package-layout-assessment.md) | complete — revised functional layout accepted |
 | 0014 | MADR | [Organize MCP packages by capability and dependency ownership](decisions/0014-MADR-organize-mcp-runtime-package.md) | accepted |
-| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | in-progress — L0 awaits coherent prerequisite commit |
+| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | in-progress — all L1 checks passed; coherent commit ready |
 
 ## I want to…
 
@@ -49,5 +49,6 @@ This tree holds three kinds of document:
 | compare repair implementation options | [R1–R5 research, recommendations and required work](decisions/0002-PLAN-build-schema-driven-mcp-framework.md#research-refinement--2026-11-25) |
 | streamline local checks without losing coverage | [Local gate duplication assessment](reports/0012-REPORT-local-gate-duplication-assessment.md) |
 | organize library source below the repository root | [Library package layout assessment](reports/0013-REPORT-library-package-layout-assessment.md) |
+| migrate an application's runtime import | [Runtime import migration guide](guides/runtime-import-migration.md) |
 | generate, check or recover the protocol contract | [Generation and recovery guide](guides/generate-protocol.md) |
 | review the Make targets this repository needs | [Makefile reassessment](reports/0012-REPORT-local-gate-duplication-assessment.md#makefile-reassessment--2026-11-27) |

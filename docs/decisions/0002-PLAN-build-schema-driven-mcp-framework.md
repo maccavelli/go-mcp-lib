@@ -23,7 +23,8 @@ authorized R1 only, then approved execution of R1–R5 and commits to main betwe
 qualified coherent phases. R1 passed qualification on 2026-11-25. R2's input,
 model/API and complete candidate exit passed on 2026-11-26; R3 publication and
 installed-tree qualification passed on 2026-11-27. The coherent R2/R3 commit is
-ready after the Make/hook repair and pass-7 installed checks described below.
+`d1276de4761aa77d6d3389370e6781c049753131`, including the qualified Make/hook
+repair and pass-7 installed checks described below.
 R4/R5 and Stage 7 remain pending.
 The owner committed and pushed the R2 work in progress as `5c00e36` on
 2026-11-26. That historical checkpoint was not a qualified R2/R3 exit;
@@ -82,6 +83,14 @@ This table preserves the original deliverables. Some paths now exist; existence
 does not establish acceptance. The repair ledger below gives current status.
 Use root package name `mcp`; callers can import the module with that conventional
 local name. The generator's package is `main` and its engine remains internal.
+
+The accepted [0014-MADR-organize-mcp-runtime-package.md](0014-MADR-organize-mcp-runtime-package.md)
+supersedes that original placement after the coherent R2/R3 commit. Its approved
+PLAN moves the runtime to `mcp/` and the runtime-only bridge to
+`mcp/internal/sdkbridge/`, preserving shared root validation and both modules.
+The table below and historical execution entries keep original locators;
+remaining R4/R5 runtime work uses `mcp/` and its scoped bridge. See the
+[import migration guide](../guides/runtime-import-migration.md).
 
 | Path | Responsibility and dependency direction |
 | :--- | :--- |

@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import acceptance_inventory as inventory
 import gate
 import gate_common as common
+import library_layout
 import prepare
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -98,9 +99,12 @@ class TestRepairA02GateAccounting(unittest.TestCase):
         calls = []
         def execute(args, cwd, **kwargs):
             calls.append(args)
-            return subprocess.CompletedProcess(args, 0, "fixture/p 1 0\n" if args[1] == "list" else ("" if args[1] == "vet" else GOOD), "")
-        with patch.object(common, "run", side_effect=execute), patch.object(common, "required_inventory", return_value={("fixture/p", "TestCase")}), contextlib.redirect_stdout(io.StringIO()):
+            metadata = json.dumps({"ImportPath": "fixture/p", "TestGoFiles": ["case_test.go"]})
+            return subprocess.CompletedProcess(args, 0, metadata if args[1] == "list" else ("" if args[1] == "vet" else GOOD), "")
+        with patch.object(common, "run", side_effect=execute), patch.object(common, "required_inventory", return_value={("fixture/p", "TestCase")}), patch.object(library_layout, "validate", return_value=[]) as layout, contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(common.test_module(ROOT, "runtime"), 0)
+        layout.assert_called_once()
+        self.assertEqual(calls.count(["go", "list", "-json", "./..."]), 1)
         self.assertIn(["go", "test", "-vet=off", "-count=1", "-json", "./..."], calls)
         self.assertEqual(calls.count(["go", "vet", "./..."]), 1)
         with patch.dict(os.environ, {"CGO_ENABLED": "1", "GOFLAGS": "-race", "GOWORK": "other", "GOOS": "foreign", "GOARCH": "wrong", "GOEXPERIMENT": "nojsonv2"}):

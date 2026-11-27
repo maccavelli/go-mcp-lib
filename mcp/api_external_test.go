@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	mcp "github.com/maccavelli/go-mcp-lib"
+	mcp "github.com/maccavelli/go-mcp-lib/mcp"
 	p "github.com/maccavelli/go-mcp-lib/protocol"
 )
 

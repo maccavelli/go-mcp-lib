@@ -56,19 +56,19 @@
         "test": "TestDistinctAbsenceNullEmptyZero"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestPins"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestTypedErrorClassification"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestCallToolCancelledClassifies"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestRegistrationErrorClassifies"
       },
       {
@@ -128,127 +128,127 @@
         "test": "TestLocalReferenceResolution"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestConcurrentConnectionsIsolation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestTwoServersSameToolNameLive"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestMiddlewareOrdering"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestMandatoryGateRejectsBeforeUserMiddleware"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestSingleSlotLayersRejectDoubleInstall"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestUseMiddlewareValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestDeclareOutputSchemaValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestOutputValidationBeforeEmission"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestValidOutputPassesEmission"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestNoDeclarationNoCheck"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestAddPromptValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestAddResourceValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestAddResourceTemplateValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestRoundTripToolCall"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestRoundTripListTools"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestCallToolRejectsEmptyName"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestCallToolAfterClose"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestCallToolDeadline"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestServerOptionsValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestAddToolDuplicateRejected"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestAddToolValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestConcurrentServersSameToolName"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestSubscribeReadUpdate"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestElicitValidation"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestClientSessionGuards"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestOwnedResultBoundary"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib/internal/sdkbridge",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp/internal/sdkbridge",
         "test": "TestSDKWireConversion"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestOwnedPublicAPI"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestOwnedMiddlewareLive"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestOwnedMiddlewareBoundary"
       },
       {
-        "package": "github.com/maccavelli/go-mcp-lib",
+        "package": "github.com/maccavelli/go-mcp-lib/mcp",
         "test": "TestSDKResultProjection"
       }
     ],

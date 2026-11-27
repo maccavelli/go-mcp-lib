@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/maccavelli/go-mcp-lib/internal/sdkbridge"
+	"github.com/maccavelli/go-mcp-lib/mcp/internal/sdkbridge"
 	mcplib "github.com/maccavelli/go-mcp-lib/protocol"
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 )

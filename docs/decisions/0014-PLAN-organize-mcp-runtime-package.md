@@ -19,8 +19,7 @@ contract bytes and the complete existing test/gate inventory. Document the
 intentional migration to `github.com/maccavelli/go-mcp-lib/mcp`.
 
 The owner accepted the revised architecture and approved execution on
-2026-11-27. L0 is in progress; source relocation follows the qualified,
-committed R2/R3 prerequisite.
+2026-11-27. L0 passed at the coherent prerequisite commit; L1 is in progress.
 
 ## Grounding Reference
 
@@ -29,8 +28,9 @@ The accepted amended decision is
 The measured reference layouts and source locators are in
 [0013-REPORT-library-package-layout-assessment.md](../reports/0013-REPORT-library-package-layout-assessment.md).
 The current published baseline is `5c00e3680393e960f74a8907b1d6d8eaaf5f7336`,
-with approved R2/R3 repairs uncommitted. L0 must name the later coherent R2/R3
-commit and re-read every move locator at that HEAD before execution.
+with approved R2/R3 repairs then uncommitted. L0 subsequently re-grounded all
+move locators at `d1276de4761aa77d6d3389370e6781c049753131`, the qualified
+coherent R2/R3 and Make/lint repair commit.
 
 ## Scope
 
@@ -180,6 +180,162 @@ locators or unexplained generated-byte changes remain. Unrelated work is
 preserved; no consumer-repository mutation, push or tag is inferred.
 
 ## Execution Record
+
+### 2026-11-27 — L1 pass 2 exit checks passed; coherent commit ready
+
+Queued native Darwin ordinary generation returned `unchanged`. The combined
+`make pre-add-check lint generate-check build-check docs-check` then passed
+with one dispatcher invocation and one generation/check leaf: 70 runtime
+tests in five packages, 346 generator tests in twelve packages, readonly
+formatting, standalone vet, both lint owners, CLI status `ok`, complete
+two-module/three-target compilation, record/link checks and all 37 Markdown
+files. Normal Go operations forced CGO off.
+
+The final L0-to-L1 byte audit passed. All 26 moved files retain their exact
+contents apart from the five bridge imports, one external consumer import and
+reviewed package-comment corrections. No root Go file remains. Every test
+inventory row is retained; only 34 runtime and one bridge package identities
+change. All 146 captured protected-path identities, including expected absence
+of the generator sum file, are unchanged. All ten protocol files preserve
+their SHA-256 and nanosecond mtimes through generation/check; the reviewed
+manifest remains
+`2d2d88d86a78b2806043c9b7a2580001ea83b952040ad57a1fc7f223500f0112`.
+
+| Case | Observed exit evidence |
+| :--- | :--- |
+| L01 | Complete 26-file move, zero root Go files, five runtime packages and complete passing test accounting. |
+| L02 | Actual external consumer builds with canonical capability imports; the legacy-root control is refused by the compiler under readonly policy. |
+| L03 | A scratch root Go file produces its named layout failure. |
+| L04 | Reviewed L0 preflight passed; destination, parent, source, inventory and alias plants fail while preserving all scratch bytes/link identities. |
+| L05 | The real complete candidate passes every native lane and both module/target matrices; decoder, accessor and middleware bypasses remain caught at the moved paths. |
+| L06 | Public API, middleware, connection-isolation and runtime feature tests remain required and pass; no new exported runtime identifier or SDK escape hatch. |
+| L07 | Protected inputs/reviews and generated-byte inventories are unchanged; ordinary regeneration is unchanged and the actual CLI check is clean. |
+| L08 | Four ordinary native lanes pass with CGO off; separately queued physical-Linux race tests pass in all four selected packages with CGO on. |
+| L09 | Coherent prerequisite commit `d1276de4761aa77d6d3389370e6781c049753131` precedes the move. |
+| L10 | Bridge ownership is runtime-only; forbidden edges and sibling private import fail; shared validation and corpus retain their identities. |
+| L11 | Both modules and test inventories survive, library-command imports fail, and actual consumer imports use functional packages without new modules or stubs. |
+
+All L01–L11 verification cases are satisfied. Stage the coherent migration
+after the passing pre-add checks and identifier review, then commit on main
+with `git commit --no-edit`. Record the resulting migration commit in the
+completion entry before marking this PLAN complete. No push or tag is included.
+R4/R5 and Stage 7 remain governed by the separate framework PLAN.
+
+### 2026-11-27 — L1 pass 2: native, race and actual consumer checks passed
+
+All four `scripts/qualify_layout.py` lanes completed with zero failures at
+source identity
+`8d5e56e27db148ad81e5fd770d1b20a503896c32f25b0797f8ab6ffcf62fffbf`:
+Darwin/arm64, Windows/amd64, physical Linux/amd64 and WSL Linux/amd64.
+Each accounted for 346 generator tests across twelve packages, including the
+complete moved-runtime candidate and both modules' three-target source/test
+compilation. All nine layout/control tests, seven Make cases, eight lint
+plants and retained R2/R3 failure controls passed. Protected-baseline/final
+and source-preservation checks passed on every lane. Ordinary Go execution
+used CGO off. The source identity remained unchanged at continuation.
+
+The separately admitted physical-Linux race command enabled CGO only for
+`go test -race -vet=off -count=1 ./mcp ./mcp/internal/sdkbridge ./internal/validation ./codec`.
+All four packages passed; the queue wrapper exited zero after 28 seconds.
+WSL was explicitly excluded from race placement.
+
+An additional scratch external module used the actual relocated checkout,
+the pinned dependency graph and readonly/offline Go settings. Imports of
+`/mcp`, `/codec` and `/protocol`, including `mcp.NewClient`, `mcp.NewServer`
+and `mcp.Pins`, built successfully. Switching that actual consumer to the
+legacy root import failed with the required readonly missing-package diagnostic.
+
+The remaining exit work is unchanged CLI generation/check, final canonical
+Make pre-add/lint/build/docs checks, protected-byte and staged identifier review,
+and the coherent migration commit. No third source revision was needed.
+
+### 2026-11-27 — L1 pass 2 native qualification started
+
+All nine scratch layout/control tests now pass on native Windows. The exact
+readonly legacy-import diagnostic is pinned, while canonical capability imports
+build successfully. Actual Go metadata catches forbidden codec/protocol-to-runtime,
+bridge-to-owner and library-to-command edges. The compiler accepts the owning
+runtime's private import and rejects a sibling's import. Root files, missing
+production/tests, owner changes, extra/malformed modules, the legacy bridge,
+invalid metadata and changed protected contracts all fail their own controls.
+Relocation conflicts and source/destination/parent aliases fail without changing
+scratch contents or link identities. No control is skipped.
+
+Freeze the moved source, updated candidate plants, canonical inventory reuse,
+checker integration, current architecture and migration guidance. Run
+`scripts/qualify_layout.py --allow-network --baseline d1276de4761aa77d6d3389370e6781c049753131`
+on native Darwin/arm64, Windows/amd64, physical Linux/amd64 and WSL through their
+queues. The driver retains all R2/R3 plants and complete candidate qualification,
+and checks protected inputs against that prerequisite commit. Normal Go work
+forces CGO off. After ordinary qualification, run the moved runtime/bridge,
+shared validation and codec race tests on eligible physical Linux with CGO on,
+then verify unchanged generation/check and complete pre-add before committing.
+No third L1 source revision is preauthorized.
+
+### 2026-11-27 — L1 pass 1 controls: strict diagnostic correction for pass 2
+
+The 26-file move and reviewed import/locator/inventory updates landed locally.
+Canonical `make lint` passed both modules and both analyzers. The native Windows
+scratch layout suite passed seven of eight cases; the legacy consumer built
+with the canonical imports and was correctly refused after switching to the
+absent root package. The new test expected generic module-resolution wording,
+but the enforced readonly policy produced:
+
+```text
+cannot find module providing package github.com/maccavelli/go-mcp-lib: import lookup disabled by -mod=readonly
+```
+
+This is a new fixture-expectation defect, not a pre-existing runtime failure.
+Pass 2 requires that exact readonly diagnostic, the named package and nonzero
+exit, while retaining the preceding canonical-consumer success. No assertion
+or compiler failure is discarded. Finish explicit alias/conflict and missing
+production/module controls before freezing the complete native matrix. The
+existing third-build deviation rule still stops before pass 3. No L1 commit
+or complete qualification is claimed for pass 1.
+
+### 2026-11-27 — L0 passed; L1 pass 1 preparation started
+
+The coherent prerequisite landed on main as
+`d1276de4761aa77d6d3389370e6781c049753131`; the working tree was clean.
+R3 pass 7 and installed Make/pre-add/lint, repeat generation, drift and
+three-target compilation all passed before this inventory. No push occurred.
+
+Re-grounded native Go metadata shows five runtime-module packages. The runtime
+imports its bridge, protocol and shared validation; protocol also imports
+shared validation. Bridge production importers remain `client.go`, `tools.go`,
+`resources.go` and `middleware_bridge.go`; its additional test importer is
+`client_boundary_test.go`. No sibling bridge owner was found. The runtime's
+twelve test files have no relative fixture reads; validation's five test files
+retain their existing corpus and schema paths. The standard-library-only
+generator remains a separate module and has no sum file to relocate or create.
+
+The reviewed root move is exactly:
+
+```text
+api_external_test.go      client.go                 client_boundary_test.go
+doc.go                    doc_test.go               errors.go
+errors_test.go            isolation_test.go         middleware.go
+middleware_bridge.go      middleware_bridge_test.go middleware_test.go
+output.go                 output_test.go            request.go
+resources.go              resources_test.go         roundtrip_test.go
+server.go                 server_test.go            session.go
+subscribe_test.go         tools.go                  transport.go
+```
+
+Move those files under `mcp/`, and the bridge's `codec.go` and `codec_test.go`
+from `internal/sdkbridge/` under `mcp/internal/sdkbridge/`. The destination does
+not exist and no conflict is present. Capture protected protocol, schema,
+validation, module/tool-pin and retained-review identities before moving.
+Read-only Go-source searches of the four named reference repositories found
+no legacy-root MCP import; this is not an assertion about unknown consumers.
+
+L1 pass 1 will integrate layout/import checks into the canonical runtime
+package inventory, reusing its single Go metadata query. Add scratch controls
+for root files, dependency edges, consumer/internal-import rules, module/test
+ownership and conflict-preserving preflight. Keep generated bytes and pins
+unchanged. Existing runtime API and decoder/middleware plants must execute at
+their moved locations. The approved third-build rule applies independently
+to L1; no additional R3 pass is implied.
 
 ### 2026-11-27 — L0 prerequisite native qualification passed
 

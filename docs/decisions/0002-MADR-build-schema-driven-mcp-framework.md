@@ -1255,6 +1255,17 @@ the additional WSL runner, CGO-free ordinary operation and race-only CGO.
 
 ## More Information
 
+### Amendment 2026-11-27 — Functional runtime placement accepted
+
+The accepted [0014-MADR-organize-mcp-runtime-package.md](0014-MADR-organize-mcp-runtime-package.md)
+and approved PLAN supersede this record's original root-runtime placement.
+The canonical runtime is `mcp/`, with its runtime-only private bridge at
+`mcp/internal/sdkbridge/`; codec, generated protocol and shared root validation
+retain their responsibilities. Consumer runtime imports add `/mcp`. The module
+identities, runtime semantics and generation pins remain unchanged. Original
+path references retain their historical context; current implementation
+locators and the R4/R5 continuation use the functional paths.
+
 ### Amendment 2026-11-27 — Hook-discovery repair allowance accepted
 
 The owner selected A after the pass-6 hook-discovery defect. The canonical

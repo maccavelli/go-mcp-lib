@@ -191,18 +191,35 @@ def account_tests(stdout: str, expected_packages: set[str],
     return errors, passed
 
 
-def package_inventory(root: Path) -> tuple[set[str], set[str], list[str]]:
-    result = run(["go", "list", "-f", "{{.ImportPath}} {{len .TestGoFiles}} {{len .XTestGoFiles}}", "./..."], root)
+def package_inventory(root: Path, *, check_layout: bool = False) -> tuple[set[str], set[str], list[str]]:
+    result = run(["go", "list", "-json", "./..."], root)
     names, no_tests = set(), set()
     errors = []
-    for line in result.stdout.splitlines():
-        fields = line.split()
-        if len(fields) != 3 or not all(value.isdecimal() for value in fields[1:]):
-            errors.append("malformed package inventory")
-            continue
-        names.add(fields[0])
-        if fields[1:] == ["0", "0"]:
-            no_tests.add(fields[0])
+    packages = []
+    remaining = result.stdout.strip()
+    decoder = json.JSONDecoder()
+    try:
+        while remaining:
+            package, end = decoder.raw_decode(remaining)
+            if not isinstance(package, dict) or not isinstance(package.get("ImportPath"), str) or not package["ImportPath"]:
+                raise ValueError("missing package identity")
+            name = package["ImportPath"]
+            if name in names:
+                raise ValueError("duplicate package identity")
+            for field in ("GoFiles", "TestGoFiles", "XTestGoFiles", "Imports"):
+                values = package.get(field, [])
+                if not isinstance(values, list) or any(not isinstance(value, str) for value in values):
+                    raise ValueError("invalid package metadata: " + field)
+            names.add(name)
+            if not (package.get("TestGoFiles") or package.get("XTestGoFiles")):
+                no_tests.add(name)
+            packages.append(package)
+            remaining = remaining[end:].lstrip()
+    except (ValueError, TypeError) as exc:
+        errors.append("malformed package inventory: " + str(exc))
+    if check_layout:
+        from library_layout import validate
+        errors.extend("library layout: " + error for error in validate(root, packages))
     if result.returncode or not names:
         errors.append(f"package inventory failed ({result.returncode}): {result.stderr.strip()}")
     return names, no_tests, errors
@@ -211,7 +228,7 @@ def package_inventory(root: Path) -> tuple[set[str], set[str], list[str]]:
 def test_module(root: Path, name: str) -> int:
     vet = run(["go", "vet", "./..."], root)
     failures = report(f"unit.{name}.vet", [vet.stdout + vet.stderr] if vet.returncode else [])
-    packages, no_tests, errors = package_inventory(root)
+    packages, no_tests, errors = package_inventory(root, check_layout=name == "runtime")
     if errors:
         return failures + report(f"unit.{name}", errors)
     try:

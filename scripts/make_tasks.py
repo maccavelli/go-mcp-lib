@@ -77,7 +77,7 @@ def execute(goals: list[str], module: str, checks: frozenset[str], leaves: froze
         version = pins["lint"]["markdownlint-cli2"]["version"]
         failures += command("markdown", ["npx", "--offline", "--yes", f"markdownlint-cli2@{version}"])
     if "selftest" in leaves:
-        for name in ("test_gate.py", "test_r2_evidence.py", "test_make_tasks.py"):
+        for name in ("test_gate.py", "test_r2_evidence.py", "test_make_tasks.py", "test_library_layout.py"):
             failures += command(name, [sys.executable, "-B", "scripts/" + name])
     if "lint-controls" in leaves:
         failures += command("lint-controls", [sys.executable, "-B", "scripts/verify_make_lint.py"])

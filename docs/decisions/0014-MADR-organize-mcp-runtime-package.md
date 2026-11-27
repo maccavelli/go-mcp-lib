@@ -66,7 +66,7 @@ The owner subsequently accepted this amendment and approved execution on
 2026-11-27. L10/L11 below record that ruling; the prerequisite R2/R3 boundary
 still precedes source relocation.
 
-### Proposed package ownership
+### Package ownership
 
 | Path | Responsibility and disposition |
 | :--- | :--- |
@@ -91,7 +91,7 @@ maintenance tools use scoped `internal/cmd/`, while ACP has a separate
 not make `cmd` an import path for their library APIs, nor require relocating
 the existing MCP generator to make the runtime functional.
 
-### Proposed dependency and test rules
+### Dependency and test rules
 
 * Keep the runtime cohesive: `Transport.transport` and `Request.ownedRequest`
   seal package-private contracts, while handles and middleware share private

@@ -18,6 +18,9 @@ approve repairs, change the accepted contract, or execute Stage 7.
 
 ## Scope and baseline
 
+- Relocated runtime source links retain this audited Git revision. Current
+  runtime files live under `mcp/`; see the
+  [import migration guide](../guides/runtime-import-migration.md) for the path mapping.
 - Audited revision: `5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532`.
 - The working tree was clean before the audit and remained clean throughout
   product investigation. Only this report and its documentation index are changed.
@@ -336,13 +339,13 @@ checker accepts `file: bad URI`. The URI-template helper rejects the supported
 reserved expansion `{+path}`. All three outcomes were reproduced.
 
 These helpers are used by their tests, not by the runtime adapter. Separately,
-[`resources.go`](../../resources.go) implements different, weaker checks rather
+[`resources.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/resources.go) implements different, weaker checks rather
 than using the qualified validator/parser. Consequently helper coverage does
 not establish enforcement during registration or protocol processing.
 
 ### A18 — Live runtime dispatch bypasses configured policies and output checks
 
-[`middleware.go`](../../middleware.go), `chainSnapshot` at line 207, constructs
+[`middleware.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/middleware.go), `chainSnapshot` at line 207, constructs
 the owned chain but is only called by tests. `rebuildReceiving` at line 140
 installs only user middleware into the SDK. `Authorize`, `Observation` and
 `Admission` store callbacks that are not connected to dispatch.
@@ -356,7 +359,7 @@ auth=0 observe=0 admit=0 handler=1 err=<nil>
 
 The declared-output validator is also absent from live dispatch. A handler
 returning `reply: "wrong"` under a declared `const: "required"` output property
-returns a successful result. [`tools.go`](../../tools.go) does not pass the
+returns a successful result. [`tools.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/tools.go) does not pass the
 declared `OutputSchema` to the SDK either.
 
 Even wiring the current chain unchanged would be insufficient: its result
@@ -373,7 +376,7 @@ The MADR's Option D ruling, lines 799–810, requires owned fulfillment using
 `MultiRoundTripOptions.Disabled` and public request/response map codecs.
 Dropping sampling and roots requires a fresh ruling; it was not the selected
 resolution. The [Stage 6 report](0010-REPORT-stage-6-runtime-api-feature-matrix.md)
-instead describes their exclusion. [`client.go`](../../client.go) configures
+instead describes their exclusion. [`client.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/client.go) configures
 no owned handlers or fulfillment loop. The required owned union types are
 also missing under A10.
 
@@ -384,7 +387,7 @@ There is no exported server serve/connect operation; round-trip tests reach
 `server.sdk.Connect` privately. External consumers therefore cannot reproduce
 those tests through the advertised owned surface.
 
-[`transport.go`](../../transport.go) also seals `Transport` with a root-package
+[`transport.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/transport.go) also seals `Transport` with a root-package
 method, while the PLAN places adapters in a `transport/` subpackage. That
 subpackage cannot directly implement the private method. Resolve the package
 boundary in the approved pair before Stage 7 implementation; do not expose an
@@ -392,19 +395,19 @@ unguarded SDK escape hatch to work around it.
 
 ### A20 — Registration errors, immutable options and public errors fail their contracts
 
-[`tools.go`](../../tools.go), `AddTool` at line 46, catches and re-panics every
+[`tools.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/tools.go), `AddTool` at line 46, catches and re-panics every
 SDK declaration panic. The scratch malformed input-schema probe panics with
 `input schema must have type "object" (got bad-type)` instead of returning the
 promised registration error. Input validation remains SDK-internal rather
 than the canonical adapter checked before lossy conversion.
 
-[`server.go`](../../server.go), `Options` at line 117, returns a shallow copy
+[`server.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/server.go), `Options` at line 117, returns a shallow copy
 whose `Implementation` pointer is shared. Changing the returned implementation
 changes future `Options()` results; reproduced. `client.go` has the same
 pointer-copy pattern. SDK construction copies some fields, so the defect is
 not a claim that every such edit changes the live wire identity.
 
-[`errors.go`](../../errors.go), `TypedError.Error`, formats the entire cause
+[`errors.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/errors.go), `TypedError.Error`, formats the entire cause
 and message without bounds or sanitization. Several API error paths return
 unclassified errors; no internal-error sentinel is provided. Wire disclosure
 through a future transport was not tested here, but the current public error
