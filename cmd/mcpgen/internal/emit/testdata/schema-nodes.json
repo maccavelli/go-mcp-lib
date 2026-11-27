@@ -1,0 +1,3365 @@
+{
+  "nodes": {
+    "#": [
+      "$defs",
+      "$schema"
+    ],
+    "#/$defs/Annotations": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/Annotations/properties/audience": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Annotations/properties/audience/items": [
+      "$ref"
+    ],
+    "#/$defs/Annotations/properties/lastModified": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Annotations/properties/priority": [
+      "description",
+      "maximum",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/AudioContent": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/AudioContent/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/AudioContent/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/AudioContent/properties/data": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/AudioContent/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/AudioContent/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/BaseMetadata": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/BaseMetadata/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/BaseMetadata/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/BlobResourceContents": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/BlobResourceContents/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/BlobResourceContents/properties/blob": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/BlobResourceContents/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/BlobResourceContents/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/BooleanSchema": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/BooleanSchema/properties/default": [
+      "type"
+    ],
+    "#/$defs/BooleanSchema/properties/description": [
+      "type"
+    ],
+    "#/$defs/BooleanSchema/properties/title": [
+      "type"
+    ],
+    "#/$defs/BooleanSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CacheableResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CacheableResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CacheableResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/CacheableResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CacheableResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/CallToolRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CallToolRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/CallToolRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CallToolRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CallToolRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/CallToolRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CallToolRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CallToolRequestParams/properties/arguments": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/CallToolRequestParams/properties/arguments/additionalProperties": [],
+    "#/$defs/CallToolRequestParams/properties/inputResponses": [
+      "$ref"
+    ],
+    "#/$defs/CallToolRequestParams/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CallToolRequestParams/properties/requestState": [
+      "type"
+    ],
+    "#/$defs/CallToolResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CallToolResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CallToolResult/properties/content": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/CallToolResult/properties/content/items": [
+      "$ref"
+    ],
+    "#/$defs/CallToolResult/properties/isError": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CallToolResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CallToolResult/properties/structuredContent": [
+      "description"
+    ],
+    "#/$defs/CallToolResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CallToolResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/CallToolResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CallToolResultResponse/properties/result": [
+      "anyOf"
+    ],
+    "#/$defs/CallToolResultResponse/properties/result/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/CallToolResultResponse/properties/result/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/CancelledNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CancelledNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CancelledNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CancelledNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/CancelledNotificationParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CancelledNotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CancelledNotificationParams/properties/reason": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CancelledNotificationParams/properties/requestId": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ClientCapabilities": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/elicitation": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/elicitation/properties/form": [
+      "$ref"
+    ],
+    "#/$defs/ClientCapabilities/properties/elicitation/properties/url": [
+      "$ref"
+    ],
+    "#/$defs/ClientCapabilities/properties/experimental": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/experimental/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/ClientCapabilities/properties/extensions": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/extensions/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/ClientCapabilities/properties/roots": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/sampling": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ClientCapabilities/properties/sampling/properties/context": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ClientCapabilities/properties/sampling/properties/tools": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ClientNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ClientNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ClientNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ClientNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest": [
+      "anyOf"
+    ],
+    "#/$defs/ClientRequest/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/5": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/6": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/7": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/8": [
+      "$ref"
+    ],
+    "#/$defs/ClientRequest/anyOf/9": [
+      "$ref"
+    ],
+    "#/$defs/ClientResult": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/CompleteRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/CompleteRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CompleteRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CompleteRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/CompleteRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CompleteRequestParams/properties/argument": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/argument/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/argument/properties/value": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/context": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/context/properties/arguments": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/context/properties/arguments/additionalProperties": [
+      "type"
+    ],
+    "#/$defs/CompleteRequestParams/properties/ref": [
+      "anyOf"
+    ],
+    "#/$defs/CompleteRequestParams/properties/ref/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/CompleteRequestParams/properties/ref/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/CompleteResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CompleteResult/properties/completion": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/completion/properties/hasMore": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/completion/properties/total": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/completion/properties/values": [
+      "description",
+      "items",
+      "maxItems",
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/completion/properties/values/items": [
+      "type"
+    ],
+    "#/$defs/CompleteResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CompleteResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CompleteResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/CompleteResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CompleteResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/ContentBlock": [
+      "anyOf"
+    ],
+    "#/$defs/ContentBlock/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ContentBlock/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ContentBlock/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/ContentBlock/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/ContentBlock/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/includeContext": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/maxTokens": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/messages": [
+      "items",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/messages/items": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/metadata": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/modelPreferences": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/stopSequences": [
+      "items",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/stopSequences/items": [
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/systemPrompt": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/temperature": [
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/toolChoice": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/tools": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/CreateMessageRequestParams/properties/tools/items": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/CreateMessageResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content": [
+      "anyOf"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/5": [
+      "items",
+      "type"
+    ],
+    "#/$defs/CreateMessageResult/properties/content/anyOf/5/items": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/model": [
+      "description",
+      "type"
+    ],
+    "#/$defs/CreateMessageResult/properties/role": [
+      "$ref"
+    ],
+    "#/$defs/CreateMessageResult/properties/stopReason": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Cursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/DiscoverRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/DiscoverRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/DiscoverRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/DiscoverRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/DiscoverRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/DiscoverResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/DiscoverResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/capabilities": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/DiscoverResult/properties/instructions": [
+      "description",
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/supportedVersions": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/supportedVersions/items": [
+      "type"
+    ],
+    "#/$defs/DiscoverResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/DiscoverResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/DiscoverResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/DiscoverResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/DiscoverResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/ElicitRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ElicitRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ElicitRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ElicitRequestFormParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/mode": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/$schema": [
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/properties": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/properties/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/required": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/required/items": [
+      "type"
+    ],
+    "#/$defs/ElicitRequestFormParams/properties/requestedSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ElicitRequestParams": [
+      "anyOf",
+      "description"
+    ],
+    "#/$defs/ElicitRequestParams/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ElicitRequestParams/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ElicitRequestURLParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ElicitRequestURLParams/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ElicitRequestURLParams/properties/mode": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/ElicitRequestURLParams/properties/url": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ElicitResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ElicitResult/properties/action": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ElicitResult/properties/content": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ElicitResult/properties/content/additionalProperties": [
+      "anyOf"
+    ],
+    "#/$defs/ElicitResult/properties/content/additionalProperties/anyOf/0": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ElicitResult/properties/content/additionalProperties/anyOf/0/items": [
+      "type"
+    ],
+    "#/$defs/ElicitResult/properties/content/additionalProperties/anyOf/1": [
+      "type"
+    ],
+    "#/$defs/EmbeddedResource": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/EmbeddedResource/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/EmbeddedResource/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/EmbeddedResource/properties/resource": [
+      "anyOf"
+    ],
+    "#/$defs/EmbeddedResource/properties/resource/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/EmbeddedResource/properties/resource/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/EmbeddedResource/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/EmptyResult": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/EnumSchema": [
+      "anyOf"
+    ],
+    "#/$defs/EnumSchema/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/EnumSchema/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/EnumSchema/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/EnumSchema/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/EnumSchema/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/Error": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Error/properties/code": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Error/properties/data": [
+      "description"
+    ],
+    "#/$defs/Error/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/GetPromptRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/GetPromptRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/GetPromptRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/GetPromptRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/arguments": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/arguments/additionalProperties": [
+      "type"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/inputResponses": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/GetPromptRequestParams/properties/requestState": [
+      "type"
+    ],
+    "#/$defs/GetPromptResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/GetPromptResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptResult/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/GetPromptResult/properties/messages": [
+      "items",
+      "type"
+    ],
+    "#/$defs/GetPromptResult/properties/messages/items": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/GetPromptResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/GetPromptResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/GetPromptResultResponse/properties/result": [
+      "anyOf"
+    ],
+    "#/$defs/GetPromptResultResponse/properties/result/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/GetPromptResultResponse/properties/result/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/HeaderMismatchError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/HeaderMismatchError/properties/error": [
+      "allOf"
+    ],
+    "#/$defs/HeaderMismatchError/properties/error/allOf/0": [
+      "$ref"
+    ],
+    "#/$defs/HeaderMismatchError/properties/error/allOf/1": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/HeaderMismatchError/properties/error/allOf/1/properties/code": [
+      "const",
+      "type"
+    ],
+    "#/$defs/HeaderMismatchError/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/HeaderMismatchError/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/Icon": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Icon/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Icon/properties/sizes": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Icon/properties/sizes/items": [
+      "type"
+    ],
+    "#/$defs/Icon/properties/src": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/Icon/properties/theme": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/Icons": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/Icons/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Icons/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/ImageContent": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ImageContent/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ImageContent/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ImageContent/properties/data": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ImageContent/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ImageContent/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/Implementation": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/Implementation/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/version": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Implementation/properties/websiteUrl": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/InputRequest": [
+      "anyOf"
+    ],
+    "#/$defs/InputRequest/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/InputRequest/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/InputRequest/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/InputRequests": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/InputRequests/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/InputRequiredResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/InputRequiredResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/InputRequiredResult/properties/inputRequests": [
+      "$ref"
+    ],
+    "#/$defs/InputRequiredResult/properties/requestState": [
+      "type"
+    ],
+    "#/$defs/InputRequiredResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/InputResponse": [
+      "anyOf"
+    ],
+    "#/$defs/InputResponse/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/InputResponse/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/InputResponse/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/InputResponseRequestParams": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/InputResponseRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/InputResponseRequestParams/properties/inputResponses": [
+      "$ref"
+    ],
+    "#/$defs/InputResponseRequestParams/properties/requestState": [
+      "type"
+    ],
+    "#/$defs/InputResponses": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/InputResponses/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/InternalError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/InternalError/properties/code": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/InternalError/properties/data": [
+      "description"
+    ],
+    "#/$defs/InternalError/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/InvalidParamsError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/InvalidParamsError/properties/code": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/InvalidParamsError/properties/data": [
+      "description"
+    ],
+    "#/$defs/InvalidParamsError/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/InvalidRequestError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/InvalidRequestError/properties/code": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/InvalidRequestError/properties/data": [
+      "description"
+    ],
+    "#/$defs/InvalidRequestError/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/JSONArray": [
+      "items",
+      "type"
+    ],
+    "#/$defs/JSONArray/items": [
+      "$ref"
+    ],
+    "#/$defs/JSONObject": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/JSONObject/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCErrorResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/JSONRPCErrorResponse/properties/error": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCErrorResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCErrorResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/JSONRPCMessage": [
+      "anyOf",
+      "description"
+    ],
+    "#/$defs/JSONRPCMessage/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCMessage/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCMessage/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCMessage/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/JSONRPCNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/JSONRPCNotification/properties/method": [
+      "type"
+    ],
+    "#/$defs/JSONRPCNotification/properties/params": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/JSONRPCNotification/properties/params/additionalProperties": [],
+    "#/$defs/JSONRPCRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/JSONRPCRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/JSONRPCRequest/properties/method": [
+      "type"
+    ],
+    "#/$defs/JSONRPCRequest/properties/params": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/JSONRPCRequest/properties/params/additionalProperties": [],
+    "#/$defs/JSONRPCResponse": [
+      "anyOf",
+      "description"
+    ],
+    "#/$defs/JSONRPCResponse/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCResponse/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/JSONRPCResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/JSONRPCResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/JSONRPCResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/JSONValue": [
+      "anyOf"
+    ],
+    "#/$defs/JSONValue/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/JSONValue/anyOf/1": [
+      "items",
+      "type"
+    ],
+    "#/$defs/JSONValue/anyOf/1/items": [
+      "$ref"
+    ],
+    "#/$defs/JSONValue/anyOf/2": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/default": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/description": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/enum": [
+      "items",
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/enum/items": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/enumNames": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/enumNames/items": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/title": [
+      "type"
+    ],
+    "#/$defs/LegacyTitledEnumSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListPromptsRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListPromptsRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListPromptsRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListPromptsRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListPromptsRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ListPromptsResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListPromptsResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ListPromptsResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ListPromptsResult/properties/nextCursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListPromptsResult/properties/prompts": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ListPromptsResult/properties/prompts/items": [
+      "$ref"
+    ],
+    "#/$defs/ListPromptsResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListPromptsResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ListPromptsResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListPromptsResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListPromptsResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListPromptsResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/nextCursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/resourceTemplates": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/resourceTemplates/items": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListResourceTemplatesResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourceTemplatesResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourcesRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourcesRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourcesRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourcesResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ListResourcesResult/properties/nextCursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListResourcesResult/properties/resources": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ListResourcesResult/properties/resources/items": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListResourcesResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ListResourcesResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListResourcesResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListResourcesResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListResourcesResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/ListRootsRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListRootsRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListRootsRequest/properties/params": [
+      "properties",
+      "type"
+    ],
+    "#/$defs/ListRootsRequest/properties/params/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ListRootsResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListRootsResult/properties/roots": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ListRootsResult/properties/roots/items": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListToolsRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListToolsRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListToolsRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListToolsResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ListToolsResult/properties/nextCursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListToolsResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ListToolsResult/properties/tools": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ListToolsResult/properties/tools/items": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ListToolsResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ListToolsResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ListToolsResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ListToolsResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/LoggingLevel": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/LoggingMessageNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/LoggingMessageNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/LoggingMessageNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/LoggingMessageNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/LoggingMessageNotificationParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/LoggingMessageNotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/LoggingMessageNotificationParams/properties/data": [
+      "description"
+    ],
+    "#/$defs/LoggingMessageNotificationParams/properties/level": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/LoggingMessageNotificationParams/properties/logger": [
+      "description",
+      "type"
+    ],
+    "#/$defs/MetaObject": [
+      "description",
+      "type"
+    ],
+    "#/$defs/MethodNotFoundError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/MethodNotFoundError/properties/code": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/MethodNotFoundError/properties/data": [
+      "description"
+    ],
+    "#/$defs/MethodNotFoundError/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error": [
+      "allOf"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error/allOf/0": [
+      "$ref"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error/allOf/1": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error/allOf/1/properties/code": [
+      "const",
+      "type"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error/allOf/1/properties/data": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/error/allOf/1/properties/data/properties/requiredCapabilities": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/MissingRequiredClientCapabilityError/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ModelHint": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ModelHint/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ModelPreferences": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ModelPreferences/properties/costPriority": [
+      "description",
+      "maximum",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ModelPreferences/properties/hints": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/ModelPreferences/properties/hints/items": [
+      "$ref"
+    ],
+    "#/$defs/ModelPreferences/properties/intelligencePriority": [
+      "description",
+      "maximum",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ModelPreferences/properties/speedPriority": [
+      "description",
+      "maximum",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/MultiSelectEnumSchema": [
+      "anyOf"
+    ],
+    "#/$defs/MultiSelectEnumSchema/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/MultiSelectEnumSchema/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/Notification": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Notification/properties/method": [
+      "type"
+    ],
+    "#/$defs/Notification/properties/params": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/Notification/properties/params/additionalProperties": [],
+    "#/$defs/NotificationMetaObject": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/NotificationMetaObject/properties/io.modelcontextprotocol~1subscriptionId": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/NotificationParams": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/NotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/NumberSchema": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/default": [
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/description": [
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/maximum": [
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/minimum": [
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/title": [
+      "type"
+    ],
+    "#/$defs/NumberSchema/properties/type": [
+      "enum",
+      "type"
+    ],
+    "#/$defs/PaginatedRequest": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PaginatedRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/PaginatedRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/PaginatedRequest/properties/method": [
+      "type"
+    ],
+    "#/$defs/PaginatedRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/PaginatedRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PaginatedRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/PaginatedRequestParams/properties/cursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PaginatedResult": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PaginatedResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/PaginatedResult/properties/nextCursor": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PaginatedResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ParseError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ParseError/properties/code": [
+      "const",
+      "description",
+      "type"
+    ],
+    "#/$defs/ParseError/properties/data": [
+      "description"
+    ],
+    "#/$defs/ParseError/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition": [
+      "anyOf",
+      "description"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/5": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/6": [
+      "$ref"
+    ],
+    "#/$defs/PrimitiveSchemaDefinition/anyOf/7": [
+      "$ref"
+    ],
+    "#/$defs/ProgressNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ProgressNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ProgressNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ProgressNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ProgressNotificationParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ProgressNotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ProgressNotificationParams/properties/message": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ProgressNotificationParams/properties/progress": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ProgressNotificationParams/properties/progressToken": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ProgressNotificationParams/properties/total": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ProgressToken": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Prompt": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Prompt/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Prompt/properties/arguments": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Prompt/properties/arguments/items": [
+      "$ref"
+    ],
+    "#/$defs/Prompt/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Prompt/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Prompt/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/Prompt/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Prompt/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptArgument": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PromptArgument/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptArgument/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptArgument/properties/required": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptArgument/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptListChangedNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PromptListChangedNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/PromptListChangedNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/PromptListChangedNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/PromptMessage": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PromptMessage/properties/content": [
+      "$ref"
+    ],
+    "#/$defs/PromptMessage/properties/role": [
+      "$ref"
+    ],
+    "#/$defs/PromptReference": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/PromptReference/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptReference/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/PromptReference/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ReadResourceRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ReadResourceRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ReadResourceRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ReadResourceRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ReadResourceRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceRequestParams/properties/inputResponses": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceRequestParams/properties/requestState": [
+      "type"
+    ],
+    "#/$defs/ReadResourceRequestParams/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ReadResourceResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ReadResourceResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceResult/properties/cacheScope": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ReadResourceResult/properties/contents": [
+      "items",
+      "type"
+    ],
+    "#/$defs/ReadResourceResult/properties/contents/items": [
+      "anyOf"
+    ],
+    "#/$defs/ReadResourceResult/properties/contents/items/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceResult/properties/contents/items/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ReadResourceResult/properties/ttlMs": [
+      "description",
+      "minimum",
+      "type"
+    ],
+    "#/$defs/ReadResourceResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ReadResourceResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ReadResourceResultResponse/properties/result": [
+      "anyOf"
+    ],
+    "#/$defs/ReadResourceResultResponse/properties/result/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ReadResourceResultResponse/properties/result/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/Request": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Request/properties/method": [
+      "type"
+    ],
+    "#/$defs/Request/properties/params": [
+      "additionalProperties",
+      "type"
+    ],
+    "#/$defs/Request/properties/params/additionalProperties": [],
+    "#/$defs/RequestId": [
+      "description",
+      "type"
+    ],
+    "#/$defs/RequestMetaObject": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/RequestMetaObject/properties/io.modelcontextprotocol~1clientCapabilities": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/RequestMetaObject/properties/io.modelcontextprotocol~1clientInfo": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/RequestMetaObject/properties/io.modelcontextprotocol~1logLevel": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/RequestMetaObject/properties/io.modelcontextprotocol~1protocolVersion": [
+      "description",
+      "type"
+    ],
+    "#/$defs/RequestMetaObject/properties/progressToken": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/RequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/RequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Resource": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Resource/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Resource/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/Resource/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Resource/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Resource/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/Resource/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Resource/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Resource/properties/size": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Resource/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Resource/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceContents": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceContents/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ResourceContents/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceContents/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceLink": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ResourceLink/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ResourceLink/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/ResourceLink/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/size": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceLink/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceListChangedNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceListChangedNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceListChangedNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceListChangedNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ResourceRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ResourceRequestParams/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ResourceTemplate/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ResourceTemplate/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/ResourceTemplate/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResourceTemplate/properties/uriTemplate": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceTemplateReference": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceTemplateReference/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceTemplateReference/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/ResourceUpdatedNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceUpdatedNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceUpdatedNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ResourceUpdatedNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ResourceUpdatedNotificationParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ResourceUpdatedNotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/ResourceUpdatedNotificationParams/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/Result": [
+      "additionalProperties",
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Result/additionalProperties": [],
+    "#/$defs/Result/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Result/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ResultMetaObject": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ResultMetaObject/properties/io.modelcontextprotocol~1serverInfo": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ResultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Role": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/Root": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Root/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Root/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Root/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/SamplingMessage": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SamplingMessage/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content": [
+      "anyOf"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/5": [
+      "items",
+      "type"
+    ],
+    "#/$defs/SamplingMessage/properties/content/anyOf/5/items": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessage/properties/role": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessageContentBlock": [
+      "anyOf"
+    ],
+    "#/$defs/SamplingMessageContentBlock/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessageContentBlock/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessageContentBlock/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessageContentBlock/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/SamplingMessageContentBlock/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/ServerCapabilities": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/completions": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ServerCapabilities/properties/experimental": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/experimental/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/ServerCapabilities/properties/extensions": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/extensions/additionalProperties": [
+      "$ref"
+    ],
+    "#/$defs/ServerCapabilities/properties/logging": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ServerCapabilities/properties/prompts": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/prompts/properties/listChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/resources": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/resources/properties/listChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/resources/properties/subscribe": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/tools": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ServerCapabilities/properties/tools/properties/listChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ServerNotification": [
+      "anyOf"
+    ],
+    "#/$defs/ServerNotification/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/5": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/6": [
+      "$ref"
+    ],
+    "#/$defs/ServerNotification/anyOf/7": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult": [
+      "anyOf"
+    ],
+    "#/$defs/ServerResult/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/10": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/11": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/2": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/3": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/4": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/5": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/6": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/7": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/8": [
+      "$ref"
+    ],
+    "#/$defs/ServerResult/anyOf/9": [
+      "$ref"
+    ],
+    "#/$defs/SingleSelectEnumSchema": [
+      "anyOf"
+    ],
+    "#/$defs/SingleSelectEnumSchema/anyOf/0": [
+      "$ref"
+    ],
+    "#/$defs/SingleSelectEnumSchema/anyOf/1": [
+      "$ref"
+    ],
+    "#/$defs/StringSchema": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/default": [
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/description": [
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/format": [
+      "enum",
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/maxLength": [
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/minLength": [
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/title": [
+      "type"
+    ],
+    "#/$defs/StringSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter/properties/promptsListChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter/properties/resourceSubscriptions": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter/properties/resourceSubscriptions/items": [
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter/properties/resourcesListChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/SubscriptionFilter/properties/toolsListChanged": [
+      "description",
+      "type"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotificationParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotificationParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsAcknowledgedNotificationParams/properties/notifications": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/SubscriptionsListenRequest": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenRequest/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsListenRequest/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenRequest/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenRequest/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsListenRequestParams": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenRequestParams/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsListenRequestParams/properties/notifications": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/SubscriptionsListenResult": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenResult/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsListenResult/properties/resultType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenResultMetaObject": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenResultMetaObject/properties/io.modelcontextprotocol~1serverInfo": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/SubscriptionsListenResultMetaObject/properties/io.modelcontextprotocol~1subscriptionId": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/SubscriptionsListenResultResponse": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenResultResponse/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/SubscriptionsListenResultResponse/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/SubscriptionsListenResultResponse/properties/result": [
+      "$ref"
+    ],
+    "#/$defs/TextContent": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TextContent/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/TextContent/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/TextContent/properties/text": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TextContent/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/TextResourceContents": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TextResourceContents/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/TextResourceContents/properties/mimeType": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TextResourceContents/properties/text": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TextResourceContents/properties/uri": [
+      "description",
+      "format",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/default": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/default/items": [
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/items": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/items/properties/anyOf": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/items/properties/anyOf/items": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/items/properties/anyOf/items/properties/const": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/items/properties/anyOf/items/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/maxItems": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/minItems": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledMultiSelectEnumSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/default": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/oneOf": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/oneOf/items": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/oneOf/items/properties/const": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/oneOf/items/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/TitledSingleSelectEnumSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/Tool": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Tool/properties/_meta": [
+      "$ref"
+    ],
+    "#/$defs/Tool/properties/annotations": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/Tool/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Tool/properties/icons": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/Tool/properties/icons/items": [
+      "$ref"
+    ],
+    "#/$defs/Tool/properties/inputSchema": [
+      "additionalProperties",
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/Tool/properties/inputSchema/additionalProperties": [],
+    "#/$defs/Tool/properties/inputSchema/properties/$schema": [
+      "type"
+    ],
+    "#/$defs/Tool/properties/inputSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/Tool/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/Tool/properties/outputSchema": [
+      "additionalProperties",
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/Tool/properties/outputSchema/additionalProperties": [],
+    "#/$defs/Tool/properties/outputSchema/properties/$schema": [
+      "type"
+    ],
+    "#/$defs/Tool/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations/properties/destructiveHint": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations/properties/idempotentHint": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations/properties/openWorldHint": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations/properties/readOnlyHint": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolAnnotations/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolChoice": [
+      "description",
+      "properties",
+      "type"
+    ],
+    "#/$defs/ToolChoice/properties/mode": [
+      "description",
+      "enum",
+      "type"
+    ],
+    "#/$defs/ToolListChangedNotification": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ToolListChangedNotification/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ToolListChangedNotification/properties/method": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ToolListChangedNotification/properties/params": [
+      "$ref"
+    ],
+    "#/$defs/ToolResultContent": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ToolResultContent/properties/_meta": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ToolResultContent/properties/content": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/ToolResultContent/properties/content/items": [
+      "$ref"
+    ],
+    "#/$defs/ToolResultContent/properties/isError": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolResultContent/properties/structuredContent": [
+      "description"
+    ],
+    "#/$defs/ToolResultContent/properties/toolUseId": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolResultContent/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/ToolUseContent": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/ToolUseContent/properties/_meta": [
+      "$ref",
+      "description"
+    ],
+    "#/$defs/ToolUseContent/properties/id": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolUseContent/properties/input": [
+      "additionalProperties",
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolUseContent/properties/input/additionalProperties": [],
+    "#/$defs/ToolUseContent/properties/name": [
+      "description",
+      "type"
+    ],
+    "#/$defs/ToolUseContent/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error": [
+      "allOf"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/0": [
+      "$ref"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1/properties/code": [
+      "const",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1/properties/data": [
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1/properties/data/properties/requested": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1/properties/data/properties/supported": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/error/allOf/1/properties/data/properties/supported/items": [
+      "type"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/id": [
+      "$ref"
+    ],
+    "#/$defs/UnsupportedProtocolVersionError/properties/jsonrpc": [
+      "const",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/default": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/default/items": [
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/items": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/items/properties/enum": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/items/properties/enum/items": [
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/items/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/maxItems": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/minItems": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledMultiSelectEnumSchema/properties/type": [
+      "const",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema": [
+      "description",
+      "properties",
+      "required",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/default": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/description": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/enum": [
+      "description",
+      "items",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/enum/items": [
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/title": [
+      "description",
+      "type"
+    ],
+    "#/$defs/UntitledSingleSelectEnumSchema/properties/type": [
+      "const",
+      "type"
+    ]
+  },
+  "schema-sha256": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551",
+  "version": 1
+}

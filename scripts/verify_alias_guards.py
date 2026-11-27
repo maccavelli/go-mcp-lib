@@ -85,6 +85,23 @@ def main() -> int:
             failures += report("alias.target-omission-plant" if broken else "alias.target-control",
                                [] if expected else [output],
                                "omitted Windows audit caught" if broken else "three-target export-data controls passed")
+    with tempfile.TemporaryDirectory(prefix="mcp-sdk-api-plant-") as temporary:
+        module = Path(temporary) / "generator"
+        shutil.copytree(root / "cmd/mcpgen", module,
+                        ignore=shutil.ignore_patterns(".cache", "mcpgen", "*.test", "*.exe"))
+        source = module / "internal/sdkmap/api.go"
+        text = source.read_text()
+        anchor = "PointerMethods: methods(types.NewPointer(value))"
+        if text.count(anchor) != 1:
+            failures += report("alias.API-plant-shape", ["compiler API anchor changed"])
+        else:
+            source.write_text(text.replace(anchor, "PointerMethods: methods(value)", 1))
+            result = run(["go", "test", "-vet=off", "-count=1", "-run",
+                          "^TestRepairA09CompilerAPI$", "./internal/sdkmap"], module)
+            output = result.stdout + result.stderr
+            caught = result.returncode != 0 and "FAIL compiler API method sets" in output
+            failures += report("alias.API-pointer-method-plant", [] if caught else [output],
+                               "missing pointer method caught")
     return int(bool(failures))
 
 

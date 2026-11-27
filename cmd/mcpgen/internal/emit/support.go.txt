@@ -32,11 +32,19 @@ func Present[T any](value T) Field[T] { return Field[T]{value: value, present: t
 // Null creates an explicit null. The enclosing schema must permit null.
 func Null[T any]() Field[T] { return Field[T]{present: true, null: true} }
 
-func (value Field[T]) IsZero() bool    { return !value.present }
-func (value Field[T]) IsPresent() bool { return value.present }
-func (value Field[T]) IsNull() bool    { return value.present && value.null }
-func (value Field[T]) Get() (T, bool)  { return value.value, value.present && !value.null }
+// IsZero reports absence for the JSON omitzero contract.
+func (value Field[T]) IsZero() bool { return !value.present }
 
+// IsPresent reports whether the field was explicitly supplied, including null.
+func (value Field[T]) IsPresent() bool { return value.present }
+
+// IsNull reports an explicitly supplied null rather than an absent field.
+func (value Field[T]) IsNull() bool { return value.present && value.null }
+
+// Get returns the value and whether it is present and non-null.
+func (value Field[T]) Get() (T, bool) { return value.value, value.present && !value.null }
+
+// MarshalJSONTo encodes a present value or an explicit null.
 func (value Field[T]) MarshalJSONTo(encoder *jsontext.Encoder) error {
 	if value.null || !value.present {
 		return encoder.WriteToken(jsontext.Null)
@@ -44,6 +52,7 @@ func (value Field[T]) MarshalJSONTo(encoder *jsontext.Encoder) error {
 	return json.MarshalEncode(encoder, value.value)
 }
 
+// UnmarshalJSONFrom preserves presence, null and exact JSON value semantics.
 func (value *Field[T]) UnmarshalJSONFrom(decoder *jsontext.Decoder) error {
 	body, err := decoder.ReadValue()
 	if err != nil {
@@ -78,12 +87,14 @@ func NewNumber(token string) (Number, error) {
 	return Number(token), nil
 }
 
+// MarshalJSONTo validates and writes the exact number token.
 func (value Number) MarshalJSONTo(encoder *jsontext.Encoder) error {
 	if _, err := NewNumber(string(value)); err != nil {
 		return err
 	}
 	return encoder.WriteValue(jsontext.Value(value))
 }
+// UnmarshalJSONFrom reads a bounded number without converting through float64.
 func (value *Number) UnmarshalJSONFrom(decoder *jsontext.Decoder) error {
 	body, err := decoder.ReadValue()
 	if err != nil {

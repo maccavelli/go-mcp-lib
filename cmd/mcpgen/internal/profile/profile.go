@@ -11,6 +11,8 @@ import (
 	"go/token"
 	"io"
 	"os"
+	"path"
+	"path/filepath"
 	"sort"
 	"strings"
 	"unicode"
@@ -21,6 +23,9 @@ import (
 )
 
 const profileFile = "schema/generation-profile.json"
+
+// DefaultFile identifies the reviewed generation-profile input, not ownership.
+const DefaultFile = profileFile
 
 // SchemaFile is the single reviewed source document for this profile.
 const SchemaFile = "schema/inputs/2026-07-28/schema.json"
@@ -147,6 +152,16 @@ func decode(name string, body []byte, output any) error {
 // Load verifies the profile's source pin, then every required member's bytes and
 // format version. os.Root keeps local resource acquisition inside the repository.
 func Load(directory, revision string) (*Inputs, error) {
+	return LoadNamed(directory, revision, DefaultFile)
+}
+
+// LoadNamed selects a contained generation profile while retaining its
+// independent content pin and every required member identity.
+func LoadNamed(directory, revision, name string) (*Inputs, error) {
+	if name == "" || !filepath.IsLocal(name) || path.Clean(name) != name || strings.ContainsAny(name, "\\:%") {
+		return nil, failure(name, "unsafe-profile", "profile must be a clean repository-relative path")
+	}
+	profileFile := name
 	if revision != Revision {
 		return nil, failure(profileFile, "unsupported-revision", "revision is not reviewed")
 	}
@@ -155,6 +170,16 @@ func Load(directory, revision string) (*Inputs, error) {
 		return nil, failure(profileFile, "unreadable-root", "repository root cannot be opened")
 	}
 	defer func() { _ = root.Close() }()
+	parts := strings.Split(name, "/")
+	for i := range parts {
+		info, err := root.Lstat(strings.Join(parts[:i+1], "/"))
+		if err != nil {
+			return nil, failure(name, "missing-input", "selected profile path cannot be read")
+		}
+		if info.Mode()&os.ModeSymlink != 0 {
+			return nil, failure(name, "unsafe-profile", "selected profile path is aliased")
+		}
+	}
 	body, err := read(root, profileFile)
 	if err != nil {
 		return nil, err

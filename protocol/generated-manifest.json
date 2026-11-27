@@ -1,8 +1,24 @@
 {
+  "version": 2,
   "revision": "2026-07-28",
   "files": [
     "aliases.go",
+    "api.json",
+    "bindings.json",
+    "codecs.go",
     "constants.go",
-    "owned.go"
-  ]
+    "coverage.json",
+    "owned.go",
+    "schema.json"
+  ],
+  "sha256": {
+    "aliases.go": "b065758f76f45c989329844f3de53bf69dbff46a9ffef03aa741f0f1c4ca695c",
+    "api.json": "08c6496a330251b49178e99da246e81d03c6519237d55bda1754a379b9f491b0",
+    "bindings.json": "1069498cbe0003287838c84c2451e1ac8c79cebbca3c24bd8768684c169802ac",
+    "codecs.go": "8f165e932f3e7c66a6447421ec79958e26ce3854d96b412351a9d91eeca6c0ad",
+    "constants.go": "cb4391eb34c3255f55c14e949790cb33f516d2e3dca6ae7960d617a118d3eec2",
+    "coverage.json": "a4e8089a2cc23289285d411068dde215a26cc0b70a5da5ef05a3cbf1660105d4",
+    "owned.go": "4f09448d48dc2157828b17040c536d52b386e538b5056d5c875259fff42447db",
+    "schema.json": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551"
+  }
 }

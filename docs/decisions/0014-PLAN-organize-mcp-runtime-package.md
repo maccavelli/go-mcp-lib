@@ -181,6 +181,51 @@ preserved; no consumer-repository mutation, push or tag is inferred.
 
 ## Execution Record
 
+### 2026-11-27 — L0 prerequisite native qualification passed
+
+The owner approved R3 pass 7, and all native qualification lanes passed the
+literal hook-target repair. Its exact source identity and complete results
+are recorded in the prerequisite PLAN. Verified publication and installed
+checks are queued; the coherent prerequisite commit still precedes L0's
+inventory re-grounding and any L1 source move.
+
+### 2026-11-27 — L0 remains waiting: prerequisite hook discovery
+
+R3 pass 6 completed on native Windows and WSL, but read-only inspection found
+that the installed hook cannot discover the new shared Make target rule.
+The prerequisite PLAN records the exact defect, partial qualification results
+and requested next-pass allowance. Its unfinished Linux and queued macOS jobs
+were stopped; neither is reported as qualified. The approved runtime-layout
+decision is unchanged, but L0 still requires the coherent prerequisite commit.
+No runtime or bridge file has moved, and no additional R3 source revision is
+implied by the layout approval.
+
+### 2026-11-27 — Prerequisite Make/lint repair A approved
+
+The owner selected the focused Make foundation and lint repair. Its implementation
+and remaining R3 pass-6 qualification are governed by the accepted amendment to
+[0002-MADR-build-schema-driven-mcp-framework.md](0002-MADR-build-schema-driven-mcp-framework.md)
+and its PLAN. The runtime move still follows the coherent prerequisite commit.
+No additional layout decision or execution approval is needed after that exit.
+
+### 2026-11-27 — L0 pass 1: prerequisite publication passed; commit blocked
+
+R3 pass 5 and installed-generation checks passed, and normal regeneration kept
+all protocol bytes and mtimes unchanged. The attempted prerequisite commit was
+then blocked by the agent harness's fallback legacy lint gate. The repository
+has no Makefile adapter, so its existing Python-only canonical precheck was not
+selected. Missing export/method comments and an incorrectly placed generated
+header need a producer repair and a new qualified generated identity.
+
+The owner requested a passing `make lint` and a four-reference Makefile
+assessment. The findings and proposed scope choices are recorded in
+[0012-REPORT-local-gate-duplication-assessment.md](../reports/0012-REPORT-local-gate-duplication-assessment.md#makefile-reassessment--2026-11-27)
+and the execution record of
+[0002-PLAN-build-schema-driven-mcp-framework.md](0002-PLAN-build-schema-driven-mcp-framework.md).
+The runtime-layout decision remains accepted and this PLAN remains approved.
+L0's coherent-commit exit is unmet; L1 has not started. Preserve all staged work
+and resolve the prerequisite deviation before moving any runtime or bridge file.
+
 ### 2026-11-27 — Approval recorded; L0 pass 1 started
 
 The owner accepted the amended MADR and approved this PLAN's execution,

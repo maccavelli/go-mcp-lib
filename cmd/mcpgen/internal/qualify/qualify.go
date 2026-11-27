@@ -10,12 +10,14 @@
 package qualify
 
 import (
-	"encoding/json"
+	"context"
+	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/ownership"
 )
 
 // Targets are the three supported platforms; compile-only, never executed
@@ -54,6 +56,13 @@ type Runner func(env []string, dir string, args ...string) (int, string)
 // OSRunner runs real go commands through argument arrays.
 func OSRunner() Runner {
 	return CommandRunner("go")
+}
+
+// OSRunnerContext bounds all compiler children by the CLI invocation context.
+func OSRunnerContext(ctx context.Context) Runner {
+	return func(env []string, dir string, args ...string) (int, string) {
+		return runCommandContext(ctx, "go", env, dir, args, 10*time.Minute, 32<<20)
+	}
 }
 
 // CommandRunner applies the qualification timeout, output and process bounds to
@@ -122,38 +131,39 @@ func tail(s string, n int) string {
 	return strings.Clone(s[len(s)-n:])
 }
 
-// ExcludeStale removes files in dst that the manifest owns but the new
-// emission no longer contains, so stale outputs never enter the candidate.
-func ExcludeStale(dst string, manifestFiles []string) error {
-	data, err := os.ReadFile(filepath.Join(dst, "generated-manifest.json"))
+// ExcludeStale removes only verified hashed stale output in an owned scratch
+// directory. Production publication always uses the recoverable publisher.
+func ExcludeStale(dst string, manifestFiles []string) (failure error) {
+	root, err := os.OpenRoot(dst)
 	if err != nil {
-		if os.IsNotExist(err) {
-			return nil
-		}
 		return err
 	}
-	var old Manifest
-	if err := json.Unmarshal(data, &old); err != nil {
-		return fmt.Errorf("qualify: stale manifest unreadable: %w", err)
+	defer func() { failure = errors.Join(failure, root.Close()) }()
+	previous, legacy, err := ownership.Existing(root, "")
+	if err != nil {
+		return err
 	}
-	current := make(map[string]bool, len(manifestFiles))
+	if legacy {
+		return fmt.Errorf("qualify: legacy deletion requires verified publication")
+	}
+	current := map[string]bool{ownership.ManifestName: true}
 	for _, name := range manifestFiles {
+		if err := ownership.Name(name); err != nil {
+			return err
+		}
 		current[name] = true
 	}
-	for _, name := range old.Files {
+	for _, name := range ownership.Sorted(previous) {
 		if current[name] {
 			continue
 		}
-		path := filepath.Join(dst, name)
-		if err := os.Remove(path); err != nil && !os.IsNotExist(err) {
-			return fmt.Errorf("qualify: removing stale %s: %w", name, err)
+		body, err := ownership.Read(root, name)
+		if err != nil || ownership.Digest(body) != previous[name] {
+			return fmt.Errorf("qualify: stale output changed: %s", name)
+		}
+		if err := root.Remove(name); err != nil {
+			return err
 		}
 	}
 	return nil
-}
-
-// Manifest is the ownership record written alongside generated outputs.
-type Manifest struct {
-	Revision string   `json:"revision"`
-	Files    []string `json:"files"`
 }

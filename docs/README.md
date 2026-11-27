@@ -7,7 +7,7 @@ This tree holds three kinds of document:
 - guides you follow to do a thing.
 
 - **[architecture.md](architecture.md)** — how the pieces fit together, as they are now.
-- **guides/** — task-shaped walkthroughs. None exists yet; the first real guide creates this directory.
+- **[guides/](guides/)** — task-shaped walkthroughs, including protocol generation and recovery.
 - **[decisions/](decisions/)** — numbered MADR/PLAN pairs.
 - **[reports/](reports/)** — measured findings and qualification evidence.
 
@@ -18,7 +18,7 @@ This tree holds three kinds of document:
 | 0001 | MADR | [Adopt the fleet workspace scaffold](decisions/0001-MADR-workspace-scaffold.md) | accepted |
 | 0001 | PLAN | [Implement the fleet workspace scaffold](decisions/0001-PLAN-workspace-scaffold.md) | in-progress |
 | 0002 | MADR | [Build a schema-driven MCP framework](decisions/0002-MADR-build-schema-driven-mcp-framework.md) | accepted — local-cicd-scaffolding scope recorded |
-| 0002 | PLAN | [Implement the schema-driven MCP framework](decisions/0002-PLAN-build-schema-driven-mcp-framework.md) | in-progress — R1 qualified; R2 candidate qualified; R3 underway |
+| 0002 | PLAN | [Implement the schema-driven MCP framework](decisions/0002-PLAN-build-schema-driven-mcp-framework.md) | in-progress — R2/R3 qualified; coherent commit ready |
 | 0002 | REPORT | [Qualify MCP framework boundaries](reports/0002-REPORT-qualify-mcp-framework-boundaries.md) | complete |
 | 0002 | REPORT | [Stage 0 grounding and framework inventory](reports/0002-REPORT-stage-0-framework-inventory.md) | B01 resolved; stage exit incomplete per completion audit |
 | 0003 | MADR | [Name the Bash and heredocs deny hook](decisions/0003-MADR-name-bash-heredoc-hook.md) | accepted |
@@ -31,10 +31,10 @@ This tree holds three kinds of document:
 | 0009 | REPORT | [CI/CD standardization assessment](reports/0009-REPORT-cicd-standardization-assessment.md) | complete — owner decisions recorded |
 | 0010 | REPORT | [Stage 6 execution: owned runtime APIs and feature matrix](reports/0010-REPORT-stage-6-runtime-api-feature-matrix.md) | historical completion claim; repairs required per audit |
 | 0011 | REPORT | [Pre-Stage 7 completion audit](reports/0011-REPORT-pre-stage-7-completion-audit.md) | complete — prerequisite repairs recommended |
-| 0012 | REPORT | [Local gate duplication and execution costs](reports/0012-REPORT-local-gate-duplication-assessment.md) | assessment complete — consolidation and timings pending |
+| 0012 | REPORT | [Local gate duplication and execution costs](reports/0012-REPORT-local-gate-duplication-assessment.md) | Make foundation A implemented and qualified; broader graph work remains |
 | 0013 | REPORT | [Library package layout assessment](reports/0013-REPORT-library-package-layout-assessment.md) | complete — revised functional layout accepted |
 | 0014 | MADR | [Organize MCP packages by capability and dependency ownership](decisions/0014-MADR-organize-mcp-runtime-package.md) | accepted |
-| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | in-progress — L0 prerequisite boundary |
+| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | in-progress — L0 awaits coherent prerequisite commit |
 
 ## I want to…
 
@@ -49,3 +49,5 @@ This tree holds three kinds of document:
 | compare repair implementation options | [R1–R5 research, recommendations and required work](decisions/0002-PLAN-build-schema-driven-mcp-framework.md#research-refinement--2026-11-25) |
 | streamline local checks without losing coverage | [Local gate duplication assessment](reports/0012-REPORT-local-gate-duplication-assessment.md) |
 | organize library source below the repository root | [Library package layout assessment](reports/0013-REPORT-library-package-layout-assessment.md) |
+| generate, check or recover the protocol contract | [Generation and recovery guide](guides/generate-protocol.md) |
+| review the Make targets this repository needs | [Makefile reassessment](reports/0012-REPORT-local-gate-duplication-assessment.md#makefile-reassessment--2026-11-27) |

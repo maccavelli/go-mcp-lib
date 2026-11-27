@@ -45,13 +45,13 @@ func CheckURI(value string) error {
 	return nil
 }
 
+var templateVar = regexp.MustCompile(`^\{[A-Za-z0-9_]+(:[0-9]+)?(,\*|[*])?\}$`)
+var templateVars = regexp.MustCompile(`\{[^{}]*\}`)
+
 // CheckURITemplate enforces RFC 6570 level 1-2 template shape at
 // template locations (e.g. ResourceTemplate.uriTemplate): a URI-shaped
 // prefix with {var} expansions, each expansion a simple varspec with an
 // optional numeric prefix modifier or explode marker.
-var templateVar = regexp.MustCompile(`^\{[A-Za-z0-9_]+(:[0-9]+)?(,\*|[*])?\}$`)
-var templateVars = regexp.MustCompile(`\{[^{}]*\}`)
-
 func CheckURITemplate(value string) error {
 	if value == "" {
 		return fmt.Errorf("validation: uriTemplate is empty")

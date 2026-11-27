@@ -1,0 +1,932 @@
+[
+  {
+    "definition": "Annotations",
+    "pointer": "#/$defs/Annotations",
+    "go-name": "Annotations",
+    "disposition": "alias"
+  },
+  {
+    "definition": "AudioContent",
+    "pointer": "#/$defs/AudioContent",
+    "go-name": "AudioContent",
+    "disposition": "owned"
+  },
+  {
+    "definition": "BaseMetadata",
+    "pointer": "#/$defs/BaseMetadata",
+    "go-name": "BaseMetadata",
+    "disposition": "owned"
+  },
+  {
+    "definition": "BlobResourceContents",
+    "pointer": "#/$defs/BlobResourceContents",
+    "go-name": "BlobResourceContents",
+    "disposition": "owned"
+  },
+  {
+    "definition": "BooleanSchema",
+    "pointer": "#/$defs/BooleanSchema",
+    "go-name": "BooleanSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CacheableResult",
+    "pointer": "#/$defs/CacheableResult",
+    "go-name": "CacheableResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CallToolRequest",
+    "pointer": "#/$defs/CallToolRequest",
+    "go-name": "CallToolRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CallToolRequestParams",
+    "pointer": "#/$defs/CallToolRequestParams",
+    "go-name": "CallToolRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CallToolResult",
+    "pointer": "#/$defs/CallToolResult",
+    "go-name": "CallToolResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CallToolResultResponse",
+    "pointer": "#/$defs/CallToolResultResponse",
+    "go-name": "CallToolResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CancelledNotification",
+    "pointer": "#/$defs/CancelledNotification",
+    "go-name": "CancelledNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CancelledNotificationParams",
+    "pointer": "#/$defs/CancelledNotificationParams",
+    "go-name": "CancelledNotificationParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ClientCapabilities",
+    "pointer": "#/$defs/ClientCapabilities",
+    "go-name": "ClientCapabilities",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ClientNotification",
+    "pointer": "#/$defs/ClientNotification",
+    "go-name": "ClientNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ClientRequest",
+    "pointer": "#/$defs/ClientRequest",
+    "go-name": "ClientRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ClientResult",
+    "pointer": "#/$defs/ClientResult",
+    "go-name": "ClientResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CompleteRequest",
+    "pointer": "#/$defs/CompleteRequest",
+    "go-name": "CompleteRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CompleteRequestParams",
+    "pointer": "#/$defs/CompleteRequestParams",
+    "go-name": "CompleteRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CompleteResult",
+    "pointer": "#/$defs/CompleteResult",
+    "go-name": "CompleteResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CompleteResultResponse",
+    "pointer": "#/$defs/CompleteResultResponse",
+    "go-name": "CompleteResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ContentBlock",
+    "pointer": "#/$defs/ContentBlock",
+    "go-name": "ContentBlock",
+    "disposition": "owned"
+  },
+  {
+    "definition": "CreateMessageRequest",
+    "pointer": "#/$defs/CreateMessageRequest",
+    "go-name": "CreateMessageRequest",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "CreateMessageRequestParams",
+    "pointer": "#/$defs/CreateMessageRequestParams",
+    "go-name": "CreateMessageRequestParams",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "CreateMessageResult",
+    "pointer": "#/$defs/CreateMessageResult",
+    "go-name": "CreateMessageResult",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "Cursor",
+    "pointer": "#/$defs/Cursor",
+    "go-name": "Cursor",
+    "disposition": "owned"
+  },
+  {
+    "definition": "DiscoverRequest",
+    "pointer": "#/$defs/DiscoverRequest",
+    "go-name": "DiscoverRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "DiscoverResult",
+    "pointer": "#/$defs/DiscoverResult",
+    "go-name": "DiscoverResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "DiscoverResultResponse",
+    "pointer": "#/$defs/DiscoverResultResponse",
+    "go-name": "DiscoverResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ElicitRequest",
+    "pointer": "#/$defs/ElicitRequest",
+    "go-name": "ElicitRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ElicitRequestFormParams",
+    "pointer": "#/$defs/ElicitRequestFormParams",
+    "go-name": "ElicitRequestFormParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ElicitRequestParams",
+    "pointer": "#/$defs/ElicitRequestParams",
+    "go-name": "ElicitRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ElicitRequestURLParams",
+    "pointer": "#/$defs/ElicitRequestURLParams",
+    "go-name": "ElicitRequestURLParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ElicitResult",
+    "pointer": "#/$defs/ElicitResult",
+    "go-name": "ElicitResult",
+    "disposition": "alias"
+  },
+  {
+    "definition": "EmbeddedResource",
+    "pointer": "#/$defs/EmbeddedResource",
+    "go-name": "EmbeddedResource",
+    "disposition": "owned"
+  },
+  {
+    "definition": "EmptyResult",
+    "pointer": "#/$defs/EmptyResult",
+    "go-name": "EmptyResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "EnumSchema",
+    "pointer": "#/$defs/EnumSchema",
+    "go-name": "EnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Error",
+    "pointer": "#/$defs/Error",
+    "go-name": "Error",
+    "disposition": "owned"
+  },
+  {
+    "definition": "GetPromptRequest",
+    "pointer": "#/$defs/GetPromptRequest",
+    "go-name": "GetPromptRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "GetPromptRequestParams",
+    "pointer": "#/$defs/GetPromptRequestParams",
+    "go-name": "GetPromptRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "GetPromptResult",
+    "pointer": "#/$defs/GetPromptResult",
+    "go-name": "GetPromptResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "GetPromptResultResponse",
+    "pointer": "#/$defs/GetPromptResultResponse",
+    "go-name": "GetPromptResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "HeaderMismatchError",
+    "pointer": "#/$defs/HeaderMismatchError",
+    "go-name": "HeaderMismatchError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Icon",
+    "pointer": "#/$defs/Icon",
+    "go-name": "Icon",
+    "disposition": "alias"
+  },
+  {
+    "definition": "Icons",
+    "pointer": "#/$defs/Icons",
+    "go-name": "Icons",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ImageContent",
+    "pointer": "#/$defs/ImageContent",
+    "go-name": "ImageContent",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Implementation",
+    "pointer": "#/$defs/Implementation",
+    "go-name": "Implementation",
+    "disposition": "alias"
+  },
+  {
+    "definition": "InputRequest",
+    "pointer": "#/$defs/InputRequest",
+    "go-name": "InputRequest",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "InputRequests",
+    "pointer": "#/$defs/InputRequests",
+    "go-name": "InputRequests",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "InputRequiredResult",
+    "pointer": "#/$defs/InputRequiredResult",
+    "go-name": "InputRequiredResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "InputResponse",
+    "pointer": "#/$defs/InputResponse",
+    "go-name": "InputResponse",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "InputResponseRequestParams",
+    "pointer": "#/$defs/InputResponseRequestParams",
+    "go-name": "InputResponseRequestParams",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "InputResponses",
+    "pointer": "#/$defs/InputResponses",
+    "go-name": "InputResponses",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "InternalError",
+    "pointer": "#/$defs/InternalError",
+    "go-name": "InternalError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "InvalidParamsError",
+    "pointer": "#/$defs/InvalidParamsError",
+    "go-name": "InvalidParamsError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "InvalidRequestError",
+    "pointer": "#/$defs/InvalidRequestError",
+    "go-name": "InvalidRequestError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONArray",
+    "pointer": "#/$defs/JSONArray",
+    "go-name": "JSONArray",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONObject",
+    "pointer": "#/$defs/JSONObject",
+    "go-name": "JSONObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCErrorResponse",
+    "pointer": "#/$defs/JSONRPCErrorResponse",
+    "go-name": "JSONRPCErrorResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCMessage",
+    "pointer": "#/$defs/JSONRPCMessage",
+    "go-name": "JSONRPCMessage",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCNotification",
+    "pointer": "#/$defs/JSONRPCNotification",
+    "go-name": "JSONRPCNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCRequest",
+    "pointer": "#/$defs/JSONRPCRequest",
+    "go-name": "JSONRPCRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCResponse",
+    "pointer": "#/$defs/JSONRPCResponse",
+    "go-name": "JSONRPCResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONRPCResultResponse",
+    "pointer": "#/$defs/JSONRPCResultResponse",
+    "go-name": "JSONRPCResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "JSONValue",
+    "pointer": "#/$defs/JSONValue",
+    "go-name": "JSONValue",
+    "disposition": "owned"
+  },
+  {
+    "definition": "LegacyTitledEnumSchema",
+    "pointer": "#/$defs/LegacyTitledEnumSchema",
+    "go-name": "LegacyTitledEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListPromptsRequest",
+    "pointer": "#/$defs/ListPromptsRequest",
+    "go-name": "ListPromptsRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListPromptsResult",
+    "pointer": "#/$defs/ListPromptsResult",
+    "go-name": "ListPromptsResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListPromptsResultResponse",
+    "pointer": "#/$defs/ListPromptsResultResponse",
+    "go-name": "ListPromptsResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourceTemplatesRequest",
+    "pointer": "#/$defs/ListResourceTemplatesRequest",
+    "go-name": "ListResourceTemplatesRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourceTemplatesResult",
+    "pointer": "#/$defs/ListResourceTemplatesResult",
+    "go-name": "ListResourceTemplatesResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourceTemplatesResultResponse",
+    "pointer": "#/$defs/ListResourceTemplatesResultResponse",
+    "go-name": "ListResourceTemplatesResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourcesRequest",
+    "pointer": "#/$defs/ListResourcesRequest",
+    "go-name": "ListResourcesRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourcesResult",
+    "pointer": "#/$defs/ListResourcesResult",
+    "go-name": "ListResourcesResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListResourcesResultResponse",
+    "pointer": "#/$defs/ListResourcesResultResponse",
+    "go-name": "ListResourcesResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListRootsRequest",
+    "pointer": "#/$defs/ListRootsRequest",
+    "go-name": "ListRootsRequest",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ListRootsResult",
+    "pointer": "#/$defs/ListRootsResult",
+    "go-name": "ListRootsResult",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ListToolsRequest",
+    "pointer": "#/$defs/ListToolsRequest",
+    "go-name": "ListToolsRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListToolsResult",
+    "pointer": "#/$defs/ListToolsResult",
+    "go-name": "ListToolsResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ListToolsResultResponse",
+    "pointer": "#/$defs/ListToolsResultResponse",
+    "go-name": "ListToolsResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "LoggingLevel",
+    "pointer": "#/$defs/LoggingLevel",
+    "go-name": "LoggingLevel",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "LoggingMessageNotification",
+    "pointer": "#/$defs/LoggingMessageNotification",
+    "go-name": "LoggingMessageNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "LoggingMessageNotificationParams",
+    "pointer": "#/$defs/LoggingMessageNotificationParams",
+    "go-name": "LoggingMessageNotificationParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "MetaObject",
+    "pointer": "#/$defs/MetaObject",
+    "go-name": "MetaObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "MethodNotFoundError",
+    "pointer": "#/$defs/MethodNotFoundError",
+    "go-name": "MethodNotFoundError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "MissingRequiredClientCapabilityError",
+    "pointer": "#/$defs/MissingRequiredClientCapabilityError",
+    "go-name": "MissingRequiredClientCapabilityError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ModelHint",
+    "pointer": "#/$defs/ModelHint",
+    "go-name": "ModelHint",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ModelPreferences",
+    "pointer": "#/$defs/ModelPreferences",
+    "go-name": "ModelPreferences",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "MultiSelectEnumSchema",
+    "pointer": "#/$defs/MultiSelectEnumSchema",
+    "go-name": "MultiSelectEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Notification",
+    "pointer": "#/$defs/Notification",
+    "go-name": "Notification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "NotificationMetaObject",
+    "pointer": "#/$defs/NotificationMetaObject",
+    "go-name": "NotificationMetaObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "NotificationParams",
+    "pointer": "#/$defs/NotificationParams",
+    "go-name": "NotificationParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "NumberSchema",
+    "pointer": "#/$defs/NumberSchema",
+    "go-name": "NumberSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PaginatedRequest",
+    "pointer": "#/$defs/PaginatedRequest",
+    "go-name": "PaginatedRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PaginatedRequestParams",
+    "pointer": "#/$defs/PaginatedRequestParams",
+    "go-name": "PaginatedRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PaginatedResult",
+    "pointer": "#/$defs/PaginatedResult",
+    "go-name": "PaginatedResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ParseError",
+    "pointer": "#/$defs/ParseError",
+    "go-name": "ParseError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PrimitiveSchemaDefinition",
+    "pointer": "#/$defs/PrimitiveSchemaDefinition",
+    "go-name": "PrimitiveSchemaDefinition",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ProgressNotification",
+    "pointer": "#/$defs/ProgressNotification",
+    "go-name": "ProgressNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ProgressNotificationParams",
+    "pointer": "#/$defs/ProgressNotificationParams",
+    "go-name": "ProgressNotificationParams",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ProgressToken",
+    "pointer": "#/$defs/ProgressToken",
+    "go-name": "ProgressToken",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Prompt",
+    "pointer": "#/$defs/Prompt",
+    "go-name": "Prompt",
+    "disposition": "alias"
+  },
+  {
+    "definition": "PromptArgument",
+    "pointer": "#/$defs/PromptArgument",
+    "go-name": "PromptArgument",
+    "disposition": "alias"
+  },
+  {
+    "definition": "PromptListChangedNotification",
+    "pointer": "#/$defs/PromptListChangedNotification",
+    "go-name": "PromptListChangedNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PromptMessage",
+    "pointer": "#/$defs/PromptMessage",
+    "go-name": "PromptMessage",
+    "disposition": "owned"
+  },
+  {
+    "definition": "PromptReference",
+    "pointer": "#/$defs/PromptReference",
+    "go-name": "PromptReference",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ReadResourceRequest",
+    "pointer": "#/$defs/ReadResourceRequest",
+    "go-name": "ReadResourceRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ReadResourceRequestParams",
+    "pointer": "#/$defs/ReadResourceRequestParams",
+    "go-name": "ReadResourceRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ReadResourceResult",
+    "pointer": "#/$defs/ReadResourceResult",
+    "go-name": "ReadResourceResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ReadResourceResultResponse",
+    "pointer": "#/$defs/ReadResourceResultResponse",
+    "go-name": "ReadResourceResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Request",
+    "pointer": "#/$defs/Request",
+    "go-name": "Request",
+    "disposition": "owned"
+  },
+  {
+    "definition": "RequestId",
+    "pointer": "#/$defs/RequestId",
+    "go-name": "RequestID",
+    "disposition": "owned"
+  },
+  {
+    "definition": "RequestMetaObject",
+    "pointer": "#/$defs/RequestMetaObject",
+    "go-name": "RequestMetaObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "RequestParams",
+    "pointer": "#/$defs/RequestParams",
+    "go-name": "RequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Resource",
+    "pointer": "#/$defs/Resource",
+    "go-name": "Resource",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ResourceContents",
+    "pointer": "#/$defs/ResourceContents",
+    "go-name": "ResourceContents",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ResourceLink",
+    "pointer": "#/$defs/ResourceLink",
+    "go-name": "ResourceLink",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResourceListChangedNotification",
+    "pointer": "#/$defs/ResourceListChangedNotification",
+    "go-name": "ResourceListChangedNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResourceRequestParams",
+    "pointer": "#/$defs/ResourceRequestParams",
+    "go-name": "ResourceRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResourceTemplate",
+    "pointer": "#/$defs/ResourceTemplate",
+    "go-name": "ResourceTemplate",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ResourceTemplateReference",
+    "pointer": "#/$defs/ResourceTemplateReference",
+    "go-name": "ResourceTemplateReference",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResourceUpdatedNotification",
+    "pointer": "#/$defs/ResourceUpdatedNotification",
+    "go-name": "ResourceUpdatedNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResourceUpdatedNotificationParams",
+    "pointer": "#/$defs/ResourceUpdatedNotificationParams",
+    "go-name": "ResourceUpdatedNotificationParams",
+    "disposition": "alias"
+  },
+  {
+    "definition": "Result",
+    "pointer": "#/$defs/Result",
+    "go-name": "Result",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResultMetaObject",
+    "pointer": "#/$defs/ResultMetaObject",
+    "go-name": "ResultMetaObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ResultType",
+    "pointer": "#/$defs/ResultType",
+    "go-name": "ResultType",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Role",
+    "pointer": "#/$defs/Role",
+    "go-name": "Role",
+    "disposition": "alias"
+  },
+  {
+    "definition": "Root",
+    "pointer": "#/$defs/Root",
+    "go-name": "Root",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "SamplingMessage",
+    "pointer": "#/$defs/SamplingMessage",
+    "go-name": "SamplingMessage",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "SamplingMessageContentBlock",
+    "pointer": "#/$defs/SamplingMessageContentBlock",
+    "go-name": "SamplingMessageContentBlock",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ServerCapabilities",
+    "pointer": "#/$defs/ServerCapabilities",
+    "go-name": "ServerCapabilities",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ServerNotification",
+    "pointer": "#/$defs/ServerNotification",
+    "go-name": "ServerNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ServerResult",
+    "pointer": "#/$defs/ServerResult",
+    "go-name": "ServerResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SingleSelectEnumSchema",
+    "pointer": "#/$defs/SingleSelectEnumSchema",
+    "go-name": "SingleSelectEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "StringSchema",
+    "pointer": "#/$defs/StringSchema",
+    "go-name": "StringSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionFilter",
+    "pointer": "#/$defs/SubscriptionFilter",
+    "go-name": "SubscriptionFilter",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsAcknowledgedNotification",
+    "pointer": "#/$defs/SubscriptionsAcknowledgedNotification",
+    "go-name": "SubscriptionsAcknowledgedNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsAcknowledgedNotificationParams",
+    "pointer": "#/$defs/SubscriptionsAcknowledgedNotificationParams",
+    "go-name": "SubscriptionsAcknowledgedNotificationParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsListenRequest",
+    "pointer": "#/$defs/SubscriptionsListenRequest",
+    "go-name": "SubscriptionsListenRequest",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsListenRequestParams",
+    "pointer": "#/$defs/SubscriptionsListenRequestParams",
+    "go-name": "SubscriptionsListenRequestParams",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsListenResult",
+    "pointer": "#/$defs/SubscriptionsListenResult",
+    "go-name": "SubscriptionsListenResult",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsListenResultMetaObject",
+    "pointer": "#/$defs/SubscriptionsListenResultMetaObject",
+    "go-name": "SubscriptionsListenResultMetaObject",
+    "disposition": "owned"
+  },
+  {
+    "definition": "SubscriptionsListenResultResponse",
+    "pointer": "#/$defs/SubscriptionsListenResultResponse",
+    "go-name": "SubscriptionsListenResultResponse",
+    "disposition": "owned"
+  },
+  {
+    "definition": "TextContent",
+    "pointer": "#/$defs/TextContent",
+    "go-name": "TextContent",
+    "disposition": "owned"
+  },
+  {
+    "definition": "TextResourceContents",
+    "pointer": "#/$defs/TextResourceContents",
+    "go-name": "TextResourceContents",
+    "disposition": "owned"
+  },
+  {
+    "definition": "TitledMultiSelectEnumSchema",
+    "pointer": "#/$defs/TitledMultiSelectEnumSchema",
+    "go-name": "TitledMultiSelectEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "TitledSingleSelectEnumSchema",
+    "pointer": "#/$defs/TitledSingleSelectEnumSchema",
+    "go-name": "TitledSingleSelectEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "Tool",
+    "pointer": "#/$defs/Tool",
+    "go-name": "Tool",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ToolAnnotations",
+    "pointer": "#/$defs/ToolAnnotations",
+    "go-name": "ToolAnnotations",
+    "disposition": "alias"
+  },
+  {
+    "definition": "ToolChoice",
+    "pointer": "#/$defs/ToolChoice",
+    "go-name": "ToolChoice",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ToolListChangedNotification",
+    "pointer": "#/$defs/ToolListChangedNotification",
+    "go-name": "ToolListChangedNotification",
+    "disposition": "owned"
+  },
+  {
+    "definition": "ToolResultContent",
+    "pointer": "#/$defs/ToolResultContent",
+    "go-name": "ToolResultContent",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "ToolUseContent",
+    "pointer": "#/$defs/ToolUseContent",
+    "go-name": "ToolUseContent",
+    "disposition": "owned-codec"
+  },
+  {
+    "definition": "UnsupportedProtocolVersionError",
+    "pointer": "#/$defs/UnsupportedProtocolVersionError",
+    "go-name": "UnsupportedProtocolVersionError",
+    "disposition": "owned"
+  },
+  {
+    "definition": "UntitledMultiSelectEnumSchema",
+    "pointer": "#/$defs/UntitledMultiSelectEnumSchema",
+    "go-name": "UntitledMultiSelectEnumSchema",
+    "disposition": "owned"
+  },
+  {
+    "definition": "UntitledSingleSelectEnumSchema",
+    "pointer": "#/$defs/UntitledSingleSelectEnumSchema",
+    "go-name": "UntitledSingleSelectEnumSchema",
+    "disposition": "owned"
+  }
+]

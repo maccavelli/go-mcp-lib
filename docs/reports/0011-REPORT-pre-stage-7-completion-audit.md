@@ -236,8 +236,8 @@ actual library for all three targets.
 
 ### A12 — Publication and recovery paths can escape the output directory
 
-[`publish.go`](../../cmd/mcpgen/publish.go), `staleOwned` at line 157, trusts
-manifest filenames. [`recover.go`](../../cmd/mcpgen/recover.go),
+[`publish.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/cmd/mcpgen/publish.go), `staleOwned` at line 157, trusts
+manifest filenames. [`recover.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/cmd/mcpgen/recover.go),
 `recoverRestore` at line 118, trusts journal filenames and removes entries
 recorded as new without verifying their current candidate hash.
 
@@ -255,7 +255,7 @@ symlink verification must precede all writes/deletions, including recovery.
 
 ### A13 — Journal recovery cannot perform its promised rollback or completion
 
-[`publish.go`](../../cmd/mcpgen/publish.go), `journalFile` at line 30, records
+[`publish.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/cmd/mcpgen/publish.go), `journalFile` at line 30, records
 hashes but no recoverable original/candidate bytes. `writeSynced` at line 144
 truncates and writes destination files directly; it does not stage and rename
 them. Staging uses a generic temporary directory, not guaranteed to be on the
@@ -282,7 +282,7 @@ aliases or API signatures. A changed definition with the same output filenames
 is invisible to this diff.
 
 [`cli.go`](../../cmd/mcpgen/cli.go) silently normalizes an unknown `--format`
-to text; common `--manifest` is absent. [`recover.go`](../../cmd/mcpgen/recover.go),
+to text; common `--manifest` is absent. [`recover.go`](https://github.com/maccavelli/go-mcp-lib/blob/5bfdd9f5e4a6e9286cf593fdc1f3ccec60890532/cmd/mcpgen/recover.go),
 `runUpdate`/`noTraversal`, cleans an absolute path but does not enforce separation
 from live schema inputs or reject symlink escapes. Revision is not validated
 as immutable provenance. These Stage 4 obligations should be restored with

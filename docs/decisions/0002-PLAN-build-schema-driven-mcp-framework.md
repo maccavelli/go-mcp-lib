@@ -1,6 +1,6 @@
 ---
 status: in-progress
-date: 2026-11-26
+date: 2026-11-27
 associated-madr: 0002-MADR-build-schema-driven-mcp-framework.md
 ---
 
@@ -20,7 +20,14 @@ unmet exits in every Stage 0–6, so those completion claims are not the current
 acceptance status. The owner selected post-audit option A, “do A repairs”.
 R1–R5 below specify that option's repair amendment. The owner initially
 authorized R1 only, then approved execution of R1–R5 and commits to main between
-qualified coherent phases. R1 passed qualification on 2026-11-25; R2 is in progress.
+qualified coherent phases. R1 passed qualification on 2026-11-25. R2's input,
+model/API and complete candidate exit passed on 2026-11-26; R3 publication and
+installed-tree qualification passed on 2026-11-27. The coherent R2/R3 commit is
+ready after the Make/hook repair and pass-7 installed checks described below.
+R4/R5 and Stage 7 remain pending.
+The owner committed and pushed the R2 work in progress as `5c00e36` on
+2026-11-26. That historical checkpoint was not a qualified R2/R3 exit;
+the reviewed contract has now been safely published and requalified locally.
 The overall PLAN remains in-progress. Stage 7 is not ready to start.
 
 The 2026-11-25 research refinement below evaluates three implementation options
@@ -1689,6 +1696,820 @@ re-run qualification, rather than pairing old generated code with new inputs.
   occurred without its separate explicit authorization.
 
 ## Execution Record
+
+### 2026-11-27 — R3 pass 7 exit: installed Make/lint and regeneration passed
+
+After all four native qualification lanes passed, ordinary verified CLI
+generation published exactly `aliases.go`, `codecs.go`, `constants.go`,
+`owned.go` and `generated-manifest.json`. The installed manifest is
+`2d2d88d86a78b2806043c9b7a2580001ea83b952040ad57a1fc7f223500f0112`.
+All nine artifacts match the retained proposed SHA-256 inventory; the
+handwritten protocol file is unchanged. Product tool, module, input, schema
+and profile pins were preserved; the previous review remains archived.
+
+Queued native Darwin `make pre-add-check lint` passed with one dispatcher
+invocation: 70 runtime tests across five packages, 346 generator tests across
+twelve packages, readonly formatting, standalone vet and both pinned lint
+owners, including generated documentation. Ordinary operations used CGO off.
+Repeat CLI generation returned `unchanged`; the final CLI check returned `ok`,
+with both modules' three-target source/test matrices passing and no drift or
+unowned output. All ten protocol files retained SHA-256 and nanosecond mtimes
+through repeat generation/check. No new source revision followed qualification.
+
+The literal hook target, its seven Make regressions and all required broken
+controls are verified. The R2/R3 source/output prerequisite is qualified for a
+coherent commit on main after record/link/Markdown and staged identifier checks.
+Those checks passed: all record links, all 36 Markdown files and the staged
+97-file identifier scan. Git's whitespace diagnostic still reports the raw
+schema's extra final blank line at `protocol/schema.json:3963`; its bytes are
+identical to both the pinned input and that input at HEAD, with SHA-256
+`907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551`.
+Preserve that reviewed raw artifact rather than change its input identity for
+an advisory. Formatting and both lint owners passed; no gate was disabled.
+The full PLAN remains in progress: R4/R5 and Stage 7 are not completed by this
+exit. No push or tag is included. Layout L0 re-grounds at the resulting commit
+before any runtime or bridge relocation.
+
+### 2026-11-27 — R3 pass 7: all native qualification lanes passed
+
+All four `scripts/qualify_r3.py --allow-network` jobs completed with zero
+failures against source identity
+`1e841afbadc7eb5abf86d9d048712989bb33003398d863e086a7bf95b1c931cf`.
+The native classes were Darwin/arm64, Windows/amd64 and physical Linux/amd64,
+plus WSL Linux/amd64. Each accounted for 346 passing generator tests across
+twelve packages, including actual candidate runtime pre-add and both modules'
+three-target source/test compilation. Pinned analyzer checks passed with
+generated files included. The seven Make cases passed, including literal hook
+discovery, standalone/combined pre-add dispatch and failed-command propagation.
+All eight documentation plants and the retained loader, reference, alias,
+profile, emitter, candidate and fifteen publication controls were caught.
+Every lane's source-preservation check passed; normal execution forced CGO off.
+No new race result is claimed for this comment/Make-only revision.
+
+Safe publication into the session checkout and the grouped installed
+Make/pre-add, regeneration and drift checks are queued in that order under
+the host's shared heavy-run queue. No generated file is patched by hand.
+The prerequisite is not yet committed, so layout L0 remains waiting.
+
+### 2026-11-27 — R3 pass 7 native qualification started
+
+The Makefile now declares `pre-add-check:` literally and shares the existing
+single dispatcher prerequisite with the other goals. All seven Make foundation
+tests passed in preparation. Actual scratch Make runs covered standalone
+pre-add, combined pre-add/lint/test and lint/test, each with one dispatch and
+nonzero failure propagation. The deliberately shared-only scratch rule failed
+discovery with `FAIL pre-add hook cannot discover literal target`.
+
+Freeze this source and run `scripts/qualify_r3.py --allow-network` through the
+native host queues for Darwin/arm64, Windows/amd64, physical Linux/amd64 and
+WSL. Each driver records its source identity and checks preservation. Retain
+the previously reviewed documentation-only candidate; no publisher, schema,
+profile, API or SDK behavior changed in this revision. The same separately
+attributed physical-Linux race evidence remains applicable to unchanged R3
+behavior. Qualification, safe live promotion and a coherent commit are still
+required; no pass 8 is inferred.
+
+### 2026-11-27 — R3 pass 7 approved: literal hook target and qualification
+
+The owner selected A from the hook-discovery deviation prompt. Authorize one
+additional source revision and qualification cycle, pass 7, for a literal
+`pre-add-check:` Make entry and a scratch regression that rejects the previous
+shared-only rule. Retain combined-goal coalescing and verify actual standalone
+and combined pre-add dispatch, including nonzero propagation. The installed
+hook and all acceptance gates remain unchanged.
+
+Run the complete frozen-source qualification on native Windows/amd64,
+Darwin/arm64, physical Linux/amd64 and WSL through the existing queues. Preserve
+the reviewed generated candidate and input/profile/schema identities. After
+qualification, publish through the verified CLI, check repeat generation and
+installed pre-add/lint, and commit the coherent prerequisite on main. Then
+resume the already approved layout PLAN. No push, tag, pass 8, broader tooling
+scope or bypass is authorized. Stop if another source revision is needed.
+
+### 2026-11-27 — R3 pass 6: hook-discovery defect; allowance decision pending
+
+The frozen source identity was
+`1a7b6666ccaf522db21252e28f1189a92133c7bf31f576d04ba86f9421ca5672`.
+Windows/amd64 and WSL completed `scripts/qualify_r3.py --allow-network` with
+zero failures. Each accounted for 346 generator tests across twelve packages,
+passed the six Make foundation cases, caught all eight handwritten/generated
+documentation plants through actual Make, and passed retained publication plants.
+Their source-preservation checks passed. Physical Linux passed preparation and
+the generator pre-add checks before interruption; macOS remained queued and
+executed nothing. Neither incomplete lane is a passing native qualification.
+
+Read-only inspection of the installed hook found a remaining adapter defect:
+it selects Make only when a line matches `^pre-add-check:`. The new Makefile's
+shared rule at lines 10–12 includes that goal without such a literal entry.
+The existing combined-goal regression passes, but does not exercise discovery.
+This defect was introduced by the new Make foundation; the earlier fallback
+selection was the pre-existing problem. No global hook change is appropriate.
+
+Correcting the literal target and adding a scratch discovery/dispatch control
+requires another source revision. The approved allowance ends at pass 6, so
+implementation and publication stop before pass 7. Cancel only this repository's
+queued macOS and unfinished physical-Linux pass-6 jobs rather than spend another
+qualification cycle on this known incomplete adapter. Both wrappers exited 130;
+the macOS ticket was removed without running, and the remote Linux process group
+was stopped, with its interrupted scratch retained temporarily by the runner.
+No source correction, new output publication, prerequisite commit or runtime
+relocation is included in this stop.
+
+The owner was offered three resolutions, with unchanged acceptance gates:
+
+| Option | Work and cost | Consequence |
+| :--- | :--- | :--- |
+| A — Authorize pass 7 **(recommended)** | Small literal-target correction and scratch regression, followed by one additional native qualification cycle. | Commit the qualified prerequisite, then resume the approved layout. |
+| B — Authorize passes 7–8 | Same repair and verification scope, with a second revision available if a further defect is found. | Same exit, with a larger iteration allowance. |
+| C — Review before another allowance | Preserve the current candidate and inspect the proposed repair before resuming. | The prerequisite commit and layout remain waiting. |
+
+Doing nothing leaves the hook on its legacy fallback and the prerequisite
+uncommittable. No option bypasses that hook or removes a validation. Record the
+owner's selected resolution before changing source or starting another pass.
+
+### 2026-11-27 — R3 pass 6 native qualification started
+
+Freeze the Make foundation, canonical module selectors, standalone documentation
+analyzer, emitter comment/header correction and preserved candidate reviews.
+The Make regression suite has six passing cases, including real combined-goal
+dispatch, deliberately failed Make propagation, worker admission and wrong
+version/builder/module metadata controls. Focused Go parser tests passed and
+reported rejection of the old header placement and missing method documentation.
+Generator `make lint MODULE=generator` passed both pinned analysis owners.
+
+Run the complete `scripts/qualify_r3.py --allow-network` driver on native
+Darwin/arm64, Windows/amd64, physical Linux/amd64 and WSL. New Make/lint controls
+join the retained R2/R3 controls; normal checks force CGO off. This is the last
+approved R3 pass. Retain separately attributed prior race evidence for the
+unchanged publication/ownership/CLI behavior; no ordinary operation enables CGO.
+No publication of the corrected output or layout move precedes this exit.
+
+### 2026-11-27 — Make foundation A approved; R3 pass 6 preparation
+
+The owner selected A from the prerequisite deviation prompt. Execute the new
+ML01–ML05 ruling in the paired MADR before the coherent R2/R3 commit, then
+resume the already approved layout PLAN. This is the remaining approved R3
+source revision/pass 6; no pass 7 is authorized.
+
+The documentation-only candidate compiles both module/source/test matrices
+with manifest
+`2d2d88d86a78b2806043c9b7a2580001ea83b952040ad57a1fc7f223500f0112`.
+`api.json`, `bindings.json`, `coverage.json`, raw schema and profile identities
+are unchanged. The previous migration review is retained at
+`tools/r2-candidate-migration-pre-lint.json`; the current review captures the
+five changed Go/manifest artifacts. The initial capture correctly refused an
+addition to the product-hashed tool manifest. Keep that manifest byte-identical
+and place the new maintainer-only Revive pin in `tools/documentation-lint.json`.
+No product input guard was changed. The final native qualification still
+precedes verified publication.
+
+The standalone Revive controls caught all four rule violations in both
+handwritten and generated scratch files through actual `make lint` on native
+Windows. Positive controls passed. Additional handwritten preparation found
+one undocumented loader constant block and a URI-template function comment
+attached to preceding variables; document the block and attach the existing
+function comment to its function, preserving behavior.
+
+Preparation probes: the Make selector tests passed and the parser controls
+rejected the old misplaced header and an undocumented generated method.
+The first fleet lint probe correctly refused an unprepared older global
+linter. After explicit tool preparation, handwritten rules fired, but the
+generated-file plants exposed the pinned golangci Revive adapter's internal
+generated-file skip. Inspecting that adapter and its pinned Revive source
+confirmed the cause. Within ML02, pin standalone Revive at the same dependency
+version, 1.17.1, and give those four rules one owner across all files. Require
+its verified build/module metadata and preserve generated analysis through the
+configuration and repeated broken-input controls. The blank-import control now
+uses a side-effect import; Revive deliberately accepts a valid embed directive,
+so an embed directive is not a broken input for its modern rule.
+
+1. Re-ground the four-reference assessment and shared-hook dispatch at HEAD
+   `ff6d700`. Preserve the staged R2/R3 work and the installed reviewed protocol.
+2. Add a thin Makefile and Python dispatcher for existing preparation,
+   formatting, lint, vet, test, generation/build, inventory, documentation and
+   checker-self-test owners. Combined goals share equivalent leaves. Expose
+   `pre-add-check` through the existing canonical precheck, with queued heavy
+   execution and no shell shim or global-hook edit. Do not claim complete
+   preflight, API/wire readiness or Stage 9 receipts.
+3. Add equivalent modern exported/package/naming/blank-import documentation
+   checks to the pinned lint configuration, retaining generated analysis.
+   Fix handwritten export comments and the emitter's marker/method comments.
+   Strengthen header verification to inspect parser-recognized placement and
+   exported method docs, with old malformed/omitted cases in scratch.
+4. Preserve the pass-5 migration review separately, render the new candidate,
+   compare its public declarations and input/profile/schema identities, and
+   retain the new qualified output review. No owned output is hand-edited.
+5. Run the focused new controls and the complete existing R3 qualification
+   matrix for this frozen revision. Use a queued fleet host for heavy work;
+   normal CGO remains off, with race attributed separately. Run actual Make
+   targets and prove nonzero propagation on broken scratch input.
+6. Publish through the verified R3 CLI only after qualification; repeat normal
+   generation/check and require unchanged bytes/mtimes. Record pre-add,
+   documentation and identifier results and commit the coherent R2/R3 phase.
+   Then re-ground L0 at that commit before starting the layout migration.
+
+Exit: no blocker, ML01–ML05 and retained RA cases verified, required plants
+caught, `make lint` passes, the installed-hook route uses the same checked
+implementation, and the prerequisite phase is committed. A new scope decision
+or a need for R3 pass 7 stops for owner review.
+
+### 2026-11-27 — R3 deviation: commit lint gate and missing Make interface
+
+The attempted coherent R2/R3 `git commit --no-edit` was blocked before commit by
+the agent harness's shared precommit quality gate. The pinned repository gate
+had passed, but the shared hook did not discover its Python-only entry point:
+there is no executable shell adapter and no root Makefile `pre-add-check:` target.
+It therefore selected its generic legacy `golint` fallback. The commit was not
+created; the qualified implementation/output and records remain staged. No
+runtime relocation has started.
+
+Representative exact findings and provenance:
+
+| Evidence | Finding | Provenance |
+| :--- | :--- | :--- |
+| `cmd/mcpgen/internal/acquire/acquisition.go:27:6` | `exported type Options should have comment or be unexported` | New R3 export; analogous findings name acquisition Result, publication Entry and journal/ownership constants. |
+| `cmd/mcpgen/internal/emit/emit.go:7:2` | `a blank import should be only in a main or test package, or have a comment justifying it` | The blank embed import was already present in HEAD. |
+| `cmd/mcpgen/internal/model/model.go:27:2` | `exported const ClassAssertion should have comment (or a comment on this block) or be unexported` | The constant block was already present in HEAD. |
+| `protocol/owned.go:17:1` | `exported method AudioContent.MarshalJSONTo should have comment or be unexported` | Newly installed R2 generated method; other JSON methods and union accessors have the same producer defect. |
+| `protocol/owned.go:1` | Generated marker appears after the `package` keyword, not as a leading standard comment. | Emitter AST formatting defect; current `TestGeneratedHeader` checks substring presence and misses placement. |
+
+The owner directed that `make lint` must pass and requested comparison with all
+four reference Makefiles. The refreshed evidence, target contract and proposed
+order are in
+[0012-REPORT-local-gate-duplication-assessment.md](../reports/0012-REPORT-local-gate-duplication-assessment.md#makefile-reassessment--2026-11-27).
+Their shared hook contract supports `make pre-add-check`, so a thin Makefile
+can delegate to the existing Python runner without a shell shim or global-hook
+edit. Documentation/naming findings must remain checked by the modern pinned
+linter; the new entry point must not weaken checks or hide generated findings.
+
+Proposed repair scope, pending owner selection under the deviation rule:
+
+| Option | Work and cost | Effect on the approved layout |
+| :--- | :--- | :--- |
+| A — Canonical Make foundation and focused lint repair **(recommended)** | Moderate: expose existing check owners through thin Make/Python selectors; add real `lint` and `pre-add-check`, modern equivalent documentation rules and broken-input controls; repair handwritten comments and emitter header/method docs; review new generated hashes and requalify under the remaining R3 pass 6. Keep input/profile/schema pins fixed. | Complete the coherent R2/R3 prerequisite commit, then resume approved L0/L1. Broader preflight/security/stage-specific graph work remains explicitly scheduled rather than claimed complete. |
+| B — Complete local validation graph before relocation | Larger: A plus graph/receipt deduplication, all local target families, fleet dispatch and owner-managed security evidence integration. Existing incomplete API/wire/product acceptance still fails until its planned implementation is complete. Phase this separately; no additional R3 build passes are silently granted. | Layout remains approved but waits for the expanded tooling work and its qualification. |
+| C — Retain assessment and hold execution | No source/tooling changes; keep the staged generation and records intact. | The commit gate remains blocked, `make lint` remains unavailable and L1 cannot begin. |
+
+No source, linter, Makefile or global hook was changed for this assessment.
+Do not hand-edit generated output, bypass a hook, add an exclusion, discard an
+assertion or reset staged work. Record the chosen scope before implementation.
+If no repair is selected, the coherent R2/R3 commit and runtime move remain
+incomplete despite the valid functional qualification evidence.
+
+### 2026-11-27 — R3 pass 5 exit: publication and installed checks passed
+
+The four native jobs completed against source identity
+`9a284508e220fa21f43a106efa2d39f3ebacd128bb3fccd1c7a2381826f3d902`.
+Each reported `343 tests passed; 12 packages accounted`, `0 issues`, all shared
+R2 controls passed, all fifteen publication/CLI bypass plants caught,
+`pass source-preservation` and `R3 qualification failures 0`. The native
+Darwin/arm64, Windows/amd64, physical Linux/amd64 and WSL Linux/amd64 driver
+elapsed times were 212, 222, 507 and 145 seconds respectively, excluding queue
+waits. The physical-Linux actual-CLI race run from pass 4 also passed (323.349
+seconds); that earlier result is explicitly attributed to pass 4, whose two
+fixture/control errors were corrected and caught by pass 5. All ordinary
+operations used CGO off; only the separately attributed race command enabled it.
+
+After the owner accepted the independent layout pair, its documentation-only
+commit `ff6d700` preserved the required boundary before runtime relocation.
+The same R3 implementation then performed the live explicit legacy bootstrap
+under the session host queue, offline and with CGO off. `generate` exited 0
+with `status: complete`, publishing the nine reviewed generated files with
+manifest SHA256
+`57de122dd1234b6b99ff922c126413dd32c92800f3b8c610962616e5648531c6`.
+The schema/profile pins and retained migration review were unchanged.
+
+Installed-generation validation, also queued on native Darwin/arm64:
+
+* `python3 -B scripts/go-precheck.py --module generator`: exit 0; formatting,
+  standalone vet, all 343 generator tests across twelve packages and lint
+  passed. Its actual-product test reused the complete runtime pre-add owner
+  inside the installed candidate; no duplicate standalone runtime suite ran.
+* Ordinary `generate --repo ../.. --format json`: exit 0, `unchanged`, empty
+  changed-file list. All ten protocol files, including handwritten `doc.go`,
+  retained their exact SHA256 and nanosecond mtimes after regeneration/check.
+* `check --repo ../.. --format json`: exit 0, `ok`, no drift, unowned output or
+  interruption; bootstrap no longer required. Runtime and generator source
+  and tests compiled for Darwin/arm64, Linux/amd64 and Windows/amd64.
+
+The guide [generate-protocol.md](../guides/generate-protocol.md) documents
+ordinary generation/check and explicit verified bootstrap/recovery. The R2
+candidate and R3 publication functional checks passed; their coordinated phase
+commit remains blocked by the subsequent harness lint finding recorded above.
+The staged change contains their implementation, generated output and evidence.
+This does not
+declare R4/R5, historical whole-stage exits or Stage 7 complete. Runtime layout
+relocation remains the subsequent approved
+[0014-PLAN-organize-mcp-runtime-package.md](0014-PLAN-organize-mcp-runtime-package.md).
+
+An additional staged Git whitespace diagnostic reports
+`protocol/schema.json:3963: new blank line at EOF`. The generated schema is
+byte-for-byte identical to both the pinned input and its existing HEAD object,
+including that upstream trailing blank line. This is outside the R3 acceptance
+cases and is retained as an advisory follow-up; changing it would violate the
+reviewed raw-schema identity. No formatter, lint rule or assertion was relaxed.
+Required pre-add, record/link, Markdown and identifier checks all passed.
+
+### 2026-11-27 — R3, pass 4 results and pass 5 preparation
+
+All four native environments passed the complete 343-test / 12-package
+generator inventory against frozen source identity
+`f02cc3caff9c4e008d04ed10df1cb17b3f8d73cc2abda377dec2f9bc20765de7`.
+This includes actual CLI Git bootstrap, staged-change refusal, deterministic
+repeat generation and retained mtimes, inspection/check, full restore and the
+three killed-CLI checkpoints. Formatting, vet, preparation and the existing
+loader/model/reference/alias/profile/emitter controls passed. The two corrected
+candidate digest plants now caught their intended test assertions.
+
+The aggregate failed for two new fixture/control findings: `errcheck` at
+`cmd/mcpgen/cli_publication_test.go:93` requires handling the checkpoint write
+error; the CLI scope mutant lacked the reviewed root files needed by its
+`profileFixture`, so it failed setup instead of the intended nonce assertion.
+Return the checkpoint write error and copy the same independently pinned root
+inputs already used by the selected-profile plant into that scratch layout.
+Retain all helper containment and nonce checks. Neither failure grants negative
+evidence for the missing scope control. The additional physical-Linux actual-CLI
+race result is still being collected when this entry is prepared.
+
+The record/link check also exposed four historical audit links to replaced
+`publish.go`/`recover.go`. Pin those links to the audit's existing immutable
+baseline, whose objects were verified locally, preserving its original findings
+and line references. Do not relabel the repaired implementation as the source
+of the historical defects.
+
+Pass 5 requalifies the corrected fixtures/controls with the same complete native
+driver and explicit race-only CGO policy. No live protocol publication or phase
+commit has occurred. The separately selected named `mcp/` layout is recorded in
+[0014-MADR-organize-mcp-runtime-package.md](0014-MADR-organize-mcp-runtime-package.md);
+its proposed PLAN does not relocate source during R3 or extend this allowance.
+
+### 2026-11-27 — R3, pass 4: full pre-publication qualification started
+
+Apply the two pass-3 plant corrections and lint predicate fix. The actual CLI
+fixture owns its temporary Git HEAD/index and borrows only immutable source
+objects read-only. It verifies frozen Git evidence, wrong frozen bytes, dirty
+staged owned output, explicit bootstrap, repeat generation/mtimes, complete
+inspection, ordinary check and full restoration. Actual CLI children are killed
+at staging, first replacement and final cleanup. A reaped fixture owner is
+explicitly resolved by its parent; production never steals a stale lock. Check
+must fail mixed output and may accept a fully installed terminal generation
+after a cleanup interruption. Capability-scoped helpers cannot target live roots.
+
+Run `scripts/qualify_r3.py --allow-network` on the native target matrix and WSL
+against one frozen source revision. The driver shares the R2 control list,
+invokes each pre-add/test/control owner once, and adds publication/CLI controls;
+it does not nest the R2 driver or duplicate its test suite. A new Git-output
+bound control also proves `io.Copy` cannot bypass the checked writer. No live
+publication occurs in this driver. Its results must precede safe live promotion,
+post-installation checks and the coherent R2/R3 commit.
+The physical-Linux job adds `--race` for the new actual-CLI fixtures; all normal
+checks still force CGO off and only that `go test -race` command enables CGO.
+
+### 2026-11-27 — R3, pass 3: Windows cases and Linux race passed; lint/plant fixes
+
+Frozen source identity:
+`1d2f63195d7a55ce8b2142f1dd30b528657af4b5e7abe748a026667de3476c55`.
+Windows completed in 78 seconds with no queue wait: all 336 tests / 12 packages,
+formatting, vet, preparation, source preservation and 13 publication/CLI bypass
+controls passed. The early directory-swap case and late native-refusal case both
+passed. All eight candidate controls ran; six caught their intended bypass.
+Two plants failed compilation after the ownership refactor because disabling
+the digest predicate left `body`/`sum` unused. These are new plant defects,
+not successful negative evidence. Keep the digest expressions evaluated and
+disable only their Boolean result in scratch, then require the original test
+diagnostics. Lint reported QF1001 on the late-swap refusal predicate; name the
+positive native-denial predicate before negation, retaining all checks.
+
+The physical-Linux race job completed in nine seconds with no queue wait:
+publication, ownership, profiles and acquisition all passed under `go test
+-race`, with CGO enabled only for that command. All processes exited and its
+scratch tree was removed. Ordinary output remains unchanged. Continue with
+actual CLI bootstrap/publication and killed-CLI recovery fixtures, remaining
+negative controls and native qualification inside approved passes 4–6. No R3
+exit, live promotion or joint commit is claimed from this partial pass.
+
+### 2026-11-27 — R3 deviation approved: passes 3–6
+
+The owner selected A from the pass-2 handoff: authorize up to four further R3
+source revisions, numbered passes 3–6, for the recorded findings and existing
+CLI/bootstrap/recovery/diff/update scope, native qualification, a physical-Linux
+race check, safe candidate publication and the coherent R2/R3 commit only after
+the complete exit passes. This resolves the previous third-build stop and the
+automatic review rejection; it does not authorize a push or tag. Stop at an
+unresolved new decision or the exhausted allowance. Preserve every accepted
+case, fault fixture and deliberate-failure control.
+
+Pass 3 starts by removing the unused default mapping wrapper and distinguishing
+a successful late directory swap from native refusal. Require the checkpoint
+to run, retain the exact swap error and verify the original public inventory
+when Windows prevents the rename. Add a real swap before the destination handle
+opens on every target, with a same-inventory replacement and independent byte
+and sentinel checks. A scratch identity-guard bypass must make that test fail.
+Then share hashed ownership across qualification/publication, exclude only
+reserved operational metadata from compiler snapshots, and wire the exact
+qualified bytes plus source revalidation into publication. Preserve frozen Git
+object bootstrap verification, complete restoration and strict CLI contracts.
+
+Pass-3 verification covers the new early/late directory-race fixtures, shared
+ownership and bounded scratch stale removal, operational-metadata exclusion,
+installed reviewed-generation regression, CLI help/usage/format/JSON channels,
+hashed semantic sidecars and bounded immutable candidate acquisition. Run the
+core driver and candidate/publication bypass controls natively on Windows;
+run the publication/ownership/profile/acquisition packages with the race detector
+on physical Linux, enabling CGO only for that race command. These are two target
+jobs against one frozen pass-3 source revision. Actual CLI bootstrap/promotion,
+killed CLI integration, complete native exit and the joint commit remain later
+work within the approved allowance; core results cannot substitute for them.
+
+### 2026-11-26 — R3, pass 1: owner selected profile flag A; execution started
+
+The owner selected A for the pending CLI clarification. `--manifest` on
+`inspect`, `check` and `generate` selects the complete verified generation
+profile, default `schema/generation-profile.json`. Other commands keep their
+command-specific inputs. Record the selection in the MADR's state table; preserve
+all independent pins and ownership rules. R1–R5 execution and the coherent
+R2/R3 commit boundary remain authorized; no push or tag is authorized.
+
+Start with a standard-library rooted publication/recovery engine and native
+scratch fixtures for containment, ownership, staging, durable intent, per-file
+replacement, manifest-last ordering, unchanged mtimes, lock conflicts, manual
+edits and actual killed subprocesses. Wire the CLI to that engine and the same
+qualified candidate before promotion. Initial verification is partial R3
+evidence, not permission to publish or claim RA12–RA14 complete. The ordinary
+third-build-pass rule applies; no third R3 build is preauthorized.
+
+### 2026-11-26 — R3, pass 1 result and pass 2 preparation
+
+The first Linux core run failed against source identity
+`f03b347ebf9171fa6677e6f686b0223cb2ce0685dcc374fc0b5095523b00e631`.
+Preparation, formatting, vet, R2 candidate regression and all four publication
+mutation controls passed. Publication, bootstrap, containment, filesystem-fault
+and manual-edit/corrupt-recovery cases passed. All six killed-child cases failed
+before their checkpoint: the fixture required `os.TempDir`, while Go's
+`testing.makeTempDir` uses `GOTMPDIR` when configured. The runner has distinct Go
+and ordinary temporary roots. This was a new fixture failure, not a product
+publication failure. Lint also reported two QF1001 predicates and ST1012 on the
+injected-error variable.
+
+For pass 2, use the effective Go temporary root while retaining canonical-path
+containment, a random fixture capability and independently fixed fixture bytes.
+Add explicit subprocess refusal cases for missing capability and changed fixture
+bytes; prove the capability assertion catches a scratch bypass. Simplify the two
+predicates and use `errInjected`. Exercise the selected profile flag, including
+path escape, aliased selection and independent input pins; prove profile-alias
+and ignored-flag bypasses fail in scratch copies with the repository layout.
+
+Run `scripts/qualify_r3_core.py` through the fleet queue against a frozen tree.
+This remains partial R3 evidence: the CLI still requires publication/recovery
+integration and the full native exit before live promotion or the joint R2/R3
+commit. No third R3 build pass is authorized.
+
+### 2026-11-26 — R3, pass 2: native results; third-build approval pending
+
+The three completed runs used frozen source identity
+`9b9dff5fde4a550b7b88bb64dffc2afbd6bb7c646bea7077cd27f81b821e88f1`.
+
+| Environment | Execution | Queue wait | Result |
+| :--- | :--- | :--- | :--- |
+| Windows/amd64 | 64 seconds | 92 seconds | Failed raced-directory fixture postconditions and unused wrapper lint. |
+| WSL Linux/amd64 | 39 seconds | 158 seconds | All 278 tests / 12 packages passed; failed unused wrapper lint. |
+| Darwin/arm64 | 42 seconds | 343 seconds | All 278 tests / 12 packages passed; failed unused wrapper lint. |
+
+Each run passed preparation, formatting, vet, source preservation and all seven
+scratch mutation controls: selected-profile alias, ignored profile flag, child
+fixture capability, portable output names, manifest-last order, manual-edit
+recovery conflict and exclusive lock. The corrected killed-process cases no
+longer failed. All processes exited; the duplicate automatically selected WSL
+job was canceled before execution and its staging removed. The explicit WSL run
+completed and stopped the distro. There is no physical-Linux pass-2 result.
+
+New findings, neither pre-existing at the pushed baseline:
+
+* `cmd/mcpgen/check.go:145`: `func computeSDKMapping is unused (unused)`.
+  The named-profile implementation left a default wrapper with no callers.
+  Remove that dead wrapper; retain the named-profile implementation and tests.
+* `cmd/mcpgen/internal/publish/engine_test.go:277` and `:281`:
+  `FAIL raced directory sentinel touched` and `FAIL raced destination mutated`.
+  The fixture attempts to rename the open destination at lines 245–246, returns
+  any rename error, then assumes the swap succeeded in both postconditions.
+  It does not retain the hook error, so this output alone does not establish
+  whether production containment failed. Go 1.27.4's local
+  `os/root_test.go`, `TestRootRenameAfterOpen` and `TestRootRaceRenameDir`,
+  explicitly account for Windows refusing an open-directory rename. Capture
+  the exact native error and assert unchanged original bytes when the OS denies
+  the swap. Also exercise an actual swap before opening the destination handle
+  on every target, with independent sentinel/owned-byte assertions and a scratch
+  identity-guard bypass. Retain the late-swap safety case; do not skip it, loosen
+  the preservation assertions or change publication policy.
+
+Automatic approval review rejected an additional physical-Linux race command
+because it counted as another build beyond the authorized second pass. It did
+not run. No alternate route was used. Normal qualification remains CGO-disabled;
+only an approved race command may enable CGO. `git diff --check` passed. Live
+`protocol/` publication and the joint R2/R3 commit remain pending.
+
+The global agent rule says, “A third build pass on one phase is a deviation:
+stop and prompt.” Pending owner choices, with all existing R3 cases retained:
+
+| Option | Work and cost |
+| :--- | :--- |
+| A — Authorize R3 passes 3–6 **(recommended)** | Up to four further source revisions: resolve these findings, integrate CLI/bootstrap/recovery/diff/update, run the native matrix and physical-Linux race check, then safely promote and commit only after the complete exit passes. Stop sooner on a new decision or exhausted allowance. |
+| B — Authorize R3 passes 3–10 | Same scope and gates; up to eight further revisions and a larger verification budget before another allowance decision. |
+| C — Stop with the working tree preserved | No further builds or implementation; R3, safe candidate publication and the coherent R2/R3 commit remain incomplete. |
+
+No option authorizes push or tags. This entry records evidence and proposed next
+verification allowances; it does not approve a third build.
+
+### 2026-11-26 — R2, pass 24: complete candidate exit qualified in four environments
+
+All four queued native runs passed against one frozen source identity:
+`b1134516af45ea5d2f904e087731189d4778f4c4c8dca62ef15f84ac2c9ad24e`.
+
+| Environment | Execution | Queue wait | Result |
+| :--- | ---: | ---: | :--- |
+| Darwin/arm64 | 89 seconds | 0 seconds | Passed |
+| Windows/amd64 | 103 seconds | 0 seconds | Passed |
+| Primary Linux/amd64 | 175 seconds | 0 seconds | Passed, including SDK/profile race tests |
+| WSL Linux/amd64 | 65 seconds | 88 seconds | Passed; original stopped state restored |
+
+Each run verified Go 1.27.4, pinned preparation, 22 gate-runner regressions,
+fragmented/invalid evidence cases, formatting, standalone vet, 216 generator
+tests/subtests across 10 packages, zero-issue lint and every retained negative
+control. The actual product candidate compiled both modules' packages and test
+binaries for all three targets, then passed its native runtime pre-add and
+owned decoder/public API/middleware boundary plants. Foreign binaries were not
+executed. Ordinary operations used `CGO_ENABLED=0`; only the additional primary
+Linux `sdkmap`/`profile` race tests used `CGO_ENABLED=1`. Both race packages passed.
+
+The eight emitted files now include versioned API and coverage artifacts. They
+cover all 155 definition dispositions, public generated declarations and alias
+compiler surfaces on all three targets, all 840 schema locations and keyword
+sets, the 21 reviewed method rules and capability pointers. The coverage oracle
+is independently derived from the pinned source. It explicitly leaves full
+codec/runtime qualification to R4/R5. Same-count location substitution failed
+with `FAIL coverage source location or keyword inventory`; declaration omission
+failed with `missing API binding JSONValue`. Missing pointer methods, changed
+retained inventories and wrong proposed hash maps were also caught. These were
+deliberately broken scratch copies, never live source changes.
+
+The repaired collector successfully reassembled Go test output fragments and
+retained one inventory from the already passing candidate. Every environment
+independently reproduced the exact contents of
+`tools/r2-candidate-migration.json`, including all four historical and nine
+proposed file identities and both complete target matrices. The actual product
+test also matched this retained review record. The proposed hashed manifest is
+`57de122dd1234b6b99ff922c126413dd32c92800f3b8c610962616e5648531c6`;
+the full file inventory remains in that record rather than being abbreviated
+in prose. No additional compiler audit or repeated product build was introduced
+solely to capture evidence.
+
+RA05–RA11 and the complete proposed-candidate R2 exit are now qualified. This
+does not declare publication, Stage 3 runtime integration, R3–R5 or Stage 7
+complete. Preserve the old generation until R3 supplies the rooted publisher,
+durable original/candidate staging, locked recovery and verified bootstrap.
+The coordinated coherent-tree commit remains after R3 qualification; the owner
+already published the earlier partial baseline as `5c00e36`. No agent stage,
+commit, push or tag was performed. Published history was not rewritten.
+
+All runner sessions exited, remote success staging was removed and source
+preservation passed. A one-use comparison read all four complete logs and
+verified identical review records. A scan of all 29 modified/untracked files
+found no local account, host alias or real-machine path. No polling loop remains.
+The initial Linux launch was rejected for an oversized inline command before
+execution; a one-use scratch launcher then ran the same approved command.
+Passes 21–24 are consumed; no pass 25 is authorized.
+
+### 2026-11-26 — R3 preimplementation CLI clarification for owner review
+
+The original Stage 4 contract requires common `--manifest` arguments but does
+not identify their input type. `commands.go` still has no such flag, and
+`profile.go` now selects `schema/generation-profile.json` internally. There are
+two distinct input records: the generation profile binds every reviewed input;
+the schema provenance manifest binds the schema source. The output ownership
+manifest remains a third, separate record and cannot authorize input changes.
+Resolve the public flag meaning before implementing that R3 CLI contract:
+
+| Option | Public meaning | Cost and consequence |
+| :--- | :--- | :--- |
+| A — Generation profile **(recommended)** | `inspect`, `check` and `generate` use `--manifest` for the complete verified input profile; default `schema/generation-profile.json`. Other commands retain their command-specific inputs. | Smallest interface change; the selected profile and every member retain independent pin/containment validation. |
+| B — Schema provenance | `--manifest` selects the revision's schema provenance record; the generation profile remains fixed and must cross-check that selected record. | More path and consistency wiring; preserves the earlier schema-focused reading of the flag. |
+| C — Explicit names | Replace the ambiguous flag with `--profile` and `--source-manifest` where applicable. | Clearest distinction, with a deliberate amendment to the original public flag contract and corresponding help/tests. |
+
+All choices preserve offline ordinary commands, strict formats/exit codes,
+verified ownership and the existing output layout. No choice weakens bootstrap
+or permits the hashless inventory to authorize replacement. The owner has been
+prompted with these three options and subsequently selected A. The dated R3
+execution entry and MADR clarification supersede this pending question; retain
+the alternatives as review history. Implement the selected profile meaning
+before claiming the R3 CLI acceptance cases complete.
+
+### 2026-11-26 — R2, pass 23: all product/control checks passed; evidence fragments need joining
+
+The Darwin-native run finished after 91 seconds using identity
+`c743286e46c87c978a88c7fc238e62327365f20846bfff268dbf4a206eecbf43`.
+Preparation, 22 gate-runner regressions, the evidence regression, formatting,
+vet, 216 generator tests/subtests across 10 packages, zero-issue lint and every
+loader/reference/alias/profile/emitter/candidate control passed. The independent
+840-location fixture matched every model-derived pointer and keyword set.
+The real candidate compiled both modules for all targets and passed the native
+runtime pre-add and decoder/public API/middleware plants. The API/coverage,
+compiler pointer-method, migration-map and retained-record omission plants were
+caught. Source preservation passed.
+
+The aggregate driver failed only its evidence extraction leaf:
+`Expecting ',' delimiter: line 1 column 978 (char 977)`. Go test JSON splits a
+long output line across events. Reassemble output fragments for the exact test
+before parsing its logical inventory line, and require that test's passing
+terminal result. Add a deliberately fragmented positive fixture and retain
+missing/duplicate/malformed/unfinished evidence rejection.
+
+Recover the inventory from this run's retained passing Go test log only after
+confirming that every other driver leaf and source preservation passed. The
+explicit extraction-recovery command rejects a failed product/control leaf.
+It produced `tools/r2-candidate-migration.json`: four independently verified
+historical identities and nine proposed identities including the hashed
+manifest, both modules' complete compile-only matrix, and immutable source/
+profile pins. This does not relabel the aggregate pass-23 driver as successful.
+No new generation or build was needed to recover the already tested evidence.
+
+Use approved pass 24 to qualify the corrected collector and the retained record
+natively in all four environments. Add a same-count coverage-location
+substitution plant to demonstrate the independent pointer oracle catches more
+than a count change. Keep the source snapshot frozen until every runner exits.
+R3 publication remains pending; no pass 25 or agent push/tag is authorized.
+
+### 2026-11-26 — R2, pass 22: candidate passed; incorrect coverage test count rejected
+
+The Windows-native run finished after 104 seconds, using identity
+`99c15c71786140ea86d9023df7107c0bea1a38cb77b90f8d9777c9be5e5f6ab1`.
+The corrected multiple-definition method binding passed. The actual candidate
+compiled both modules' packages/test binaries on all three targets, and its
+native runtime pre-add and all decoder/API/middleware plants passed. Formatting,
+vet, zero-issue lint, Python regressions and every input/control command passed.
+The generator's one failing test was `TestRepairA10Artifacts`:
+`FAIL coverage node/definition inventory: aliases=14 definitions=155 nodes=840`.
+Its newly written expectation of 841 locations was incorrect; no accepted
+contract specified that count. The overall driver remained nonzero and did not
+retain a successful migration record. The failed scratch tree was retained by
+the runner's diagnostic policy; source preservation passed.
+
+Before pass 23, derive an independent location/key inventory directly from the
+immutable schema, with the source SHA-256 verified before maintenance output.
+`scripts/schema_node_inventory.py` found exactly 840 locations including the
+root. Retain that fixture in `internal/emit/testdata/schema-nodes.json` and
+compare every pointer and keyword set, as well as the total, against coverage.
+This replaces the erroneous estimate with a stronger exact source-location
+oracle, preserving the full-coverage requirement. The maintenance derivation
+does not run in ordinary gates and does not use the production model walker.
+The coverage-omission plant remains mandatory against the corrected baseline.
+
+The direct retained-record test and bypass plant also passed: changing the
+reviewed hash fails; bypassing that comparison triggers `FAIL retained
+inventory guard`. Use approved pass 23 for the independent coverage inventory
+and complete evidence capture. Pass 24 remains for the retained-record/native
+matrix. No pass 25, publication or agent push/tag is authorized.
+
+### 2026-11-26 — R2, pass 21: API/coverage and migration artifact implementation
+
+Extend the existing protocol ownership inventory with versioned `api.json` and
+`coverage.json`. The API records public generated declarations, source pointers,
+import qualifiers and alias representations/value/pointer method sets on all
+three targets. SDK metadata comes from the existing compiler audit, with no
+second export-data load. Coverage records all model nodes (including the
+document root), keyword classifications, 155 definition bindings, reviewed
+method rules and capability source pointers. Codec/runtime qualification is
+explicitly pending R4/R5; generated binding coverage is not live conformance.
+
+Capture exact previous/proposed hashes, including both manifests, from the
+already compiled actual candidate. The canonical gate exposes its retained
+test-log location; R2 extracts the fixture's versioned inventory and emits it
+only after its checks and source preservation succeed. Retain the result as
+`tools/r2-candidate-migration.json` after a successful frozen run, then require
+the actual product fixture to match that reviewed record in subsequent runs.
+This file is review evidence, not publisher authority. `check` also includes
+the qualified migration inventory in its structured report.
+
+New cases cover representative exact API signatures, the complete definition/
+node/method inventories, shuffled method order, incomplete method/alias target
+inputs, generic/promoted pointer method sets and malformed/absent/duplicate
+evidence. Scratch plants omit an API declaration, a coverage node, a pointer
+method and proposed migration hashes. Retain every earlier control. The
+ordinary checked-in generation remains unchanged; R3 still owns publication.
+The Linux-native run finished after 121 seconds, using identity
+`6c65a04b47e1da87e2279064ebe161aa4fdea0222648cbe1267e3dec61a17707`.
+Preparation, Python regressions, formatting, vet and zero-issue lint passed.
+Generator tests and four emitter controls failed before candidate compilation:
+`emit: missing or duplicate method coverage notifications/cancelled`. The new
+coverage code collapsed multiple schema definitions for one wire method into
+one pointer. Both `CancelledNotification` and `ClientNotification` bind this
+method; the reviewed semantic row selects the former. The existing profile
+correctly retains a set of permitted definitions per method. Repair coverage
+to retain that same set, add a concrete cancellation binding assertion, and
+retain every coverage/inventory assertion. This is an implementation bug in
+the new artifact builder, not a changed protocol decision.
+
+The new API omission, compiler pointer-method omission and migration-map
+substitution plants were caught. The coverage omission and three older emitter
+controls could not reach their intended failure because of the coverage bug;
+they remain required. All other input/reference/alias/profile/candidate
+controls and remote source preservation passed. Two aggregate driver leaves
+failed; no successful migration evidence was retained or publication performed.
+The runner retained its failed scratch snapshot under its diagnostic policy.
+Use approved pass 22 for the correction and a direct retained-record mismatch
+fixture/plant. Passes 23–24 remain available for final retention and the native
+matrix. No additional allowance is inferred from this failure.
+
+### 2026-11-26 — R2 deviation: passes 21–24 approved
+
+The owner selected A after pass 20. Execute bounded R2 passes 21–24 to finish
+the planned generated API/coverage artifacts and retained before/after migration
+hash inventory, then qualify the complete candidate and omission plants. Reuse
+the existing schema model, semantic input and three-target SDK compiler audit;
+do not introduce a redundant scanner or imply R4/R5 runtime completion from
+binding coverage. Preserve the published baseline `5c00e36`. R3 still owns
+verified publication and recovery. No pass 25, agent push or tag is authorized.
+
+### 2026-11-26 — R2, pass 20: four-environment matrix passed; artifact exit remains open
+
+The full R2 input/control command completed successfully in all four requested
+environments, through their shared heavy-run queues:
+
+| Environment | Execution | Queue wait | Result |
+| :--- | ---: | ---: | :--- |
+| Windows/amd64 | 93 seconds | 0 seconds | Passed |
+| WSL Linux/amd64 | 59 seconds | 92 seconds | Passed; originally stopped distro returned to stopped |
+| Primary Linux/amd64 | 157 seconds | 320 seconds | Passed, including additional SDK/profile race tests |
+| Darwin/arm64 | 84 seconds | 998 seconds | Passed |
+
+Each completed run verified Go 1.27.4, pinned preparation, 22 Python regressions,
+208 generator tests/subtests across 10 packages, formatting, standalone vet,
+pinned lint with zero issues, and every retained loader/reference/model/alias/
+profile/emitter/candidate negative control. `TestRepairA11ActualProduct` compiled
+the actual proposed product's two modules, including internal and external test
+binaries, for Darwin/arm64, Linux/amd64 and Windows/amd64. Its native runtime
+pre-add gate and the owned decoder, public SDK accessor, middleware parameter/
+result type and SDK complete-result projection plants passed in each environment.
+The represented-field alias corpus and its field-dropping serializer plant
+remain passing evidence; R4's broader differential obligation is unchanged.
+
+All ordinary operations used `CGO_ENABLED=0`. Only the primary Linux run's
+additional `sdkmap` and `profile` tests used `-race` and `CGO_ENABLED=1`; both
+passed. No race test ran in WSL. Source preservation passed in every completed
+run. Remote staging was removed for the completed Windows, WSL and primary
+Linux runs. A redundant second Linux dispatch also selected WSL; it was
+cancelled after starting, exited 130 after 39 seconds, stopped its process group
+and returned the distro to its original stopped state. Its interrupted work
+root was retained by the runner's interrupted-run policy; transport staging
+was removed. It is not counted as another completed qualification.
+
+The three remote snapshots used identity
+`905546d25f99289a8137c74a71d6531a42644c496e59b80e21adada4bc724bea`.
+While Darwin was queued, the owner committed and pushed all existing work as
+`5c00e3680393e960f74a8907b1d6d8eaaf5f7336`; local `main` and `origin/main`
+matched and the working tree was clean. No file contents changed. The deleted
+`cmd/mcpgen/schema_util.go` ceased to be a tracked missing path, changing the
+index-based identity to
+`94a002376bffef21acda1b642fa636376379533be37447d5719d0e4fe1ddc34d`.
+Reconstructing that one historical missing inventory entry reproduced the
+remote identity exactly. Darwin tested the committed inventory and preserved
+it. All pass-20 runner sessions have exited; no qualification loop remains.
+
+**Remaining R2 exit work:** step 5 and the original Stage 3 require generated
+API/coverage artifacts. `internal/emit/emit.go` currently emits six files:
+`aliases.go`, `bindings.json`, `codecs.go`, `constants.go`, `owned.go` and
+`schema.json`. The bindings enumerate definition/name/disposition/source
+correspondence; the external API probe checks public SDK reachability. These
+do not yet provide the planned reviewable API-signature and vocabulary/method/
+capability coverage artifacts. Generate them from the already verified model,
+compiler information and semantic rules, with explicit separation of binding
+coverage from R4/R5 runtime qualification. Test determinism, completeness and
+deliberate omissions without adding a second redundant audit or scan.
+
+Step 7 also requires the exact old/proposed file inventories and hashes to be
+retained for review. `qualify.Candidate.Previous` and `Proposed` hold those maps
+during qualification, but the actual product fixture does not retain a
+reviewable migration inventory. Capture that evidence with the final candidate,
+including its manifest, without publishing or trusting the hashless list.
+
+The owner-pushed commit contains bridge references to the proposed owned types
+while `protocol/` still contains the historical generation, including SDK
+aliases. This remains the explicitly coordinated R2/R3 integration work;
+publication has not happened and an ordinary coherent-tree qualification is
+not claimed. Preserve the published commit and complete remaining changes in
+follow-up commits after their exits pass. Do not rewrite published history.
+R3's rooted publisher, journal/recovery and verified migration remain unstarted;
+the old publisher must not be used to install the candidate. R4/R5 and Stage 7
+remain pending. The agent performed no commit, push or tag in this pass.
+
+The approved passes 17–20 are consumed. Before another R2 build, present the
+owner these options: A (recommended), authorize bounded passes 21–24 for the
+remaining API/coverage and retained migration artifacts and their qualification;
+B, authorize passes 21–28 for the same scope with a larger iteration allowance;
+C, stop with the pushed work preserved and the R2 exit/R3 promotion pending.
+A costs one further bounded implementation/verification cycle; B reserves up
+to two such cycles and does not broaden scope. C leaves the committed
+generated/runtime mismatch unresolved. No pass 21 or agent push/tag is
+authorized by the successful matrix or the owner's completed push.
 
 ### 2026-11-26 — R2, pass 19: owned middleware and retained alias fixtures passed on Windows
 

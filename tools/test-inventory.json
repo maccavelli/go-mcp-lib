@@ -307,6 +307,10 @@
       },
       {
         "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestGeneratedDocumentationControls"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
         "test": "TestFormatGoAcceptsEmission"
       },
       {
@@ -568,6 +572,118 @@
       {
         "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
         "test": "TestRepairA11ActualProduct"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10Artifacts"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/emit",
+        "test": "TestRepairA10ArtifactInputs"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap",
+        "test": "TestRepairA09CompilerAPI"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA11MigrationInventory"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA11RetainedMigration"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/ownership",
+        "test": "TestRepairA12Names"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/ownership",
+        "test": "TestRepairA12Inventories"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13Publication"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13Bootstrap"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA12Containment"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13Faults"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13ManualAndCorrupt"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13KilledProcess"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestPublicationChild"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile",
+        "test": "TestRepairA14ProfileSelection"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA14ProfileFlag"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA13ChildScope"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA11InstalledReview"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish",
+        "test": "TestRepairA12OpenRace"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify",
+        "test": "TestRepairA12OperationalMetadata"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/acquire",
+        "test": "TestRepairA14Acquisition"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA14SemanticDiff"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA14CLI"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestCLIContractChild"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA13Recovery"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA13CLIScope"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestRepairA13GitBounds"
+      },
+      {
+        "package": "github.com/maccavelli/go-mcp-lib/cmd/mcpgen",
+        "test": "TestCLIPublicationChild"
       }
     ]
   }

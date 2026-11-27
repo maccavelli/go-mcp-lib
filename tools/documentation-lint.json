@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "revive": {
+    "module": "github.com/mgechev/revive",
+    "version": "v1.17.1",
+    "owner": "documentation and naming for handwritten and generated source",
+    "provenance": "same Revive version as the pinned golangci-lint 2.15.0 dependency; builder follows tools/versions.json"
+  }
+}

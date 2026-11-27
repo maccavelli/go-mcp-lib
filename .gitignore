@@ -17,6 +17,9 @@ temp/
 coverage.*
 cmd/mcpgen/mcpgen
 
+# Reserved publication/recovery metadata; generated contract files stay tracked.
+/protocol/.mcpgen-*
+
 # Local tool state; tools/versions.json is committed, caches are not.
 .gocache/
 node_modules/

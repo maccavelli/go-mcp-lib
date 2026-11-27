@@ -37,18 +37,18 @@ def run(args: list[str], cwd: Path, *, network: bool = False,
         "creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
     env = environment(network=network)
     if env_updates:
-        if set(env_updates) - {"GO_MCP_LINTER"}:
+        if set(env_updates) - {"GO_MCP_LINTER", "GO_MCP_REVIVE"}:
             raise ValueError("execution overrides are limited to prepared tool selection")
         env.update(env_updates)
     if gobin is not None:
         env["GOBIN"] = str(gobin)
     try:
-        if os.name == "nt" and args[0] == "npm":
-            executable = shutil.which("npm")
+        if os.name == "nt" and args[0] in {"npm", "npx"}:
+            executable = shutil.which(args[0])
             node = shutil.which("node")
-            script = Path(executable).parent / "node_modules/npm/bin/npm-cli.js" if executable else None
+            script = Path(executable).parent / "node_modules/npm/bin" / (args[0] + "-cli.js") if executable else None
             if not node or script is None or not script.is_file():
-                raise OSError("native npm JavaScript entry point unavailable")
+                raise OSError(f"native {args[0]} JavaScript entry point unavailable")
             args = [node, str(script), *args[1:]]
         with (directory / "stdout").open("wb") as out, (directory / "stderr").open("wb") as err:
             process = subprocess.Popen(args, cwd=cwd, env=env,
@@ -220,12 +220,15 @@ def test_module(root: Path, name: str) -> int:
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return failures + report(f"unit.{name}", [f"required test inventory: {exc}"])
     result = run(["go", "test", "-vet=off", "-count=1", "-json", "./..."], root,
-                 env_updates={"GO_MCP_LINTER": linter_executable(repository)})
+                 env_updates={"GO_MCP_LINTER": linter_executable(repository),
+                              "GO_MCP_REVIVE": revive_executable(repository)})
     errors, passed = account_tests(result.stdout, packages, no_tests, required)
     errors.extend(failed_test_diagnostics(result.stdout))
     if result.returncode:
         logs = getattr(result, "log_directory", "unavailable")
         errors.append(f"go test exit {result.returncode}; complete logs: {logs}: {(result.stdout + result.stderr)[-2000:]}")
+    if not errors and getattr(result, "log_directory", None):
+        print("test-logs " + json.dumps({"module": name, "directory": result.log_directory}), flush=True)
     return failures + report(f"unit.{name}", errors, f"{passed} tests passed; {len(packages)} packages accounted")
 
 
@@ -297,10 +300,47 @@ def linter_path(root: Path) -> Path:
     return root / ".cache/tools" / (platform.system() + "-" + platform.machine()) / ("golangci-lint" + suffix)
 
 
-def lint_module(root: Path, module: Path, name: str, executable: str) -> int:
+def revive_path(root: Path) -> Path:
+    suffix = ".exe" if os.name == "nt" else ""
+    return linter_path(root).parent / ("revive" + suffix)
+
+
+def revive_executable(root: Path) -> str:
+    prepared = revive_path(root)
+    return os.environ.get("GO_MCP_REVIVE") or (str(prepared) if prepared.is_file() else shutil.which("revive")) or "revive"
+
+
+def documentation_pin(root: Path) -> dict:
+    document = json.loads((root / "tools/documentation-lint.json").read_text())
+    if document["version"] != 1:
+        raise ValueError("unsupported documentation lint pin")
+    return document["revive"]
+
+
+def revive(root: Path, pins: dict, executable: str | None = None) -> tuple[str, list[str]]:
+    executable = executable or revive_executable(root)
+    try:
+        pin = documentation_pin(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        return executable, [f"documentation lint pin unavailable: {exc}"]
+    result = run(["go", "version", "-m", executable], root)
+    lines = [line.split() for line in result.stdout.splitlines()]
+    builder = pins["go"]["toolchain"]
+    compiler = bool(lines and lines[0][-1:] == [builder])
+    module = any(row[:3] == ["mod", pin["module"], pin["version"]] for row in lines)
+    errors = [] if not result.returncode and compiler and module else [
+        f"required Revive {pin['version']} built with {builder}; {result.stdout}{result.stderr}"]
+    return executable, errors
+
+
+def lint_module(root: Path, module: Path, name: str, executable: str, documentation: str | None = None) -> int:
     result = run([executable, "run", "--config", str(root / ".golangci.yml")], module)
     errors = [f"exit {result.returncode}: {result.stdout}{result.stderr}"] if result.returncode else []
-    return report(f"lint.{name}", errors, "0 issues")
+    failures = report(f"lint.{name}", errors, "0 issues")
+    result = run([documentation or revive_executable(root), "-config", str(root / ".revive.toml"),
+                  "-formatter", "friendly", "-set_exit_status", "./..."], module)
+    errors = [f"exit {result.returncode}: {result.stdout}{result.stderr}"] if result.returncode else []
+    return failures + report(f"lint.{name}.documentation", errors, "0 issues; generated files included")
 
 
 def go_files(module: Path) -> list[Path]:
@@ -316,16 +356,21 @@ def go_files(module: Path) -> list[Path]:
     return files
 
 
-def precheck(root: Path, selection: str, pins: dict) -> int:
-    executable, errors = linter(root, pins)
-    failures = report("pre-add.linter", errors)
+def precheck(root: Path, selection: str, pins: dict,
+             checks: frozenset[str] = frozenset({"fmt", "vet", "test", "lint"})) -> int:
+    if not checks or checks - {"fmt", "vet", "test", "lint"}:
+        raise ValueError("unknown or empty module check selection")
+    executable, errors = linter(root, pins) if "lint" in checks else ("", [])
+    documentation, doc_errors = revive(root, pins) if "lint" in checks else ("", [])
+    errors += doc_errors
+    failures = report("pre-add.linter", errors) if "lint" in checks else 0
     for name, relative in selected_modules(selection):
         module = root / relative
         if not (module / "go.mod").is_file():
             failures += report(f"pre-add.{name}", [f"missing module at {relative}"])
             continue
-        files = go_files(module)
-        if not files:
+        files = go_files(module) if "fmt" in checks else []
+        if "fmt" in checks and not files:
             failures += report(f"pre-add.{name}.gofmt", ["empty source inventory"])
         # Bounded argument lengths also work on native Windows.
         for offset in range(0, len(files), 50):
@@ -336,9 +381,16 @@ def precheck(root: Path, selection: str, pins: dict) -> int:
             if result.stdout.strip():
                 problems.append(f"gofmt would rewrite: {result.stdout.strip()}")
             failures += report(f"pre-add.{name}.gofmt", problems)
-        failures += test_module(module, name)
+        if "test" in checks:
+            # Test accounting owns the one standalone vet invocation as well.
+            failures += test_module(module, name)
+        elif "vet" in checks:
+            result = run(["go", "vet", "./..."], module)
+            failures += report(f"unit.{name}.vet", [result.stdout + result.stderr] if result.returncode else [])
+        if "lint" not in checks:
+            continue
         if not errors:
-            failures += lint_module(root, module, name, executable)
+            failures += lint_module(root, module, name, executable, documentation)
         else:
             failures += report(f"lint.{name}", ["pinned linter unavailable"])
     return failures

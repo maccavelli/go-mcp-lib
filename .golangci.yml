@@ -21,3 +21,8 @@ linters:
     paths: null
     rules: null
     generated: disable
+# Standalone pinned Revive owns documentation/naming for all sources. The pinned
+# golangci Revive adapter internally skips generated files; do not duplicate it.
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

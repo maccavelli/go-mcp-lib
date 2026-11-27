@@ -1,0 +1,11 @@
+# True tells Revive to inspect files despite their generated marker.
+ignore-generated-header = true
+confidence = 0.8
+severity = "error"
+error-code = 1
+warning-code = 1
+
+[rule.exported]
+[rule.package-comments]
+[rule.var-naming]
+[rule.blank-imports]

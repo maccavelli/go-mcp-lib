@@ -1,6 +1,6 @@
 ---
 status: accepted
-date: 2026-11-25
+date: 2026-11-27
 ---
 
 # Build a schema-driven MCP framework around the upstream Go SDK
@@ -384,6 +384,16 @@ not erase handwritten files or unrelated uncommitted changes.
 | `diff` | Compare schema semantics and public API impact between two manifests |
 | `update` | Fetch an explicitly identified candidate and produce a reviewable change |
 | `recover` | Diagnose and complete or restore an interrupted publication using its journal |
+
+Owner clarification, 2026-11-26: `--manifest` on `inspect`, `check` and
+`generate` selects the complete independently pinned generation profile,
+defaulting to `schema/generation-profile.json`. It does not select the output
+ownership manifest. Other commands retain their command-specific inputs.
+
+| Profile selection state | Outcome and acceptance owner |
+| :--- | :--- |
+| Default or explicitly selected reviewed generation profile | decided — verify the profile and every member before emission; `TestRepairA14CLI` |
+| Missing, malformed, unreviewed, escaping or aliased selected profile | decided — fail without output mutation; `TestRepairA14CLI` |
 
 The engine has internal typed interfaces for source loading, reference lookup,
 semantic rules, SDK mapping, and emission. Add extension packs as versioned
@@ -1244,6 +1254,59 @@ the additional WSL runner, CGO-free ordinary operation and race-only CGO.
   and divergence of an entire SDK merely to supply enhancements.
 
 ## More Information
+
+### Amendment 2026-11-27 — Hook-discovery repair allowance accepted
+
+The owner selected A after the pass-6 hook-discovery defect. The canonical
+pre-add entry already required by ML01 must include a literal target declaration
+recognized by the installed hook. Keep the shared dispatcher and prove that
+standalone and combined Make goals still execute it once. The earlier pass-6
+limit below records the historical approval; this later ruling extends it once.
+
+| Case | Input or state | Owner ruling and verification |
+| :--- | :--- | :--- |
+| ML01 hook integration | Shared-only target is invisible to the installed hook | decided — authorize R3 pass 7 for the literal target, a broken scratch discovery control, actual standalone/combined dispatch and native qualification; no hook bypass or change, no pass 8. |
+
+### Amendment 2026-11-27 — Canonical Make foundation and lint repair accepted
+
+The owner selected A from the Makefile/prerequisite repair prompt after requiring
+`make lint` to pass. A thin Makefile now belongs to the R3 prerequisite scope:
+it dispatches to the existing Python check owners, including a real
+`pre-add-check` target discoverable by the installed agent hook. This does not
+advance the full Stage 9 receipts, security integration or readiness graph.
+No shell orchestration, global-hook change or upstream-forge configuration is
+included. The existing accepted architecture and historical rulings remain.
+
+Preserve the legacy lint findings through explicit modern documentation/naming
+rules in the pinned lint stack and fix their producers. Generated code remains
+analyzed, with no exclusions or suppressed assertions. Correct generated marker
+placement and method documentation in the emitter, never by editing owned
+output. Review and qualify the resulting new output hashes before publication;
+preserve the prior reviewed inventory as evidence. Input/profile/SDK/schema pins,
+public signatures and runtime semantics remain fixed. This precedes the accepted
+[0014-MADR-organize-mcp-runtime-package.md](0014-MADR-organize-mcp-runtime-package.md)
+relocation; its unchanged-generated-bytes requirement uses this qualified
+post-repair baseline.
+
+The prescribed broken-input probes found that golangci-lint 2.15.0's Revive
+adapter sets `ignore-generated-header` false internally, which makes Revive
+1.17.1 omit generated files even with golangci exclusions disabled. Use
+standalone Revive at that same version as the sole owner of these four rules,
+with `ignore-generated-header = true`. Keep the other analyzers in the pinned
+golangci runner. This is a correction to the execution mechanism inside ML02,
+not permission to drop a finding class or add an exclusion. Tool versions and
+the builder are verified during explicit preparation and normal lint.
+
+| Case | Input or state | Owner ruling and verification |
+| :--- | :--- | :--- |
+| ML01 | Make entry points, independent modules, or combined targets | decided — one Python implementation and one matching leaf per invocation; both modules accounted; Make selector/dispatch tests and a deliberately failing scratch target. |
+| ML02 | Missing handwritten/generated export docs, package docs, naming or blank-import explanation | decided — modern lint fails without changing public signatures; fix source/emitter and prove each rule catches a broken scratch input, including generated files. |
+| ML03 | Marker after package clause, or undocumented generated methods | decided — emitter produces a standard leading marker and method docs; parser-based header/doc checks reject the previous malformed placement and an omitted method comment in scratch. |
+| ML04 | Changed generated byte identity after the documentation repair | decided — retain the previous review, capture and qualify the new inventory, then use verified publication; no handwritten output patch, pin substitution or hash-only blessing of current files. |
+| ML05 | Heavy Make target, missing fleet wrapper/tool or unsupported mode | decided — use the existing host selection/queue contract, preserve diagnostics and nonzero failures, keep normal CGO off, and leave unimplemented product readiness nonzero. Make/runner failure controls and native qualification. |
+
+The owner approved the focused A scope, not the larger validation-graph option.
+The existing R3 allowance ends at pass 6; this ruling does not grant pass 7.
 
 ### Source map for review
 

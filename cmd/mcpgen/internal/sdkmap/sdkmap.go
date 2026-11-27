@@ -55,15 +55,16 @@ var OwnershipPolicy = map[string]string{"Meta": "owned"}
 
 // Result is the mechanical disposition table.
 type Result struct {
-	Revision     string            `json:"revision"`
-	SDKModule    string            `json:"sdk-module"`
-	SDKVersion   string            `json:"sdk-version"`
-	Dispositions map[string]string `json:"dispositions"`
-	Deprecations []string          `json:"sdk-deprecations-verified"`
-	AliasAudit   map[string]string `json:"alias-audit"`
-	SourceSHA256 string            `json:"sdk-context-sha256"`
-	SDKSum       string            `json:"sdk-module-sum"`
-	SDKExports   []string          `json:"sdk-exports-verified"`
+	Revision     string                        `json:"revision"`
+	SDKModule    string                        `json:"sdk-module"`
+	SDKVersion   string                        `json:"sdk-version"`
+	Dispositions map[string]string             `json:"dispositions"`
+	Deprecations []string                      `json:"sdk-deprecations-verified"`
+	AliasAudit   map[string]string             `json:"alias-audit"`
+	SourceSHA256 string                        `json:"sdk-context-sha256"`
+	SDKSum       string                        `json:"sdk-module-sum"`
+	SDKExports   []string                      `json:"sdk-exports-verified"`
+	TypeAPI      map[string]map[string]TypeAPI `json:"sdk-type-api"`
 }
 
 // Build computes dispositions for every definition in defs against the
@@ -154,6 +155,7 @@ func BuildInModule(revision, sdkDir, sdkVersion, root string, defs []string) (*R
 		SourceSHA256: audit.digest,
 		SDKSum:       audit.sum,
 		SDKExports:   exports,
+		TypeAPI:      audit.api,
 	}, nil
 }
 

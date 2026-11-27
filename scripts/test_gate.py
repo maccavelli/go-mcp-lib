@@ -115,7 +115,7 @@ class TestRepairA02GateAccounting(unittest.TestCase):
             with self.subTest(args=args), contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as error:
                 gate.main(args)
             self.assertEqual(error.exception.code, 2)
-        with patch.object(gate, "test_module", return_value=0) as tests, patch.object(gate, "linter", return_value=("lint", [])), patch.object(gate, "lint_module", return_value=0), contextlib.redirect_stdout(io.StringIO()):
+        with patch.object(gate, "test_module", return_value=0) as tests, patch.object(gate, "linter", return_value=("lint", [])), patch.object(gate, "revive", return_value=("docs", [])), patch.object(gate, "lint_module", return_value=0), contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(gate.main(["unit", "--module", "generator"]), 0)
             self.assertEqual(tests.call_args.args[1], "generator")
             self.assertEqual(tests.call_count, 1)

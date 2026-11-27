@@ -15,6 +15,18 @@ from gate_common import linter_executable, report, run
 def main() -> int:
     root = Path(__file__).resolve().parent.parent
     cases = (
+        ("API-omission", "internal/emit/artifacts.go", "^TestRepairA10Artifacts$",
+         "api.Declarations = append(api.Declarations, declarations...)",
+         'for _, d := range declarations { if d.Name != "JSONValue" { api.Declarations = append(api.Declarations, d) } }',
+         "missing API binding JSONValue"),
+        ("coverage-omission", "internal/emit/artifacts.go", "^TestRepairA10Artifacts$",
+         "result.Nodes = append(result.Nodes, nodeCoverage{pointer, keywords})",
+         'if pointer != "#/$defs/JSONValue" { result.Nodes = append(result.Nodes, nodeCoverage{pointer, keywords}) }',
+         "FAIL coverage node/definition inventory"),
+        ("coverage-location", "internal/emit/artifacts.go", "^TestRepairA10Artifacts$",
+         "nodeCoverage{pointer, keywords}",
+         'nodeCoverage{strings.Replace(pointer, "#/$defs/JSONValue", "#/$defs/Altered", 1), keywords}',
+         "FAIL coverage source location or keyword inventory"),
         ("name-collision", "internal/emit/compiler.go", "^TestRepairA10NameGuards$/^case-fold$",
          "if previous, exists := c.claimed[key]; exists {",
          "if previous, exists := c.claimed[key]; exists && false {",

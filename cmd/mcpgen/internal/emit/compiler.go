@@ -293,7 +293,14 @@ func method(receiver string, pointer bool, name string, params, results []*ast.F
 	if pointer {
 		typ = &ast.StarExpr{X: typ}
 	}
-	return &ast.FuncDecl{Recv: &ast.FieldList{List: []*ast.Field{field("value", typ)}}, Name: ident(name), Type: &ast.FuncType{Params: &ast.FieldList{List: params}, Results: &ast.FieldList{List: results}}, Body: &ast.BlockStmt{List: body}}
+	comment := name + " returns the requested typed union branch or a validation error."
+	switch name {
+	case "MarshalJSONTo":
+		comment = "MarshalJSONTo validates and encodes the owned value using its schema contract."
+	case "UnmarshalJSONFrom":
+		comment = "UnmarshalJSONFrom decodes and validates the owned value using its schema contract."
+	}
+	return &ast.FuncDecl{Doc: doc(comment), Recv: &ast.FieldList{List: []*ast.Field{field("value", typ)}}, Name: ident(name), Type: &ast.FuncType{Params: &ast.FieldList{List: params}, Results: &ast.FieldList{List: results}}, Body: &ast.BlockStmt{List: body}}
 }
 
 func (c *compiler) declareUnion(name string, node *model.Node, comment string) error {

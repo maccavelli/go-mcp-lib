@@ -24,8 +24,11 @@ import (
 type KeywordClass int
 
 const (
+	// ClassAssertion identifies a keyword that constrains valid instances.
 	ClassAssertion KeywordClass = iota
+	// ClassAnnotation identifies a keyword that describes instances or schemas.
 	ClassAnnotation
+	// ClassUnsupported identifies a keyword outside the accepted schema profile.
 	ClassUnsupported
 )
 
@@ -94,6 +97,7 @@ type Node struct {
 // Model is the intermediate representation over a document's definitions.
 type Model struct {
 	Source      string
+	Root        *Node
 	Definitions map[string]*Node
 	// Document retains the exact validated input for generated wire hooks.
 	Document []byte
@@ -151,7 +155,11 @@ func Build(doc *load.Document) (*Model, error) {
 		}
 		definitions[name] = node
 	}
-	return &Model{Source: doc.Source, Definitions: definitions, Document: append([]byte(nil), doc.Bytes...)}, nil
+	rootNode, err := buildNode(doc.Source, "#", root)
+	if err != nil {
+		return nil, err
+	}
+	return &Model{Source: doc.Source, Root: rootNode, Definitions: definitions, Document: append([]byte(nil), doc.Bytes...)}, nil
 }
 
 // assertionShaped lists JSON Schema 2020-12 keywords that assert but are

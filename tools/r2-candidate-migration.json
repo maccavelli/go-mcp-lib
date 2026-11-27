@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "revision": "2026-07-28",
+  "schema-sha256": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551",
+  "profile-sha256": "e57dcb9eb38e6d79b7f3e4daa937fe085bdbaa89697fb8600a3411d916086ee4",
+  "previous-sha256": {
+    "aliases.go": "97ab5b635be8f8e57a30c419033b9c0e6bda75fb86511e270130e987fe8f35ac",
+    "api.json": "08c6496a330251b49178e99da246e81d03c6519237d55bda1754a379b9f491b0",
+    "bindings.json": "1069498cbe0003287838c84c2451e1ac8c79cebbca3c24bd8768684c169802ac",
+    "codecs.go": "30ea4c48c1cd28190a6287e56b011d7aa35ef972611b1ad4d559d2baf549b0d0",
+    "constants.go": "fbe4006faf51d4a1d7882dd1184df07879476cfab24503605a39dbfa19ad08f7",
+    "coverage.json": "a4e8089a2cc23289285d411068dde215a26cc0b70a5da5ef05a3cbf1660105d4",
+    "generated-manifest.json": "57de122dd1234b6b99ff922c126413dd32c92800f3b8c610962616e5648531c6",
+    "owned.go": "1bf4b008c9aaa677b42a23593371aaf0c7d387e2f46123bb913eaf62d87a6538",
+    "schema.json": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551"
+  },
+  "proposed-sha256": {
+    "aliases.go": "b065758f76f45c989329844f3de53bf69dbff46a9ffef03aa741f0f1c4ca695c",
+    "api.json": "08c6496a330251b49178e99da246e81d03c6519237d55bda1754a379b9f491b0",
+    "bindings.json": "1069498cbe0003287838c84c2451e1ac8c79cebbca3c24bd8768684c169802ac",
+    "codecs.go": "8f165e932f3e7c66a6447421ec79958e26ce3854d96b412351a9d91eeca6c0ad",
+    "constants.go": "cb4391eb34c3255f55c14e949790cb33f516d2e3dca6ae7960d617a118d3eec2",
+    "coverage.json": "a4e8089a2cc23289285d411068dde215a26cc0b70a5da5ef05a3cbf1660105d4",
+    "generated-manifest.json": "2d2d88d86a78b2806043c9b7a2580001ea83b952040ad57a1fc7f223500f0112",
+    "owned.go": "4f09448d48dc2157828b17040c536d52b386e538b5056d5c875259fff42447db",
+    "schema.json": "907dcebce6aaeb16c21421ffef8c207093d88b9442fee340658a99cacb06b551"
+  },
+  "compile-qualification": [
+    {
+      "candidate": ".",
+      "targets": [
+        {
+          "target": "darwin/arm64",
+          "package": true,
+          "tests": true
+        },
+        {
+          "target": "linux/amd64",
+          "package": true,
+          "tests": true
+        },
+        {
+          "target": "windows/amd64",
+          "package": true,
+          "tests": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "candidate": "cmd/mcpgen",
+      "targets": [
+        {
+          "target": "darwin/arm64",
+          "package": true,
+          "tests": true
+        },
+        {
+          "target": "linux/amd64",
+          "package": true,
+          "tests": true
+        },
+        {
+          "target": "windows/amd64",
+          "package": true,
+          "tests": true
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

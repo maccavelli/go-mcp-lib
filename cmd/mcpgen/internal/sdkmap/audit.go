@@ -173,6 +173,7 @@ type auditResult struct {
 	sum        string
 	available  map[string]bool
 	deprecated map[string]bool
+	api        map[string]map[string]TypeAPI
 }
 
 var audits = struct {
@@ -284,6 +285,9 @@ func (s *metadataSnapshot) loadSDKTarget(target string) (*types.Package, map[str
 }
 
 func includeTarget(result *auditResult, target string, pkg *types.Package, deprecated map[string]bool) {
+	if result.api == nil {
+		result.api = make(map[string]map[string]TypeAPI)
+	}
 	if target == "darwin/arm64" {
 		for name, marked := range deprecated {
 			if marked {
@@ -312,6 +316,10 @@ func includeTarget(result *auditResult, target string, pkg *types.Package, depre
 		if target == "darwin/arm64" {
 			result.available[name] = true
 		}
+		if result.api[name] == nil {
+			result.api[name] = make(map[string]TypeAPI)
+		}
+		result.api[name][target] = typeAPI(object.Type())
 		if reason := aliasViolation(object.Type(), deprecated); reason != "" && result.reasons[name] == "" {
 			result.reasons[name] = target + ": " + reason
 		}

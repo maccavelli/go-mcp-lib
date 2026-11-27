@@ -1,9 +1,12 @@
 package qualify
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/ownership"
 )
 
 func fakeRunner(failOS string) Runner {
@@ -60,8 +63,14 @@ func TestSplitTarget(t *testing.T) {
 
 func TestExcludeStaleRemovesOrphan(t *testing.T) {
 	dst := t.TempDir()
-	oldManifest := Manifest{Revision: "r1", Files: []string{"owned.go", "aliases.go", "gone.go"}}
-	data := []byte(`{"revision":"r1","files":["owned.go","aliases.go","gone.go"]}`)
+	oldManifest := ownership.Manifest{Version: 2, Revision: "r1", Files: []string{"aliases.go", "gone.go", "owned.go"}, SHA256: map[string]string{}}
+	for _, name := range oldManifest.Files {
+		oldManifest.SHA256[name] = ownership.Digest([]byte("x"))
+	}
+	data, err := json.Marshal(oldManifest)
+	if err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(filepath.Join(dst, "generated-manifest.json"), data, 0o644); err != nil {
 		t.Fatal(err)
 	}

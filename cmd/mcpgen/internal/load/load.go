@@ -45,6 +45,7 @@ func DefaultLimits() Limits {
 // on them, so they are never renumbered or reused for a different meaning.
 type Code string
 
+// Diagnostic codes distinguish each bounded loader rejection.
 const (
 	CodeDocumentTooLarge   Code = "document-too-large"
 	CodeDuplicateMember    Code = "duplicate-member"

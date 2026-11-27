@@ -4,7 +4,7 @@ package emit
 import (
 	"bytes"
 	"crypto/sha256"
-	_ "embed"
+	_ "embed" // Supplies go:embed for the codec support template below.
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -19,6 +19,7 @@ import (
 	"unicode"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/model"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
 )
 
@@ -30,6 +31,7 @@ type Options struct {
 	Dispositions *sdkmap.Result
 	PackagePath  string
 	Names        map[string]string
+	Methods      []profile.Method
 }
 
 // File contains final bytes, including formatting, covered by the manifest.
@@ -105,6 +107,11 @@ func Render(opts Options) ([]File, *Manifest, error) {
 		return nil, nil, fmt.Errorf("emit: original schema bytes are required")
 	}
 	files = append(files, File{"schema.json", bytes.Clone(opts.Model.Document)})
+	artifacts, err := c.contractArtifacts(files)
+	if err != nil {
+		return nil, nil, err
+	}
+	files = append(files, artifacts...)
 	sort.Slice(files, func(i, j int) bool { return files[i].Name < files[j].Name })
 	manifest := &Manifest{Version: 2, Revision: opts.Revision, SHA256: make(map[string]string)}
 	for _, file := range files {
@@ -116,8 +123,20 @@ func Render(opts Options) ([]File, *Manifest, error) {
 }
 
 func formatAST(file *ast.File) ([]byte, error) {
+	// Synthetic trees have no source positions. Print the file header separately
+	// so go/printer cannot attach it after the package keyword at position zero.
+	header := file.Doc
+	syntax := *file
+	syntax.Doc = nil
 	var out bytes.Buffer
-	if err := format.Node(&out, token.NewFileSet(), file); err != nil {
+	if header != nil {
+		for _, comment := range header.List {
+			out.WriteString(comment.Text)
+			out.WriteByte('\n')
+		}
+		out.WriteByte('\n')
+	}
+	if err := format.Node(&out, token.NewFileSet(), &syntax); err != nil {
 		return nil, fmt.Errorf("emit: format syntax tree: %w", err)
 	}
 	return FormatGo("generated.go", out.Bytes())

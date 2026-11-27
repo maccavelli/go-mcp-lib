@@ -12,7 +12,7 @@ import tarfile
 import tempfile
 import time
 
-from gate_common import MODULES, linter, linter_path, report, run
+from gate_common import MODULES, documentation_pin, linter, linter_path, report, revive, revive_path, run
 
 
 def digest(path: Path) -> str:
@@ -202,6 +202,24 @@ def prepare(root: Path, pins: dict, network: bool) -> int:
             identities["linter-sha256"] = digest(Path(executable))
         except OSError as exc:
             failures += report("setup.linter.identity", [str(exc)])
+    _, errors = revive(root, pins)
+    if errors and network and not os.environ.get("GO_MCP_REVIVE"):
+        destination = revive_path(root)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="revive-candidate-", dir=destination.parent) as temporary:
+            candidate = Path(temporary)
+            pin = documentation_pin(root)
+            result = run(["go", "install", pin["module"] + "@" + pin["version"]],
+                         candidate, network=True, gobin=candidate)
+            if result.returncode:
+                errors = [f"pinned Revive acquisition failed: {result.stdout}{result.stderr}"]
+            else:
+                built = candidate / destination.name
+                _, errors = revive(root, pins, str(built))
+                if not errors:
+                    built.replace(destination)
+                    _, errors = revive(root, pins)
+    failures += report("setup.documentation-linter", errors)
     for name, relative in MODULES.items():
         try:
             problems = prepare_module(root, relative, pins, name, network)

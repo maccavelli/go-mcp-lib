@@ -11,12 +11,17 @@ from gate_common import report, run
 def main() -> int:
     root = Path(__file__).resolve().parent.parent
     cases = (
-        ("proposed-identity", "candidate.go", "^TestRepairA11OwnershipAndContainment$/^bad-hash$",
-         (("manifest.SHA256[name] != contentSHA256(body)", "false"),),
+        ("retained-inventory", "candidate_runtime_test.go", "^TestRepairA11RetainedMigration$/^changed$",
+         (("if !bytes.Equal(compact.Bytes(), migration) {", "if !bytes.Equal(compact.Bytes(), migration) && false {"),),
+         "FAIL retained inventory guard"),
+        ("migration-inventory", "migration.go", "^TestRepairA11MigrationInventory$",
+         (("Proposed: maps.Clone(c.Proposed)", "Proposed: maps.Clone(c.Previous)"),),
+         "FAIL migration inventory identities"),
+        ("proposed-identity", "../ownership/ownership.go", "^TestRepairA11OwnershipAndContainment$/^bad-hash$",
+         (("Digest(body) != sum", "Digest(body) != sum && false"),),
          "FAIL candidate ownership/containment guard accepted bad-hash"),
-        ("historical-identity", "candidate.go", "^TestRepairA11OwnershipAndContainment$/^tampered-legacy$",
-         (("hex.EncodeToString(hash.Sum(nil)) != expected[name]", "false"),
-          ("identity != expected", "identity != expected && false")),
+        ("historical-identity", "../ownership/ownership.go", "^TestRepairA11OwnershipAndContainment$/^tampered-legacy$",
+         (("Digest(body) != expected[name]", "Digest(body) != expected[name] && false"),),
          "FAIL candidate ownership/containment guard accepted tampered-legacy"),
         ("unowned-output", "candidate.go", "^TestRepairA11OwnershipAndContainment$/^unowned$",
          (("if strings.EqualFold(base, proposedName) {", "if strings.EqualFold(base, proposedName) && false {"),),
@@ -38,7 +43,8 @@ def main() -> int:
             module = Path(temporary) / "generator"
             shutil.copytree(root / "cmd/mcpgen", module,
                             ignore=shutil.ignore_patterns(".cache", "mcpgen", "*.test", "*.exe"))
-            source = module / "internal/qualify" / filename
+            package = "." if filename == "candidate_runtime_test.go" else "./internal/qualify"
+            source = module / filename if package == "." else module / "internal/qualify" / filename
             text = source.read_text()
             valid = True
             for anchor, replacement in replacements:
@@ -50,8 +56,14 @@ def main() -> int:
             if not valid:
                 continue
             source.write_text(text)
+            if name == "historical-identity":
+                snapshot = module / "internal/qualify/candidate.go"
+                snapshot_text = snapshot.read_text()
+                anchor = "if identity != expected {"
+                assert snapshot_text.count(anchor) == 1
+                snapshot.write_text(snapshot_text.replace(anchor, "if identity != expected && false {", 1))
             result = run(["go", "test", "-vet=off", "-count=1", "-run", test,
-                          "./internal/qualify"], module, timeout=600)
+                          package], module, timeout=600)
             output = result.stdout + result.stderr
             caught = result.returncode != 0 and diagnostic in output
             failures += report(f"candidate.{name}.plant", [] if caught else [output],

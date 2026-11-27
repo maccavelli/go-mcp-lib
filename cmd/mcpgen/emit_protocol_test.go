@@ -23,7 +23,7 @@ func TestEmitProtocolIntoScratch(t *testing.T) {
 	if err != nil {
 		t.Fatalf("FAIL emit: %v", err)
 	}
-	if !reflect.DeepEqual(manifest.Files, []string{"aliases.go", "bindings.json", "codecs.go", "constants.go", "owned.go", "schema.json"}) {
+	if !reflect.DeepEqual(manifest.Files, []string{"aliases.go", "api.json", "bindings.json", "codecs.go", "constants.go", "coverage.json", "owned.go", "schema.json"}) {
 		t.Fatalf("FAIL manifest files: %v", manifest.Files)
 	}
 	for _, name := range manifest.Files {

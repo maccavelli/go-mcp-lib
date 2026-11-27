@@ -25,6 +25,10 @@ func SchemaToProtocol(schemaPath, sdkDir, revision, outDir string) (*emit.Manife
 }
 
 func schemaToProtocol(schemaPath, sdkDir, revision, outDir string, inputs *profile.Inputs) (*emit.Manifest, error) {
+	return schemaToProtocolAudit(schemaPath, sdkDir, revision, outDir, inputs, nil)
+}
+
+func schemaToProtocolAudit(schemaPath, sdkDir, revision, outDir string, inputs *profile.Inputs, audit func(*sdkmap.Result)) (*emit.Manifest, error) {
 	absolute, err := filepath.Abs(schemaPath)
 	if err != nil {
 		return nil, err
@@ -68,12 +72,16 @@ func schemaToProtocol(schemaPath, sdkDir, revision, outDir string, inputs *profi
 	if err != nil {
 		return nil, err
 	}
+	if audit != nil {
+		audit(dispositions)
+	}
 	files, manifest, err := emit.Render(emit.Options{
 		Revision:     revision,
 		Model:        m,
 		Dispositions: dispositions,
 		PackagePath:  "github.com/maccavelli/go-mcp-lib/protocol",
 		Names:        inputs.Mapping.GoNames,
+		Methods:      inputs.Methods,
 	})
 	if err != nil {
 		return nil, err

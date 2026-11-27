@@ -1,12 +1,16 @@
 package main
 
 import (
+	"encoding/json"
+	"flag"
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/qualify"
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/sdkmap"
 )
 
 // cmdInspect implements `inspect`: provenance, dispositions, mappings,
@@ -14,17 +18,37 @@ import (
 func cmdInspect(args []string, out *printer) error {
 	fs := flagSet("inspect")
 	repo := fs.String("repo", ".", "repository root")
+	manifest := fs.String("manifest", profile.DefaultFile, "verified generation profile, relative to repo")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
 		return err
 	}
-	out.format = *format
-	mapping, err := computeSDKMapping(*repo)
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
+	inputs, err := profile.LoadNamed(*repo, profile.Revision, *manifest)
 	if err != nil {
 		return fmt.Errorf("inspect: %w", err)
+	}
+	sdkDir, err := pinnedSDKDir(*repo)
+	if err != nil {
+		return err
+	}
+	scratch, err := os.MkdirTemp("", "mcpgen-inspect-*")
+	if err != nil {
+		return err
+	}
+	defer func() { _ = os.RemoveAll(scratch) }()
+	var mapping *sdkmap.Result
+	_, err = schemaToProtocolAudit(filepath.Join(*repo, filepath.FromSlash(profile.SchemaFile)), sdkDir, profile.Revision, scratch, inputs, func(actual *sdkmap.Result) { mapping = actual })
+	if err != nil {
+		return err
 	}
 	counts := dispositionCounts(mapping.Dispositions)
 	data := map[string]any{
@@ -34,9 +58,18 @@ func cmdInspect(args []string, out *printer) error {
 		"definitions":        len(mapping.Dispositions),
 		"definitions-counts": fmt.Sprintf("alias=%d owned=%d owned-codec=%d", counts["alias"], counts["owned"], counts["owned-codec"]),
 		"deprecated-surface": len(mapping.Deprecations),
-		"qualification":      "complete product candidate qualification pending",
+		"qualification":      "inspection only; use check for complete candidate compilation",
 		"mapping-revision":   profile.Revision,
 		"sdk-audit":          mapping,
+		"profile-sha256":     profile.ProfileSHA256,
+		"generation-profile": *manifest,
+	}
+	for _, name := range []string{"api.json", "coverage.json", "bindings.json"} {
+		body, err := os.ReadFile(filepath.Join(scratch, name))
+		if err != nil {
+			return err
+		}
+		data[name] = json.RawMessage(body)
 	}
 	return out.emit("inspect", "ok", data)
 }
@@ -54,15 +87,21 @@ func dispositionCounts(dispositions map[string]string) map[string]int {
 func cmdCheck(args []string, out *printer) error {
 	fs := flagSet("check")
 	repo := fs.String("repo", ".", "repository root")
+	manifest := fs.String("manifest", profile.DefaultFile, "verified generation profile, relative to repo")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
 		return err
 	}
-	out.format = *format
-	report, err := checkTree(*repo)
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
+	report, err := checkTreeContext(out.ctx, *repo, *manifest)
 	if err != nil {
 		return err
 	}
@@ -84,40 +123,30 @@ func cmdCheck(args []string, out *printer) error {
 func cmdGenerate(args []string, out *printer) error {
 	fs := flagSet("generate")
 	repo := fs.String("repo", ".", "repository root")
+	manifest := fs.String("manifest", profile.DefaultFile, "verified generation profile, relative to repo")
+	bootstrap := fs.Bool("bootstrap-legacy", false, "verify frozen Git evidence before migrating legacy output")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
 		return err
 	}
-	out.format = *format
-	report, err := checkTree(*repo)
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
+	report, err := checkTreeContext(out.ctx, *repo, *manifest)
 	if err != nil {
 		return err
 	}
-	if !report.ok() {
-		if report.interrupted() || report.firstGeneration() {
-			// An interrupted publication with no conflicting edits, or a
-			// destination with no prior emission, is completed through
-			// the journal by design, not refused.
-			pub, err := publish(*repo, report)
-			if err != nil {
-				return err
-			}
-			return out.emit("generate", "completed-interrupted", pub.data())
-		}
-		// Drift is a failure: report and exit 1, never publish over it.
-		if err := out.emit("generate", "drift", report.data()); err != nil {
-			return err
-		}
-		return fmt.Errorf("refusing to publish over drift: %v", report.DriftFiles)
-	}
-	pub, err := publish(*repo, report)
+	receipt, err := publishChecked(out.ctx, *repo, report, *bootstrap, out.publicationHook)
 	if err != nil {
 		return err
 	}
-	return out.emit("generate", "ok", pub.data())
+	return out.emit("generate", receipt.State, receipt)
 }
 
 // cmdDiff implements `diff --from M --to M`.
@@ -127,6 +156,9 @@ func cmdDiff(args []string, out *printer) error {
 	to := fs.String("to", "", "target manifest")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
@@ -135,7 +167,9 @@ func cmdDiff(args []string, out *printer) error {
 	if *from == "" || *to == "" {
 		return usageError("diff", "--from and --to are required")
 	}
-	out.format = *format
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
 	changes, err := diffManifests(*from, *to)
 	if err != nil {
 		return err
@@ -153,9 +187,13 @@ func cmdUpdate(args []string, out *printer) error {
 	source := fs.String("source", "", "schema source URL")
 	revision := fs.String("revision", "", "upstream commit")
 	sum := fs.String("sha256", "", "expected digest")
-	candidate := fs.String("candidate", "", "candidate directory")
+	candidate := fs.String("candidate", "", "new candidate directory")
+	repo := fs.String("repo", ".", "repository root for disjoint candidate validation")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
@@ -164,8 +202,10 @@ func cmdUpdate(args []string, out *printer) error {
 	if *source == "" || *revision == "" || *sum == "" || *candidate == "" {
 		return usageError("update", "--source, --revision, --sha256, and --candidate are all required")
 	}
-	out.format = *format
-	return runUpdate(*source, *revision, *sum, *candidate, out)
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
+	return runUpdate(*repo, *source, *revision, *sum, *candidate, out)
 }
 
 // cmdRecover implements journal-based recovery.
@@ -175,6 +215,9 @@ func cmdRecover(args []string, out *printer) error {
 	repo := fs.String("repo", ".", "repository root")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
@@ -183,7 +226,9 @@ func cmdRecover(args []string, out *printer) error {
 	if *action == "" {
 		return usageError("recover", "--action inspect|complete|restore is required")
 	}
-	out.format = *format
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
 	return runRecover(*action, *repo, out)
 }
 
@@ -193,12 +238,17 @@ func cmdDiagnostic(args []string, out *printer) error {
 	repo := fs.String("repo", ".", "repository root")
 	format := fs.String("format", "text", "output format")
 	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return errHelp
+		}
 		return errUsage
 	}
 	if err := requireNoPositional(fs); err != nil {
 		return err
 	}
-	out.format = *format
+	if err := out.selectFormat(*format); err != nil {
+		return err
+	}
 	data := map[string]any{
 		"repo":            repoRelative(*repo, *repo),
 		"schema-loader":   "strict, exact-number tokens",

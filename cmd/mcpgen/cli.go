@@ -1,12 +1,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/publish"
 )
 
 // Exit codes are contract: 0 help/success, 2 usage errors, 1 failed
@@ -31,17 +34,29 @@ type result struct {
 
 // printer handles --format text|json output.
 type printer struct {
-	format string
+	format          string
+	ctx             context.Context
+	emitted         bool
+	publicationHook publish.Hook
 }
 
 func newPrinter(format string) *printer {
 	if format != "json" {
 		format = "text"
 	}
-	return &printer{format: format}
+	return &printer{format: format, ctx: context.Background()}
+}
+
+func (p *printer) selectFormat(format string) error {
+	if format != "text" && format != "json" {
+		return usageError("", "--format must be text or json")
+	}
+	p.format = format
+	return nil
 }
 
 func (p *printer) emit(command, status string, data any) error {
+	p.emitted = true
 	if p.format == "json" {
 		enc := json.NewEncoder(os.Stdout)
 		enc.SetIndent("", "  ")
@@ -76,6 +91,11 @@ func usageError(command, message string) error {
 
 // errUsage routes a usage failure to exit 2 through the command table.
 var errUsage = &usageExit{}
+var errHelp = &helpExit{}
+
+type helpExit struct{}
+
+func (*helpExit) Error() string { return "help" }
 
 type usageExit struct{}
 
@@ -98,6 +118,7 @@ func requireNoPositional(fs *flag.FlagSet) error {
 
 var commonUsage = `common flags:
   --format text|json   output format (default text)
+  --manifest FILE     verified generation profile for inspect/check/generate
 
 exit codes:
   0 success, 2 usage error, 1 failed validation, drift, or recovery conflict`
@@ -110,9 +131,9 @@ type commandDoc struct {
 }
 
 var commandDocs = []commandDoc{
-	{"inspect", "[--repo DIR] [--format text|json]", "report provenance, dispositions, mappings, unsupported features"},
-	{"check", "[--repo DIR] [--format text|json]", "render and qualify in scratch; compare bytes and inventory without publishing"},
-	{"generate", "[--repo DIR] [--format text|json]", "run all checks, then publish generated outputs deterministically"},
+	{"inspect", "[--repo DIR] [--manifest FILE] [--format text|json]", "report provenance, dispositions, mappings, unsupported features"},
+	{"check", "[--repo DIR] [--manifest FILE] [--format text|json]", "render and qualify in scratch; compare bytes and inventory without publishing"},
+	{"generate", "[--repo DIR] [--manifest FILE] [--bootstrap-legacy] [--format text|json]", "qualify exact candidate bytes, then publish with verified recovery"},
 	{"diff", "--from M --to M [--format text|json]", "report semantic, capability, method, and inventory changes between manifests"},
 	{"update", "--source URL --revision C --sha256 D --candidate DIR", "bounded network acquisition into a candidate directory; never promotes"},
 	{"recover", "--action inspect|complete|restore [--repo DIR]", "inspect or resolve an interrupted publication from its journal"},

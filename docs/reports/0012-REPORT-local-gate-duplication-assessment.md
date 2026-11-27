@@ -1,9 +1,13 @@
 # Local gate duplication and execution-cost assessment
 
-Date: 2026-11-24
+Date: 2026-11-24; Makefile reassessment: 2026-11-27
 
 Status: source assessment complete; consolidation proposed; implementation and
 before/after timing pending
+
+The [2026-11-27 Makefile reassessment](#makefile-reassessment--2026-11-27)
+below records the current entry-point gap and the proposed implementation order.
+The original observations retain their historical baseline.
 
 ## Finding
 
@@ -263,3 +267,154 @@ selection gate must reject a deliberately broken scratch case before acceptance.
 The assessment completes the source-level analysis. It does not establish that
 the proposed consolidation has been implemented, that current reference gates
 are complete, or that a particular wall-clock saving has been achieved.
+
+## Makefile reassessment — 2026-11-27
+
+The owner requested `make lint` to pass and asked what the other repositories'
+Makefiles establish as the standard to implement here. Their Makefiles, precheck
+wrappers and relevant linter configuration were inspected read-only. No reference
+Makefile or source was changed, and no reference suite was run. The source
+baselines for self-update, TUI and ACP remain those above; the provider baseline
+is now `223bb8dc597b37a7a3f0fcea70f85742ed03580b`, with concurrent unrelated
+working-tree changes. MCP HEAD is
+`ff6d700` with the approved R2/R3 implementation staged but uncommitted.
+
+### What the four Makefiles establish
+
+| Repository | Useful precedent | Differences and costs to account for |
+| :--- | :--- | :--- |
+| go-selfupdate-lib | Named formatting, vet, lint, test, fuzz, API, docs, disclosure and pre-add entry points; a full local gate; three-GOOS lint. | Much orchestration is shell; full gate and precheck are distinct overlapping entry points. GOOS-only lint leaves GOARCH inherited. Library release/signing/service-manager tooling is product-specific. |
+| go-llmprovider-sdk | Root and `authcontract` tested separately; explicit dependency, coverage, API, schema, generated-output, fixture, documentation and self-test targets. | Root host/Windows and nested-module selection differ by target. Some normal commands inherit CGO; precheck race is mixed into the default path. The vulnerability-tool pin is parsed from a forge configuration file. These details do not meet MCP's local-only, explicit-environment contract. |
+| go-tui-lib | Thin public targets backed by Python; explicit per-module work; read-only modernization and tidy checks; examples and API checks. | Its Makefile still contains shell loops; lint has a modernization prerequisite, while other callers also request modernization. Precheck adds workspace-mode tests and repeated security scans. These are not all interchangeable with MCP's two independent modules. |
+| acp-go-sdk2 | Explicit root and generator-module coverage; uncached/shuffled tests; generator/tool self-tests; generation, API, fuzz, docs and disclosure commands. | Shell/platform bootstrap and product release/download recipes are specific to ACP. Host-plus-Windows lint repeats Windows on a Windows host and does not set an architecture. Its vulnerability pin also comes from forge configuration. |
+
+The shared standard is the stable command interface and the obligations behind
+it, not an identical file copied from one repository. MCP should use Make only
+for dispatch, with Python 3 standard-library orchestration, an explicit two-module
+inventory and tool pins in `tools/versions.json`. Documentation-only targets
+must not invoke Go merely while Make expands variables.
+
+### Why the current commit reached legacy golint
+
+MCP has `scripts/go-precheck.py`, which delegates to the pinned canonical gate,
+but has no root Makefile and no executable `scripts/go-precheck.sh` adapter.
+The installed shared agent precommit hook selects, in order:
+
+1. An executable `scripts/go-precheck.sh`.
+2. A literal `pre-add-check:` Makefile target.
+3. Its generic per-file `gofmt` / legacy `golint` fallback.
+
+The failed R2/R3 commit therefore used the fallback. The reference repositories
+provide the first adapter; MCP can provide the second without a new shell script
+or a global-hook edit. `make pre-add-check` must reach the same Python precheck
+and preserve all its required checks. Supplying an empty or weaker target would
+be a bypass, not a repair.
+
+The fallback also exposed real documentation defects. Examples are missing
+comments on `Options` at `cmd/mcpgen/internal/acquire/acquisition.go:27`, on
+publication/ownership exports, and on generated methods such as
+`AudioContent.MarshalJSONTo` at `protocol/owned.go:17`. The emitter's blank
+`embed` import and keyword-class constant block already existed in HEAD; the
+new R3 exports and generated method surface add other findings. In addition,
+`protocol/owned.go:1` currently starts `package // Code generated ...`, placing
+the marker after the package keyword rather than in the standard leading
+comment. The current header test only searches for a substring and misses that
+placement defect.
+
+Correct those producers and add explicit modern documentation/naming checks to
+the pinned linter, with broken-input controls. Keep generated source analyzed;
+fixing the marker must not become a way to suppress missing documentation.
+Do not hand-edit manifest-owned output or change a global hook to evade findings.
+Emitter/header/comment repairs require a freshly rendered, reviewed and qualified
+output inventory before replacing the current reviewed generated bytes.
+
+### Recommended target contract for MCP
+
+| Target family | What to implement | Current backing and required work |
+| :--- | :--- | :--- |
+| `help`, `setup` | Stable help and explicit pinned preparation; network acquisition stays opt-in. | Reuse `gate.py setup`; Make performs no eager Go/shell discovery. |
+| `fmt-check`, `lint`, `vet`, `test` | Independent selectors over one runner; both modules, generated and untracked applicable sources; no writes by validation. | Existing precheck owns these leaves but lacks separate clean selectors. Keep standalone vet as owner and `go test -vet=off -count=1 -json`; configured lint does not repeat govet. Preserve event/test-inventory accounting. |
+| `pre-add-check` | The canonical local precheck entry point used by Make and the installed agent hook. | Delegate to `scripts/go-precheck.py`; do not recreate checks in the Makefile or add a shell implementation. |
+| `check-records`, `markdownlint`, `docs-check` | Record/link checks, Markdown style, and any actual code/documentation parity requirements. | Reuse `check_records.py --check-all` for the links it already owns and the pinned Markdown tool. Do not add a second generic link scan over the same scope. Separate absent parity checks from existing record/link coverage. |
+| `generate-check`, `build-check` | Read-only generated drift/ownership check and source/test compilation for both modules on all three target tuples. | R3's CLI `check` now performs the complete candidate compile matrix. Let one result satisfy its compile obligations instead of launching the same matrix again under another alias. |
+| `gate-selftest`, `inventory-check` | Checker regression tests, deliberate failure controls and acceptance/test ownership reconciliation. | Existing Python tests, R2/R3 plants and inventories provide owners. Add Make dispatch and missing Make/lint/header controls; do not hide another clean full suite inside every validator. |
+| `race` | Separate, explicitly CGO-enabled test variant on eligible queued native hosts. | Add a selector and complete test accounting; retain accepted native obligations. WSL remains outside race admission. Race never replaces CGO-disabled ordinary tests/builds. |
+| `modernize`, `tidy-check` | Read-only Go modernization and module tidiness, per independent module. | Add explicit leaves if adopted; prove analyzer overlap before removing an existing owner. No `go fix` rewrite or `go mod tidy` mutation in readiness commands. |
+| `api-check`, `coverage-check`, `fuzz` | Owned public API/consumer compatibility, recorded coverage obligations and bounded declared fuzz campaigns. | Bind accepted R4/R5 and later-stage requirements. Current `api` readiness remains incomplete; no foreign repository's tag baseline, numeric coverage floor or fuzz count is imported without its own rationale. |
+| `vuln`, `disclosure-check` | Strict local security evidence through the owner's existing tooling and freshness policy. | Keep pins and policy local and forge-independent. A required missing, unavailable or stale scan is not a successful scan. Do not copy private host/account rules into the repository. |
+| `preflight` | Complete accepted local pre-push graph, native evidence and current security evidence, with every failure propagated. | Finish graph/evidence integration before claiming readiness. Existing incomplete wire/API/product qualification remains a failure until its planned work is complete. This target performs no push, tag, release or forge operation. |
+
+`fmt` and `tidy`, if exposed, are explicitly mutating maintenance commands and
+do not stand in for their read-only checks. `test-sum` is an alternative renderer
+of the same complete event stream, not a second mandatory suite. A coverage
+validator consumes the required test artifact rather than starting a hidden run.
+
+### Coverage and duplication rules
+
+- Model targets as exact `darwin/arm64`, `linux/amd64`, `windows/amd64` tuples;
+  assigning GOOS alone does not set the required architecture. Lint each
+  required module/tuple once, either on its native runner or through one
+  explicitly selected cross-target analysis owner. Do not repeat the whole
+  cross-target lint matrix on every native runner.
+- Keep CGO off and independent-module readonly/offline environments for normal
+  analysis, tests and builds. Only an explicit race command enables CGO.
+- Heavy Make targets dispatch through the fleet selection/queue mechanism.
+  Named machines and credentials remain operator-owned, outside committed files.
+  Physical Linux, native Windows, Darwin and WSL evidence retain their distinct
+  accepted roles; cross-compilation does not execute a native test obligation.
+- Share exact successful leaves within a qualification invocation. Source,
+  configuration, toolchain, tuple, tags, CGO mode, fixtures, history or required
+  test selection changes invalidate their dependent results. An old success
+  stamp or ordinary Go test cache does not certify a new input.
+- Keep the existing vet/govet split; use modern revive documentation/naming
+  rules to preserve the legacy fallback's relevant findings. Confirm each rule
+  with its own broken scratch input. Do not enable an entire foreign lint
+  profile, with its product-specific exclusions, by copying the file.
+- `preflight` selects leaves once; it must not run `pre-add-check`, then `test`,
+  then `lint` as three independent aggregates. Generator candidate runtime
+  checks also need explicit ownership so a live runtime suite is not replayed
+  unnecessarily against equivalent bytes.
+- Tests of checker failure propagation and missing input are distinct from
+  ordinary validators. Retain all negative controls while avoiding repeated
+  identical clean baselines.
+
+### Proposed implementation order and review boundary
+
+1. Establish the common Make entry points for already implemented validation
+   leaves, including a real `lint` and the `pre-add-check` hook adapter. Add the
+   Make selector/failure-propagation controls without changing global hooks.
+2. Repair handwritten export documentation and generator header/method comments,
+   preserve the checks with modern analyzer rules, and render/qualify the new
+   generated identity before the blocked R2/R3 commit. Preserve the pinned raw
+   schema bytes and all input/profile/SDK identities.
+3. Complete that coherent prerequisite commit, then execute the already approved
+   runtime relocation under
+   [0014-PLAN-organize-mcp-runtime-package.md](../decisions/0014-PLAN-organize-mcp-runtime-package.md).
+4. Complete the broader local preflight graph, artifact consumption, security
+   integration and remaining stage-specific gates as their accepted product work
+   becomes available. Measure repeated-leaf elimination and wall time before
+   claiming a speedup or complete acceptance.
+
+The linked framework PLAN records the blocked commit and proposed scope choices.
+This reassessment does not install a Makefile, change a linter, repair the
+generator or authorize edits in the reference repositories. It establishes what
+the immediate repair and the complete local standard each require.
+
+### Execution refinement after option A selection
+
+The owner selected A and implementation is now governed by the framework pair.
+The Make interface and shared Python selectors have been written; final native
+qualification and the phase commit remain pending. Broken-input probes exposed
+a generated-file skip inside the pinned golangci Revive adapter. Standalone
+Revive 1.17.1, the same dependency version, now owns the four documentation and
+naming rules with generated headers explicitly inspected. Golangci retains the
+other analyzers, avoiding duplicate rule execution. All four generated and
+handwritten violations were caught through actual Make on a native Windows
+scratch snapshot; valid controls passed.
+
+The new tool pin is isolated in `tools/documentation-lint.json`; the existing
+generation-profile tool manifest remains byte-identical. Parser-based checks
+also rejected the old malformed generated marker and a missing method comment.
+The new candidate's API/bindings/coverage/schema/profile identities are unchanged;
+only generated Go headers/comments and their ownership hashes change. These
+preparation results do not claim the pending native phase exit or full preflight.

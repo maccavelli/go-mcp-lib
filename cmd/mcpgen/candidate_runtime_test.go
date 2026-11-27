@@ -2,9 +2,13 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
+	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 
 	"github.com/maccavelli/go-mcp-lib/cmd/mcpgen/internal/profile"
@@ -59,6 +63,14 @@ func TestRepairA11ActualProduct(t *testing.T) {
 		}
 		t.FailNow()
 	}
+	migration, err := candidate.MigrationJSON(profile.Revision, profile.SchemaSHA256, profile.ProfileSHA256, reports)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := verifyMigrationReview(repo, migration); err != nil {
+		t.Errorf("FAIL retained migration inventory differs from qualified candidate: %v", err)
+	}
+	t.Logf("R2_MIGRATION %s", migration)
 	env := append(qualify.GoEnv(cache), "GOOS="+runtime.GOOS, "GOARCH="+runtime.GOARCH)
 	linter := os.Getenv("GO_MCP_LINTER")
 	if linter == "" {
@@ -151,5 +163,113 @@ func TestRepairA11ActualProduct(t *testing.T) {
 	}
 	if err := candidate.VerifySource(); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestRepairA11InstalledReview(t *testing.T) {
+	repo := t.TempDir()
+	path := filepath.Join(repo, "tools/r2-candidate-migration.json")
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	record := qualify.Migration{Version: 1, Revision: "fixture", SchemaSHA256: strings.Repeat("0", 64), ProfileSHA256: strings.Repeat("1", 64), Previous: map[string]string{"owned.go": "old"}, Proposed: map[string]string{"owned.go": "new"}}
+	for _, module := range []string{".", "cmd/mcpgen"} {
+		report := &qualify.Report{Candidate: module, Passed: true}
+		for _, target := range qualify.Targets {
+			report.Targets = append(report.Targets, qualify.Result{Target: target, Package: true, Tests: true})
+		}
+		record.Qualification = append(record.Qualification, report)
+	}
+	retained, err := json.Marshal(record)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(path, retained, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	for _, name := range []string{"installed", "profile", "bytes", "before", "target"} {
+		t.Run(name, func(t *testing.T) {
+			var current qualify.Migration
+			if err := json.Unmarshal(retained, &current); err != nil {
+				t.Fatal(err)
+			}
+			current.Previous = maps.Clone(current.Proposed)
+			switch name {
+			case "profile":
+				current.ProfileSHA256 = strings.Repeat("2", 64)
+			case "bytes":
+				current.Proposed["owned.go"] = "changed"
+				current.Previous = maps.Clone(current.Proposed)
+			case "before":
+				current.Previous["owned.go"] = "unreviewed"
+			case "target":
+				current.Qualification[0].Targets[0].Tests = false
+			}
+			body, err := json.Marshal(current)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := verifyMigrationReview(repo, body); (err == nil) != (name == "installed") {
+				t.Errorf("FAIL installed review guard %s: %v", name, err)
+			}
+		})
+	}
+}
+
+func verifyMigrationReview(repo string, migration []byte) error {
+	previous, err := os.ReadFile(filepath.Join(repo, "tools", "r2-candidate-migration.json"))
+	if os.IsNotExist(err) {
+		return nil // Initial capture precedes retention; it grants no publication.
+	}
+	if err != nil {
+		return err
+	}
+	var compact bytes.Buffer
+	if err := json.Compact(&compact, previous); err != nil {
+		return err
+	}
+	if !bytes.Equal(compact.Bytes(), migration) {
+		var retained, current qualify.Migration
+		if json.Unmarshal(compact.Bytes(), &retained) != nil || json.Unmarshal(migration, &current) != nil || current.Version != 1 || current.Revision == "" || len(current.SchemaSHA256) != 64 || len(current.ProfileSHA256) != 64 || !qualify.AllPassed(current.Qualification) || !maps.Equal(current.Previous, current.Proposed) || !maps.Equal(retained.Proposed, current.Proposed) {
+			return fmt.Errorf("review record does not match the qualified inventory")
+		}
+		// An installed reviewed generation has no remaining migration. Restore
+		// only its historical before inventory for an exact comparison; every
+		// other pin, target result and proposed byte must remain unchanged.
+		current.Previous = retained.Previous
+		normalized, err := json.Marshal(current)
+		if err != nil || !bytes.Equal(compact.Bytes(), normalized) {
+			return fmt.Errorf("installed generation differs from the reviewed candidate")
+		}
+	}
+	return nil
+}
+
+func TestRepairA11RetainedMigration(t *testing.T) {
+	repo := t.TempDir()
+	path := filepath.Join(repo, "tools", "r2-candidate-migration.json")
+	if err := os.Mkdir(filepath.Dir(path), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	expected := []byte(`{"version":1,"proposed-sha256":{"owned.go":"expected"}}`)
+	if err := verifyMigrationReview(repo, expected); err != nil {
+		t.Fatal(err)
+	}
+	for _, test := range []struct {
+		name, body string
+		valid      bool
+	}{
+		{"valid", string(expected), true},
+		{"changed", `{"version":1,"proposed-sha256":{"owned.go":"changed"}}`, false},
+		{"malformed", `{broken`, false},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			if err := os.WriteFile(path, []byte(test.body), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := verifyMigrationReview(repo, expected); (err == nil) != test.valid {
+				t.Errorf("FAIL retained inventory guard: valid=%t error=%v", test.valid, err)
+			}
+		})
 	}
 }

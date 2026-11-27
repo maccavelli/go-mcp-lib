@@ -37,7 +37,7 @@ func reviewedOutput(t *testing.T) ([]File, *Manifest) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	files, manifest, err := Render(Options{Revision: profile.Revision, Model: m, Dispositions: actual, Names: inputs.Mapping.GoNames, PackagePath: "github.com/maccavelli/go-mcp-lib/protocol"})
+	files, manifest, err := Render(Options{Revision: profile.Revision, Model: m, Dispositions: actual, Names: inputs.Mapping.GoNames, Methods: inputs.Methods, PackagePath: "github.com/maccavelli/go-mcp-lib/protocol"})
 	if err != nil {
 		t.Fatalf("FAIL reviewed AST emission: %v", err)
 	}
@@ -72,7 +72,7 @@ func TestRepairA10TotalBindings(t *testing.T) {
 			return true
 		})
 	}
-	if manifest.Version != 2 || len(manifest.SHA256) != 6 || len(bindings) != 155 {
+	if manifest.Version != 2 || len(manifest.SHA256) != 8 || len(bindings) != 155 {
 		t.Fatalf("FAIL incomplete bindings or hashed inventory: %d", len(bindings))
 	}
 	seen := map[string]bool{}

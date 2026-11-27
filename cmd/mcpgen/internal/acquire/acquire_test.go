@@ -22,11 +22,12 @@ func pin() (string, Options) {
 
 func TestRunFetchesAndVerifies(t *testing.T) {
 	want, opts := pin()
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, _ = fmt.Fprint(w, "schema-body-for-pinning")
 	}))
 	defer server.Close()
-	opts.URL = server.URL
+	opts.URL = server.URL + "/" + opts.Commit + "/schema.json"
+	opts.Client = server.Client()
 	opts.InputsDir = t.TempDir()
 	opts.SHA256 = want
 	result, err := Run(opts)
@@ -50,11 +51,12 @@ func TestRunVerifiesExistingWithoutNetwork(t *testing.T) {
 	}
 	// URL points at a server that fails every request: the existing file
 	// must satisfy the pin without any fetch.
-	refused := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+	refused := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusTeapot)
 	}))
 	defer refused.Close()
-	opts.URL = refused.URL
+	opts.URL = refused.URL + "/" + opts.Commit + "/schema.json"
+	opts.Client = refused.Client()
 	opts.SHA256 = want
 	result, err := Run(opts)
 	if err != nil {
@@ -67,11 +69,12 @@ func TestRunVerifiesExistingWithoutNetwork(t *testing.T) {
 
 func TestRunRejectsHashMismatchWithoutWriting(t *testing.T) {
 	_, opts := pin()
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+	server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = fmt.Fprint(w, "tampered-bytes")
 	}))
 	defer server.Close()
-	opts.URL = server.URL
+	opts.URL = server.URL + "/" + opts.Commit + "/schema.json"
+	opts.Client = server.Client()
 	opts.InputsDir = t.TempDir()
 	opts.SHA256 = "0000000000000000000000000000000000000000000000000000000000000000"
 	if _, err := Run(opts); err == nil {

@@ -77,7 +77,11 @@ func commandEnvironment(overrides []string) []string {
 }
 
 func runCommand(executable string, env []string, directory string, args []string, timeout time.Duration, limit int) (int, string) {
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	return runCommandContext(context.Background(), executable, env, directory, args, timeout, limit)
+}
+
+func runCommandContext(parent context.Context, executable string, env []string, directory string, args []string, timeout time.Duration, limit int) (int, string) {
+	ctx, cancel := context.WithTimeout(parent, timeout)
 	defer cancel()
 	log := &commandLog{limit: limit, cancel: cancel}
 	cmd := exec.CommandContext(ctx, executable, args...)

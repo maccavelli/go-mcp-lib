@@ -10,9 +10,13 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"os"
+	"os/signal"
 	"sort"
+	"syscall"
 )
 
 // commands maps a command name to its implementation.
@@ -27,30 +31,48 @@ var commands = map[string]func([]string, *printer) error{
 }
 
 func main() {
-	if len(os.Args) < 2 {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	code := runCLI(ctx, os.Args[1:])
+	stop()
+	os.Exit(code)
+}
+
+func runCLI(ctx context.Context, args []string) int {
+	return runCLIPrinter(ctx, args, newPrinter("text"))
+}
+
+func runCLIPrinter(ctx context.Context, args []string, out *printer) int {
+	if len(args) < 1 {
 		fmt.Fprintln(os.Stderr, helpText())
-		os.Exit(exitUsage)
+		return exitUsage
 	}
-	name := os.Args[1]
+	name := args[0]
 	if name == "help" || name == "--help" || name == "-h" {
 		fmt.Print(helpText())
-		os.Exit(exitOK)
+		return exitOK
 	}
 	run, ok := commands[name]
 	if !ok {
 		fmt.Fprintf(os.Stderr, "mcpgen: unknown command %q\n\n%s\n", name, helpText())
-		os.Exit(exitUsage)
+		return exitUsage
 	}
-	out := newPrinter("text")
-	err := run(os.Args[2:], out)
-	if err == nil {
-		os.Exit(exitOK)
+	out.ctx = ctx
+	err := run(args[1:], out)
+	if err == nil || errors.Is(err, errHelp) {
+		return exitOK
 	}
 	if _, isUsage := err.(*usageExit); isUsage {
-		os.Exit(exitUsage)
+		return exitUsage
+	}
+	// A failed operation has a machine-readable result only when JSON was
+	// selected; human diagnostics remain on stderr in every mode.
+	if out.format == "json" && !out.emitted {
+		if emitErr := out.emit(name, "failed", map[string]any{"error": err.Error()}); emitErr != nil {
+			fmt.Fprintf(os.Stderr, "mcpgen: result write: %v\n", emitErr)
+		}
 	}
 	fmt.Fprintf(os.Stderr, "mcpgen %s: %v\n", name, err)
-	os.Exit(exitFail)
+	return exitFail
 }
 
 // commandNames is the sorted command list for tests.
