@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: implemented
 date: 2026-11-27
 associated-madr: 0014-MADR-organize-mcp-runtime-package.md
 ---
@@ -19,7 +19,8 @@ contract bytes and the complete existing test/gate inventory. Document the
 intentional migration to `github.com/maccavelli/go-mcp-lib/mcp`.
 
 The owner accepted the revised architecture and approved execution on
-2026-11-27. L0 passed at the coherent prerequisite commit; L1 is in progress.
+2026-11-27. L0 and L1 are complete. The coherent migration commit is
+`c28f603b35abb1dcd9fe368ba856663ad79eb46d` on main.
 
 ## Grounding Reference
 
@@ -180,6 +181,26 @@ locators or unexplained generated-byte changes remain. Unrelated work is
 preserved; no consumer-repository mutation, push or tag is inferred.
 
 ## Execution Record
+
+### 2026-11-27 — L1 committed; PLAN complete
+
+The coherent migration landed on main as
+`c28f603b35abb1dcd9fe368ba856663ad79eb46d`
+(`refactor(layout): relocate mcp runtime and sdkbridge to mcp/`). Git records
+all 26 Go files as renames. The staged 42-file local-identifier scan and
+whitespace check passed before commit; the working tree was clean afterward.
+The global prepare-commit-msg hook supplied the message through
+`git commit --no-edit`.
+
+All L01–L11 cases and completion criteria are satisfied by the pass-2 native,
+race, actual-consumer, Make, artifact and deliberate-failure evidence below.
+The canonical runtime import is `github.com/maccavelli/go-mcp-lib/mcp`;
+`mcp/internal/sdkbridge/` owns the runtime-private conversions and shared
+validation remains at root scope. No root Go source/test files, lost test
+cases, unexplained generated-byte changes or stale active candidate locators
+remain. No third source revision, consumer-repository mutation, push or tag
+was performed. This completes the layout PLAN; the framework's R4/R5 and
+Stage 7 remain separate unfinished work.
 
 ### 2026-11-27 — L1 pass 2 exit checks passed; coherent commit ready
 

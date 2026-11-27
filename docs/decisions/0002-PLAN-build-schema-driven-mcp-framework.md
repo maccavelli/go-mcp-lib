@@ -1706,6 +1706,18 @@ re-run qualification, rather than pairing old generated code with new inputs.
 
 ## Execution Record
 
+### 2026-11-27 — Functional runtime layout completed separately
+
+The accepted [0014-MADR-organize-mcp-runtime-package.md](0014-MADR-organize-mcp-runtime-package.md)
+and its completed PLAN landed the qualified runtime/bridge migration as
+`c28f603b35abb1dcd9fe368ba856663ad79eb46d`, after the coherent R2/R3 prerequisite
+`d1276de4761aa77d6d3389370e6781c049753131`. Continue runtime repair locators
+under `mcp/` and `mcp/internal/sdkbridge/`; shared validation remains at root.
+Generated contracts, pins, test cases and both module identities are unchanged.
+Four ordinary native lanes, physical-Linux race tests, actual consumer/import
+controls and final Make gates passed. This layout completion does not complete
+R4/R5 or authorize Stage 7 execution. No push or tag occurred.
+
 ### 2026-11-27 — R3 pass 7 exit: installed Make/lint and regeneration passed
 
 After all four native qualification lanes passed, ordinary verified CLI

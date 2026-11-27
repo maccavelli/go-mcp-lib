@@ -34,7 +34,7 @@ This tree holds three kinds of document:
 | 0012 | REPORT | [Local gate duplication and execution costs](reports/0012-REPORT-local-gate-duplication-assessment.md) | Make foundation A implemented and qualified; broader graph work remains |
 | 0013 | REPORT | [Library package layout assessment](reports/0013-REPORT-library-package-layout-assessment.md) | complete — revised functional layout accepted |
 | 0014 | MADR | [Organize MCP packages by capability and dependency ownership](decisions/0014-MADR-organize-mcp-runtime-package.md) | accepted |
-| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | in-progress — all L1 checks passed; coherent commit ready |
+| 0014 | PLAN | [Implement functional MCP packages and scoped internals](decisions/0014-PLAN-organize-mcp-runtime-package.md) | complete — qualified migration committed as c28f603 |
 
 ## I want to…
 

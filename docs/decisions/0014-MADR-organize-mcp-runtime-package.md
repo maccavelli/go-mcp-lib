@@ -117,8 +117,9 @@ the existing MCP generator to make the runtime functional.
   `authcontract` or ACP's generator, not just another directory.
 
 The associated [0014-PLAN-organize-mcp-runtime-package.md](0014-PLAN-organize-mcp-runtime-package.md)
-is approved and in progress. Source relocation follows its L0 prerequisite
-checks and the coherent R2/R3 phase commit.
+is complete. Its L0 prerequisite checks and coherent R2/R3 phase commit
+preceded the qualified relocation in
+`c28f603b35abb1dcd9fe368ba856663ad79eb46d`.
 
 ### State table
 
